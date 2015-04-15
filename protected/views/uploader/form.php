@@ -1,7 +1,7 @@
-<div class="hidden" id="tp_head_text_data">Загрузка изображений</div>
+<div class="hidden" id="tp_head_text_data"><?=$_GET["title"]?></div>
 <!-- <form action="/adv/setAdvImg?id=" method="POST" id="uploader"> -->
     <div class="upload">
-        <h3>Загрузка изображения</h3>
+        <h3><?=$_GET["title"]?></h3>
         <!-- <div class="max-files">Оставшееся количество изображений: <span class="max-files-count" data-count=""></span></div> -->
         <div id="uploaderPj">Ваш браузер не поддерживает Flash.</div>
         <div class="b-save-buttons">
@@ -13,7 +13,7 @@
 <!-- </form> -->
 <script>
 $(function () {
-    var maxfiles = 1,
+    var maxfiles = <?=( (isset($_GET["maxFiles"]) && intval($_GET["maxFiles"]) > 0 && ($_GET["maxFiles"]) < 10000)?$_GET["maxFiles"]:"1")?>,
         error = false;
 
     $("#uploaderPj").pluploadQueue({
@@ -29,7 +29,7 @@ $(function () {
             height: 600
         },
         filters : [
-            {title : "Image files", extensions : "jpg,gif,png,jpeg"}
+            {title : "Files", extensions : "<?=$_GET['extensions']?>" }
         ],
         init : {
             FilesAdded: function(up, files) {
@@ -50,7 +50,12 @@ $(function () {
                 }
             },
             UploadComplete: function(){
+                var tmpArr = [];
                 if( !error ){
+                    $(".plupload_filelist .plupload_done").each(function(){
+                        tmpArr.push($(this).find("input").eq(0).val());
+                    });
+                    $("<?=$_GET['selector']?>").val(tmpArr.join(','));
                     $(".plupload_save").click();
                     $(".b-save-buttons").fadeIn(300);
                 }

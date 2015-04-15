@@ -32,20 +32,6 @@ $(document).ready(function(){
     $(window).resize(whenResize);
     whenResize();
 
-    // $(".ajax-create").fancybox({
-    //     type: "ajax",
-    //     helpers: {
-    //         overlay: {
-    //             locked: true 
-    //         }
-    //     },
-    //     afterShow: function(el){
-    //         var $form = $(".fancybox-inner form");
-    //         $form.find("input").eq(0).focus();
-    //         bindForm($form,false);
-    //     }
-    // });
-
     $(".ajax-update,.ajax-create").fancybox({
         type: "ajax",
         helpers: {
@@ -58,6 +44,7 @@ $(document).ready(function(){
         margin: 30,
         beforeShow: function(){
             bindForm($(".fancybox-inner form"));
+            bindImageUploader();
             bindTinymce();
             bindAutocomplete();
             bindTooltip();
@@ -193,19 +180,35 @@ $(document).ready(function(){
             return false;
         });
 
-        $(".b-input-image").change(function(){
-            if( $(this).val() != "" ){
-                $(".b-input-image-add").addClass("hidden");
-                $(".b-image-wrap").removeClass("hidden");
-                $(".b-input-image-img").css("background-image","url('"+$(".b-input-image-img").attr("data-base")+"/"+$(this).val()+"')");
-            }else{
-                $(".b-input-image-add").removeClass("hidden");
-                $(".b-image-wrap").addClass("hidden");
-            }
-        });
+        // $(".b-input-image").change(function(){
+        //     if( $(this).val() != "" ){
+        //         $(".b-input-image-add").addClass("hidden");
+        //         $(".b-image-wrap").removeClass("hidden");
+        //         $(".b-input-image-img").css("background-image","url('"+$(".b-input-image-img").attr("data-base")+"/"+$(this).val()+"')");
+        //     }else{
+        //         $(".b-input-image-add").removeClass("hidden");
+        //         $(".b-image-wrap").addClass("hidden");
+        //     }
+        // });
 
+        // // Удаление изображения
+        // $(".b-image-delete").click(function(){
+        //     $(".b-image-cancel").attr("data-url",$(".b-input-image").val())// Сохраняем предыдущее изображение для того, чтобы можно было восстановить
+        //                         .show();// Показываем кнопку отмены удаления
+        //     $(".b-input-image").val("").trigger("change");// Удаляем ссылку на фотку из поля
+        // });
+
+        // // Отмена удаления
+        // $(".b-image-cancel").click(function(){
+        //     $(".b-input-image").val($(".b-image-cancel").attr("data-url")).trigger("change")// Возвращаем сохраненную ссылку на изображение в поле
+        //     $(".b-image-cancel").hide(); // Прячем кнопку отмены удаления                                 
+        // });
+
+    }
+
+    function bindImageUploader(){
         $(".b-get-image").click(function(){
-            $(".b-for-image-form").load($(".b-input-image-add").attr("data-path"), {}, function(){
+            $(".b-for-image-form").load($(".b-get-image").attr("data-path"), {}, function(){
                 $(".upload").addClass("upload-show");
                 $(".b-upload-overlay").addClass("b-upload-overlay-show")
                 $(".plupload_cancel,.b-upload-overlay,.plupload_save").click(function(){
@@ -221,56 +224,6 @@ $(document).ready(function(){
                 });
             });
         });
-
-        // Удаление изображения
-        $(".b-image-delete").click(function(){
-            $(".b-image-cancel").attr("data-url",$(".b-input-image").val())// Сохраняем предыдущее изображение для того, чтобы можно было восстановить
-                                .show();// Показываем кнопку отмены удаления
-            $(".b-input-image").val("").trigger("change");// Удаляем ссылку на фотку из поля
-        });
-
-        // Отмена удаления
-        $(".b-image-cancel").click(function(){
-            $(".b-input-image").val($(".b-image-cancel").attr("data-url")).trigger("change")// Возвращаем сохраненную ссылку на изображение в поле
-            $(".b-image-cancel").hide(); // Прячем кнопку отмены удаления                                 
-        });
-
-        // if( $(".fancybox-wrap #accordion").length ){
-        //     $(".fancybox-wrap #accordion").accordion({
-        //         heightStyle: "content"
-        //     }).fadeIn(300);
-        // }
-
-        // if( $(".fancybox-wrap .b-selectable").length ){
-        //     $(".fancybox-wrap .b-selectable li").click(function(){
-        //         if( $(this).hasClass("blocked") ) return false;
-
-        //         var $this = $(this),
-        //             action = ( $this.hasClass("active") )?"del":"add";
-
-        //         if( $this.hasClass("active") ){
-        //             $this.removeClass("active");
-        //         }else{
-        //             $this.addClass("active");
-        //         }
-
-        //         setPreloader($this);
-
-        //         $.ajax({
-        //             type: "GET",
-        //             url: $this.attr("data-url"),
-        //             data: "action="+action,
-        //             success: function(msg){
-        //                 var result = JSON.parse(msg);
-        //                 if( result.error != false ){
-        //                     alert( result.error );
-        //                 }
-        //                 removePreloader($this);
-        //             }
-        //         });
-        //     });
-        // }
-
     }
 
     /* TinyMCE ------------------------------------- TinyMCE */
@@ -629,4 +582,5 @@ $(document).ready(function(){
     bindFilter();
     bindAutocomplete();
     bindTooltip();
+    bindImageUploader();
 });

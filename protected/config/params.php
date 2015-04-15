@@ -6,7 +6,7 @@ return array(
 	'title'=>'Youla',
 	// this is used in error pages
 	'adminEmail'=>'webmaster@example.com',
-	'imageFolder'=>'upload/images',
+	// 'imageFolder'=>'upload/images',
 	'tempFolder'=>'upload/temp',
 	'adminPanel'=>'/admin/',
 	'defaultAdminRedirect'=>'/admin/goodType',
