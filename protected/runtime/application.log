@@ -1,0 +1,2266 @@
+2015/02/13 07:25:16 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/print.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/print.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/print.css
+HTTP_REFERER=http://localhost/youla/page/index?code=about
+---
+2015/02/13 07:25:16 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/form.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/form.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/form.css
+HTTP_REFERER=http://localhost/youla/page/index?code=about
+---
+2015/02/13 07:25:36 [error] [system.db.CDbCommand] CDbCommand::fetch() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'page.pag_code' in 'where clause'. The SQL statement executed was: SELECT * FROM `page` `t` WHERE page.pag_code = about LIMIT 1.
+2015/02/13 07:25:36 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'page.pag_code' in 'where clause'' in /Users/mikhkita/sites/youla/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/db/CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 /Users/mikhkita/sites/youla/framework/db/ar/CActiveRecord.php(1351): CDbCommand->queryRow()
+#2 /Users/mikhkita/sites/youla/framework/db/ar/CActiveRecord.php(1456): CActiveRecord->query(Object(CDbCriteria))
+#3 /Users/mikhkita/sites/youla/protected/controllers/PageController.php(124): CActiveRecord->find(Array)
+#4 [internal function]: PageController->actionIndex('about')
+#5 /Users/mikhkita/sites/youla/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PageController), Array)
+#6 /Users/mikhkita/sites/youla/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PageController), Object(ReflectionMethod), Array)
+#7 /Users/mikhkita/sites/youla/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#9 /Users/mikhkita/sites/youla/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#10 /Users/mikhkita/sites/youla/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#11 /Users/mikhkita/sites/youla/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#12 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#13 /Users/mikhkita/sites/youla/framework/web/CController.php(291): CFilterChain->run()
+#14 /Users/mikhkita/sites/youla/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#15 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(282): CController->run('index')
+#16 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('page/index')
+#17 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#18 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#19 {main}
+REQUEST_URI=/youla/page/index?code=about
+---
+2015/02/13 07:25:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/screen.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/screen.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/screen.css
+HTTP_REFERER=http://localhost/youla/page/index?code=about
+---
+2015/02/13 07:25:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/print.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/print.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/print.css
+HTTP_REFERER=http://localhost/youla/page/index?code=about
+---
+2015/02/13 07:25:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/form.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/form.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/form.css
+HTTP_REFERER=http://localhost/youla/page/index?code=about
+---
+2015/02/13 07:43:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/article
+---
+2015/02/13 07:48:01 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/article
+---
+2015/02/13 07:49:11 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/article
+---
+2015/02/13 08:05:44 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/rubric
+---
+2015/02/13 08:13:11 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/13 08:13:30 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/13 08:14:34 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/13 08:15:31 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/13 08:15:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/rubric
+---
+2015/02/13 08:16:09 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/13 08:20:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/13 08:26:06 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/13 08:27:12 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/13 08:28:01 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/13 08:28:46 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/13 08:29:17 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/13 08:34:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/rubric
+---
+2015/02/13 08:39:15 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/category
+---
+2015/02/13 08:40:27 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/category
+---
+2015/02/13 09:07:30 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/article
+---
+2015/02/13 09:08:47 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/article
+---
+2015/02/13 09:08:55 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/article
+---
+2015/02/13 09:08:57 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/house
+---
+2015/02/13 09:10:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/house
+---
+2015/02/13 09:10:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/house
+---
+2015/02/13 09:11:07 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/rubric
+---
+2015/02/13 09:11:20 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/rubric
+---
+2015/02/13 09:11:26 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/rubric
+---
+2015/02/13 09:12:30 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/rubric
+---
+2015/02/13 09:29:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/tinymce/plugins/plupload/plugin.min.js".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/tinymce/plug...')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/tinymce/plugins/plupload/plugin.min.js
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/13 09:29:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/13 09:30:00 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/13 09:34:33 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "i/arrow-down.png".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('i/arrow-down.pn...')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/i/arrow-down.png
+HTTP_REFERER=http://localhost/youla/css/layout.css
+---
+2015/02/13 13:30:14 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/screen.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/screen.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/screen.css
+HTTP_REFERER=http://localhost/youla/admin
+---
+2015/02/13 13:30:14 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/print.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/print.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/print.css
+HTTP_REFERER=http://localhost/youla/admin
+---
+2015/02/13 13:30:14 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/form.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/form.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/form.css
+HTTP_REFERER=http://localhost/youla/admin
+---
+2015/02/13 15:19:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/print.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/print.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/print.css
+HTTP_REFERER=http://localhost/youla/admin
+---
+2015/02/13 15:19:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/screen.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/screen.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/screen.css
+HTTP_REFERER=http://localhost/youla/admin
+---
+2015/02/13 15:19:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/form.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/form.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/form.css
+HTTP_REFERER=http://localhost/youla/admin
+---
+2015/02/13 15:19:07 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/rubric
+---
+2015/02/13 15:19:09 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/13 15:19:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/print.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/print.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/print.css
+HTTP_REFERER=http://localhost/youla/admin
+---
+2015/02/13 15:19:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/screen.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/screen.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/screen.css
+HTTP_REFERER=http://localhost/youla/admin
+---
+2015/02/13 15:19:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/form.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/form.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/form.css
+HTTP_REFERER=http://localhost/youla/admin
+---
+2015/02/13 15:19:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/rubric
+---
+2015/02/13 15:19:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/house
+---
+2015/02/13 16:35:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/house
+---
+2015/02/13 17:03:29 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/screen.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/screen.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/screen.css
+HTTP_REFERER=http://localhost/youla/admin
+---
+2015/02/13 17:03:29 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/print.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/print.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/print.css
+HTTP_REFERER=http://localhost/youla/admin
+---
+2015/02/13 17:03:29 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/form.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/form.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/form.css
+HTTP_REFERER=http://localhost/youla/admin
+---
+2015/02/14 06:39:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/favicon.ico
+---
+2015/02/14 06:39:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "rubrics/favicon.ico".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('rubrics/favicon...')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/rubrics/favicon.ico
+---
+2015/02/14 06:40:06 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "houses/favicon.ico".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('houses/favicon....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/houses/favicon.ico
+---
+2015/02/14 06:40:12 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "blog/favicon.ico".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('blog/favicon.ic...')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/blog/favicon.ico
+---
+2015/02/14 06:40:17 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/screen.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/screen.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/screen.css
+HTTP_REFERER=http://localhost/youla/admin
+---
+2015/02/14 06:40:17 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/print.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/print.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/print.css
+HTTP_REFERER=http://localhost/youla/admin
+---
+2015/02/14 06:40:17 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/form.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/form.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/form.css
+HTTP_REFERER=http://localhost/youla/admin
+---
+2015/02/14 06:42:33 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "хуй.html".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('\xD1\x85\xD1\x83\xD0\xB9.html')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/%D1%85%D1%83%D0%B9.html
+HTTP_REFERER=http://localhost/youla/
+---
+2015/02/14 06:42:33 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/form.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/form.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/form.css
+HTTP_REFERER=http://localhost/youla/%D1%85%D1%83%D0%B9.html
+---
+2015/02/14 06:42:33 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/screen.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/screen.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/screen.css
+HTTP_REFERER=http://localhost/youla/%D1%85%D1%83%D0%B9.html
+---
+2015/02/14 06:42:33 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/print.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/print.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/print.css
+HTTP_REFERER=http://localhost/youla/%D1%85%D1%83%D0%B9.html
+---
+2015/02/14 06:42:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/screen.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/screen.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/screen.css
+HTTP_REFERER=http://localhost/youla/admin
+---
+2015/02/14 06:42:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/print.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/print.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/print.css
+HTTP_REFERER=http://localhost/youla/admin
+---
+2015/02/14 06:42:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/form.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/form.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/form.css
+HTTP_REFERER=http://localhost/youla/admin
+---
+2015/02/14 06:43:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "project/favicon.ico".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('project/favicon...')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/project/favicon.ico
+---
+2015/02/14 06:45:17 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "project".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('project')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/project
+HTTP_REFERER=http://localhost/youla/contacts
+---
+2015/02/14 06:45:17 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/screen.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/screen.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/screen.css
+HTTP_REFERER=http://localhost/youla/project
+---
+2015/02/14 06:45:17 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/print.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/print.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/print.css
+HTTP_REFERER=http://localhost/youla/project
+---
+2015/02/14 06:45:17 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/form.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/form.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/form.css
+HTTP_REFERER=http://localhost/youla/project
+---
+2015/02/14 06:45:20 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "favicon.ico".' in /Users/mikhkita/sites/youla/framework/web/CController.php:483
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CController.php(270): CController->missingAction('favicon.ico')
+#1 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(282): CController->run('favicon.ico')
+#2 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('page/favicon.ic...')
+#3 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#5 {main}
+REQUEST_URI=/youla/page/favicon.ico
+---
+2015/02/14 06:49:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/screen.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/screen.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/screen.css
+HTTP_REFERER=http://localhost/youla/admin
+---
+2015/02/14 06:49:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/print.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/print.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/print.css
+HTTP_REFERER=http://localhost/youla/admin
+---
+2015/02/14 06:49:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/form.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/form.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/form.css
+HTTP_REFERER=http://localhost/youla/admin
+---
+2015/02/14 06:49:11 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/screen.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/screen.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/screen.css
+HTTP_REFERER=http://localhost/youla/admin
+---
+2015/02/14 06:49:11 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/print.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/print.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/print.css
+HTTP_REFERER=http://localhost/youla/admin
+---
+2015/02/14 06:49:11 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/form.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/form.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/form.css
+HTTP_REFERER=http://localhost/youla/admin
+---
+2015/02/14 06:57:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/house?House%5Bhou_name%5D=&House%5Bhou_rub_id%5D=1&House%5Bhou_typ_id%5D=
+---
+2015/02/14 06:58:09 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/house?House%5Bhou_name%5D=&House%5Bhou_rub_id%5D=1&House%5Bhou_typ_id%5D=
+---
+2015/02/14 06:59:48 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/house
+---
+2015/02/14 07:00:29 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/14 13:12:27 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/article
+---
+2015/02/14 13:12:57 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/rubric
+---
+2015/02/15 04:42:07 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/house
+---
+2015/02/15 04:42:09 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/rubric
+---
+2015/02/15 04:42:12 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/house
+---
+2015/02/15 04:42:13 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/category
+---
+2015/02/15 04:42:15 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/article
+---
+2015/02/15 04:42:16 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/15 04:42:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/rubric
+---
+2015/02/15 04:42:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/house?House%5Bhou_rub_id%5D=1
+---
+2015/02/15 04:42:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/article?Article%5Bart_hou_id%5D=35
+---
+2015/02/15 04:42:45 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/15 04:43:59 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/15 04:45:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/15 04:45:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/15 04:47:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/15 04:48:01 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/15 04:48:50 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/15 04:49:28 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/15 04:51:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/15 04:51:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/15 04:52:24 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/15 04:53:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/15 04:54:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/15 04:55:45 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/15 04:56:33 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/15 04:58:50 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/15 04:59:29 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/15 05:00:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/15 05:00:19 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/15 05:00:44 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/15 05:01:48 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/15 05:02:03 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/15 05:02:50 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/15 05:03:27 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/15 05:04:01 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/15 05:04:17 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/15 05:04:34 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/15 05:05:02 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/15 05:06:23 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/15 05:06:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/15 05:07:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/15 05:08:01 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/15 05:09:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/page
+---
+2015/02/15 15:05:45 [error] [php] Undefined variable: options (/Users/mikhkita/sites/youla/protected/views/uploader/form.php:2)
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CController.php(869): UploaderController->renderFile()
+#1 /Users/mikhkita/sites/youla/protected/controllers/UploaderController.php(24): UploaderController->renderPartial()
+#2 /Users/mikhkita/sites/youla/framework/web/actions/CInlineAction.php(49): UploaderController->actionGetForm()
+#3 /Users/mikhkita/sites/youla/framework/web/CController.php(308): CInlineAction->runWithParams()
+#4 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(133): UploaderController->runAction()
+#5 /Users/mikhkita/sites/youla/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /Users/mikhkita/sites/youla/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#7 /Users/mikhkita/sites/youla/framework/web/filters/CInlineFilter.php(58): UploaderController->filterAccessControl()
+#8 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#9 /Users/mikhkita/sites/youla/framework/web/CController.php(291): CFilterChain->run()
+#10 /Users/mikhkita/sites/youla/framework/web/CController.php(265): UploaderController->runActionWithFilters()
+#11 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(282): UploaderController->run()
+#12 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#13 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /Users/mikhkita/sites/youla/index.php(11): CWebApplication->run()
+REQUEST_URI=/youla/uploader/getForm
+2015/02/15 15:05:47 [error] [php] Undefined variable: options (/Users/mikhkita/sites/youla/protected/views/uploader/form.php:2)
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CController.php(869): UploaderController->renderFile()
+#1 /Users/mikhkita/sites/youla/protected/controllers/UploaderController.php(24): UploaderController->renderPartial()
+#2 /Users/mikhkita/sites/youla/framework/web/actions/CInlineAction.php(49): UploaderController->actionGetForm()
+#3 /Users/mikhkita/sites/youla/framework/web/CController.php(308): CInlineAction->runWithParams()
+#4 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(133): UploaderController->runAction()
+#5 /Users/mikhkita/sites/youla/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /Users/mikhkita/sites/youla/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#7 /Users/mikhkita/sites/youla/framework/web/filters/CInlineFilter.php(58): UploaderController->filterAccessControl()
+#8 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#9 /Users/mikhkita/sites/youla/framework/web/CController.php(291): CFilterChain->run()
+#10 /Users/mikhkita/sites/youla/framework/web/CController.php(265): UploaderController->runActionWithFilters()
+#11 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(282): UploaderController->run()
+#12 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#13 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /Users/mikhkita/sites/youla/index.php(11): CWebApplication->run()
+REQUEST_URI=/youla/uploader/getForm
+2015/02/15 15:05:47 [error] [php] Undefined variable: options (/Users/mikhkita/sites/youla/protected/views/uploader/form.php:2)
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CController.php(869): UploaderController->renderFile()
+#1 /Users/mikhkita/sites/youla/protected/controllers/UploaderController.php(24): UploaderController->renderPartial()
+#2 /Users/mikhkita/sites/youla/framework/web/actions/CInlineAction.php(49): UploaderController->actionGetForm()
+#3 /Users/mikhkita/sites/youla/framework/web/CController.php(308): CInlineAction->runWithParams()
+#4 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(133): UploaderController->runAction()
+#5 /Users/mikhkita/sites/youla/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /Users/mikhkita/sites/youla/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#7 /Users/mikhkita/sites/youla/framework/web/filters/CInlineFilter.php(58): UploaderController->filterAccessControl()
+#8 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#9 /Users/mikhkita/sites/youla/framework/web/CController.php(291): CFilterChain->run()
+#10 /Users/mikhkita/sites/youla/framework/web/CController.php(265): UploaderController->runActionWithFilters()
+#11 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(282): UploaderController->run()
+#12 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#13 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /Users/mikhkita/sites/youla/index.php(11): CWebApplication->run()
+REQUEST_URI=/youla/uploader/getForm
+2015/02/15 15:05:48 [error] [php] Undefined variable: options (/Users/mikhkita/sites/youla/protected/views/uploader/form.php:2)
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CController.php(869): UploaderController->renderFile()
+#1 /Users/mikhkita/sites/youla/protected/controllers/UploaderController.php(24): UploaderController->renderPartial()
+#2 /Users/mikhkita/sites/youla/framework/web/actions/CInlineAction.php(49): UploaderController->actionGetForm()
+#3 /Users/mikhkita/sites/youla/framework/web/CController.php(308): CInlineAction->runWithParams()
+#4 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(133): UploaderController->runAction()
+#5 /Users/mikhkita/sites/youla/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /Users/mikhkita/sites/youla/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#7 /Users/mikhkita/sites/youla/framework/web/filters/CInlineFilter.php(58): UploaderController->filterAccessControl()
+#8 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#9 /Users/mikhkita/sites/youla/framework/web/CController.php(291): CFilterChain->run()
+#10 /Users/mikhkita/sites/youla/framework/web/CController.php(265): UploaderController->runActionWithFilters()
+#11 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(282): UploaderController->run()
+#12 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#13 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /Users/mikhkita/sites/youla/index.php(11): CWebApplication->run()
+REQUEST_URI=/youla/uploader/getForm
+2015/02/15 15:05:48 [error] [php] Undefined variable: options (/Users/mikhkita/sites/youla/protected/views/uploader/form.php:2)
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CController.php(869): UploaderController->renderFile()
+#1 /Users/mikhkita/sites/youla/protected/controllers/UploaderController.php(24): UploaderController->renderPartial()
+#2 /Users/mikhkita/sites/youla/framework/web/actions/CInlineAction.php(49): UploaderController->actionGetForm()
+#3 /Users/mikhkita/sites/youla/framework/web/CController.php(308): CInlineAction->runWithParams()
+#4 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(133): UploaderController->runAction()
+#5 /Users/mikhkita/sites/youla/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /Users/mikhkita/sites/youla/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#7 /Users/mikhkita/sites/youla/framework/web/filters/CInlineFilter.php(58): UploaderController->filterAccessControl()
+#8 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#9 /Users/mikhkita/sites/youla/framework/web/CController.php(291): CFilterChain->run()
+#10 /Users/mikhkita/sites/youla/framework/web/CController.php(265): UploaderController->runActionWithFilters()
+#11 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(282): UploaderController->run()
+#12 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#13 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /Users/mikhkita/sites/youla/index.php(11): CWebApplication->run()
+REQUEST_URI=/youla/uploader/getForm
+2015/02/15 15:05:48 [error] [php] Undefined variable: options (/Users/mikhkita/sites/youla/protected/views/uploader/form.php:2)
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CController.php(869): UploaderController->renderFile()
+#1 /Users/mikhkita/sites/youla/protected/controllers/UploaderController.php(24): UploaderController->renderPartial()
+#2 /Users/mikhkita/sites/youla/framework/web/actions/CInlineAction.php(49): UploaderController->actionGetForm()
+#3 /Users/mikhkita/sites/youla/framework/web/CController.php(308): CInlineAction->runWithParams()
+#4 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(133): UploaderController->runAction()
+#5 /Users/mikhkita/sites/youla/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /Users/mikhkita/sites/youla/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#7 /Users/mikhkita/sites/youla/framework/web/filters/CInlineFilter.php(58): UploaderController->filterAccessControl()
+#8 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#9 /Users/mikhkita/sites/youla/framework/web/CController.php(291): CFilterChain->run()
+#10 /Users/mikhkita/sites/youla/framework/web/CController.php(265): UploaderController->runActionWithFilters()
+#11 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(282): UploaderController->run()
+#12 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#13 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /Users/mikhkita/sites/youla/index.php(11): CWebApplication->run()
+REQUEST_URI=/youla/uploader/getForm
+2015/02/15 15:05:50 [error] [php] Undefined variable: options (/Users/mikhkita/sites/youla/protected/views/uploader/form.php:2)
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CController.php(869): UploaderController->renderFile()
+#1 /Users/mikhkita/sites/youla/protected/controllers/UploaderController.php(24): UploaderController->renderPartial()
+#2 /Users/mikhkita/sites/youla/framework/web/actions/CInlineAction.php(49): UploaderController->actionGetForm()
+#3 /Users/mikhkita/sites/youla/framework/web/CController.php(308): CInlineAction->runWithParams()
+#4 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(133): UploaderController->runAction()
+#5 /Users/mikhkita/sites/youla/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /Users/mikhkita/sites/youla/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#7 /Users/mikhkita/sites/youla/framework/web/filters/CInlineFilter.php(58): UploaderController->filterAccessControl()
+#8 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#9 /Users/mikhkita/sites/youla/framework/web/CController.php(291): CFilterChain->run()
+#10 /Users/mikhkita/sites/youla/framework/web/CController.php(265): UploaderController->runActionWithFilters()
+#11 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(282): UploaderController->run()
+#12 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#13 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /Users/mikhkita/sites/youla/index.php(11): CWebApplication->run()
+REQUEST_URI=/youla/uploader/getForm
+2015/02/15 15:05:55 [error] [php] Undefined variable: options (/Users/mikhkita/sites/youla/protected/views/uploader/form.php:2)
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CController.php(869): UploaderController->renderFile()
+#1 /Users/mikhkita/sites/youla/protected/controllers/UploaderController.php(24): UploaderController->renderPartial()
+#2 /Users/mikhkita/sites/youla/framework/web/actions/CInlineAction.php(49): UploaderController->actionGetForm()
+#3 /Users/mikhkita/sites/youla/framework/web/CController.php(308): CInlineAction->runWithParams()
+#4 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(133): UploaderController->runAction()
+#5 /Users/mikhkita/sites/youla/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /Users/mikhkita/sites/youla/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#7 /Users/mikhkita/sites/youla/framework/web/filters/CInlineFilter.php(58): UploaderController->filterAccessControl()
+#8 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#9 /Users/mikhkita/sites/youla/framework/web/CController.php(291): CFilterChain->run()
+#10 /Users/mikhkita/sites/youla/framework/web/CController.php(265): UploaderController->runActionWithFilters()
+#11 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(282): UploaderController->run()
+#12 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#13 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /Users/mikhkita/sites/youla/index.php(11): CWebApplication->run()
+REQUEST_URI=/youla/uploader/getForm
+2015/02/15 15:05:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/rubric
+---
+2015/02/15 15:06:11 [error] [php] Undefined variable: options (/Users/mikhkita/sites/youla/protected/views/uploader/form.php:2)
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CController.php(869): UploaderController->renderFile()
+#1 /Users/mikhkita/sites/youla/protected/controllers/UploaderController.php(24): UploaderController->renderPartial()
+#2 /Users/mikhkita/sites/youla/framework/web/actions/CInlineAction.php(49): UploaderController->actionGetForm()
+#3 /Users/mikhkita/sites/youla/framework/web/CController.php(308): CInlineAction->runWithParams()
+#4 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(133): UploaderController->runAction()
+#5 /Users/mikhkita/sites/youla/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /Users/mikhkita/sites/youla/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#7 /Users/mikhkita/sites/youla/framework/web/filters/CInlineFilter.php(58): UploaderController->filterAccessControl()
+#8 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#9 /Users/mikhkita/sites/youla/framework/web/CController.php(291): CFilterChain->run()
+#10 /Users/mikhkita/sites/youla/framework/web/CController.php(265): UploaderController->runActionWithFilters()
+#11 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(282): UploaderController->run()
+#12 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#13 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /Users/mikhkita/sites/youla/index.php(11): CWebApplication->run()
+REQUEST_URI=/youla/uploader/getForm
+2015/02/15 15:06:11 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/screen.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/screen.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/screen.css
+HTTP_REFERER=http://localhost/youla/uploader/getForm
+---
+2015/02/15 15:06:11 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/print.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/print.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/print.css
+HTTP_REFERER=http://localhost/youla/uploader/getForm
+---
+2015/02/15 15:06:11 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/form.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/form.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/form.css
+HTTP_REFERER=http://localhost/youla/uploader/getForm
+---
+2015/02/15 18:09:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/favicon.ico
+---
+2015/02/15 18:10:04 [error] [php] Undefined variable: options (/Users/mikhkita/sites/youla/protected/views/uploader/form.php:2)
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CController.php(869): UploaderController->renderFile()
+#1 /Users/mikhkita/sites/youla/protected/controllers/UploaderController.php(24): UploaderController->renderPartial()
+#2 /Users/mikhkita/sites/youla/framework/web/actions/CInlineAction.php(49): UploaderController->actionGetForm()
+#3 /Users/mikhkita/sites/youla/framework/web/CController.php(308): CInlineAction->runWithParams()
+#4 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(133): UploaderController->runAction()
+#5 /Users/mikhkita/sites/youla/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /Users/mikhkita/sites/youla/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#7 /Users/mikhkita/sites/youla/framework/web/filters/CInlineFilter.php(58): UploaderController->filterAccessControl()
+#8 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#9 /Users/mikhkita/sites/youla/framework/web/CController.php(291): CFilterChain->run()
+#10 /Users/mikhkita/sites/youla/framework/web/CController.php(265): UploaderController->runActionWithFilters()
+#11 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(282): UploaderController->run()
+#12 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#13 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /Users/mikhkita/sites/youla/index.php(11): CWebApplication->run()
+REQUEST_URI=/youla/uploader/getForm
+2015/02/15 18:10:08 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/rubric
+---
+2015/02/15 18:10:11 [error] [php] Undefined variable: options (/Users/mikhkita/sites/youla/protected/views/uploader/form.php:2)
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CController.php(869): UploaderController->renderFile()
+#1 /Users/mikhkita/sites/youla/protected/controllers/UploaderController.php(24): UploaderController->renderPartial()
+#2 /Users/mikhkita/sites/youla/framework/web/actions/CInlineAction.php(49): UploaderController->actionGetForm()
+#3 /Users/mikhkita/sites/youla/framework/web/CController.php(308): CInlineAction->runWithParams()
+#4 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(133): UploaderController->runAction()
+#5 /Users/mikhkita/sites/youla/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /Users/mikhkita/sites/youla/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#7 /Users/mikhkita/sites/youla/framework/web/filters/CInlineFilter.php(58): UploaderController->filterAccessControl()
+#8 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#9 /Users/mikhkita/sites/youla/framework/web/CController.php(291): CFilterChain->run()
+#10 /Users/mikhkita/sites/youla/framework/web/CController.php(265): UploaderController->runActionWithFilters()
+#11 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(282): UploaderController->run()
+#12 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#13 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /Users/mikhkita/sites/youla/index.php(11): CWebApplication->run()
+REQUEST_URI=/youla/uploader/getForm
+2015/02/15 18:10:11 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/screen.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/screen.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/screen.css
+HTTP_REFERER=http://localhost/youla/uploader/getForm
+---
+2015/02/15 18:10:11 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/form.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/form.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/form.css
+HTTP_REFERER=http://localhost/youla/uploader/getForm
+---
+2015/02/15 18:10:11 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/print.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/print.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/print.css
+HTTP_REFERER=http://localhost/youla/uploader/getForm
+---
+2015/02/16 05:23:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/favicon.ico
+---
+2015/02/16 12:16:17 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/print.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/print.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/print.css
+HTTP_REFERER=http://localhost/youla/admin
+---
+2015/02/16 12:16:17 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/screen.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/screen.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/screen.css
+HTTP_REFERER=http://localhost/youla/admin
+---
+2015/02/16 12:16:17 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/form.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/form.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/form.css
+HTTP_REFERER=http://localhost/youla/admin
+---
+2015/02/16 12:16:28 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/rubric
+---
+2015/02/16 12:16:57 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/rubric
+---
+2015/02/16 12:17:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/rubric
+---
+2015/02/16 12:23:48 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "rubrics/favicon.ico".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('rubrics/favicon...')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/rubrics/favicon.ico
+---
+2015/02/16 12:25:30 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "houses/favicon.ico".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('houses/favicon....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/houses/favicon.ico
+---
+2015/02/16 12:25:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "blog/favicon.ico".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('blog/favicon.ic...')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/blog/favicon.ico
+---
+2015/02/16 16:13:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/favicon.ico
+---
+2015/02/18 15:48:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/screen.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/screen.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/screen.css
+HTTP_REFERER=http://localhost/youla/admin
+---
+2015/02/18 15:48:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/print.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/print.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/print.css
+HTTP_REFERER=http://localhost/youla/admin
+---
+2015/02/18 15:48:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/form.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/form.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/form.css
+HTTP_REFERER=http://localhost/youla/admin
+---
+2015/02/18 15:48:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/screen.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/screen.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/screen.css
+HTTP_REFERER=http://localhost/youla/admin
+---
+2015/02/18 15:48:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/form.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/form.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/form.css
+HTTP_REFERER=http://localhost/youla/admin
+---
+2015/02/18 15:48:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/print.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/print.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/print.css
+HTTP_REFERER=http://localhost/youla/admin
+---
+2015/02/18 15:48:54 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/screen.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/screen.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/screen.css
+HTTP_REFERER=http://localhost/youla/admin
+---
+2015/02/18 15:48:54 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/print.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/print.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/print.css
+HTTP_REFERER=http://localhost/youla/admin
+---
+2015/02/18 15:48:54 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/form.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/form.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/form.css
+HTTP_REFERER=http://localhost/youla/admin
+---
+2015/02/18 16:10:21 [error] [php] Trying to get property of non-object (/Users/mikhkita/sites/youla/protected/views/article/adminIndex.php:24)
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CController.php(869): ArticleController->renderFile()
+#1 /Users/mikhkita/sites/youla/framework/web/CController.php(782): ArticleController->renderPartial()
+#2 /Users/mikhkita/sites/youla/protected/controllers/ArticleController.php(113): ArticleController->render()
+#3 unknown(0): ArticleController->actionAdminIndex()
+#4 /Users/mikhkita/sites/youla/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#5 /Users/mikhkita/sites/youla/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#6 /Users/mikhkita/sites/youla/framework/web/CController.php(308): CInlineAction->runWithParams()
+#7 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(133): ArticleController->runAction()
+#8 /Users/mikhkita/sites/youla/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#9 /Users/mikhkita/sites/youla/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#10 /Users/mikhkita/sites/youla/framework/web/filters/CInlineFilter.php(58): ArticleController->filterAccessControl()
+#11 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#12 /Users/mikhkita/sites/youla/framework/web/CController.php(291): CFilterChain->run()
+#13 /Users/mikhkita/sites/youla/framework/web/CController.php(265): ArticleController->runActionWithFilters()
+#14 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(282): ArticleController->run()
+#15 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#16 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#17 /Users/mikhkita/sites/youla/index.php(11): CWebApplication->run()
+REQUEST_URI=/youla/admin/article
+2015/02/18 16:10:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/screen.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/screen.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/screen.css
+HTTP_REFERER=http://localhost/youla/admin/article
+---
+2015/02/18 16:10:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/print.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/print.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/print.css
+HTTP_REFERER=http://localhost/youla/admin/article
+---
+2015/02/18 16:10:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/form.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/form.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/form.css
+HTTP_REFERER=http://localhost/youla/admin/article
+---
+2015/02/18 16:13:11 [error] [php] Trying to get property of non-object (/Users/mikhkita/sites/youla/protected/views/article/_form.php:27)
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CController.php(869): ArticleController->renderFile()
+#1 /Users/mikhkita/sites/youla/protected/views/article/adminUpdate.php(4): ArticleController->renderPartial()
+#2 /Users/mikhkita/sites/youla/framework/web/CBaseController.php(126): require()
+#3 /Users/mikhkita/sites/youla/framework/web/CBaseController.php(95): ArticleController->renderInternal()
+#4 /Users/mikhkita/sites/youla/framework/web/CController.php(869): ArticleController->renderFile()
+#5 /Users/mikhkita/sites/youla/protected/controllers/ArticleController.php(60): ArticleController->renderPartial()
+#6 unknown(0): ArticleController->actionAdminUpdate()
+#7 /Users/mikhkita/sites/youla/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#8 /Users/mikhkita/sites/youla/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#9 /Users/mikhkita/sites/youla/framework/web/CController.php(308): CInlineAction->runWithParams()
+#10 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(133): ArticleController->runAction()
+#11 /Users/mikhkita/sites/youla/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#12 /Users/mikhkita/sites/youla/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#13 /Users/mikhkita/sites/youla/framework/web/filters/CInlineFilter.php(58): ArticleController->filterAccessControl()
+#14 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#15 /Users/mikhkita/sites/youla/framework/web/CController.php(291): CFilterChain->run()
+#16 /Users/mikhkita/sites/youla/framework/web/CController.php(265): ArticleController->runActionWithFilters()
+#17 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(282): ArticleController->run()
+#18 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#19 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#20 /Users/mikhkita/sites/youla/index.php(11): CWebApplication->run()
+REQUEST_URI=/youla/admin/article/update?id=12
+2015/02/18 16:13:26 [error] [php] Trying to get property of non-object (/Users/mikhkita/sites/youla/protected/views/article/_form.php:27)
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CController.php(869): ArticleController->renderFile()
+#1 /Users/mikhkita/sites/youla/protected/views/article/adminUpdate.php(4): ArticleController->renderPartial()
+#2 /Users/mikhkita/sites/youla/framework/web/CBaseController.php(126): require()
+#3 /Users/mikhkita/sites/youla/framework/web/CBaseController.php(95): ArticleController->renderInternal()
+#4 /Users/mikhkita/sites/youla/framework/web/CController.php(869): ArticleController->renderFile()
+#5 /Users/mikhkita/sites/youla/protected/controllers/ArticleController.php(60): ArticleController->renderPartial()
+#6 unknown(0): ArticleController->actionAdminUpdate()
+#7 /Users/mikhkita/sites/youla/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#8 /Users/mikhkita/sites/youla/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#9 /Users/mikhkita/sites/youla/framework/web/CController.php(308): CInlineAction->runWithParams()
+#10 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(133): ArticleController->runAction()
+#11 /Users/mikhkita/sites/youla/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#12 /Users/mikhkita/sites/youla/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#13 /Users/mikhkita/sites/youla/framework/web/filters/CInlineFilter.php(58): ArticleController->filterAccessControl()
+#14 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#15 /Users/mikhkita/sites/youla/framework/web/CController.php(291): CFilterChain->run()
+#16 /Users/mikhkita/sites/youla/framework/web/CController.php(265): ArticleController->runActionWithFilters()
+#17 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(282): ArticleController->run()
+#18 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#19 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#20 /Users/mikhkita/sites/youla/index.php(11): CWebApplication->run()
+REQUEST_URI=/youla/admin/article/update?id=12
+2015/02/18 16:16:12 [error] [php] Trying to get property of non-object (/Users/mikhkita/sites/youla/protected/views/article/_form.php:27)
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CController.php(869): ArticleController->renderFile()
+#1 /Users/mikhkita/sites/youla/protected/views/article/adminUpdate.php(4): ArticleController->renderPartial()
+#2 /Users/mikhkita/sites/youla/framework/web/CBaseController.php(126): require()
+#3 /Users/mikhkita/sites/youla/framework/web/CBaseController.php(95): ArticleController->renderInternal()
+#4 /Users/mikhkita/sites/youla/framework/web/CController.php(869): ArticleController->renderFile()
+#5 /Users/mikhkita/sites/youla/protected/controllers/ArticleController.php(60): ArticleController->renderPartial()
+#6 unknown(0): ArticleController->actionAdminUpdate()
+#7 /Users/mikhkita/sites/youla/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#8 /Users/mikhkita/sites/youla/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#9 /Users/mikhkita/sites/youla/framework/web/CController.php(308): CInlineAction->runWithParams()
+#10 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(133): ArticleController->runAction()
+#11 /Users/mikhkita/sites/youla/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#12 /Users/mikhkita/sites/youla/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#13 /Users/mikhkita/sites/youla/framework/web/filters/CInlineFilter.php(58): ArticleController->filterAccessControl()
+#14 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#15 /Users/mikhkita/sites/youla/framework/web/CController.php(291): CFilterChain->run()
+#16 /Users/mikhkita/sites/youla/framework/web/CController.php(265): ArticleController->runActionWithFilters()
+#17 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(282): ArticleController->run()
+#18 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#19 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#20 /Users/mikhkita/sites/youla/index.php(11): CWebApplication->run()
+REQUEST_URI=/youla/admin/article/update?id=12
+2015/02/18 16:16:27 [error] [php] Trying to get property of non-object (/Users/mikhkita/sites/youla/protected/views/article/_form.php:27)
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CController.php(869): ArticleController->renderFile()
+#1 /Users/mikhkita/sites/youla/protected/views/article/adminUpdate.php(4): ArticleController->renderPartial()
+#2 /Users/mikhkita/sites/youla/framework/web/CBaseController.php(126): require()
+#3 /Users/mikhkita/sites/youla/framework/web/CBaseController.php(95): ArticleController->renderInternal()
+#4 /Users/mikhkita/sites/youla/framework/web/CController.php(869): ArticleController->renderFile()
+#5 /Users/mikhkita/sites/youla/protected/controllers/ArticleController.php(60): ArticleController->renderPartial()
+#6 unknown(0): ArticleController->actionAdminUpdate()
+#7 /Users/mikhkita/sites/youla/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#8 /Users/mikhkita/sites/youla/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#9 /Users/mikhkita/sites/youla/framework/web/CController.php(308): CInlineAction->runWithParams()
+#10 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(133): ArticleController->runAction()
+#11 /Users/mikhkita/sites/youla/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#12 /Users/mikhkita/sites/youla/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#13 /Users/mikhkita/sites/youla/framework/web/filters/CInlineFilter.php(58): ArticleController->filterAccessControl()
+#14 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#15 /Users/mikhkita/sites/youla/framework/web/CController.php(291): CFilterChain->run()
+#16 /Users/mikhkita/sites/youla/framework/web/CController.php(265): ArticleController->runActionWithFilters()
+#17 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(282): ArticleController->run()
+#18 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#19 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#20 /Users/mikhkita/sites/youla/index.php(11): CWebApplication->run()
+REQUEST_URI=/youla/admin/article/update?id=12
+2015/02/18 16:16:42 [error] [php] Trying to get property of non-object (/Users/mikhkita/sites/youla/protected/views/article/_form.php:27)
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CController.php(869): ArticleController->renderFile()
+#1 /Users/mikhkita/sites/youla/protected/views/article/adminUpdate.php(4): ArticleController->renderPartial()
+#2 /Users/mikhkita/sites/youla/framework/web/CBaseController.php(126): require()
+#3 /Users/mikhkita/sites/youla/framework/web/CBaseController.php(95): ArticleController->renderInternal()
+#4 /Users/mikhkita/sites/youla/framework/web/CController.php(869): ArticleController->renderFile()
+#5 /Users/mikhkita/sites/youla/protected/controllers/ArticleController.php(60): ArticleController->renderPartial()
+#6 unknown(0): ArticleController->actionAdminUpdate()
+#7 /Users/mikhkita/sites/youla/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#8 /Users/mikhkita/sites/youla/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#9 /Users/mikhkita/sites/youla/framework/web/CController.php(308): CInlineAction->runWithParams()
+#10 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(133): ArticleController->runAction()
+#11 /Users/mikhkita/sites/youla/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#12 /Users/mikhkita/sites/youla/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#13 /Users/mikhkita/sites/youla/framework/web/filters/CInlineFilter.php(58): ArticleController->filterAccessControl()
+#14 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#15 /Users/mikhkita/sites/youla/framework/web/CController.php(291): CFilterChain->run()
+#16 /Users/mikhkita/sites/youla/framework/web/CController.php(265): ArticleController->runActionWithFilters()
+#17 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(282): ArticleController->run()
+#18 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#19 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#20 /Users/mikhkita/sites/youla/index.php(11): CWebApplication->run()
+REQUEST_URI=/youla/admin/article/update?id=12
+2015/02/18 16:16:51 [error] [php] Trying to get property of non-object (/Users/mikhkita/sites/youla/protected/views/article/_form.php:27)
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CController.php(869): ArticleController->renderFile()
+#1 /Users/mikhkita/sites/youla/protected/views/article/adminUpdate.php(4): ArticleController->renderPartial()
+#2 /Users/mikhkita/sites/youla/framework/web/CBaseController.php(126): require()
+#3 /Users/mikhkita/sites/youla/framework/web/CBaseController.php(95): ArticleController->renderInternal()
+#4 /Users/mikhkita/sites/youla/framework/web/CController.php(869): ArticleController->renderFile()
+#5 /Users/mikhkita/sites/youla/protected/controllers/ArticleController.php(60): ArticleController->renderPartial()
+#6 unknown(0): ArticleController->actionAdminUpdate()
+#7 /Users/mikhkita/sites/youla/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#8 /Users/mikhkita/sites/youla/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#9 /Users/mikhkita/sites/youla/framework/web/CController.php(308): CInlineAction->runWithParams()
+#10 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(133): ArticleController->runAction()
+#11 /Users/mikhkita/sites/youla/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#12 /Users/mikhkita/sites/youla/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#13 /Users/mikhkita/sites/youla/framework/web/filters/CInlineFilter.php(58): ArticleController->filterAccessControl()
+#14 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#15 /Users/mikhkita/sites/youla/framework/web/CController.php(291): CFilterChain->run()
+#16 /Users/mikhkita/sites/youla/framework/web/CController.php(265): ArticleController->runActionWithFilters()
+#17 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(282): ArticleController->run()
+#18 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#19 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#20 /Users/mikhkita/sites/youla/index.php(11): CWebApplication->run()
+REQUEST_URI=/youla/admin/article/update?id=12
+2015/02/18 16:16:54 [error] [php] Trying to get property of non-object (/Users/mikhkita/sites/youla/protected/views/article/_form.php:21)
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CController.php(869): ArticleController->renderFile()
+#1 /Users/mikhkita/sites/youla/protected/views/article/adminCreate.php(4): ArticleController->renderPartial()
+#2 /Users/mikhkita/sites/youla/framework/web/CBaseController.php(126): require()
+#3 /Users/mikhkita/sites/youla/framework/web/CBaseController.php(95): ArticleController->renderInternal()
+#4 /Users/mikhkita/sites/youla/framework/web/CController.php(869): ArticleController->renderFile()
+#5 /Users/mikhkita/sites/youla/protected/controllers/ArticleController.php(44): ArticleController->renderPartial()
+#6 /Users/mikhkita/sites/youla/framework/web/actions/CInlineAction.php(49): ArticleController->actionAdminCreate()
+#7 /Users/mikhkita/sites/youla/framework/web/CController.php(308): CInlineAction->runWithParams()
+#8 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(133): ArticleController->runAction()
+#9 /Users/mikhkita/sites/youla/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#10 /Users/mikhkita/sites/youla/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#11 /Users/mikhkita/sites/youla/framework/web/filters/CInlineFilter.php(58): ArticleController->filterAccessControl()
+#12 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#13 /Users/mikhkita/sites/youla/framework/web/CController.php(291): CFilterChain->run()
+#14 /Users/mikhkita/sites/youla/framework/web/CController.php(265): ArticleController->runActionWithFilters()
+#15 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(282): ArticleController->run()
+#16 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#17 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#18 /Users/mikhkita/sites/youla/index.php(11): CWebApplication->run()
+REQUEST_URI=/youla/admin/article/create
+2015/02/18 16:17:07 [error] [php] Trying to get property of non-object (/Users/mikhkita/sites/youla/protected/views/article/_form.php:21)
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CController.php(869): ArticleController->renderFile()
+#1 /Users/mikhkita/sites/youla/protected/views/article/adminCreate.php(4): ArticleController->renderPartial()
+#2 /Users/mikhkita/sites/youla/framework/web/CBaseController.php(126): require()
+#3 /Users/mikhkita/sites/youla/framework/web/CBaseController.php(95): ArticleController->renderInternal()
+#4 /Users/mikhkita/sites/youla/framework/web/CController.php(869): ArticleController->renderFile()
+#5 /Users/mikhkita/sites/youla/protected/controllers/ArticleController.php(44): ArticleController->renderPartial()
+#6 /Users/mikhkita/sites/youla/framework/web/actions/CInlineAction.php(49): ArticleController->actionAdminCreate()
+#7 /Users/mikhkita/sites/youla/framework/web/CController.php(308): CInlineAction->runWithParams()
+#8 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(133): ArticleController->runAction()
+#9 /Users/mikhkita/sites/youla/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#10 /Users/mikhkita/sites/youla/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#11 /Users/mikhkita/sites/youla/framework/web/filters/CInlineFilter.php(58): ArticleController->filterAccessControl()
+#12 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#13 /Users/mikhkita/sites/youla/framework/web/CController.php(291): CFilterChain->run()
+#14 /Users/mikhkita/sites/youla/framework/web/CController.php(265): ArticleController->runActionWithFilters()
+#15 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(282): ArticleController->run()
+#16 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#17 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#18 /Users/mikhkita/sites/youla/index.php(11): CWebApplication->run()
+REQUEST_URI=/youla/admin/article/create
+2015/02/18 16:17:16 [error] [php] Trying to get property of non-object (/Users/mikhkita/sites/youla/protected/views/article/_form.php:21)
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CController.php(869): ArticleController->renderFile()
+#1 /Users/mikhkita/sites/youla/protected/views/article/adminCreate.php(4): ArticleController->renderPartial()
+#2 /Users/mikhkita/sites/youla/framework/web/CBaseController.php(126): require()
+#3 /Users/mikhkita/sites/youla/framework/web/CBaseController.php(95): ArticleController->renderInternal()
+#4 /Users/mikhkita/sites/youla/framework/web/CController.php(869): ArticleController->renderFile()
+#5 /Users/mikhkita/sites/youla/protected/controllers/ArticleController.php(44): ArticleController->renderPartial()
+#6 /Users/mikhkita/sites/youla/framework/web/actions/CInlineAction.php(49): ArticleController->actionAdminCreate()
+#7 /Users/mikhkita/sites/youla/framework/web/CController.php(308): CInlineAction->runWithParams()
+#8 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(133): ArticleController->runAction()
+#9 /Users/mikhkita/sites/youla/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#10 /Users/mikhkita/sites/youla/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#11 /Users/mikhkita/sites/youla/framework/web/filters/CInlineFilter.php(58): ArticleController->filterAccessControl()
+#12 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#13 /Users/mikhkita/sites/youla/framework/web/CController.php(291): CFilterChain->run()
+#14 /Users/mikhkita/sites/youla/framework/web/CController.php(265): ArticleController->runActionWithFilters()
+#15 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(282): ArticleController->run()
+#16 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#17 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#18 /Users/mikhkita/sites/youla/index.php(11): CWebApplication->run()
+REQUEST_URI=/youla/admin/article/create
+2015/02/18 16:17:20 [error] [php] Trying to get property of non-object (/Users/mikhkita/sites/youla/protected/views/article/_form.php:21)
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CController.php(869): ArticleController->renderFile()
+#1 /Users/mikhkita/sites/youla/protected/views/article/adminCreate.php(4): ArticleController->renderPartial()
+#2 /Users/mikhkita/sites/youla/framework/web/CBaseController.php(126): require()
+#3 /Users/mikhkita/sites/youla/framework/web/CBaseController.php(95): ArticleController->renderInternal()
+#4 /Users/mikhkita/sites/youla/framework/web/CController.php(869): ArticleController->renderFile()
+#5 /Users/mikhkita/sites/youla/protected/controllers/ArticleController.php(44): ArticleController->renderPartial()
+#6 /Users/mikhkita/sites/youla/framework/web/actions/CInlineAction.php(49): ArticleController->actionAdminCreate()
+#7 /Users/mikhkita/sites/youla/framework/web/CController.php(308): CInlineAction->runWithParams()
+#8 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(133): ArticleController->runAction()
+#9 /Users/mikhkita/sites/youla/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#10 /Users/mikhkita/sites/youla/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#11 /Users/mikhkita/sites/youla/framework/web/filters/CInlineFilter.php(58): ArticleController->filterAccessControl()
+#12 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#13 /Users/mikhkita/sites/youla/framework/web/CController.php(291): CFilterChain->run()
+#14 /Users/mikhkita/sites/youla/framework/web/CController.php(265): ArticleController->runActionWithFilters()
+#15 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(282): ArticleController->run()
+#16 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#17 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#18 /Users/mikhkita/sites/youla/index.php(11): CWebApplication->run()
+REQUEST_URI=/youla/admin/article/create
+2015/02/18 16:17:27 [error] [php] Trying to get property of non-object (/Users/mikhkita/sites/youla/protected/views/article/_form.php:21)
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CController.php(869): ArticleController->renderFile()
+#1 /Users/mikhkita/sites/youla/protected/views/article/adminCreate.php(4): ArticleController->renderPartial()
+#2 /Users/mikhkita/sites/youla/framework/web/CBaseController.php(126): require()
+#3 /Users/mikhkita/sites/youla/framework/web/CBaseController.php(95): ArticleController->renderInternal()
+#4 /Users/mikhkita/sites/youla/framework/web/CController.php(869): ArticleController->renderFile()
+#5 /Users/mikhkita/sites/youla/protected/controllers/ArticleController.php(44): ArticleController->renderPartial()
+#6 /Users/mikhkita/sites/youla/framework/web/actions/CInlineAction.php(49): ArticleController->actionAdminCreate()
+#7 /Users/mikhkita/sites/youla/framework/web/CController.php(308): CInlineAction->runWithParams()
+#8 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(133): ArticleController->runAction()
+#9 /Users/mikhkita/sites/youla/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#10 /Users/mikhkita/sites/youla/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#11 /Users/mikhkita/sites/youla/framework/web/filters/CInlineFilter.php(58): ArticleController->filterAccessControl()
+#12 /Users/mikhkita/sites/youla/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#13 /Users/mikhkita/sites/youla/framework/web/CController.php(291): CFilterChain->run()
+#14 /Users/mikhkita/sites/youla/framework/web/CController.php(265): ArticleController->runActionWithFilters()
+#15 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(282): ArticleController->run()
+#16 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#17 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#18 /Users/mikhkita/sites/youla/index.php(11): CWebApplication->run()
+REQUEST_URI=/youla/admin/article/create
+2015/02/19 08:26:45 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/favicon.ico
+---
+2015/02/20 07:30:20 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/favicon.ico
+---
+2015/02/20 07:30:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/screen.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/screen.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/screen.css
+HTTP_REFERER=http://localhost/youla/admin
+---
+2015/02/20 07:30:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/print.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/print.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/print.css
+HTTP_REFERER=http://localhost/youla/admin
+---
+2015/02/20 07:30:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/form.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/form.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/css/form.css
+HTTP_REFERER=http://localhost/youla/admin
+---
+2015/02/20 07:30:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/article
+---
+2015/02/20 07:42:03 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://localhost/youla/admin/article
+---
+2015/02/20 07:42:09 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2015/02/20 07:42:10 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/screen.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/screen.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/screen.css
+HTTP_REFERER=http://dev.youla.com/admin
+---
+2015/02/20 07:42:10 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/print.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/print.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/print.css
+HTTP_REFERER=http://dev.youla.com/admin
+---
+2015/02/20 07:42:10 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/form.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/form.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/form.css
+HTTP_REFERER=http://dev.youla.com/admin
+---
+2015/02/20 07:42:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon2.ico".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon2.ico')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon2.ico
+---
+2015/02/20 07:47:50 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://dev.youla.com/admin/page
+---
+2015/02/20 07:51:07 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://dev.youla.com/admin/page
+---
+2015/02/20 07:51:17 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://dev.youla.com/admin/page
+---
+2015/02/20 07:53:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://dev.youla.com/admin/page
+---
+2015/02/20 07:55:27 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://dev.youla.com/admin/page
+---
+2015/02/21 15:04:33 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/favicon.ico
+---
+2015/02/24 09:58:47 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2015/02/24 09:58:48 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/screen.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/screen.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/screen.css
+HTTP_REFERER=http://dev.youla.com/admin
+---
+2015/02/24 09:58:48 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/print.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/print.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/print.css
+HTTP_REFERER=http://dev.youla.com/admin
+---
+2015/02/24 09:58:48 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/form.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/form.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/form.css
+HTTP_REFERER=http://dev.youla.com/admin
+---
+2015/02/24 09:58:50 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon2.ico".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon2.ico')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon2.ico
+---
+2015/02/25 10:00:00 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/screen.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/screen.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/screen.css
+HTTP_REFERER=http://dev.youla.com/admin
+---
+2015/02/25 10:00:00 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/print.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/print.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/print.css
+HTTP_REFERER=http://dev.youla.com/admin
+---
+2015/02/25 10:00:00 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/form.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/form.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/form.css
+HTTP_REFERER=http://dev.youla.com/admin
+---
+2015/02/25 17:08:28 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/favicon.ico
+---
+2015/02/26 09:37:55 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2015/02/26 09:37:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/screen.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/screen.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/screen.css
+HTTP_REFERER=http://dev.youla.com/admin
+---
+2015/02/26 09:37:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/print.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/print.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/print.css
+HTTP_REFERER=http://dev.youla.com/admin
+---
+2015/02/26 09:37:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/form.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/form.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/form.css
+HTTP_REFERER=http://dev.youla.com/admin
+---
+2015/02/26 09:37:59 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon2.ico".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon2.ico')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon2.ico
+---
+2015/02/26 22:57:46 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/youla/favicon.ico
+---
+2015/03/13 16:51:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+---
+2015/03/13 16:51:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/screen.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/screen.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/screen.css
+HTTP_REFERER=http://dev.youla.com/admin
+---
+2015/03/13 16:51:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/print.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/print.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/print.css
+HTTP_REFERER=http://dev.youla.com/admin
+---
+2015/03/13 16:51:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/form.css".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('css/form.css')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/form.css
+HTTP_REFERER=http://dev.youla.com/admin
+---
+2015/03/13 16:51:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon2.ico".' in /Users/mikhkita/sites/youla/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/youla/framework/web/CWebApplication.php(141): CWebApplication->runController('favicon2.ico')
+#1 /Users/mikhkita/sites/youla/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/youla/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon2.ico
+---
