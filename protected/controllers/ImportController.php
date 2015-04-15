@@ -28,10 +28,9 @@ class ImportController extends Controller
 
 	public function actionAdminIndex($partial = false)
 	{
+		$model = GoodType::model()->findAll();
 		$this->render('adminIndex',array(
-			// 'data'=>$model,
-			// 'filter'=>$filter,
-			// 'labels'=>Import::attributeLabels()
+			'data'=>$model
 		));
 	}
 
