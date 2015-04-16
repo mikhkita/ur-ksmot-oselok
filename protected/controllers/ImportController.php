@@ -38,7 +38,11 @@ class ImportController extends Controller
 	}
 	public function actionAdminStep_2()
 	{
-		require_once Yii::app()->basePath.'/../classes/PHPExcel.php'; // Подключаем библиотеку PHPExcel
+
+		spl_autoload_unregister(array('YiiBase','autoload'));
+		Yii::import("ext.phpexcel.Classes.PHPExcel", true);
+		$objPHPExcel = new PHPExcel();
+		spl_autoload_register(array('YiiBase','autoload'));
 
 	// 	$uploadDir = "upload/tmp";
 	// 	$excelDir = "upload/excel";
