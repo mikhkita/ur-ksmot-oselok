@@ -4741,3 +4741,165 @@ Stack trace:
 REQUEST_URI=/css/form.css
 HTTP_REFERER=http://ur-ksmot-oselok:88/admin/import/step_2
 ---
+2015/04/16 15:58:50 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin/import
+---
+2015/04/16 16:01:52 [error] [php] include(PHPExcel_Shared_ZipStreamWrapper.php): failed to open stream: No such file or directory (C:\OpenServer\domains\ur-ksmot-oselok\framework\YiiBase.php:427)
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\classes\PHPExcel.php(34): spl_autoload_call()
+#1 C:\OpenServer\domains\ur-ksmot-oselok\protected\controllers\ImportController.php(41): require_once()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\actions\CInlineAction.php(49): ImportController->actionAdminStep_2()
+#3 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(308): CInlineAction->runWithParams()
+#4 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(133): ImportController->runAction()
+#5 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#6 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#7 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CInlineFilter.php(58): ImportController->filterAccessControl()
+#8 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#9 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(291): CFilterChain->run()
+#10 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(265): ImportController->runActionWithFilters()
+#11 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(282): ImportController->run()
+#12 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#13 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CWebApplication->run()
+REQUEST_URI=/admin/import/step_2
+2015/04/16 16:01:52 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/screen.css".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/screen.css')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/screen.css
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin/import/step_2
+---
+2015/04/16 16:01:52 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/print.css".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/print.css')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/print.css
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin/import/step_2
+---
+2015/04/16 16:01:52 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/form.css".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/form.css')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/form.css
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin/import/step_2
+---
+2015/04/16 16:01:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin/import
+---
+2015/04/16 16:05:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin/import
+---
+2015/04/16 16:14:15 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin/import
+---
+2015/04/16 16:15:00 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin/import
+---
+2015/04/16 16:15:02 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin/import
+---
+2015/04/16 16:16:08 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin/import
+---
+2015/04/16 16:20:34 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin/import
+---
+2015/04/16 16:20:40 [error] [php] include(PHPExcel_Shared_ZipStreamWrapper.php): failed to open stream: No such file or directory (C:\OpenServer\domains\ur-ksmot-oselok\framework\YiiBase.php:427)
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\classes\PHPExcel.php(34): spl_autoload_call()
+#1 C:\OpenServer\domains\ur-ksmot-oselok\protected\controllers\ImportController.php(41): require_once()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\actions\CInlineAction.php(49): ImportController->actionAdminStep_2()
+#3 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(308): CInlineAction->runWithParams()
+#4 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(133): ImportController->runAction()
+#5 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#6 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#7 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CInlineFilter.php(58): ImportController->filterAccessControl()
+#8 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#9 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(291): CFilterChain->run()
+#10 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(265): ImportController->runActionWithFilters()
+#11 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(282): ImportController->run()
+#12 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#13 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CWebApplication->run()
+REQUEST_URI=/admin/import/step_2
+2015/04/16 16:20:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/screen.css".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/screen.css')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/screen.css
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin/import/step_2
+---
+2015/04/16 16:20:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/print.css".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/print.css')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/print.css
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin/import/step_2
+---
+2015/04/16 16:20:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/form.css".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/form.css')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/form.css
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin/import/step_2
+---
