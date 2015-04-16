@@ -8,7 +8,6 @@ $(document).ready(function(){
             ignore: ""
         });
         $("#import-step1").submit(function(e,a){
-            tinymce.triggerSave();
             if( $(this).valid() && !$(this).find("input[type=submit]").hasClass("blocked") ){
                 var $form = $(this),
                     url = $("#import-step1").attr("action");
