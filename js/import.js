@@ -1,5 +1,8 @@
 $(document).ready(function(){
-	$("input[name='GoodType[id]']").eq(0).attr("checked","checked");
+    var progress = new KitProgress("#D26A44",2);
+    progress.endDuration = 0.3;
+
+	$("input[name='GoodTypeId']").eq(0).attr("checked","checked");
 	$(".b-excel-input").change(function(){
 
 		 $('input[type="submit"]').attr('disabled',false);
@@ -18,8 +21,7 @@ $(document).ready(function(){
                 //     $form.find("input[type='text'],input[type='number'],textarea").val("");
                 //     $form.find("input").eq(0).focus();
                 // }
-
-                progress.setColor("#FFF");
+                
                 progress.start(3);
 
                 // url = ( $(".main form").length ) ? (url+( (url.split("?").length>1)?"&":"?" )+$(".main form").serialize()) : url;
@@ -34,6 +36,7 @@ $(document).ready(function(){
                     data: $("#import-step1").serialize(),
                     success: function(msg){
                         progress.end(function(){
+                            $(".b-main-center").html(msg);
                         });
                     }
                 });

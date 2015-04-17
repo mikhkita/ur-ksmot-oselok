@@ -28,7 +28,7 @@
 class PHPExcel_Autoloader
 {
 	public static function Register() {
-		return spl_autoload_register(array('PHPExcel_Autoloader', 'Load'));
+		return spl_autoload_register(array('PHPExcel_Autoloader', 'Load'),true,true);
 	}	//	function Register()
 
 

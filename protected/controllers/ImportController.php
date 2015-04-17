@@ -13,7 +13,7 @@ class ImportController extends Controller
 	{
 		return array(
 			array('allow',
-				'actions'=>array('adminIndex', 'adminStep_2'),
+				'actions'=>array('adminIndex', 'adminStep2'),
 
 				'roles'=>array('manager'),
 			),
@@ -36,49 +36,55 @@ class ImportController extends Controller
 		));
 
 	}
-	public function actionAdminStep_2()
+	public function actionAdminStep2($partial = false)
 	{
-
-		spl_autoload_unregister(array('YiiBase','autoload'));
-		Yii::import("ext.phpexcel.Classes.PHPExcel", true);
-		$objPHPExcel = new PHPExcel();
-		spl_autoload_register(array('YiiBase','autoload'));
-
-	// 	$uploadDir = "upload/tmp";
-	// 	$excelDir = "upload/excel";
-	// 	print_r($_POST);
-	// 	if(isset($_POST["Goodtype"])) {
-	// 		$this->render('adminStep_2',array(
-	// 		'model'=>"даров"
-	// 		));
-	// 	}
-
-	// 	function getXLS($xls){
-		// include_once Yii::app()->basePath.'/../classes/PHPExcel/IOFactory.php';
-	// 	$objPHPExcel = PHPExcel_IOFactory::load($xls);
-	// 	$objPHPExcel->setActiveSheetIndex(0);
-	// 	$aSheet = $objPHPExcel->getActiveSheet();
-		
-	// 	$array = array();//этот массив будет содержать массивы содержащие в себе значения ячеек каждой строки
-	// 	//получим итератор строки и пройдемся по нему циклом
-	// 	foreach($aSheet->getRowIterator() as $row){
-	// 		//получим итератор ячеек текущей строки
-	// 		$cellIterator = $row->getCellIterator();
-	// 		//пройдемся циклом по ячейкам строки
-	// 		$item = array();//этот массив будет содержать значения каждой отдельной строки
-	// 		foreach($cellIterator as $cell){
-	// 			//заносим значения ячеек одной строки в отдельный массив
-	// 			array_push($item, $cell->getCalculatedValue());
-	// 		}
-	// 		//заносим массив со значениями ячеек отдельной строки в "общий массв строк"
-	// 		array_push($array, $item);
-	// 	}
-	// 	// unlink($xls);
-	// 	return $array;
-	
-	// }
-	// $xlsData = getXLS($uploadDir."/".$_POST["uploaderPj_0_tmpname"]);
+		if(isset($_POST["GoodTypeId"]) && isset($_POST["excel"])) {
+			// if( !$partial ){
+			// $this->layout='admin';
+			// }
+			include_once  Yii::app()->basePath.'/phpexcel/Classes/PHPExcel.php';
+			include_once  Yii::app()->basePath.'/phpexcel/Classes/PHPExcel/IOFactory.php';
+			$model = GoodType::model()->findByPk($_POST["GoodTypeId"]);
+			foreach ($model->fields as $key => $value) {
+				echo $value->attribute->name;
+			}
+			function getXLS($xls,$title){
+				$objPHPExcel = PHPExcel_IOFactory::load($xls);
+				$objPHPExcel->setActiveSheetIndex(0);
+				$aSheet = $objPHPExcel->getActiveSheet();
+				
+				$array = array();//этот массив будет содержать массивы содержащие в себе значения ячеек каждой строки
+				//получим итератор строки и пройдемся по нему циклом
+				foreach($aSheet->getRowIterator() as $row){
+					//получим итератор ячеек текущей строки
+					$cellIterator = $row->getCellIterator();
+					//пройдемся циклом по ячейкам строки
+					$item = array();//этот массив будет содержать значения каждой отдельной строки
+					
+					foreach($cellIterator as $cell){
+						//заносим значения ячеек одной строки в отдельный массив
+						array_push($item, $cell->getCalculatedValue());
+					}
+					if($title) return $item;
+					//заносим массив со значениями ячеек отдельной строки в "общий массв строк"
+					array_push($array, $item);
+					
+				}
+				return $array;
+			} 	
+			$xlsData = getXLS(Yii::app()->params['tempFolder']."/".$_POST["excel"],1);
+			// if( !$partial ){
+			// 	$this->render('adminStep2',array(
+			// 	'model'=>$model
+			// 	));
+			// }else {
+				$this->renderPartial('adminStep2',array(
+				'model'=>$model
+				));
+			// }
+		}
 	}
+
 	public function loadModel($id)
 	{
 		$model=Import::model()->findByPk($id);
