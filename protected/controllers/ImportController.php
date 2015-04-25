@@ -105,7 +105,8 @@ class ImportController extends Controller
 			$item = array();//этот массив будет содержать значения каждой отдельной строки
 			foreach($cellIterator as $cell){
 				//заносим значения ячеек одной строки в отдельный массив
-				array_push($item, $cell->getCalculatedValue());
+				if( $cell->getCalculatedValue() != "" )
+					array_push($item, $cell->getCalculatedValue());
 			}
 			if(is_array($var)) {
 				$tmp = array();

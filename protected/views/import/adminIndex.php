@@ -15,7 +15,7 @@
 		</li>
 	<? endforeach; ?>
 	</ul>	
-	<a href="#" data-path="<? echo Yii::app()->createUrl('/uploader/getForm',array('maxFiles'=>2,'extensions'=>'*', 'title' => 'Загрузка файла "Excel"', 'selector' => '.b-excel-input') ); ?>" class="b-get-image" >Добавить изображение</a>
+	<a href="#" data-path="<? echo Yii::app()->createUrl('/uploader/getForm',array('maxFiles'=>1,'extensions'=>'*', 'title' => 'Загрузка файла "Excel"', 'selector' => '.b-excel-input') ); ?>" class="b-get-image" >Загрузить файл</a>
 	<input type="hidden" name="excel_name" class="b-excel-input">
 	<input type="submit" value="Далее" disabled>
 <?php $this->endWidget(); ?>
