@@ -50,8 +50,8 @@ class GoodAttribute extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'good' => array(self::BELONGS_TO, 'Good', 'id'),
-			'attribute' => array(self::BELONGS_TO, 'Attribute', 'id'),
+			'good' => array(self::BELONGS_TO, 'Good', 'good_id'),
+			'attribute' => array(self::BELONGS_TO, 'Attribute', 'attribute_id'),
 		);
 	}
 
@@ -113,5 +113,14 @@ class GoodAttribute extends CActiveRecord
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
+	}
+
+	public function afterFind()
+	{
+		parent::afterFind();
+		
+		$val = $this->attributes[$this->attribute->type->code."_value"];
+		
+		$this->setAttribute("value",($val != NULL)?$val:false,true);
 	}
 }

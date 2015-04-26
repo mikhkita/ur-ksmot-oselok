@@ -42,7 +42,7 @@ class GoodType extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'fields' => array(self::HAS_MANY, 'GoodTypeAttribute', 'good_type_id','order'=>'sort'),
-			// 'goods' => array(self::HAS_MANY, 'Good', 'good_type_id'),
+			'goods' => array(self::HAS_MANY, 'Good', 'good_type_id'),
 		);
 	}
 

@@ -34,7 +34,8 @@
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Перейти к предпросмотру'); ?>
-		<input type="hidden" name="excel_folder" value="<?=$folder?>">
+		<input type="hidden" name="excel_path" value="<?=$excel_path?>">
+        <input type="hidden" name="GoodTypeId" value="<?=$GoodTypeId?>">
 		<input type="button" value="Отменить">
 	</div>
 

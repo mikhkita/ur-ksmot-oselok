@@ -43,7 +43,7 @@ class Good extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'fields' => array(self::HAS_MANY, 'Attributes', 'art_hou_id'),
+			'fields' => array(self::HAS_MANY, 'GoodAttribute', 'good_id'),
 			'type' => array(self::BELONGS_TO, 'GoodType', 'good_type_id'),
 		);
 	}

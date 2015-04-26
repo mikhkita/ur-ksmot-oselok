@@ -25,12 +25,10 @@ table
     border-collapse: collapse;
 }
 ::selection {
-    background: transparent;
-    color: #D26A44;
+    background: #D26A44;
 }
 ::-moz-selection {
-    background: transparent;
-    color: #D26A44;
+    background: #D26A44;
 }
 table.rows
 {
@@ -285,9 +283,8 @@ h2{
 }
 .b-main-center{
     display: inline-block;
-    /*max-width: 960px;*/
-    width: 100%;
     position: relative;
+    min-width: 100%;
 }
 .adm-title{
     text-align: center;
@@ -317,6 +314,9 @@ h1{
         position: relative;
         background-color: #452716;
         /*padding: 0px;*/
+    }
+    .b-table tr.b-exist{
+        background-color: #FFC9B5 !important;
     }
         .b-table tr.b-filter td select,
         .b-table tr.b-filter td input{
@@ -1335,8 +1335,7 @@ li.ui-autocomplete-category {
             .import-list ul:last-child li{
                 
             }
-                .import-list .left:last-child ul li span,
-                .b-variants li span{
+                .import-list .left:last-child ul li span{
                     border-radius: 50%;
                     background-color: #F5E9BC;
                     color: #452716;
@@ -1351,15 +1350,13 @@ li.ui-autocomplete-category {
                     font-size: 18px;
                     text-shadow: 0 0px 0px rgba(0,0,0,0.5);
                 }  
-                    .import-list .left:last-child ul li span:after,
-                    .b-variants li span:after{
+                    .import-list .left:last-child ul li span:after{
                         content: "×";
                         position: relative;
                         top: -2px;
                         font-size: 18px;
                     }
-                    .import-list .left:last-child ul li span:hover,
-                    .b-variants li span:hover{
+                    .import-list .left:last-child ul li span:hover{
                         cursor: pointer;
                         background-color: #452716;
                         color: #F5E9BC;

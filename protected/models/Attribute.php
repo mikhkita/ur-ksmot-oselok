@@ -45,6 +45,7 @@ class Attribute extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'goods' => array(self::HAS_MANY, 'GoodAttribute', 'attribute_id'),
 			'goodTypes' => array(self::HAS_MANY, 'GoodTypeAttribute', 'attribute_id'),
 			'type' => array(self::BELONGS_TO, 'AttributeType', 'attribute_type_id'),
 			'variants' => array(self::HAS_MANY, 'AttributeVariant', 'attribute_id','order'=>'sort'),
