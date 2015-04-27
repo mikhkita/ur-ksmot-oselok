@@ -5924,3 +5924,48 @@ Stack trace:
 REQUEST_URI=/js/jquery.qtip.min.js.map
 HTTP_REFERER=http://ur-ksmot-oselok:88/admin/goodType
 ---
+2015/04/28 00:19:01 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/screen.css".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/screen.css')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/screen.css
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin
+---
+2015/04/28 00:19:01 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/form.css".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/form.css')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/form.css
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin
+---
+2015/04/28 00:19:01 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/print.css".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/print.css')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/print.css
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin
+---
+2015/04/28 00:19:01 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin
+---
+2015/04/28 00:19:03 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon2.ico".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('favicon2.ico')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon2.ico
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin/goodType
+---
