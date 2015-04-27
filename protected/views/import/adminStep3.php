@@ -14,7 +14,7 @@
 	<? foreach ($arResult["ROWS"] as $i => $row): ?>
 		<tr<?if($row["HIGHLIGHT"] != NULL):?> class="b-<?=$row["HIGHLIGHT"]?>"<?endif;?>>
 			<? foreach ($row["COLS"] as $j => $cell): ?>
-				<td>
+				<td<?if($cell["HIGHLIGHT"] != NULL):?> class="b-<?=$cell["HIGHLIGHT"]?>"<?endif;?>>
 					<? if($cell["VALUE"] != NULL): ?>
 						<?=$cell["VALUE"]?>
 						<input type="hidden" name="IMPORT[NEW][][<?=$cell["ID"]?>]" value="<?=$cell["VALUE"]?>">

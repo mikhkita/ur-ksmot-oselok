@@ -95,10 +95,13 @@ class ImportController extends Controller
 				// Кладем в каждую ячейку матрицы массив данных об этой ячейке вида:
 				// array("ID" => "ID атрибута", "VALUE" => "Значение этого атрибута из экселя", "HIGHLIGHT" => "Тип подсветки ячейки");
             	foreach ($xls[$i] as $j => $cell) {
+            		$cellHighlight = NULL;
+            		if( $cell == NULL ) $cellHighlight = "empty";
+
             		$xls[$i][$j] = array(
             			"ID" => $sorted_titles[$j],
             			"VALUE" => $cell,
-            			"HIGHLIGHT" => NULL
+            			"HIGHLIGHT" => $cellHighlight
             		);
 
             		// Ищем значение атрибута с наименованием "Код" для определения,
@@ -136,8 +139,6 @@ class ImportController extends Controller
 		return $model;
 	}
 	private	function getXLS($xls,$rows = false,$titles = false){
-		print_r($rows);
-		print_r($titles);
 		if( is_array($rows) && $titles === false )
 			throw new CHttpException(404,'Отсутствуют наименования столбцов');
 
