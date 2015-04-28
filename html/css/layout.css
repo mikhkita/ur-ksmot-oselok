@@ -290,13 +290,12 @@ input:-moz-placeholder {
 								margin-left: 7px;
 							}
 		.b-main .b-block .b-main-items {
-
+			  margin-left: 21px;
 		}
-			.b-main .b-block .b-main-items ul{
-				margin-left: 21px;
-
+			.b-main .b-block .b-main-items ul:nth-child(1){
+				
 			}
-				.b-main .b-block .b-main-items ul li{
+				.b-main .b-block .b-main-items ul:nth-child(1) li{
 					width: 620px;
 					margin-bottom: 12px;
 					border-bottom: 3px solid #e3e4e8;
@@ -304,25 +303,59 @@ input:-moz-placeholder {
   					background-color: rgb(255, 255, 255);
   					box-shadow: 0px 3px 0px 0px rgba(227, 228, 232, 0.004);
 				}	
-					.b-main .b-block .b-main-items ul li div{
+					.b-main .b-block .b-main-items ul:nth-child(1) li div{
 						margin-left: 20px;
 					}
-						.b-main .b-block .b-main-items ul li h3{
+						.b-main .b-block .b-main-items ul:nth-child(1) li h3{
 							margin-top: 8px;
 	  						
 						}
-						.b-main .b-block .b-main-items ul li h4{
+						.b-main .b-block .b-main-items ul:nth-child(1) li h4{
 							margin-top: 5px;
 						}
-						.b-main .b-block .b-main-items ul li h5{
+						.b-main .b-block .b-main-items ul:nth-child(1) li h5{
 							color: #448ccb;
 							margin-top: 9px;
   							font-size: 24px;
   							font-family: "HNM";
 						}
-							.b-main .b-block .b-main-items ul li h5 span{
+							.b-main .b-block .b-main-items ul:nth-child(1) li h5 span{
 								font-size: 19px;
 							}
+		.b-main .b-block .b-pagination {
+			position: absolute;
+ 			bottom: 13px;
+ 			left: 50%;
+ 			margin-left: -149px;
+		}
+			.b-main .b-block .b-pagination li {
+				color: #448ccb;
+				text-align: center;
+  				margin-right: 5px;
+			}
+			.b-main .b-block .b-pagination li.points {
+				background: none;
+  				border: none;
+  				font-size: 30px;
+			}
+				.b-main .b-block .b-pagination li a {
+					border-radius: 5px;
+  					background-color: rgb(68, 140, 203);
+  					box-shadow: 0px 3px 0px 0px rgba(65, 114, 166, 0.004);
+  					width: 46px;
+  					border-bottom: 3px solid #4172a6;
+					color: #fff;
+					display: block;
+					padding: 11px 0 10px;
+				}
+					.b-main .b-block .b-pagination li a:hover {
+					background-color: rgb(55, 117, 171);
+					}
+					.b-main .b-block .b-pagination li a:active {
+					margin-top: 3px;
+					border:none;
+					}
+
 .b-item {
 	margin-bottom: 60px;
 }
