@@ -336,7 +336,7 @@ input:-moz-placeholder {
   		border-bottom: 3px solid #e3e4e8;
 	}
 		.b-item .b-block .sub-menu{
-			font-family: "HNM";
+			font-family: "HNR";
 			font-size: 16px;
  			color: rgb(68, 140, 203);
  			line-height: 1.2;
@@ -350,11 +350,13 @@ input:-moz-placeholder {
 				}
 		.b-item .b-block h2 {
  			font-size: 30px;
- 			font-family: "HNM";
+ 			font-family: "HNm";
  			color: rgb(65, 114, 166);
  			line-height: 1.2;
  			margin-bottom: 13px;
-		}
+		
+ 			margin-top: 6px;
+}
 		.b-item .b-block .images {
 			width: 462px;
 			margin-bottom: 10px;
@@ -443,22 +445,25 @@ input:-moz-placeholder {
 					.b-item .b-block .desc h4 {
 						float: left;
 						width: 230px;
-  						font-size: 12px;
+  						
+						font-size: 14px;
   						font-family: "HNM";
   						line-height: 1.2;
 					}
 					.b-item .b-block .desc h5 {
 						float: left;
-  						font-size: 12px;
+  						
+						font-size: 14px;
   						font-family: "HNR";
-  						font-weight: 700;
+  						
+						font-weight: 500;
   						line-height: 1.2;
 					}
 			.b-item .b-block .desc p {
-  				font-size: 12px;
-  				line-height: 1.667;
-  				font-weight: 700;
-  				text-align: justify;
+  				font-size: 14px;
+  				line-height: 25px;
+  				font-weight: 500;
+  				/* text-align: justify; */
 			}
 				.b-item .b-block .desc p span {
 					font-family: "HNM";
