@@ -18,37 +18,7 @@
 
 	<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript" src="js/jquery.fancybox.js"></script>
-	<script type="text/javascript" src="js/jssor.js"></script>
-	<script type="text/javascript" src="js/jssor.slider.js"></script>
-	<script type="text/javascript" src="js/TweenMax.min.js"></script>
-	<script type="text/javascript" src="js/swipe.js"></script>
-	<script type="text/javascript" src="js/carousel.lite.js"></script>
-	<script type="text/javascript" src="js/css3-mediaqueries.js"></script>
-	<script type="text/javascript" src="js/jquery.maskedinput.min.js"></script>
-	<script type="text/javascript" src="js/jquery.validate.min.js"></script>
-	<script type="text/javascript" src="js/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="js/KitProgress.js"></script>
-	<script type="text/javascript" src="js/KitAnimate.js"></script>
-	<script type="text/javascript" src="js/device.js"></script>
-	<script type="text/javascript" src="js/KitSend.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
-	<script>
-  	$(function() {
-	    $( "#slider-range" ).slider({
-			range: true,
-			min: 1000,
-			max: 50000,
-			values: [ 1000, 36000 ],
-			slide: function( event, ui ) {
-			$( "#amount-l" ).text( ui.values[ 0 ] );
-			$( "#amount-r" ).text( ui.values[ 1 ] );
-			}
-		});
-		$( "#amount-l" ).text( $( "#slider-range" ).slider( "values", 0 ) );
-		$( "#amount-r" ).text( $( "#slider-range" ).slider( "values", 1 ) );
-		
-	    });
-  	</script>
 </head>
 <body>
 	<ul class="ps-lines">
@@ -82,10 +52,10 @@
 			</ul>
 			<h2>Weds Farmas DP-V11 R18 5*114,3 7,5J +37 в Томске</h2>
 			<div class="images left">
-				<div style="background-image:url('i/wheel.jpg');"><a href="i/wheel.jpg"></a></div>
+				<div id="bg-img" style="background-image:url('i/wheel.jpg');"><a class="fancy-img" href="i/wheel.jpg"></a></div>
 				<ul class="hor clearfix">
 					<li style="background-image:url('i/wheel.jpg');"><a href="i/wheel.jpg"></a></li>
-					<li style="background-image:url('i/wheel.jpg');"><a href="i/wheel.jpg"></a></li>
+					<li style="background-image:url('i/22.jpg');"><a href="i/22.jpg"></a></li>
 					<li style="background-image:url('i/wheel.jpg');"><a href="i/wheel.jpg"></a></li>
 					<li style="background-image:url('i/wheel.jpg');"><a href="i/wheel.jpg"></a></li>
 					<li style="background-image:url('i/wheel.jpg');"><a href="i/wheel.jpg"></a></li>
