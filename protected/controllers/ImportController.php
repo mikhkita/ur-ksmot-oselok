@@ -51,10 +51,10 @@ class ImportController extends Controller
 			$xls = $this->getXLS($excel_path,1);
 
 			$this->render('adminStep2',array(
-			'model'=>$model,
-			'xls'=>$xls,
-			'excel_path'=>$excel_path,
-			'GoodTypeId'=>$_POST["GoodTypeId"]
+				'model'=>$model,
+				'xls'=>$xls,
+				'excel_path'=>$excel_path,
+				'GoodTypeId'=>$_POST["GoodTypeId"]
 			));
 		}
 	}
@@ -67,18 +67,6 @@ class ImportController extends Controller
 			$model = GoodType::model()->findByPk($_POST["GoodTypeId"]);
 			$sorted_titles = $_POST["excel"];// Массив соответствующих "ID атрибута" каждому столбцу
 			$titles = array();
-			$exist_codes = array();
-			$arResult = array(
-				"TITLES"=>NULL,
-				"ROWS" => array(),
-			);
-
-			// Составление массива кодов элементов для проверки на наличие элемента из экселя в БД
-			foreach ($model->goods as $key => $good) {
-				foreach ($good->fields as $field) {
-					if( $field->attribute->id == 3 ) $exist_codes[] = $field->value;
-				}
-			}
 
 			// Получаем массив заголовков вида: array("ID атрибута" => "Наименование атрибута")
 			foreach ($model->fields as $key => $value) {
@@ -88,39 +76,88 @@ class ImportController extends Controller
             // Получаем матрицу считанного экселя в отсортированном по столбцами виде
 			$xls = $this->getXLS($_POST["excel_path"],$sorted_titles,$titles);
 
-			$arResult["TITLES"] = $xls[0];
+			// Генерация структурированного ассоциативного массива для вью.
+			$arResult = $this->getArResult($xls, $model->goods, $sorted_titles);
 
-			for($i = 1; $i < count($xls); $i++) {
-				$code = NULL;
-				// Кладем в каждую ячейку матрицы массив данных об этой ячейке вида:
-				// array("ID" => "ID атрибута", "VALUE" => "Значение этого атрибута из экселя", "HIGHLIGHT" => "Тип подсветки ячейки");
-            	foreach ($xls[$i] as $j => $cell) {
-            		$cellHighlight = NULL;
-            		if( $cell == NULL ) $cellHighlight = "empty";
-
-            		$xls[$i][$j] = array(
-            			"ID" => $sorted_titles[$j],
-            			"VALUE" => $cell,
-            			"HIGHLIGHT" => $cellHighlight
-            		);
-
-            		// Ищем значение атрибута с наименованием "Код" для определения,
-            		// существует ли уже элемент с данным кодом
-            		if( intval($sorted_titles[$j]) == $this->codeId )
-            			$code = $cell;
-            	}
-
-            	$arResult["ROWS"][] = array(
-            		// Если уже есть элемент с таким кодом, то выделяем всю строку
-					"HIGHLIGHT" => (in_array($code, $exist_codes))?"exist":NULL,
-					"COLS" => $xls[$i]
-				);
-            }
+			print_r($arResult);
+			die();
 
 			$this->render('adminStep3',array(
 				'arResult'=>$arResult
 			));
 		}
+	}
+
+	public function getArResult($xls, $goods, $sorted_titles){
+		$all_goods = array();
+		$exist_codes = array();
+		$arResult = array(
+			"TITLES"=>NULL,
+			"ROWS" => array(),
+		);
+
+		// Составление массива кодов элементов для проверки на наличие элемента из экселя в БД
+		foreach ($goods as $key => $good) {
+			$fields = array();
+			$code = NULL;
+
+			foreach ($good->fields as $field) {
+				$fieldId = $field->attribute->id;
+				if( !isset($fields[$fieldId]) ) $fields[$fieldId] = array();
+				$fields[$fieldId][] = $field->value;
+
+				if( $field->attribute->id == $this->codeId ) $code = $field->value;
+			}
+			$all_goods[$code] = $fields;
+		}
+
+		$arResult["TITLES"] = $xls[0];
+
+		for($i = 1; $i < count($xls); $i++) {
+			$code = $xls[$i][array_search($this->codeId, $sorted_titles)];
+			$isset = isset($all_goods[$code]);
+
+			// Кладем в каждую ячейку матрицы массив данных об этой ячейке вида:
+			// array("ID" => "ID атрибута", "VALUE" => "Значение этого атрибута из экселя", "HIGHLIGHT" => "Тип подсветки ячейки");
+        	foreach ($xls[$i] as $j => $cell) {
+        		$id = $sorted_titles[$j]; // ID атрибута, в который будет вставляться значение
+        		$cellValueAndHighlight = $this->getCellValueAndHighlight($all_goods[$code][$id],$cell);
+
+        		$xls[$i][$j] = array(
+        			"ID" => $id,
+        			"VALUE" => $cellValueAndHighlight["VALUE"],
+        			"HIGHLIGHT" => $cellValueAndHighlight["HIGHLIGHT"]
+        		);
+        	}
+
+        	$arResult["ROWS"][] = array(
+        		// Если уже есть элемент с таким кодом, то выделяем всю строку
+				"HIGHLIGHT" => ($isset)?"exist":NULL,
+				"COLS" => $xls[$i]
+			);
+        }
+        return $arResult;
+	}
+
+	public function getCellValueAndHighlight($field,$value){
+		$valid = false;
+		$highlight = NULL;
+
+		if( $cell == NULL ){
+			$highlight = "empty";
+		}else{
+			if( $field["TYPE"] == "float" || $field["TYPE"] == "int" ){
+				if( is_numeric($value) ){
+					$valid = true;
+					if( $field["TYPE"] == "int" ){
+						$value = intval($value);
+					}
+				}
+			}else $valid = true;
+
+			if(!$valid) $highlight = "not-valid";
+		}
+		return array("VALUE" => $value, "HIGHLIGHT" => $highlight );
 	}
 
 	public function actionAdminImport()
