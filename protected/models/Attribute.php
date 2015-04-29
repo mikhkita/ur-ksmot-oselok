@@ -6,6 +6,7 @@
  * The followings are the available columns in table 'attribute':
  * @property string $id
  * @property string $name
+ * @property string $code
  * @property integer $attribute_type_id
  * @property integer $multi
  * @property integer $list
@@ -30,10 +31,10 @@ class Attribute extends CActiveRecord
 		return array(
 			array('name, attribute_type_id', 'required'),
 			array('attribute_type_id, multi, list', 'numerical', 'integerOnly'=>true),
-			array('name', 'length', 'max'=>255),
+			array('name, code', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, attribute_type_id, multi, list', 'safe', 'on'=>'search'),
+			array('id, name, code, attribute_type_id, multi, list', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -63,6 +64,7 @@ class Attribute extends CActiveRecord
 			'attribute_type_id' => 'Тип данных',
 			'multi' => 'Множественный',
 			'list' => 'Список',
+			'code' => 'Код'
 		);
 	}
 
@@ -86,6 +88,7 @@ class Attribute extends CActiveRecord
 
 		$criteria->compare('id',$this->id,true);
 		$criteria->compare('name',$this->name,true);
+		$criteria->compare('code',$this->code,true);
 		$criteria->compare('attribute_type_id',$this->attribute_type_id);
 		$criteria->compare('multi',$this->multi);
 		$criteria->compare('list',$this->list);
@@ -105,9 +108,8 @@ class Attribute extends CActiveRecord
 	{
 		return parent::model($className);
 	}
-
 	public function beforeSave(){
-		if( $this->type->code == "text" ) $this->setAttribute("list",0);
-		return parent::beforeSave();
-	}
+  		if( $this->type->code == "text" ) $this->setAttribute("list",0);
+  		return parent::beforeSave();
+ 	}
 }

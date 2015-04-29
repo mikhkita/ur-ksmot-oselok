@@ -5969,3 +5969,455 @@ Stack trace:
 REQUEST_URI=/favicon2.ico
 HTTP_REFERER=http://ur-ksmot-oselok:88/admin/goodType
 ---
+2015/04/29 15:34:07 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/screen.css".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/screen.css')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/screen.css
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin
+---
+2015/04/29 15:34:07 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/form.css".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/form.css')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/form.css
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin
+---
+2015/04/29 15:34:07 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/print.css".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/print.css')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/print.css
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin
+---
+2015/04/29 15:34:07 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin
+---
+2015/04/29 15:34:09 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon2.ico".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('favicon2.ico')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon2.ico
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin/goodType
+---
+2015/04/29 16:35:21 [error] [php] include(Comment.php): failed to open stream: No such file or directory (C:\OpenServer\domains\ur-ksmot-oselok\framework\YiiBase.php:427)
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\protected\components\views\userMenu.php(4): spl_autoload_call()
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CBaseController.php(130): require()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CBaseController.php(95): UserMenu->renderInternal()
+#3 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\widgets\CWidget.php(244): UserMenu->renderFile()
+#4 C:\OpenServer\domains\ur-ksmot-oselok\protected\components\UserMenu.php(15): UserMenu->render()
+#5 C:\OpenServer\domains\ur-ksmot-oselok\framework\zii\widgets\CPortlet.php(97): UserMenu->renderContent()
+#6 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CBaseController.php(173): UserMenu->run()
+#7 C:\OpenServer\domains\ur-ksmot-oselok\protected\views\layouts\column2.php(10): ShopController->widget()
+#8 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CBaseController.php(126): require()
+#9 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CBaseController.php(95): ShopController->renderInternal()
+#10 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(784): ShopController->renderFile()
+#11 C:\OpenServer\domains\ur-ksmot-oselok\protected\controllers\ShopController.php(37): ShopController->render()
+#12 unknown(0): ShopController->actionAdminIndex()
+#13 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#14 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#15 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(308): CInlineAction->runWithParams()
+#16 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(133): ShopController->runAction()
+#17 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#18 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#19 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CInlineFilter.php(58): ShopController->filterAccessControl()
+#20 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#21 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(291): CFilterChain->run()
+#22 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(265): ShopController->runActionWithFilters()
+#23 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(282): ShopController->run()
+#24 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#25 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#26 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CWebApplication->run()
+REQUEST_URI=/admin/shop
+2015/04/29 16:35:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/screen.css".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/screen.css')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/screen.css
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin/shop
+---
+2015/04/29 16:35:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/print.css".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/print.css')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/print.css
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin/shop
+---
+2015/04/29 16:35:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/form.css".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/form.css')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/form.css
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin/shop
+---
+2015/04/29 16:36:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "admin/i/logo.png".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('admin/i/logo.pn...')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/admin/i/logo.png
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin/shop
+---
+2015/04/29 16:36:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "admin/i/search.png".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('admin/i/search....')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/admin/i/search.png
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin/shop
+---
+2015/04/29 16:36:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "admin/i/item-1.jpg".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('admin/i/item-1....')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/admin/i/item-1.jpg
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin/shop
+---
+2015/04/29 16:40:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "admin/i/item-1.jpg".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('admin/i/item-1....')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/admin/i/item-1.jpg
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin/shop
+---
+2015/04/29 16:40:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "fonts/HelveticaNeueCyr-Roman.woff2".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('fonts/Helvetica...')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/fonts/HelveticaNeueCyr-Roman.woff2
+HTTP_REFERER=http://ur-ksmot-oselok:88/css/shop.css
+---
+2015/04/29 16:40:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "fonts/HelveticaNeueCyr-Medium.woff2".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('fonts/Helvetica...')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/fonts/HelveticaNeueCyr-Medium.woff2
+HTTP_REFERER=http://ur-ksmot-oselok:88/css/shop.css
+---
+2015/04/29 16:40:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "fonts/HelveticaNeueCyr-Roman.woff".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('fonts/Helvetica...')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/fonts/HelveticaNeueCyr-Roman.woff
+HTTP_REFERER=http://ur-ksmot-oselok:88/css/shop.css
+---
+2015/04/29 16:40:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "fonts/HelveticaNeueCyr-Medium.woff".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('fonts/Helvetica...')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/fonts/HelveticaNeueCyr-Medium.woff
+HTTP_REFERER=http://ur-ksmot-oselok:88/css/shop.css
+---
+2015/04/29 16:40:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "fonts/HelveticaNeueCyr-Roman.ttf".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('fonts/Helvetica...')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/fonts/HelveticaNeueCyr-Roman.ttf
+HTTP_REFERER=http://ur-ksmot-oselok:88/css/shop.css
+---
+2015/04/29 16:40:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "fonts/HelveticaNeueCyr-Medium.ttf".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('fonts/Helvetica...')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/fonts/HelveticaNeueCyr-Medium.ttf
+HTTP_REFERER=http://ur-ksmot-oselok:88/css/shop.css
+---
+2015/04/29 16:42:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "admin/i/item-1.jpg".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('admin/i/item-1....')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/admin/i/item-1.jpg
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin/shop
+---
+2015/04/29 16:42:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "fonts/HelveticaNeueCyr-Medium.woff2".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('fonts/Helvetica...')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/fonts/HelveticaNeueCyr-Medium.woff2
+HTTP_REFERER=http://ur-ksmot-oselok:88/css/shop.css
+---
+2015/04/29 16:42:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "fonts/HelveticaNeueCyr-Roman.woff2".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('fonts/Helvetica...')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/fonts/HelveticaNeueCyr-Roman.woff2
+HTTP_REFERER=http://ur-ksmot-oselok:88/css/shop.css
+---
+2015/04/29 16:42:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/images/ui-bg_gloss-wave_35_f6a828_500x100.png".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/images/ui-b...')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/images/ui-bg_gloss-wave_35_f6a828_500x100.png
+HTTP_REFERER=http://ur-ksmot-oselok:88/css/jquery-ui.min.css
+---
+2015/04/29 16:42:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "fonts/HelveticaNeueCyr-Roman.woff".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('fonts/Helvetica...')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/fonts/HelveticaNeueCyr-Roman.woff
+HTTP_REFERER=http://ur-ksmot-oselok:88/css/shop.css
+---
+2015/04/29 16:42:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "fonts/HelveticaNeueCyr-Medium.woff".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('fonts/Helvetica...')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/fonts/HelveticaNeueCyr-Medium.woff
+HTTP_REFERER=http://ur-ksmot-oselok:88/css/shop.css
+---
+2015/04/29 16:42:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "fonts/HelveticaNeueCyr-Medium.ttf".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('fonts/Helvetica...')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/fonts/HelveticaNeueCyr-Medium.ttf
+HTTP_REFERER=http://ur-ksmot-oselok:88/css/shop.css
+---
+2015/04/29 16:42:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "fonts/HelveticaNeueCyr-Roman.ttf".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('fonts/Helvetica...')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/fonts/HelveticaNeueCyr-Roman.ttf
+HTTP_REFERER=http://ur-ksmot-oselok:88/css/shop.css
+---
+2015/04/29 16:43:08 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "admin/i/item-1.jpg".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('admin/i/item-1....')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/admin/i/item-1.jpg
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin/shop
+---
+2015/04/29 16:43:09 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/images/ui-bg_gloss-wave_35_f6a828_500x100.png".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/images/ui-b...')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/images/ui-bg_gloss-wave_35_f6a828_500x100.png
+HTTP_REFERER=http://ur-ksmot-oselok:88/css/jquery-ui.min.css
+---
+2015/04/29 16:44:15 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/images/ui-bg_gloss-wave_35_f6a828_500x100.png".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/images/ui-b...')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/images/ui-bg_gloss-wave_35_f6a828_500x100.png
+HTTP_REFERER=http://ur-ksmot-oselok:88/css/jquery-ui.min.css
+---
+2015/04/29 16:53:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/images/ui-bg_gloss-wave_35_f6a828_500x100.png".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/images/ui-b...')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/images/ui-bg_gloss-wave_35_f6a828_500x100.png
+HTTP_REFERER=http://ur-ksmot-oselok:88/css/jquery-ui.min.css
+---
+2015/04/29 16:55:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/images/ui-bg_gloss-wave_35_f6a828_500x100.png".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/images/ui-b...')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/images/ui-bg_gloss-wave_35_f6a828_500x100.png
+HTTP_REFERER=http://ur-ksmot-oselok:88/css/jquery-ui.min.css
+---
+2015/04/29 16:56:01 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/images/ui-bg_gloss-wave_35_f6a828_500x100.png".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/images/ui-b...')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/images/ui-bg_gloss-wave_35_f6a828_500x100.png
+HTTP_REFERER=http://ur-ksmot-oselok:88/css/jquery-ui.min.css
+---
+2015/04/29 16:57:27 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/images/ui-bg_gloss-wave_35_f6a828_500x100.png".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/images/ui-b...')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/images/ui-bg_gloss-wave_35_f6a828_500x100.png
+HTTP_REFERER=http://ur-ksmot-oselok:88/css/jquery-ui.min.css
+---
+2015/04/29 16:58:11 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/images/ui-bg_gloss-wave_35_f6a828_500x100.png".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/images/ui-b...')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/images/ui-bg_gloss-wave_35_f6a828_500x100.png
+HTTP_REFERER=http://ur-ksmot-oselok:88/css/jquery-ui.min.css
+---
+2015/04/29 16:59:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/images/ui-bg_gloss-wave_35_f6a828_500x100.png".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/images/ui-b...')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/images/ui-bg_gloss-wave_35_f6a828_500x100.png
+HTTP_REFERER=http://ur-ksmot-oselok:88/css/jquery-ui.min.css
+---
+2015/04/29 17:08:03 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/screen.css".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/screen.css')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/screen.css
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin
+---
+2015/04/29 17:08:03 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/print.css".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/print.css')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/print.css
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin
+---
+2015/04/29 17:08:03 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/form.css".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/form.css')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/form.css
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin
+---
+2015/04/29 17:09:01 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/images/ui-bg_gloss-wave_35_f6a828_500x100.png".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/images/ui-b...')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/images/ui-bg_gloss-wave_35_f6a828_500x100.png
+HTTP_REFERER=http://ur-ksmot-oselok:88/css/jquery-ui.min.css
+---
+2015/04/29 17:10:57 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/images/ui-bg_gloss-wave_35_f6a828_500x100.png".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/images/ui-b...')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/images/ui-bg_gloss-wave_35_f6a828_500x100.png
+HTTP_REFERER=http://ur-ksmot-oselok:88/css/jquery-ui.min.css
+---
+2015/04/29 17:32:06 [error] [php] array_push() expects parameter 1 to be array, object given (C:\OpenServer\domains\ur-ksmot-oselok\protected\controllers\ShopController.php:41)
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(308): CInlineAction->runWithParams()
+#3 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(133): ShopController->runAction()
+#4 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#5 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#6 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CInlineFilter.php(58): ShopController->filterAccessControl()
+#7 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#8 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(291): CFilterChain->run()
+#9 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(265): ShopController->runActionWithFilters()
+#10 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(282): ShopController->run()
+#11 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#12 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#13 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CWebApplication->run()
+REQUEST_URI=/admin/shop
+2015/04/29 17:32:06 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/screen.css".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/screen.css')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/screen.css
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin/shop
+---
+2015/04/29 17:32:06 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/print.css".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/print.css')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/print.css
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin/shop
+---
+2015/04/29 17:32:06 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/form.css".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/form.css')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/form.css
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin/shop
+---
+2015/04/29 17:59:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/images/ui-bg_gloss-wave_35_f6a828_500x100.png".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/images/ui-b...')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/images/ui-bg_gloss-wave_35_f6a828_500x100.png
+HTTP_REFERER=http://ur-ksmot-oselok:88/css/jquery-ui.min.css
+---
+2015/04/29 18:11:29 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/images/ui-bg_gloss-wave_35_f6a828_500x100.png".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/images/ui-b...')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/images/ui-bg_gloss-wave_35_f6a828_500x100.png
+HTTP_REFERER=http://ur-ksmot-oselok:88/css/jquery-ui.min.css
+---
