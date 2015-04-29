@@ -30,8 +30,14 @@ class ShopController extends Controller
 
 	public function actionAdminIndex($partial = false)
 	{
-		
-		$model = Good::model()->findAll();
+		$criteria=new CDbCriteria();
+   		$count=Good::model()->count($criteria);
+   		$pages=new CPagination($count);
+
+   		$pages->pageSize=1;
+   		$pages->applyLimit($criteria);
+
+		$model = Good::model()->findAll($criteria);
 		$goods = array();
 		foreach ($model as $i => $good) {
 			$temp = array();
@@ -49,11 +55,13 @@ class ShopController extends Controller
 			}
 		$filter[$attr->name] = $temp;
 		}
+		print_r($pages->getPageCount());
 		$this->render('adminIndex',array(
 			'goods'=>$goods,
-			'filter' =>$filter
+			'filter' =>$filter,
+			'pages' => $pages
+         
 		));
-
 	}
 	
 	public function loadModel($id)

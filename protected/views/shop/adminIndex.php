@@ -32,28 +32,34 @@
                 <? endforeach; ?>
             </div>
             <div class="b-main-items left">
-                <ul>
-                	<? foreach ($goods as $good): ?>
-						<li class="clearfix">
-							<img class="left" src="<?php echo Yii::app()->request->baseUrl; ?>/i/item-1.jpg" alt="">
-                       		<div class="left">
-                            	<h3><?=$good["title"]?></h3>
-                            	<h4>7.5x18 ET37 114.30x5</h4>
-                            	<h5><?=$good["price"]?> руб.<span> + доставка 500 руб.</span></h5>
-                       	    </div>
-						</li>
-					<? endforeach; ?>
-                </ul>   
-            </div>  
-            <ul class="hor b-pagination clearfix">
-                <li><a href="">1</a></li>
-                <li><a href="">2</a></li>
-                <li><a href="">3</a></li>
-                <li><a href="">4</a></li>
-                <li><a href="">5</a></li>
-                <li class="points">...</li>
-                <li><a href="">10</a></li>
-            </ul>
+                <div class="pagination">
+                    <ul>
+                    	<? foreach ($goods as $good): ?>
+    						<li class="clearfix">
+    							<img class="left" src="<?php echo Yii::app()->request->baseUrl; ?>/i/item-1.jpg" alt="">
+                           		<div class="left">
+                                	<h3><?=$good["title"]?></h3>
+                                	<h4>7.5x18 ET37 114.30x5</h4>
+                                	<h5><?=$good["price"]?> руб.<span> + доставка 500 руб.</span></h5>
+                           	    </div>
+    						</li>
+    					<? endforeach; ?>
+                    </ul>  
+
+
+                <?php $this->widget('CLinkPager', array(
+                    'header' => '',
+                    'firstPageLabel' => '<<', 
+                    'prevPageLabel' => '<',
+                    'nextPageLabel' => '>',
+                    'lastPageLabel' => '>>', 
+                    'cssFile' => Yii::app()->request->baseUrl.'/css/shop.css',
+                    'maxButtonCount' => 5,
+                    'pages' => $pages,
+                    'htmlOptions' => array("class"=>"yiiPager hor clearfix")
+                )) ?>
+                </div>  
+            </div>
         </div>
     </div>
 

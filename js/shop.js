@@ -22,4 +22,10 @@ $(document).ready(function(){
         return false;
     });
 
+ 	$(".b-main-items").on("click","#yw0 li a", function(){
+ 		if(!$(this).parent().hasClass("hidden") || !$(this).parent().hasClass("selected"))  {
+ 			$('.b-main-items').load($(this).attr("href")+' .pagination');
+ 		}
+ 		return false;
+ 	});
 });
