@@ -9,60 +9,27 @@
                     </div>
                     <div id="slider-range"></div>
                 </div>
-                <div class="filter-cont">
-                    <h2>Состояние</h2>
-                    <div class="check-cont">
-                        <ul class="hor clearfix">
-                            <li>
-                                <input type="checkbox" id="sost-1">
-                                <label class="clearfix" for="sost-1">
-                                    <span class="checked"></span>
-                                    <span class="default"></span>   
-                                    <h3>Б/у</h3>
-                                </label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="sost-2">
-                                <label class="clearfix" for="sost-2">
-                                    <span class="checked"></span>
-                                    <span class="default"></span>
-                                    <h3>Как новый</h3>
-                                </label>
-                            </li>
-                        </ul>
-                    </div>  
-                </div>
-                <div class="filter-cont">
-                    <h2>Состояние</h2>
-                    <div class="check-cont">
-                        <ul class="hor clearfix">
-                            <li>
-                                <input type="checkbox" id="sost-3">
-                                <label class="clearfix" for="sost-3">
-                                    <span class="checked"></span>
-                                    <span class="default"></span>
-                                    <h3>Литой</h3>
-                                </label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="sost-4">
-                                <label class="clearfix" for="sost-4">
-                                    <span class="checked"></span>
-                                    <span class="default"></span>
-                                    <h3>Кованый</h3>
-                                </label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="sost-5">
-                                <label class="clearfix" for="sost-5">
-                                    <span class="checked"></span>
-                                    <span class="default"></span>
-                                    <h3>Штампованный</h3>
-                                </label>
-                            </li>
-                        </ul>
-                    </div>  
-                </div>
+                <? foreach ($filter as $name => $items): ?>
+                    <? if(count($items)): ?>
+                        <div class="filter-cont">
+                            <h2><?=$name?></h2>
+                            <div class="check-cont">
+                                <ul class="hor clearfix">
+                                    <? foreach ($items as $i => $item): ?>
+                                    <li>
+                                        <input type="checkbox" id="<?=$name.'-'.$i?>">
+                                        <label class="clearfix" for="<?=$name.'-'.$i?>">
+                                            <span class="checked"></span>
+                                            <span class="default"></span>   
+                                            <h3><?=$item?></h3>
+                                        </label>
+                                    </li>
+                                    <? endforeach; ?>
+                                </ul>
+                            </div>  
+                        </div>
+                    <? endif; ?>
+                <? endforeach; ?>
             </div>
             <div class="b-main-items left">
                 <ul>

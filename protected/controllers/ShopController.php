@@ -35,13 +35,23 @@ class ShopController extends Controller
 		$goods = array();
 		foreach ($model as $i => $good) {
 			$temp = array();
-			foreach ($good->fields as $fields) {
-				$temp[$fields->attribute->code] = $fields->value;
+			foreach ($good->fields as $field) {
+				$temp[$field->attribute->code] = $field->value;
 			}
 			array_push($goods,$temp);
 		}
+		$model = Attribute::model()->findAll();
+		$filter = array();
+		foreach ($model as $attr) {
+			$temp= array();
+			foreach ($attr->variants as $variant) {
+			array_push($temp,$variant->value);
+			}
+		$filter[$attr->name] = $temp;
+		}
 		$this->render('adminIndex',array(
-			'goods'=>$goods
+			'goods'=>$goods,
+			'filter' =>$filter
 		));
 
 	}
