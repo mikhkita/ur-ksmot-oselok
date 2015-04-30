@@ -66,16 +66,26 @@ class ImportController extends Controller
 		if(isset($_POST["excel_path"]) && isset($_POST["excel"]) && isset($_POST["GoodTypeId"])) {
 			$model = GoodType::model()->findByPk($_POST["GoodTypeId"]);
 			$sorted_titles = $_POST["excel"];// Массив соответствующих "ID атрибута" каждому столбцу
+			print_r($_POST["excel"]);
+			// die();
 			$titles = array();
 
 			// Получаем массив заголовков вида: array("ID атрибута" => "Наименование атрибута")
-			foreach ($model->fields as $key => $value) {
-            	$titles[intval($value->attribute->id)] = array(
-            		"NAME" => $value->attribute->name,
-            		"TYPE" => $value->attribute->type->code,
+			foreach ($model->fields as $key => $field) {
+				$variants = NULL;
+
+				if( $field->attribute->list ){
+					$variants = array();
+					foreach ($field->attribute->variants as $i => $variant) {
+						$variants[] = $variant->value;
+					}
+				}
+            	$titles[intval($field->attribute->id)] = array(
+            		"NAME" => $field->attribute->name,
+            		"TYPE" => $field->attribute->type->code,
+            		"VARIANTS" => $variants
             	);
             }	
-
             // Получаем матрицу считанного экселя в отсортированном по столбцами виде
 			$xls = $this->getXLS($_POST["excel_path"],$sorted_titles,$titles);
 
@@ -83,7 +93,7 @@ class ImportController extends Controller
 			$arResult = $this->getArResult($xls, $model->goods, $sorted_titles, $titles);
 
 			// print_r($arResult);
-
+			// die();
 			$this->render('adminStep3',array(
 				'arResult'=>$arResult
 			));
@@ -115,6 +125,8 @@ class ImportController extends Controller
 
 		$arResult["TITLES"] = $xls[0];
 
+		$sorted_titles = array_values($sorted_titles);
+
 		for($i = 1; $i < count($xls); $i++) {
 			$code = $xls[$i][array_search($this->codeId, $sorted_titles)];
 			$isset = isset($all_goods[$code]);
@@ -124,7 +136,7 @@ class ImportController extends Controller
         	foreach ($xls[$i] as $j => $cell) {
         		$id = $sorted_titles[$j]; // ID атрибута, в который будет вставляться значение
         		$field = ($isset)?( (isset($all_goods[$code][$id]))?($all_goods[$code][$id]):false ):false;
-        		$cellValueAndHighlight = $this->getCellValueAndHighlight($cell,$titles[$id]["TYPE"],$field);
+        		$cellValueAndHighlight = $this->getCellValueAndHighlight($cell,$titles[$id]["TYPE"],$field,$titles[$id]["VARIANTS"]);
 
         		$xls[$i][$j] = array(
         			"ID" => $id,
@@ -142,26 +154,55 @@ class ImportController extends Controller
         return $arResult;
 	}
 
-	public function getCellValueAndHighlight($value,$type,$fieldValues = false){
-		$valid = false;
+	public function getCellValueAndHighlight($value,$type,$fieldValues = false,$variants = NULL){
 		$highlight = NULL;
+		$isEmpty = false;
+		$isNotValid = false;
 
 		if( is_array($fieldValues) && $fieldValues[0] != $value ) $highlight = "overwrite";
-		if( $value == NULL ){
-			$highlight = "empty";
-		}else{
-			if( $type == "float" || $type == "int" ){
-				if( is_numeric($value) ){
-					$valid = true;
-					if( $type == "int" ){
-						$value = intval($value);
-					}
-				}
-			}else $valid = true;
 
-			if(!$valid) $highlight = "not-valid";
+		if( $value == NULL ){
+			$isEmpty = true;
+		}else{
+			$values = array();
+			$tmpValues = explode("|", $value);
+
+			foreach ($tmpValues as $key => $item) {
+				$item = trim($item);
+				if( $item != "" && $item != NULL ){
+					$v = $this->validate($type, $item);
+					$isNotValid = (!$isNotValid)?(!$v):true;
+					$values[] = $item;
+				}
+			}
+			if( count($values) < 1 ){
+				$isEmpty = true;
+			}else if(count($values) == 1){
+				$value = $values[0];
+			}else{
+				$value = $values;
+			}
 		}
+		
+		$highlight = ($isEmpty)?"empty":$highlight;
+		$highlight = ($isNotValid)?"not-valid":$highlight;
+
+		if( $highlight == NULL && is_array($variants) && ( is_array($value) || !in_array($value, $variants)) ) $highlight = "new-variant";
+		
 		return array("VALUE" => $value, "HIGHLIGHT" => $highlight );
+	}
+
+	public function validate($type, $value){
+		$valid = false;
+		if( $type == "float" || $type == "int" ){
+			if( is_numeric($value) ){
+				$valid = true;
+				if( $type == "int" ){
+					$value = intval($value);
+				}
+			}
+		}else $valid = true;
+		return $valid;
 	}
 
 	public function actionAdminImport()
