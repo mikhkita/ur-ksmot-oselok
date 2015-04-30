@@ -14,6 +14,12 @@
 	</div>
 
 	<div class="row">
+		<?php echo $form->labelEx($model,'code'); ?>
+		<?php echo $form->textField($model,'code',array('maxlength'=>255,'required'=>true)); ?>
+		<?php echo $form->error($model,'code'); ?>
+	</div>
+
+	<div class="row">
 		<?php echo $form->labelEx($model,'attribute_type_id'); ?>
 		<?php echo $form->DropDownList($model,'attribute_type_id',CHtml::listData(AttributeType::model()->findAll(array('order'=>'id ASC')), 'id', 'name')); ?>
 		<?php echo $form->error($model,'attribute_type_id'); ?>

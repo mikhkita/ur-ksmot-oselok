@@ -15,7 +15,7 @@ class ShopController extends Controller
 	{
 		return array(
 			array('allow',
-				'actions'=>array('adminIndex'),
+				'actions'=>array('adminIndex','adminFilter'),
 				'roles'=>array('manager'),
 			),
 			array('allow',
@@ -49,19 +49,31 @@ class ShopController extends Controller
 		$model = Attribute::model()->findAll();
 		$filter = array();
 		foreach ($model as $attr) {
-			$temp= array();
+			$temp = array();
 			foreach ($attr->variants as $variant) {
 			array_push($temp,$variant->value);
 			}
-		$filter[$attr->name] = $temp;
+			$filter[$attr->name] = array();
+			array_push($filter[$attr->name],$temp);
+			array_push($filter[$attr->name],$attr->code);
 		}
-		print_r($pages->getPageCount());
 		$this->render('adminIndex',array(
 			'goods'=>$goods,
 			'filter' =>$filter,
 			'pages' => $pages
          
 		));
+	}
+
+	public function actionAdminFilter($partial = false)
+	{
+		if(isset($_POST)) {
+			print_r($_POST);
+		
+			$this->render('adminFilter',array(
+				'post'=>$_POST
+			));
+		}
 	}
 	
 	public function loadModel($id)

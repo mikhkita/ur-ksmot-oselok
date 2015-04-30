@@ -9,16 +9,22 @@
                     </div>
                     <div id="slider-range"></div>
                 </div>
+                <?php $form=$this->beginWidget('CActiveForm', array(
+                    'id'=>'filter',
+                    'action' => Yii::app()->createUrl('/admin/shop/filter'),
+                    'enableAjaxValidation'=>false
+                )); ?>
+
                 <? foreach ($filter as $name => $items): ?>
-                    <? if(count($items)): ?>
+                    <? if(count($items[0])): ?>
                         <div class="filter-cont">
                             <h2><?=$name?></h2>
                             <div class="check-cont">
                                 <ul class="hor clearfix">
-                                    <? foreach ($items as $i => $item): ?>
+                                    <? foreach ($items[0] as $i => $item): ?>
                                     <li>
-                                        <input type="checkbox" id="<?=$name.'-'.$i?>">
-                                        <label class="clearfix" for="<?=$name.'-'.$i?>">
+                                        <input type="checkbox" id="<?=$items[1].'-'.$i?>" name="<?=$items[1].'['.$i.']'?>" value="<?=$item?>" >
+                                        <label class="clearfix" for="<?=$items[1].'-'.$i?>">
                                             <span class="checked"></span>
                                             <span class="default"></span>   
                                             <h3><?=$item?></h3>
@@ -30,6 +36,8 @@
                         </div>
                     <? endif; ?>
                 <? endforeach; ?>
+                <input type="submit" value="Далее">
+                <?php $this->endWidget(); ?>
             </div>
             <div class="b-main-items left">
                 <div class="pagination">
