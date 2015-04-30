@@ -57,10 +57,10 @@
 
                 <?php $this->widget('CLinkPager', array(
                     'header' => '',
-                    'firstPageLabel' => '<<', 
+                    'firstPageLabel' => '1', 
                     'prevPageLabel' => '<',
                     'nextPageLabel' => '>',
-                    'lastPageLabel' => '>>', 
+                    'lastPageLabel' => $pages->getPageCount(), 
                     'cssFile' => Yii::app()->request->baseUrl.'/css/shop.css',
                     'maxButtonCount' => 5,
                     'pages' => $pages,

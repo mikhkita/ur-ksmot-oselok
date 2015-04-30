@@ -9303,3 +9303,57 @@ Stack trace:
 REQUEST_URI=/css/images/ui-bg_gloss-wave_35_f6a828_500x100.png
 HTTP_REFERER=http://ur-ksmot-oselok:88/css/jquery-ui.min.css
 ---
+2015/04/30 19:20:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/images/ui-bg_gloss-wave_35_f6a828_500x100.png".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/images/ui-b...')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/images/ui-bg_gloss-wave_35_f6a828_500x100.png
+HTTP_REFERER=http://ur-ksmot-oselok:88/css/jquery-ui.min.css
+---
+2015/04/30 19:21:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/images/ui-bg_gloss-wave_35_f6a828_500x100.png".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/images/ui-b...')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/images/ui-bg_gloss-wave_35_f6a828_500x100.png
+HTTP_REFERER=http://ur-ksmot-oselok:88/css/jquery-ui.min.css
+---
+2015/04/30 19:35:08 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/form.css".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/form.css')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/form.css
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin
+---
+2015/04/30 19:35:08 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/screen.css".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/screen.css')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/screen.css
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin
+---
+2015/04/30 19:35:08 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/print.css".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/print.css')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/print.css
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin
+---
+2015/04/30 19:35:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/images/ui-bg_gloss-wave_35_f6a828_500x100.png".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/images/ui-b...')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/images/ui-bg_gloss-wave_35_f6a828_500x100.png
+HTTP_REFERER=http://ur-ksmot-oselok:88/css/jquery-ui.min.css
+---
