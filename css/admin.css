@@ -1,5 +1,5 @@
 @CHARSET "UTF-8";
-
+@-webkit-keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}@-o-keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}@keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}
 @font-face {
     font-family: 'RobotoRegular';
     src: url('../fonts/roboto-regular.eot');
@@ -1386,15 +1386,49 @@ li.ui-autocomplete-category {
                         background-color: #452716;
                         color: #F5E9BC;
                     }
-/*.switcher.checked:hover{
-    -webkit-animation: stripes2 2s linear infinite;
-    -moz-animation: stripes2 2s linear infinite;
-    -o-animation: stripes2 2s linear infinite;
-    animation: stripes2 2s linear infinite;    
+.progress {
+    margin-top: 25px;
+    height: 20px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    background-color: #FFF4CD;
+    border: 1px solid #452716;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
 }
-.switcher.animBlocked:hover{
-    -webkit-animation: none;  
-    -moz-animation: none;
-    -o-animation: none;
-    animation: none;
-}*/
+    .progress-bar.active, .progress.active .progress-bar {
+        -webkit-animation: progress-bar-stripes 2s linear infinite;
+        -o-animation: progress-bar-stripes 2s linear infinite;
+        animation: progress-bar-stripes 2s linear infinite;
+    }
+    .progress-bar-striped, .progress-striped .progress-bar {
+        background-image: -webkit-linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
+        background-image: -o-linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
+        background-image: linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
+        -webkit-background-size: 40px 40px;
+        background-size: 40px 40px;
+    }
+    .progress-bar {
+        float: left;
+        width: 0;
+        height: 100%;
+        font-size: 12px;
+        line-height: 20px;
+        color: #F5E9BC;
+        text-align: center;
+        background-color: #452716;
+        -webkit-box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
+        box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
+        -webkit-transition: width .6s ease;
+        -o-transition: width .6s ease;
+        transition: width .6s ease;
+    }
+.b-log{
+    width: 100%;
+    overflow: hidden;
+    height: 500px;
+    background-color: #FFF4CD;
+    border: 1px solid #452716;
+    border-radius: 4px;
+}

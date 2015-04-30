@@ -119,7 +119,7 @@ class ImportController extends Controller
 
 				if( $field->attribute->id == $this->codeId ) $code = $field->value;
 			}
-			$all_goods[$code] = $fields;
+			$all_goods[$code] = array("ID" => $good->id, "FIELDS" => $fields);
 		}
 
 		$arResult["TITLES"] = $xls[0];
@@ -134,7 +134,7 @@ class ImportController extends Controller
 			// array("ID" => "ID атрибута", "VALUE" => "Значение этого атрибута из экселя", "HIGHLIGHT" => "Тип подсветки ячейки");
         	foreach ($xls[$i] as $j => $cell) {
         		$id = $sorted_titles[$j]; // ID атрибута, в который будет вставляться значение
-        		$field = ($isset)?( (isset($all_goods[$code][$id]))?($all_goods[$code][$id]):false ):false;
+        		$field = ($isset)?( (isset($all_goods[$code]["FIELDS"][$id]))?($all_goods[$code]["FIELDS"][$id]):false ):false;
         		$cellValueAndHighlight = $this->getCellValueAndHighlight($cell,$titles[$id]["TYPE"],$field,$titles[$id]["VARIANTS"]);
 
         		$xls[$i][$j] = array(
@@ -147,7 +147,8 @@ class ImportController extends Controller
         	$arResult["ROWS"][] = array(
         		// Если уже есть элемент с таким кодом, то выделяем всю строку
 				"HIGHLIGHT" => ($isset)?"exist":NULL,
-				"COLS" => $xls[$i]
+				"COLS" => $xls[$i],
+				"ID" => ($isset)?$all_goods[$code]["ID"]:NULL
 			);
         }
         return $arResult;
@@ -176,8 +177,6 @@ class ImportController extends Controller
 			}
 			if( count($values) < 1 ){
 				$isEmpty = true;
-			}else if(count($values) == 1){
-				$value = $values[0];
 			}else{
 				$value = $values;
 			}
@@ -186,7 +185,11 @@ class ImportController extends Controller
 		$highlight = ($isEmpty)?"empty":$highlight;
 		$highlight = ($isNotValid)?"not-valid":$highlight;
 
-		if( $highlight == NULL && is_array($variants) && ( is_array($value) || !in_array($value, $variants)) ) $highlight = "new-variant";
+		if( $highlight == NULL && is_array($variants) ){
+			foreach ($value as $i => $item) {
+				if( !in_array($item, $variants) ) $highlight = "new-variant";
+			}
+		}
 		
 		return array("VALUE" => $value, "HIGHLIGHT" => $highlight );
 	}
