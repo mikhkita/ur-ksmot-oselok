@@ -49,6 +49,7 @@ class AttributeVariant extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'attribute' => array(self::BELONGS_TO, 'Attribute', 'attribute_id'),
+			'field' => array(self::HAS_MANY, 'GoodAttribute', 'variant_id'),
 		);
 	}
 
@@ -111,7 +112,7 @@ class AttributeVariant extends CActiveRecord
 	public function afterFind()
 	{
 		parent::afterFind();
-
+		
 		$val = $this->attributes[$this->attribute->type->code."_value"];
 		
 		$this->setAttribute("value",($val != NULL)?$val:false,true);

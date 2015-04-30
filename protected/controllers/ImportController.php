@@ -70,17 +70,19 @@ class ImportController extends Controller
 
 			// Получаем массив заголовков вида: array("ID атрибута" => "Наименование атрибута")
 			foreach ($model->fields as $key => $value) {
-            	$titles[intval($value->attribute->id)] = $value->attribute->name;
+            	$titles[intval($value->attribute->id)] = array(
+            		"NAME" => $value->attribute->name,
+            		"TYPE" => $value->attribute->type->code,
+            	);
             }	
 
             // Получаем матрицу считанного экселя в отсортированном по столбцами виде
 			$xls = $this->getXLS($_POST["excel_path"],$sorted_titles,$titles);
 
 			// Генерация структурированного ассоциативного массива для вью.
-			$arResult = $this->getArResult($xls, $model->goods, $sorted_titles);
+			$arResult = $this->getArResult($xls, $model->goods, $sorted_titles, $titles);
 
-			print_r($arResult);
-			die();
+			// print_r($arResult);
 
 			$this->render('adminStep3',array(
 				'arResult'=>$arResult
@@ -88,7 +90,7 @@ class ImportController extends Controller
 		}
 	}
 
-	public function getArResult($xls, $goods, $sorted_titles){
+	public function getArResult($xls, $goods, $sorted_titles, $titles){
 		$all_goods = array();
 		$exist_codes = array();
 		$arResult = array(
@@ -121,7 +123,8 @@ class ImportController extends Controller
 			// array("ID" => "ID атрибута", "VALUE" => "Значение этого атрибута из экселя", "HIGHLIGHT" => "Тип подсветки ячейки");
         	foreach ($xls[$i] as $j => $cell) {
         		$id = $sorted_titles[$j]; // ID атрибута, в который будет вставляться значение
-        		$cellValueAndHighlight = $this->getCellValueAndHighlight($all_goods[$code][$id],$cell);
+        		$field = ($isset)?( (isset($all_goods[$code][$id]))?($all_goods[$code][$id]):false ):false;
+        		$cellValueAndHighlight = $this->getCellValueAndHighlight($cell,$titles[$id]["TYPE"],$field);
 
         		$xls[$i][$j] = array(
         			"ID" => $id,
@@ -139,17 +142,18 @@ class ImportController extends Controller
         return $arResult;
 	}
 
-	public function getCellValueAndHighlight($field,$value){
+	public function getCellValueAndHighlight($value,$type,$fieldValues = false){
 		$valid = false;
 		$highlight = NULL;
 
-		if( $cell == NULL ){
+		if( is_array($fieldValues) && $fieldValues[0] != $value ) $highlight = "overwrite";
+		if( $value == NULL ){
 			$highlight = "empty";
 		}else{
-			if( $field["TYPE"] == "float" || $field["TYPE"] == "int" ){
+			if( $type == "float" || $type == "int" ){
 				if( is_numeric($value) ){
 					$valid = true;
-					if( $field["TYPE"] == "int" ){
+					if( $type == "int" ){
 						$value = intval($value);
 					}
 				}
@@ -210,7 +214,7 @@ class ImportController extends Controller
 				foreach ($rows as $key => $value) {
 					if($value!="no-id") {
 						if( $i == 1 ){
-							array_push($tmp,$titles[intval($value)]);
+							array_push($tmp,$titles[intval($value)]["NAME"]);
 						}else{
 							array_push($tmp,$item[$key]);
 						}

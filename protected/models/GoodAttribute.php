@@ -5,13 +5,13 @@
  *
  * The followings are the available columns in table 'good_attribute':
  * @property string $id
- * @property string $name
  * @property string $good_id
  * @property string $attribute_id
  * @property integer $int_value
  * @property string $varchar_value
  * @property string $text_value
  * @property double $float_value
+ * @property string $variant_id
  */
 class GoodAttribute extends CActiveRecord
 {
@@ -31,14 +31,15 @@ class GoodAttribute extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, good_id, attribute_id, int_value, varchar_value, text_value, float_value', 'required'),
+			array('good_id, attribute_id', 'required'),
 			array('int_value', 'numerical', 'integerOnly'=>true),
 			array('float_value', 'numerical'),
-			array('name, varchar_value', 'length', 'max'=>255),
-			array('good_id, attribute_id', 'length', 'max'=>10),
+			array('good_id, attribute_id, variant_id', 'length', 'max'=>10),
+			array('varchar_value', 'length', 'max'=>255),
+			array('text_value', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, good_id, attribute_id, int_value, varchar_value, text_value, float_value', 'safe', 'on'=>'search'),
+			array('id, good_id, attribute_id, int_value, varchar_value, text_value, float_value, variant_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -52,6 +53,7 @@ class GoodAttribute extends CActiveRecord
 		return array(
 			'good' => array(self::BELONGS_TO, 'Good', 'good_id'),
 			'attribute' => array(self::BELONGS_TO, 'Attribute', 'attribute_id'),
+			'variant' => array(self::BELONGS_TO, 'AttributeVariant', 'variant_id')
 		);
 	}
 
@@ -62,13 +64,13 @@ class GoodAttribute extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'name' => '',
 			'good_id' => 'Товар',
 			'attribute_id' => 'Атрибут',
 			'int_value' => 'Числовое значение',
 			'varchar_value' => 'Фраза',
 			'text_value' => 'Текстовое значение',
 			'float_value' => 'Дробное значение',
+			'variant_id' => 'Вариант из списка',
 		);
 	}
 
@@ -91,13 +93,13 @@ class GoodAttribute extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id,true);
-		$criteria->compare('name',$this->name,true);
 		$criteria->compare('good_id',$this->good_id,true);
 		$criteria->compare('attribute_id',$this->attribute_id,true);
 		$criteria->compare('int_value',$this->int_value);
 		$criteria->compare('varchar_value',$this->varchar_value,true);
 		$criteria->compare('text_value',$this->text_value,true);
 		$criteria->compare('float_value',$this->float_value);
+		$criteria->compare('variant_id',$this->variant_id,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -119,8 +121,12 @@ class GoodAttribute extends CActiveRecord
 	{
 		parent::afterFind();
 		
-		$val = $this->attributes[$this->attribute->type->code."_value"];
+		if( $this->attribute->list == 0 ){
+			$val = $this->attributes[$this->attribute->type->code."_value"];
 		
-		$this->setAttribute("value",($val != NULL)?$val:false,true);
+			$this->setAttribute("value",($val != NULL)?$val:false,true);
+		}else{
+			$this->setAttribute("value",$this->variant->value,true);
+		}
 	}
 }

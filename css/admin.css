@@ -345,7 +345,13 @@ h1{
             padding: 5px 10px;
         }
         .b-table td.b-empty{
-            background-color: #6B4530;
+            background-color: #B27C5E;
+        }
+        .b-table td.b-not-valid{
+            background-color: #FD0101;
+        }
+        .b-table td.b-overwrite{
+            background-color: #FF8A5F;
         }
         .align-left{
             text-align: left !important;

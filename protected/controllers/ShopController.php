@@ -39,6 +39,7 @@ class ShopController extends Controller
 
 		$model = Good::model()->findAll($criteria);
 		$goods = array();
+
 		foreach ($model as $i => $good) {
 			$temp = array();
 			foreach ($good->fields as $field) {
