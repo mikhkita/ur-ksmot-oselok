@@ -4,10 +4,10 @@ $(document).ready(function(){
 
     // Первый шаг --------------------------------------------------- Первый шаг
     if( $("#import-step1").length ){
-    	$("input[name='GoodTypeId']").eq(0).attr("checked","checked");
-    	$(".b-excel-input").change(function(){
-    		$('input[type="submit"]').attr('disabled',false);
-    	});
+        $("input[name='GoodTypeId']").eq(0).attr("checked","checked");
+        $(".b-excel-input").change(function(){
+            $('input[type="submit"]').attr('disabled',false);
+        });
         $("#import-step1").validate({
             ignore: ""
         });
@@ -101,22 +101,20 @@ $(document).ready(function(){
     //         }
     //     }).disableSelection();
     // }
-
+    function data_set() {
+        for (var i = 0; i < $("#attr-list li").length; i++) {
+            $("#imp-sort li:eq("+i+") input").val($("#attr-list li").eq(i).attr("data-id"));
+        }
+    };
     $( "#imp-sort li" ).draggable({ revert: true, revertDuration:false, axis: "y", containment: "parent"});
     $( "#imp-sort li" ).droppable({
         accept: "#imp-sort li",
-        create: function( event, ui ) {
-            for (var i = 0; i < $("#attr-list li").length; i++) {
-                $("#imp-sort li:eq("+i+") input").val($("#attr-list li").eq(i).attr("data-id"));
-            };
-        },
+        create: data_set,
         drop: function( event, ui ) {
             var temp = ui.draggable.html();
             ui.draggable.html($(this).html());
             $(this).html(temp);
-            for (var i = 0; i < $("#attr-list li").length; i++) {
-                $("#imp-sort li:eq("+i+") input").val($("#attr-list li").eq(i).attr("data-id"));
-            }
+            data_set();
         }
     });
     // Второй шаг --------------------------------------------------- Второй шаг
