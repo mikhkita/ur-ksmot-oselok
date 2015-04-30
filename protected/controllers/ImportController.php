@@ -66,8 +66,7 @@ class ImportController extends Controller
 		if(isset($_POST["excel_path"]) && isset($_POST["excel"]) && isset($_POST["GoodTypeId"])) {
 			$model = GoodType::model()->findByPk($_POST["GoodTypeId"]);
 			$sorted_titles = $_POST["excel"];// Массив соответствующих "ID атрибута" каждому столбцу
-			print_r($_POST["excel"]);
-			// die();
+
 			$titles = array();
 
 			// Получаем массив заголовков вида: array("ID атрибута" => "Наименование атрибута")
