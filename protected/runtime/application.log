@@ -9712,3 +9712,21 @@ Stack trace:
 REQUEST_URI=/js/jquery.qtip.min.js.map
 HTTP_REFERER=http://ur-ksmot-oselok:88/admin/import/step2
 ---
+2015/04/30 23:18:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin/import/step2
+---
+2015/04/30 23:19:34 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/jquery.qtip.min.js.map
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin/import/step2
+---

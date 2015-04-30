@@ -102,11 +102,9 @@ $(document).ready(function(){
     //     }).disableSelection();
     // }
 
-    $( "#imp-sort li" ).draggable({ revert: true, axis: "y", containment: "parent"});
+    $( "#imp-sort li" ).draggable({ revert: true, revertDuration:false, axis: "y", containment: "parent"});
     $( "#imp-sort li" ).droppable({
         accept: "#imp-sort li",
-        // activeClass: "ui-state-hover",
-        // hoverClass: "ui-state-active",
         create: function( event, ui ) {
             for (var i = 0; i < $("#attr-list li").length; i++) {
                 $("#imp-sort li:eq("+i+") input").val($("#attr-list li").eq(i).attr("data-id"));
