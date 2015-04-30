@@ -353,6 +353,18 @@ h1{
         .b-table td.b-overwrite{
             background-color: #FF8A5F;
         }
+        .b-table td.b-new-variant{
+            background-color: #00FF00;
+        }
+            .b-import-preview-table tr td{
+                text-align: center;
+            }
+            .b-import-preview-table tr td div{
+                border-top: 1px solid #452716;
+            }
+            .b-import-preview-table tr td div:first-child{
+                border-top: 0px;
+            }
         .align-left{
             text-align: left !important;
         }
