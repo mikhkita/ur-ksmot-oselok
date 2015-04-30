@@ -327,10 +327,7 @@ input:-moz-placeholder {
 								font-size: 19px;
 							}
 		.b-main .b-block .b-pagination {
-			position: absolute;
- 			bottom: 0;
- 			left: 50%;
- 			margin-left: -150px;
+
 		}
 			.b-main .b-block .b-pagination li {
 				color: #448ccb;

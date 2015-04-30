@@ -9,16 +9,22 @@
                     </div>
                     <div id="slider-range"></div>
                 </div>
+                <?php $form=$this->beginWidget('CActiveForm', array(
+                    'id'=>'filter',
+                    'action' => Yii::app()->createUrl('/admin/shop/filter'),
+                    'enableAjaxValidation'=>false
+                )); ?>
+
                 <? foreach ($filter as $name => $items): ?>
-                    <? if(count($items)): ?>
+                    <? if(count($items[0])): ?>
                         <div class="filter-cont">
                             <h2><?=$name?></h2>
                             <div class="check-cont">
                                 <ul class="hor clearfix">
-                                    <? foreach ($items as $i => $item): ?>
+                                    <? foreach ($items[0] as $i => $item): ?>
                                     <li>
-                                        <input type="checkbox" id="<?=$name.'-'.$i?>">
-                                        <label class="clearfix" for="<?=$name.'-'.$i?>">
+                                        <input type="checkbox" id="<?=$items[1].'-'.$i?>" name="<?=$items[1].'['.$i.']'?>" value="<?=$item?>" >
+                                        <label class="clearfix" for="<?=$items[1].'-'.$i?>">
                                             <span class="checked"></span>
                                             <span class="default"></span>   
                                             <h3><?=$item?></h3>
@@ -30,30 +36,38 @@
                         </div>
                     <? endif; ?>
                 <? endforeach; ?>
+                <input type="submit" value="Далее">
+                <?php $this->endWidget(); ?>
             </div>
             <div class="b-main-items left">
-                <ul>
-                	<? foreach ($goods as $good): ?>
-						<li class="clearfix">
-							<img class="left" src="<?php echo Yii::app()->request->baseUrl; ?>/i/item-1.jpg" alt="">
-                       		<div class="left">
-                            	<h3><?=$good["title"]?></h3>
-                            	<h4>7.5x18 ET37 114.30x5</h4>
-                            	<h5><?=$good["price"]?> руб.<span> + доставка 500 руб.</span></h5>
-                       	    </div>
-						</li>
-					<? endforeach; ?>
-                </ul>   
-            </div>  
-            <ul class="hor b-pagination clearfix">
-                <li><a href="">1</a></li>
-                <li><a href="">2</a></li>
-                <li><a href="">3</a></li>
-                <li><a href="">4</a></li>
-                <li><a href="">5</a></li>
-                <li class="points">...</li>
-                <li><a href="">10</a></li>
-            </ul>
+                <div class="pagination">
+                    <ul>
+                    	<? foreach ($goods as $good): ?>
+    						<li class="clearfix">
+    							<img class="left" src="<?php echo Yii::app()->request->baseUrl; ?>/i/item-1.jpg" alt="">
+                           		<div class="left">
+                                	<h3><?=$good["title"]?></h3>
+                                	<h4>7.5x18 ET37 114.30x5</h4>
+                                	<h5><?=$good["price"]?> руб.<span> + доставка 500 руб.</span></h5>
+                           	    </div>
+    						</li>
+    					<? endforeach; ?>
+                    </ul>  
+
+
+                <?php $this->widget('CLinkPager', array(
+                    'header' => '',
+                    'firstPageLabel' => '<<', 
+                    'prevPageLabel' => '<',
+                    'nextPageLabel' => '>',
+                    'lastPageLabel' => '>>', 
+                    'cssFile' => Yii::app()->request->baseUrl.'/css/shop.css',
+                    'maxButtonCount' => 5,
+                    'pages' => $pages,
+                    'htmlOptions' => array("class"=>"yiiPager hor clearfix")
+                )) ?>
+                </div>  
+            </div>
         </div>
     </div>
 
