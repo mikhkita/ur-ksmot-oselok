@@ -21,7 +21,7 @@
             <label for="">Атрибуты Excel</label>
           	<ul id="imp-sort">
                 <? foreach ($xls as $key=>$value): ?>
-                <li class="ui-state-default"><?=$value?><input type="hidden" name="excel[<?=$key?>]" value="no-id"></li>
+                <li class="ui-widget-content"><?=$value?><input type="hidden" name="excel[<?=$key?>]" value="no-id"></li>
                 <? endforeach; ?>
                 <? if( count($model->fields) > count($xls) ): ?>
                     <? for( $i = 0; $i < count($model->fields)-count($xls); $i++ ): ?>

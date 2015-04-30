@@ -84,23 +84,43 @@ $(document).ready(function(){
     // Первый шаг --------------------------------------------------- Первый шаг
 
     // Второй шаг --------------------------------------------------- Второй шаг
-    if( $("#import-step2").length ){
-        $("#imp-sort").sortable({
-            create: function( event, ui ) {
-                for (var i = 0; i < $("#attr-list li").length; i++) {
-                    $("#imp-sort li:eq("+i+") input").val($("#attr-list li").eq(i).attr("data-id"));
-                };
-            },
-            update: function( event, ui ) {
-                for (var i = 0; i < $("#attr-list li").length; i++) {
-                    $("#imp-sort li:eq("+i+") input").val($("#attr-list li").eq(i).attr("data-id"));
-                };
-                for (var j = $("#attr-list li").length; j < $("#imp-sort li").length; j++) {
-                    $("#imp-sort li:eq("+j+") input").val("no-id");
-                }
+    // if( $("#import-step2").length ){
+    //     $("#imp-sort").sortable({
+    //         create: function( event, ui ) {
+    //             for (var i = 0; i < $("#attr-list li").length; i++) {
+    //                 $("#imp-sort li:eq("+i+") input").val($("#attr-list li").eq(i).attr("data-id"));
+    //             };
+    //         },
+    //         update: function( event, ui ) {
+    //             for (var i = 0; i < $("#attr-list li").length; i++) {
+    //                 $("#imp-sort li:eq("+i+") input").val($("#attr-list li").eq(i).attr("data-id"));
+    //             };
+    //             for (var j = $("#attr-list li").length; j < $("#imp-sort li").length; j++) {
+    //                 $("#imp-sort li:eq("+j+") input").val("no-id");
+    //             }
+    //         }
+    //     }).disableSelection();
+    // }
+
+    $( "#imp-sort li" ).draggable({ revert: true, axis: "y", containment: "parent"});
+    $( "#imp-sort li" ).droppable({
+        accept: "#imp-sort li",
+        // activeClass: "ui-state-hover",
+        // hoverClass: "ui-state-active",
+        create: function( event, ui ) {
+            for (var i = 0; i < $("#attr-list li").length; i++) {
+                $("#imp-sort li:eq("+i+") input").val($("#attr-list li").eq(i).attr("data-id"));
+            };
+        },
+        drop: function( event, ui ) {
+            var temp = ui.draggable.html();
+            ui.draggable.html($(this).html());
+            $(this).html(temp);
+            for (var i = 0; i < $("#attr-list li").length; i++) {
+                $("#imp-sort li:eq("+i+") input").val($("#attr-list li").eq(i).attr("data-id"));
             }
-        }).disableSelection();
-    }
+        }
+    });
     // Второй шаг --------------------------------------------------- Второй шаг
 
     // Третий шаг --------------------------------------------------- Третий шаг
