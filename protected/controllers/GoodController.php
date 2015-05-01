@@ -83,47 +83,40 @@ class GoodController extends Controller
 		$this->actionAdminIndex(true);
 	}
 
-	public function actionAdminIndex($partial = false)
+	public function actionAdminIndex($partial = false, $goodTypeId = false)
 	{
 		if( !$partial ){
 			$this->layout='admin';
 		}
-		// $filter = new Good('filter');
-		// $criteria = new CDbCriteria();
 
-		// if (isset($_GET['Good']))
-  //       {
-  //           $filter->attributes = $_GET['Good'];
-  //           foreach ($_GET['Good'] AS $key => $val)
-  //           {
-  //               if ($val != '')
-  //               {
-  //                   if( $key == "name" ){
-  //                   	$criteria->addSearchCondition('name', $val);
-  //                   }else{
-  //                   	$criteria->addCondition("$key = '{$val}'");
-  //                   }
-  //               }
-  //           }
-  //       }
+		if( $goodTypeId ){
+			$GoodType = GoodType::model()->findByPk($goodTypeId);
+		}
 
-        // $criteria->order = 'id DESC';
+		$data = array();
 
-        // $model = Good::model()->findAll($criteria);
-        $model = array();
-        $filter = array();
+		foreach ($GoodType->goods as $good) {
+			$item = array();
+			foreach ($good->fields as $field) {
+				$attrId = $field->attribute->id;
+				if( !isset($item[$attrId]) )
+					$item[$attrId] = array();
+				$item[$attrId][] = $field;
+			}
+			$data[] = $item;
+		}
 
 		if( !$partial ){
 			$this->render('adminIndex',array(
-				'data'=>$model,
-				'filter'=>$filter,
-				'labels'=>Good::attributeLabels()
+				'data'=>$data,
+				'fields' => $GoodType->fields,
+				'name'=>$GoodType->name
 			));
 		}else{
 			$this->renderPartial('adminIndex',array(
-				'data'=>$model,
-				'filter'=>$filter,
-				'labels'=>Good::attributeLabels()
+				'data'=>$data,
+				'fields' => $GoodType->fields,
+				'name'=>$GoodType->name
 			));
 		}
 	}

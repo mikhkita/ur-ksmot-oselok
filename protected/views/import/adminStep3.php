@@ -3,15 +3,10 @@
 	<div class="progress">
 	    <div class="progress-bar progress-bar-striped active" role="progressbar" style="width:3%">3%</div>
 	</div>
-	<div class="b-log"></div>
+	<ul class="b-log"></ul>
 </div>
-<div class="b-preview">
+<div class="b-preview" data-url="<?=Yii::app()->createUrl('/'.$this->adminMenu["cur"]->code.'/adminimport')?>">
 	<h1>Предпросмотр импорта</h1>	
-	<?php $form=$this->beginWidget('CActiveForm', array(
-		'id'=>'import-step3',
-		'action' => Yii::app()->createUrl('/'.$this->adminMenu["cur"]->code.'/adminimport'),
-		'enableAjaxValidation'=>false
-	)); ?>
 	<table class="b-table b-import-preview-table" border="1">
 		<tr>
 			<? foreach ($arResult["TITLES"] as $i => $row): ?>
@@ -30,14 +25,16 @@
 								</div>
 							<? endforeach ?>	
 						<? endif; ?>
-						<? if(intval($cell["ID"]) == $this->codeId && isset($row["ID"])): ?>
-							<input type="hidden" name="IMPORT[ID]" value="<?=$row["ID"]?>">
+						<? if(intval($cell["ID"]) == $this->codeId): ?>
+							<input type="hidden" name="IMPORT[GOODTYPEID]" value="<?=$_POST['GoodTypeId']?>">
+							<? if(isset($row["ID"])): ?>
+								<input type="hidden" name="IMPORT[ID]" value="<?=$row["ID"]?>">
+							<? endif; ?>
 						<? endif; ?>
 					</td>
 				<? endforeach ?>
 			</tr>
 		<? endforeach ?>
 	</table>
-	<?php echo CHtml::submitButton("Импортировать"); ?>
-	<?php $this->endWidget(); ?>
+	<a href="#" class="b-butt b-import-butt">Импортировать</a>
 </div>

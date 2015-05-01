@@ -16,7 +16,7 @@
 			<? foreach ($data as $i => $item): ?>
 				<tr>
 					<td><?=$item->id?></td>
-					<td class="align-left"><?=$item->name?></td>
+					<td class="align-left"><a href="<?php echo $this->createUrl('/good/adminindex',array('goodTypeId'=>$item->id))?>"><?=$item->name?></a></td>
 					<td class="b-tool-cont">
 						<a href="<?php echo Yii::app()->createUrl('/'.$this->adminMenu["cur"]->code.'/adminupdate',array('id'=>$item->id))?>" class="ajax-form ajax-update b-tool b-tool-update" title="Редактировать <?=$this->adminMenu["cur"]->vin_name?>"></a>
 						<a href="<?php echo Yii::app()->createUrl('/'.$this->adminMenu["cur"]->code.'/admindelete',array('id'=>$item->id))?>" class="ajax-form ajax-delete b-tool b-tool-delete" title="Удалить <?=$this->adminMenu["cur"]->vin_name?>"></a>

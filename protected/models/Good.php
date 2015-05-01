@@ -26,7 +26,7 @@ class Good extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('code, good_type_id', 'required'),
+			array('good_type_id', 'required'),
 			array('code', 'length', 'max'=>255),
 			array('good_type_id', 'length', 'max'=>10),
 			// The following rule is used by search().

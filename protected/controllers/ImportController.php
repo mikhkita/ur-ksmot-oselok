@@ -69,7 +69,7 @@ class ImportController extends Controller
 
 			$titles = array();
 
-			// Получаем массив заголовков вида: array("ID атрибута" => "Наименование атрибута")
+			// Получаем массив заголовков с их вариантами
 			foreach ($model->fields as $key => $field) {
 				$variants = NULL;
 
@@ -209,10 +209,117 @@ class ImportController extends Controller
 
 	public function actionAdminImport()
 	{
-		print_r($_POST["IMPORT"]);
-		$this->render('adminImport',array(
-			
-		));
+		$result = "error";
+		$message = "";
+
+		if( isset($_POST["IMPORT"]["GOODTYPEID"]) ){
+			$model = GoodType::model()->findByPk($_POST["IMPORT"]["GOODTYPEID"]);
+			$import = $_POST["IMPORT"];
+			$titles = [];
+			$newFields = [];
+			$AttributeVariantTableName = AttributeVariant::tableName();
+			$GoodAttributeTableName = GoodAttribute::tableName();
+
+			$addVariants = [];
+			$addFields = [];
+			$goodCode;
+
+			// Получаем массив заголовков с их вариантами
+			$titles = $this->getTitlesWithVariants($model->fields);
+
+	        // Добавляем варианты новые варианты атрибутов, если таковые присутствуют.
+	        $sql = "INSERT INTO `$AttributeVariantTableName` (`attribute_id`,`int_value`,`varchar_value`,`float_value`,`sort`) VALUES ";
+	        foreach ($import["ITEMS"] as $i => $fields){
+	        	foreach ($fields as $key => $value){
+	        		$title = $titles[intval($key)];
+	        		$newFields[] = $key;
+	        		if( is_array($title["VARIANTS"]) ){
+	        			if( !isset($title["VARIANTS"][$value]) )
+							$addVariants[] = "('".$key."',".(($title["TYPE"] == "int")?("'".$value."'"):"NULL").",".(($title["TYPE"] == "varchar")?("'".$value."'"):"NULL").",".(($title["TYPE"] == "float")?("'".$value."'"):"NULL").",'1000')";
+	        		}
+	        	}
+	        }
+	        if( count($addVariants) > 0 ){
+		        $sql .= implode(",", $addVariants);
+				Yii::app()->db->createCommand($sql)->execute();
+
+				// Получаем обновленный массив заголовков с их вариантами
+				$model = GoodType::model()->findByPk($_POST["IMPORT"]["GOODTYPEID"]);
+				$titles = $this->getTitlesWithVariants($model->fields);
+			}
+
+			// Если есть ID товара, то удаляем атрибуты, которые будем перезаписывать
+			if( isset($import["ID"]) ){
+				$id = $import["ID"];
+				$good = Good::model()->findByPk($import["ID"]);
+				$pks = array();
+
+				foreach ($good->fields as $field) {
+					if( in_array($field->attribute_id, $newFields) )
+						$pks[] = $field->id;
+				}
+				if( count($pks) > 0 )
+					GoodAttribute::model()->deleteByPk($pks);
+
+				$message = "Обновился товар с кодом: ";
+			}else{
+				// Если нет ID товара, то создаем его и получаем его ID
+				$newGood = new Good;
+				$newGood->attributes = array("good_type_id"=>$import["GOODTYPEID"]);
+				if($newGood->save()){
+					$id = $newGood->id;
+				}else die(json_encode(array("result"=>"error","message"=>"Не удалось создать товар")));
+
+				$message = "Добавился товар с кодом: ";
+			}
+
+			// Добавляем атрибуты к товару
+	        $sql = "INSERT INTO `$GoodAttributeTableName` (`good_id`,`attribute_id`,`int_value`,`varchar_value`,`text_value`,`float_value`,`variant_id`) VALUES ";
+	        foreach ($import["ITEMS"] as $i => $fields){
+	        	foreach ($fields as $key => $value){
+	        		if( $key == $this->codeId ) $goodCode = $value;
+	        		$title = $titles[intval($key)];
+
+	        		$val = array("int"=>"NULL","varchar"=>"NULL","text"=>"NULL","float"=>"NULL");
+
+	        		if( !is_array($title["VARIANTS"]) ){
+	        			$val[$title["TYPE"]] = "'".$value."'";
+	        		}
+
+					$addFields[] = "('".$id."','".$key."',".implode(",", $val).",".((is_array($title["VARIANTS"]))?("'".$title["VARIANTS"][$value]."'"):"NULL").")";
+	        	}
+	        }
+	        if( count($addFields) > 0 ){
+		        $sql .= implode(",", $addFields);
+				Yii::app()->db->createCommand($sql)->execute();
+			}
+
+			$result = "success";
+			$message .= $goodCode;
+		}else{
+			$result = "error";
+			$message = "Отсутствует ID типа товара";
+		}
+		echo json_encode(array("result"=>$result,"message"=>$message));
+	}
+
+	public function getTitlesWithVariants($fields){
+		$titles = array();
+		foreach ($fields as $key => $field) {
+			$variants = NULL;
+
+			if( $field->attribute->list ){
+				$variants = array();
+				foreach ($field->attribute->variants as $i => $variant) {
+					$variants[$variant->value] = $variant->id;
+				}
+			}
+        	$titles[intval($field->attribute->id)] = array(
+        		"TYPE" => $field->attribute->type->code,
+        		"VARIANTS" => $variants
+        	);
+        }	
+        return $titles;
 	}
 
 	public function loadModel($id)
@@ -222,6 +329,7 @@ class ImportController extends Controller
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
 	}
+
 	private	function getXLS($xls,$rows = false,$titles = false){
 		if( is_array($rows) && $titles === false )
 			throw new CHttpException(404,'Отсутствуют наименования столбцов');
