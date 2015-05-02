@@ -17,90 +17,14 @@ $(document).ready(function(){
                     url = $("#import-step1").attr("action");
 
                 $(this).find("input[type=submit]").addClass("blocked");
-
-                // if( a == false ){
-                //     $form.find("input[type='text'],input[type='number'],textarea").val("");
-                //     $form.find("input").eq(0).focus();
-                // }
-                
-                // progress.start(3);
-
-                // url = ( $(".main form").length ) ? (url+( (url.split("?").length>1)?"&":"?" )+$(".main form").serialize()) : url;
-
-                // if( $form.attr("data-beforeAjax") && customHandlers[$form.attr("data-beforeAjax")] ){
-                //     customHandlers[$form.attr("data-beforeAjax")]($form);
-                // }
-
-                // $.ajax({
-                //     type: $("#import-step1").attr("method"),
-                //     url: url,
-                //     data: $("#import-step1").serialize(),
-                //     success: function(msg){
-                //         progress.end(function(){
-                //             $(".b-main-center").html(msg);
-                            
-                //         });
-                //     }
-                // });
             }else{
                 return false;
             }
         });
-        // $(".b-main-center").on("submit","#import-step2",function(e,a){
-        //     if( $(this).valid() && !$(this).find("input[type=submit]").hasClass("blocked") ){
-        //         var $form = $(this),
-        //             url = $("#import-step2").attr("action");
-
-        //         $(this).find("input[type=submit]").addClass("blocked");
-
-        //         // if( a == false ){
-        //         //     $form.find("input[type='text'],input[type='number'],textarea").val("");
-        //         //     $form.find("input").eq(0).focus();
-        //         // }
-                
-        //         progress.start(3);
-
-        //         // url = ( $(".main form").length ) ? (url+( (url.split("?").length>1)?"&":"?" )+$(".main form").serialize()) : url;
-
-        //         // if( $form.attr("data-beforeAjax") && customHandlers[$form.attr("data-beforeAjax")] ){
-        //         //     customHandlers[$form.attr("data-beforeAjax")]($form);
-        //         // }
-
-        //         $.ajax({
-        //             type: $("#import-step2").attr("method"),
-        //             url: url,
-        //             data: $("#import-step2").serialize(),
-        //             success: function(msg){
-        //                 progress.end(function(){
-        //                     $(".b-main-center").html(msg);
-                            
-        //                 });
-        //             }
-        //         });
-        //     }
-        //     return false;
-        // });
     }
     // Первый шаг --------------------------------------------------- Первый шаг
 
     // Второй шаг --------------------------------------------------- Второй шаг
-    // if( $("#import-step2").length ){
-    //     $("#imp-sort").sortable({
-    //         create: function( event, ui ) {
-    //             for (var i = 0; i < $("#attr-list li").length; i++) {
-    //                 $("#imp-sort li:eq("+i+") input").val($("#attr-list li").eq(i).attr("data-id"));
-    //             };
-    //         },
-    //         update: function( event, ui ) {
-    //             for (var i = 0; i < $("#attr-list li").length; i++) {
-    //                 $("#imp-sort li:eq("+i+") input").val($("#attr-list li").eq(i).attr("data-id"));
-    //             };
-    //             for (var j = $("#attr-list li").length; j < $("#imp-sort li").length; j++) {
-    //                 $("#imp-sort li:eq("+j+") input").val("no-id");
-    //             }
-    //         }
-    //     }).disableSelection();
-    // }
     function data_set() {
         for (var i = 0; i < $("#attr-list li").length; i++) {
             $("#imp-sort li:eq("+i+") input").val($("#attr-list li").eq(i).attr("data-id"));
@@ -120,7 +44,62 @@ $(document).ready(function(){
     // Второй шаг --------------------------------------------------- Второй шаг
 
     // Третий шаг --------------------------------------------------- Третий шаг
+    if( $(".b-import-preview-table").length ){
+        var log = $(".b-log"),
+            count,
+            ready = 0;
+        $(".b-import-butt").click(function(){
+            startImport();
+            return false;
+        });
+    }
+    function startImport(){
+        count = $(".b-import-preview-table tr").length-1,
+        showImport();
+        while( sendNext() ){}
+    }
+    function endImport(){
+        $(".progress").addClass("ready");
+        setLog("Импорт завершен успешно");
+    }
+    function showImport(){
+        $(".b-import").show();
+        $(".b-preview").hide();
+    }
+    function sendNext(){
+        if( $(".b-import-preview-table tr").eq(1).length ){
+            var $tr = $(".b-import-preview-table tr").eq(1),
+                data = $('<form>').append( $tr.clone() ).serialize();
 
+            $.ajax({
+                type: "POST",
+                url: $(".b-preview").attr("data-url"),
+                data: data,
+                success: function(msg){
+                    ready++;
+                    var json = JSON.parse(msg);
+                    setLog(json.message);
+                    updateProgressBar();
+                }
+            });
+
+            $tr.remove();
+            return true;
+        }else{
+            return false;
+        }
+        
+    }
+    function setLog(string){
+        log.prepend("<li>"+string+"</li>")
+    }
+    function updateProgressBar(){
+        var percent = Math.ceil(ready/count*100)+"%";
+        $(".progress-bar").css("width",percent).html(percent);
+        if( count == ready ){
+            endImport();
+        }
+    }
     // Третий шаг --------------------------------------------------- Третий шаг
 
 });
