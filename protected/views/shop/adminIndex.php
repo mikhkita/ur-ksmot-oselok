@@ -46,9 +46,9 @@
     						<li class="clearfix">
     							<img class="left" src="<?php echo Yii::app()->request->baseUrl; ?>/i/item-1.jpg" alt="">
                            		<div class="left">
-                                	<h3><?=$good["title"]?></h3>
-                                	<h4>7.5x18 ET37 114.30x5</h4>
-                                	<h5><?=$good["price"]?> руб.<span> + доставка 500 руб.</span></h5>
+                                	<h3><?=$good["TITLE"]?></h3>
+                                	<h4><?=$good["SVERLOVKA"]?></h4>
+                                	<h5><?=$good["PRICE"]?> руб.<span> + доставка 500 руб.</span></h5>
                            	    </div>
     						</li>
     					<? endforeach; ?>
