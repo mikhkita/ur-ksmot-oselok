@@ -334,6 +334,9 @@ input:-moz-placeholder {
 	  				margin-right: 5px;
 	  				float:left;
 				}
+				.b-main .b-block .b-main-items .pagination .yiiPager li.previous, .b-main .b-block .b-main-items .pagination .yiiPager li.next, .b-main .b-block .b-main-items .pagination .yiiPager li.first, .b-main .b-block .b-main-items .pagination .yiiPager li.last{
+					display: none;
+				}
 				.b-main .b-block .b-main-items .pagination .yiiPager li.points {
 					background: none;
 	  				border: none;
