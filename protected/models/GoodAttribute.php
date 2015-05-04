@@ -120,7 +120,7 @@ class GoodAttribute extends CActiveRecord
 	public function afterFind()
 	{
 		parent::afterFind();
-		
+
 		if( $this->attribute->list == 0 ){
 			$val = $this->attributes[$this->attribute->type->code."_value"];
 		
