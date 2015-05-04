@@ -95,15 +95,28 @@ class GoodController extends Controller
 
 		$data = array();
 
+		// $ii = 0;
+
 		foreach ($GoodType->goods as $good) {
-			$item = array();
-			foreach ($good->fields as $field) {
-				$attrId = $field->attribute->id;
-				if( !isset($item[$attrId]) )
-					$item[$attrId] = array();
-				$item[$attrId][] = $field;
-			}
-			$data[] = $item;
+			$ii++;
+			// if( gettype($good->fields) == "array" ){
+				$item = array();
+				// if( $ii == 2 ){
+				// 	// print_r(is_array($good->fields));
+				// 	if( !(isset($good->fields) && isset($good)) )
+				// 	die();
+				// }
+				foreach ($good->fields as $field) {
+					// if( isset($field->attribute) ){
+						$attrId = $field->attribute->id;
+						if( !isset($item[$attrId]) )
+							$item[$attrId] = array();
+						$item[$attrId][] = $field;
+					// }
+				}
+				$data[] = $item;
+			// }
+
 		}
 
 		if( !$partial ){
