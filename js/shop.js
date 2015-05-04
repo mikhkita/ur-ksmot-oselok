@@ -22,10 +22,14 @@ $(document).ready(function(){
         return false;
     });
 
+
  	$(".b-main-items").on("click","#yw0 li a", function(){
- 		if(!$(this).parent().hasClass("hidden") || !$(this).parent().hasClass("selected"))  {
- 			$('.b-main-items').load($(this).attr("href")+' .pagination');  
- 	    }
+        $.ajax({
+            url: $(this).attr("href")+"&partial=true",
+            success: function(msg){
+                $('.b-main-items').html(msg);
+            }
+        }); 
  		return false;
  	});
     $( document ) .ajaxComplete(function(){
@@ -45,14 +49,24 @@ $(document).ready(function(){
         }
     });
 
-     if( ($("#yw0 .last a").text()*1-$("#yw0 li.page").last().find("a").text()*1)==1 ) {
-            $("#yw0 .last").show();
-        }
-        if( ($("#yw0 .last a").text()*1-$("#yw0 li.page").last().find("a").text()*1)>1 ) {
-            $("#yw0 .last").show();
-            $("<li class='points'>...</li>").insertBefore("#yw0 .last");
-        }
+    if( ($("#yw0 .last a").text()*1-$("#yw0 li.page").last().find("a").text()*1)==1 ) {
+        $("#yw0 .last").show();
+    }
+    if( ($("#yw0 .last a").text()*1-$("#yw0 li.page").last().find("a").text()*1)>1 ) {
+        $("#yw0 .last").show();
+        $("<li class='points'>...</li>").insertBefore("#yw0 .last");
+    }
 
+    $("body").on("click",".good", function(){
+
+        $.ajax({
+            type: 'GET',
+            url: "/admin/shop/detail?partial=true&id="+$(this).attr("data-id"),
+            success: function(msg){
+               $('.b-content').html(msg); 
+            }
+        });  
+    });
  	
  	// var progress = new KitProgress("#D26A44",2);
   //   progress.endDuration = 0.3;

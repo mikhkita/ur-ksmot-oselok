@@ -15,7 +15,7 @@ class ShopController extends Controller
 	{
 		return array(
 			array('allow',
-				'actions'=>array('adminIndex','adminFilter'),
+				'actions'=>array('adminIndex','adminFilter','adminDetail'),
 				'roles'=>array('manager'),
 			),
 			array('allow',
@@ -36,12 +36,16 @@ class ShopController extends Controller
 
    		$pages->pageSize=1;
    		$pages->applyLimit($criteria);
-
+		$criteria->select='id';  // выбираем только поле 'title'
+		$criteria->with = array('fields');
+		$posts=Good::model()->findAll($criteria);
+		// print_r($posts);
 		$model = Good::model()->findAll($criteria);
 		$goods = array();
 
 		foreach ($model as $i => $good) {
 			$temp = array();
+			$temp['id'] = $good->id;
 			foreach ($good->fields as $field) {
 				$temp[$field->attribute->code] = $field->value;
 			}
@@ -58,12 +62,19 @@ class ShopController extends Controller
 			array_push($filter[$attr->name],$temp);
 			array_push($filter[$attr->name],$attr->code);
 		}
-		$this->render('adminIndex',array(
-			'goods'=>$goods,
-			'filter' =>$filter,
-			'pages' => $pages
-         
-		));
+
+		if( !$partial ){
+			$this->render('adminIndex',array(
+				'goods'=>$goods,
+				'filter' =>$filter,
+				'pages' => $pages
+			));
+		}else{
+			$this->renderPartial('_list',array(
+				'goods'=>$goods,
+				'pages' => $pages
+			));
+		}
 	}
 
 	public function actionAdminFilter($partial = false)
@@ -77,6 +88,27 @@ class ShopController extends Controller
 		}
 	}
 	
+	public function actionAdminDetail($partial = false,$id)
+	{
+		if(isset($id)) {
+			$model = Good::model()->findByPk($id);
+			$good = array();
+			foreach ($model->fields as $field) {
+				$good[$field->attribute->code] = array();
+				$good[$field->attribute->code]['NAME'] = $field->attribute->name;
+				$good[$field->attribute->code]['VALUE'] = $field->value;
+			}
+			if( !$partial ){
+				$this->render('adminDetail',array(
+					'good'=>$good
+				));
+			}else{
+				$this->renderPartial('adminDetail',array(
+					'good'=>$good
+				));
+			}
+		}
+	}
 	public function loadModel($id)
 	{
 		$model=Good::model()->findByPk($id);

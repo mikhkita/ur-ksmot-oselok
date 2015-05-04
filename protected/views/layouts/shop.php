@@ -37,7 +37,7 @@
             </form>
         </div>
     </div>
-    <?php echo $content;?>
+    <div class='b b-content'><?php echo $content;?></div>
     <div class="b b-bottom">
         <div class="b-block">
             <h3>© 2015 Михайло и Ко</h3>
