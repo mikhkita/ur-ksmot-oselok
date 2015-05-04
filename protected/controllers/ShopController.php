@@ -34,12 +34,12 @@ class ShopController extends Controller
    		$count=Good::model()->count($criteria);
    		$pages=new CPagination($count);
 
-   		$pages->pageSize=1;
+   		$pages->pageSize=10;
    		$pages->applyLimit($criteria);
-		$criteria->select='id';  // выбираем только поле 'title'
-		$criteria->with = array('fields');
-		$posts=Good::model()->findAll($criteria);
-		// print_r($posts);
+		// $criteria->select='id';  // выбираем только поле 'title'
+		// $criteria->with = array('fields');
+		// $posts=Good::model()->findAll($criteria);
+		// // print_r($posts);
 		$model = Good::model()->findAll($criteria);
 		$goods = array();
 

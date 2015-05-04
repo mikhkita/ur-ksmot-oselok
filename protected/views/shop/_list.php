@@ -1,4 +1,4 @@
- <div class="pagination">
+<div class="pagination">
     <ul>
     	<? foreach ($goods as $good): ?>
 			<li class="clearfix good" data-id="<?=$good['id']?>">

@@ -22,34 +22,36 @@
 				<a class="red-btn right" href="#">Купить</a>
 			</div>
 			<ul>
+				<? if(isset($good["AMOUNT"])): ?>
 				<li class="clearfix">
-					<h4>Количество в комплекте:</h4>
-					<h5>4 шт.</h5>
+					<h4><?=$good["AMOUNT"]['NAME']?>:</h4>
+					<h5><?=$good["AMOUNT"]['VALUE']?> шт.</h5>
 				</li>
+				<? endif; ?>
+				<? if(isset($good["DIAMETER"])): ?>
 				<li class="clearfix">
 					<h4><?=$good["DIAMETER"]['NAME']?>:</h4>
 					<h5><?=$good["DIAMETER"]['VALUE']?>"</h5>
 				</li>
+				<? endif; ?>
+				<? if(isset($good["TIRE_WIDTH"])): ?>
 				<li class="clearfix">
 					<h4><?=$good["TIRE_WIDTH"]['NAME']?>:</h4>
 					<h5><?=$good["TIRE_WIDTH"]['VALUE']?>"</h5>
 				</li>
-				<li class="clearfix">
-					<h4>Вылет (ET):</h4>
-					<h5>37 мм.</h5>
-				</li>
+				<? endif; ?>
+				<? if(isset($good["SVERLOVKA"])): ?>
 				<li class="clearfix">
 					<h4><?=$good["SVERLOVKA"]['NAME']?>:</h4>
 					<h5><?=$good["SVERLOVKA"]['VALUE']?></h5>
 				</li>
+				<? endif; ?>
+				<? if(isset($good["CONDITION"])): ?>
 				<li class="clearfix">
-					<h4>Наличие товара:</h4>
-					<h5>В наличии</h5>
+					<h4><?=$good["CONDITION"]['NAME']?>:</h4>
+					<h5><?=$good["CONDITION"]['VALUE']?></h5>
 				</li>
-				<li class="clearfix">
-					<h4>Состояние товара:</h4>
-					<h5>Б/у</h5>
-				</li>
+				<? endif; ?>
 			</ul>
 			<p><span>Описание:</span> Диски с японского аукциона, без  пробега по РФ. Находятся в Томске. Продаются без шин, шины выложены отдельно в нашей базе. Без погнутостей, трещин, следов ремонта. Товар б/у.</p>
 		</div>
