@@ -159,14 +159,6 @@ class ImportController extends Controller
 		$isEmpty = false;
 		$isNotValid = false;
 
-		if( is_array($fieldValues) ){
-			if( mb_strtolower($fieldValues[0]) != mb_strtolower($value) ){
-				$highlight = "overwrite";
-			}else{
-				$highlight = "equal";
-			}
-		}
-
 		if( $value == NULL ){
 			$isEmpty = true;
 		}else{
@@ -178,13 +170,21 @@ class ImportController extends Controller
 				if( $item != "" && $item != NULL ){
 					$v = $this->validate($type, $item);
 					$isNotValid = (!$isNotValid)?(!$v):true;
-					$values[] = $item;
+					$values[] = ( $type == "int" )?round($item):$item;
 				}
 			}
 			if( count($values) < 1 ){
 				$isEmpty = true;
 			}else{
 				$value = $values;
+			}
+
+			if( is_array($fieldValues) ){
+				if( mb_strtolower($fieldValues[0]) != mb_strtolower($values[0]) ){
+					$highlight = "overwrite";
+				}else{
+					$highlight = "equal";
+				}
 			}
 		}
 		
@@ -222,7 +222,7 @@ class ImportController extends Controller
 		$message = "";
 
 		if( isset($_POST["IMPORT"]["GOODTYPEID"]) ){
-			if( isset($_POST["IMPORT"]["ITEMS"]) && isset($_POST["IMPORT"]["ID"]) ){
+			if( isset($_POST["IMPORT"]["ITEMS"]) ){
 				$model = GoodType::model()->findByPk($_POST["IMPORT"]["GOODTYPEID"]);
 				$import = $_POST["IMPORT"];
 				$titles = [];
@@ -309,8 +309,7 @@ class ImportController extends Controller
 				$message .= $goodCode;
 			}else{
 				$result = "success";
-				$model = Good::model()->findByPk($_POST["IMPORT"]["ID"]);
-				$message = "Пропуск товара с кодом: ".$model->id;
+				$message = "Пропуск товара с ID: ".$_POST["IMPORT"]["ID"];
 			}
 
 		}else{

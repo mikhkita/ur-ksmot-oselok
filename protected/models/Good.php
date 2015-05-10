@@ -97,4 +97,24 @@ class Good extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+	public function afterFind()
+	{
+		parent::afterFind();
+
+		if( count($this->fields) ){
+			
+			// $this->setAttribute("value",$this->variant->value,true);
+			// print_r("$this->fields");
+			// die();
+		}
+
+		// if( $this->attribute->list == 0 ){
+		// 	$val = $this->attributes[$this->attribute->type->code."_value"];
+		
+		// 	$this->setAttribute("value",($val != NULL)?$val:false,true);
+		// }else{
+		// 	$this->setAttribute("value",$this->variant->value,true);
+		// }
+	}
 }
