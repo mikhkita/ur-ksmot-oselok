@@ -1438,7 +1438,7 @@ li.ui-autocomplete-category {
         padding: 20px;
         text-align: left;
         /*width: 100%;*/
-        overflow: hidden;
+        overflow: auto;
         height: 400px;
         background-color: #FFF4CD;
         border: 1px solid #452716;

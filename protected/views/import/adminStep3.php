@@ -21,7 +21,9 @@
 							<? foreach ($cell["VALUE"] as $g => $value): ?>
 								<div>
 									<?=$value?>
-									<input type="hidden" name="IMPORT[ITEMS][][<?=$cell["ID"]?>]" value="<?=$value?>">
+									<? if( $cell["HIGHLIGHT"] != "equal" ): ?>
+										<input type="hidden" name="IMPORT[ITEMS][][<?=$cell["ID"]?>]" value="<?=$value?>">
+									<? endif; ?>
 								</div>
 							<? endforeach ?>	
 						<? endif; ?>
