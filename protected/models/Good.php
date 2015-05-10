@@ -103,18 +103,19 @@ class Good extends CActiveRecord
 		parent::afterFind();
 
 		if( count($this->fields) ){
-			
-			// $this->setAttribute("value",$this->variant->value,true);
-			// print_r("$this->fields");
-			// die();
-		}
+			$fields = [];
 
-		// if( $this->attribute->list == 0 ){
-		// 	$val = $this->attributes[$this->attribute->type->code."_value"];
-		
-		// 	$this->setAttribute("value",($val != NULL)?$val:false,true);
-		// }else{
-		// 	$this->setAttribute("value",$this->variant->value,true);
-		// }
+			foreach ($this->fields as $field) {
+				if( isset($fields[$field->attribute_id]) ){
+					if( !is_array($fields[$field->attribute_id]) ){
+						$fields[$field->attribute_id] = array(0 => $fields[$field->attribute_id]);
+					}
+					$fields[$field->attribute_id][] = $field;
+				}else{
+					$fields[$field->attribute_id] = $field;
+				}
+			}
+			$this->setAttribute("fields_assoc",$fields,true);
+		}
 	}
 }
