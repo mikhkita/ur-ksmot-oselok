@@ -121,12 +121,16 @@ class GoodAttribute extends CActiveRecord
 	{
 		parent::afterFind();
 
-		if( $this->attribute->list == 0 ){
-			$val = $this->attributes[$this->attribute->type->code."_value"];
+		if( $this->attributes["variant_id"] == NULL ){
+			$val = ($this->attributes["int_value"] == NULL)?( ($this->attributes["float_value"] == NULL)?( ($this->attributes["varchar_value"] == NULL)?($this->attributes["text_value"]):($this->attributes["varchar_value"]) ):($this->attributes["float_value"]) ):($this->attributes["int_value"]);
 		
 			$this->setAttribute("value",($val != NULL)?$val:false,true);
 		}else{
-			$this->setAttribute("value",$this->variant->value,true);
+			// print_r($this->variant);
+			// die();
+			$val = ($this->variant->int_value == NULL)?( ($this->variant->float_value == NULL)?($this->variant->varchar_value):($this->variant->float_value) ):($this->variant->int_value);
+
+			$this->setAttribute("value",($val != NULL)?$val:false,true);
 		}
 	}
 }

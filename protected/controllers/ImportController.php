@@ -64,7 +64,7 @@ class ImportController extends Controller
 		$this->scripts[] = "import";
 
 		if(isset($_POST["excel_path"]) && isset($_POST["excel"]) && isset($_POST["GoodTypeId"])) {
-			$model = GoodType::model()->findByPk($_POST["GoodTypeId"]);
+			$model = GoodType::model()->with('goods.fields.variant','goods.fields.attribute')->findByPk($_POST["GoodTypeId"]);
 			$sorted_titles = $_POST["excel"];// Массив соответствующих "ID атрибута" каждому столбцу
 
 			$titles = array();
@@ -309,7 +309,8 @@ class ImportController extends Controller
 				$message .= $goodCode;
 			}else{
 				$result = "success";
-				$message = "Пропуск товара с ID: ".$_POST["IMPORT"]["ID"];
+				$model = Good::model()->findByPk($_POST["IMPORT"]["ID"]);
+				$message = "Пропуск товара с кодом: ".$model->fields_assoc[3]->value;
 			}
 
 		}else{
