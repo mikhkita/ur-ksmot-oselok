@@ -79,13 +79,24 @@ class ShopController extends Controller
 
 	public function actionAdminFilter($partial = false)
 	{
-		if(isset($_POST)) {
-			print_r($_POST);
+		// if(isset($_POST)) {
+		// 	print_r($_POST);
 		
-			$this->render('adminFilter',array(
-				'post'=>$_POST
-			));
-		}
+		// 	$this->render('adminFilter',array(
+		// 		'post'=>$_POST
+		// 	));
+		// }
+		$criteria=new CDbCriteria();
+		$criteria->with = array(
+            'fields' => array(
+                'select' => array('id'),
+                'condition'=>'fields.id=4',
+            )
+        );
+        $criteria->together = true;
+
+        $model = Good::model()->findAll($criteria);
+        print_r($model);
 	}
 	
 	public function actionAdminDetail($partial = false,$id)
