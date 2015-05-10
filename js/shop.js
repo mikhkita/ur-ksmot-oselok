@@ -1,5 +1,5 @@
 $(document).ready(function(){	
-
+    var progress = new KitProgress("#FFF",2);
 	$( "#slider-range" ).slider({
 		range: true,
 		min: 1000,
@@ -24,46 +24,51 @@ $(document).ready(function(){
 
 
  	$(".b-main-items").on("click","#yw0 li a", function(){
+        progress.setColor("#D26A44");
+        progress.start(3);
         $.ajax({
             url: $(this).attr("href")+"&partial=true",
             success: function(msg){
-                $('.b-main-items').html(msg);
+                progress.end(function(){
+                    $('.b-main-items').html(msg);
+                    if( $("#yw0 .selected a").text()*1==4 ) {
+                        $("#yw0 .first").show();
+                    }
+                    if( $("#yw0 .selected a").text()*1>4 ) {
+                        $("#yw0 .first").show();
+                        if(!$(".first-points").length) $("<li class='first-points'>...</li>").insertAfter("#yw0 .first");
+                    }
+                    if( ($("#yw0 .last a").text()*1-$("#yw0 li.page").last().find("a").text()*1)==1 ) {
+                        $("#yw0 .last").show();
+                    }
+                    if( ($("#yw0 .last a").text()*1-$("#yw0 li.page").last().find("a").text()*1)>1 ) {
+                        $("#yw0 .last").show();
+                        if(!$(".last-points").length) $("<li class='last-points'>...</li>").insertBefore("#yw0 .last");
+                    }
+                });
             }
         }); 
  		return false;
  	});
-    $( document ) .ajaxComplete(function(){
-        if( $("#yw0 .selected a").text()*1==4 ) {
-            $("#yw0 .first").show();
-        }
-        if( $("#yw0 .selected a").text()*1>4 ) {
-            $("#yw0 .first").show();
-            $("<li class='points'>...</li>").insertAfter("#yw0 .first");
-        }
-        if( ($("#yw0 .last a").text()*1-$("#yw0 li.page").last().find("a").text()*1)==1 ) {
-            $("#yw0 .last").show();
-        }
-        if( ($("#yw0 .last a").text()*1-$("#yw0 li.page").last().find("a").text()*1)>1 ) {
-            $("#yw0 .last").show();
-            $("<li class='points'>...</li>").insertBefore("#yw0 .last");
-        }
-    });
 
     if( ($("#yw0 .last a").text()*1-$("#yw0 li.page").last().find("a").text()*1)==1 ) {
         $("#yw0 .last").show();
     }
     if( ($("#yw0 .last a").text()*1-$("#yw0 li.page").last().find("a").text()*1)>1 ) {
         $("#yw0 .last").show();
-        $("<li class='points'>...</li>").insertBefore("#yw0 .last");
+        $("<li class='last-points'>...</li>").insertBefore("#yw0 .last");
     }
 
     $("body").on("click",".good", function(){
-
+        progress.setColor("#D26A44");
+        progress.start(3);
         $.ajax({
             type: 'GET',
             url: "/admin/shop/detail?partial=true&id="+$(this).attr("data-id"),
             success: function(msg){
-               $('.b-content').html(msg); 
+                progress.end(function(){
+                    $('.b-content').html(msg);
+                });        
             }
         });  
     });
