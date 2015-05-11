@@ -16,25 +16,25 @@
                 )); ?>
 
                 <? foreach ($filter as $name => $items): ?>
-                    <? if(count($items[0])): ?>
                         <div class="filter-cont">
                             <h2><?=$name?></h2>
                             <div class="check-cont">
                                 <ul class="hor clearfix">
-                                    <? foreach ($items[0] as $i => $item): ?>
+                                    <? foreach ($items as $i => $item): ?>
+                                        <? if($i!='code'): ?>
                                     <li>
-                                        <input type="checkbox" id="<?=$items[1].'-'.$i?>" name="<?=$items[1].'['.$i.']['.$items[2].']'?>" value="<?=$item?>" >
-                                        <label class="clearfix" for="<?=$items[1].'-'.$i?>">
+                                        <input type="checkbox" id="<?=$items['code'].'-'.$i?>" name="<?=$items['code'].'['.$i.']'?>" value="<?=$item['id']?>" >
+                                        <label class="clearfix" for="<?=$items['code'].'-'.$i?>">
                                             <span class="checked"></span>
                                             <span class="default"></span>   
-                                            <h3><?=$item?></h3>
+                                            <h3><?=$item['value']?></h3>
                                         </label>
                                     </li>
+                                        <? endif; ?>
                                     <? endforeach; ?>
                                 </ul>
                             </div>  
                         </div>
-                    <? endif; ?>
                 <? endforeach; ?>
                 <input type="submit" value="Далее">
                 <?php $this->endWidget(); ?>
