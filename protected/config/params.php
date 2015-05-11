@@ -12,4 +12,5 @@ return array(
 	'defaultAdminRedirect'=>'/admin/goodType',
 	// the copyright information displayed in the footer section
 	'copyrightInfo'=>'Copyright &copy; 2009 by My Company.',
+	'debug' => true
 );

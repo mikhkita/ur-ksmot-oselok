@@ -158,7 +158,7 @@ h2{
     border-right: 20px solid #D26A44;
     height: 100%;
     box-shadow: 0 0 20px rgba(0,0,0,0.5);
-    min-height: 550px;
+    min-height: 350px;
 }
 .who_am_i
 {
@@ -1448,3 +1448,10 @@ li.ui-autocomplete-category {
             margin-bottom: 10px;
             list-style: none;
         }
+.b-debug{
+    position: absolute;
+    font-size: 10px;
+    text-align: right;
+    right: 10px;
+    bottom: 10px;
+}
