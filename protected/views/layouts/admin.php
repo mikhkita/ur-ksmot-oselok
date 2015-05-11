@@ -63,6 +63,9 @@
                 // endif; 
                 ?>
             </ul>
+            <? if(Yii::app()->params['debug']): ?>
+                <div class="b-debug"><?=$this->debugText?></div>
+            <? endif; ?>
         </div>
         <div class="main">
             <div class="b-main-center">

@@ -85,8 +85,6 @@ class GoodController extends Controller
 
 	public function actionAdminIndex($partial = false, $goodTypeId = false)
 	{
-		$start = microtime(true);
-
 		if( !$partial ){
 			$this->layout='admin';
 		}
@@ -99,7 +97,7 @@ class GoodController extends Controller
 
 		foreach ($GoodType->goods as $good) {
 			$item = array();
-			
+
 			foreach ($good->fields as $field) {
 				if( isset($field->attribute) ){
 					$attrId = $field->attribute->id;
@@ -110,9 +108,6 @@ class GoodController extends Controller
 			}
 			$data[] = $item;
 		}
-
-		$time = microtime(true) - $start;
-		printf('Скрипт выполнялся %.4F сек.', $time);
 
 		if( !$partial ){
 			$this->render('adminIndex',array(

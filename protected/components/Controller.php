@@ -24,6 +24,10 @@ class Controller extends CController
 
     public $user;
 
+    public $start;
+    public $render;
+    public $debugText = "";
+
     public $adminMenu = array();
 
     public function init() {
@@ -39,6 +43,23 @@ class Controller extends CController
 
         $this->adminMenu["cur"] = $this->toLowerCaseModelNames(ModelNames::model()->find(array("condition" => "code = '".Yii::app()->controller->id."'")));
         
+        $this->start = microtime(true);
+    }
+
+    public function beforeRender($view){
+        parent::beforeRender($view);
+
+        $this->render = microtime(true);
+
+        $this->debugText = "Controller ".round(microtime(true) - $this->start,4);
+
+        return true;
+    }
+
+    public function afterRenderPartial(){
+        parent::afterRenderPartial();
+
+        $this->debugText = ($this->debugText."<br>View ".round(microtime(true) - $this->render,4));
     }
 
     public function getUserRole(){
