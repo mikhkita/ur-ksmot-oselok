@@ -56,11 +56,12 @@ class ShopController extends Controller
 		foreach ($model as $attr) {
 			$temp = array();
 			foreach ($attr->variants as $variant) {
-			array_push($temp,$variant->value);
+				array_push($temp,$variant->value);
 			}
 			$filter[$attr->name] = array();
 			array_push($filter[$attr->name],$temp);
 			array_push($filter[$attr->name],$attr->code);
+			array_push($filter[$attr->name],$attr->id);
 		}
 
 		if( !$partial ){
@@ -79,24 +80,35 @@ class ShopController extends Controller
 
 	public function actionAdminFilter($partial = false)
 	{
-		// if(isset($_POST)) {
-		// 	print_r($_POST);
+		if(isset($_POST)) {
+			print_r($_POST);
 		
-		// 	$this->render('adminFilter',array(
-		// 		'post'=>$_POST
-		// 	));
-		// }
-		$criteria=new CDbCriteria();
-		$criteria->with = array(
-            'fields' => array(
-                'select' => array('id'),
-                'condition'=>'fields.id=4',
-            )
-        );
-        $criteria->together = true;
+			$this->render('adminFilter',array(
+				'post'=>$_POST
+			));
+		}
+		// $criteria=new CDbCriteria();
+		// $criteria->with = array(
+  //           'fields' => array(
+  //               'select' => array('attribute_id','int_value')
+  //               // 'condition' => 'fields.attribute_id>1'
+  //               // 'sort' => 'fields.varchar_value DESC',   
+  //           )
+  //       );
+  //       // $criteria->order = 'fields.int_value DESC';
+  //       $criteria->limit = 100;
+  //       $criteria->together = true;
 
-        $model = Good::model()->findAll($criteria);
-        print_r($model);
+  //       $model = Good::model()->findAll($criteria);
+  //       foreach ($model as $key => $value) {
+  //       	foreach ($value->fields as $field) {
+  //       		// if($field->attribute_id==15) {
+  //       			echo $field->int_value;
+  //       			echo "<br>";
+  //       		// }
+  //       	}
+  //       }
+  //       print_r($model);
 	}
 	
 	public function actionAdminDetail($partial = false,$id)

@@ -23,7 +23,7 @@
                                 <ul class="hor clearfix">
                                     <? foreach ($items[0] as $i => $item): ?>
                                     <li>
-                                        <input type="checkbox" id="<?=$items[1].'-'.$i?>" name="<?=$items[1].'['.$i.']'?>" value="<?=$item?>" >
+                                        <input type="checkbox" id="<?=$items[1].'-'.$i?>" name="<?=$items[1].'['.$i.']['.$items[2].']'?>" value="<?=$item?>" >
                                         <label class="clearfix" for="<?=$items[1].'-'.$i?>">
                                             <span class="checked"></span>
                                             <span class="default"></span>   
