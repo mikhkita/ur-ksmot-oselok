@@ -53,9 +53,16 @@ class ShopController extends Controller
 		}
 		$criteria=new CDbCriteria();
 		$criteria->condition = 'list=1';
-		$criteria->with = array('fields');
-		
+		$criteria->select = array('code','name');
+		$criteria->with = array(
+            'variants'
+             => array(
+                'select' => array('int_value','varchar_value','float_value')
+                )
+            );
+
 		$model = Attribute::model()->findAll($criteria);
+		// print_r($model);
 		$filter = array();
 		foreach ($model as $attr) {
 			$temp = array();
@@ -66,7 +73,7 @@ class ShopController extends Controller
 			}
 			$filter[$attr->name] = $temp;			
 		}
-		print_r($filter);
+		
 		if( !$partial ){
 			$this->render('adminIndex',array(
 				'goods'=>$goods,
@@ -84,38 +91,75 @@ class ShopController extends Controller
 	public function actionAdminFilter($partial = false)
 	{
 		if(isset($_POST)) {
-			print_r($_POST);
-		
+			$criteria=new CDbCriteria();
+			$criteria->select = 'id';
+			$criteria->group = 'fields.good_id';
+			$criteria->order = 'fields.int_value ASC';
+            $criteria->with = array('fields' => array('select'=> array('variant_id','attribute_id','int_value')));
+
+			foreach ($_POST as $attr) {
+				if(is_array($attr)) {
+					foreach ($attr as $value) {
+						$condition .= 'fields.variant_id='.$value.' OR ';
+						$count++;
+					}
+				}
+			}
+			$criteria->condition = $condition.'(fields.attribute_id=20 AND fields.int_value>='.$_POST['price-min'].' AND fields.int_value<='.$_POST['price-max'].')';
+        	$criteria->having = 'COUNT(fields.id)='.$count+1;
+        	$model = Good::model()->findAll($criteria);
+            $goods_id = array();
+			foreach ($model as $good) {
+				array_push($goods_id, $good->id); 
+			}
+			
+		    $count=Good::model()->count($criteria);
+		    $pages=new CPagination($count);
+		    $pages->pageSize=10;
+		    $pages->applyLimit($criteria);
+
+		    $criteria=new CDbCriteria();
+		    $criteria->select = 'id';
+		    $criteria->with = array(
+		    	'fields' 
+		    	=> array(
+		    		'select'=> array('int_value','varchar_value','text_value','float_value','variant_id')
+		    		)
+		    	),
+		    	'fields.attribute'
+		    	=> array(
+		    		'select'=> array('code')
+		    		)
+		    	),
+		    );
+		    $model=Good::model()->findAllbyPk($goods_id,$criteria);
+			$goods = array();
+
+			foreach ($model as $i => $good) {
+			$temp = array();
+			$temp['id'] = $good->id;
+			foreach ($good->fields as $field) {
+				$temp[$field->attribute->code] = $field->value;
+			}
+			array_push($goods,$temp);
+			}
+			print_r($model);
+		    
+
+            
+
+			// $model = Good::model()->findAllbyPk($goods_id);
+			// $criteria->select='id';  // выбираем только поле 'title'
+			// $criteria->with = array('fields');
+			// $posts=Good::model()->findAll($criteria);
+			// // print_r($posts);
+			// $model = Good::model()->findAll($criteria);
+			print_r($pages->pageCount);
 			$this->render('adminFilter',array(
 				'post'=>$_POST
 			));
 		}
-		$criteria=new CDbCriteria();
-		$criteria->select = 'id';
-		$criteria->with = array(
-            'fields'
-             => array(
-                'select' => 'id',
-                'condition' => 'attribute_id=3 OR attribute_id=20'
-                // 'sort' => 'fields.varchar_value DESC',   
-                )
-            );
-        
-        // $criteria->order = 'fields.int_value DESC';
-
-        $criteria->limit = 100;
-        // $criteria->together = true;
-
-        $model = Good::model()->findAll($criteria);
-        // foreach ($model as $key => $value) {
-        // 	foreach ($value->fields as $field) {
-        // 		// if($field->attribute_id==15) {
-        // 			echo $field->int_value;
-        // 			echo "<br>";
-        // 		// }
-        // 	}
-        // }
-        print_r($model);
+		
 	}
 	
 	public function actionAdminDetail($partial = false,$id)

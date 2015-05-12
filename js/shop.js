@@ -2,16 +2,20 @@ $(document).ready(function(){
     var progress = new KitProgress("#FFF",2);
 	$( "#slider-range" ).slider({
 		range: true,
-		min: 1000,
+		min: 0,
 		max: 50000,
-		values: [ 1000, 36000 ],
+		values: [ 0, 36000 ],
 		slide: function( event, ui ) {
 			$( "#amount-l" ).text( ui.values[ 0 ] );
 			$( "#amount-r" ).text( ui.values[ 1 ] );
+      $( "#price-min" ).val( ui.values[ 0 ] );
+      $( "#price-max" ).val( ui.values[ 1 ] );
 		}
 	});
 	$( "#amount-l" ).text( $( "#slider-range" ).slider( "values", 0 ) );
 	$( "#amount-r" ).text( $( "#slider-range" ).slider( "values", 1 ) );
+    $( "#price-min" ).val( $( "#slider-range" ).slider( "values", 0 ) );
+    $( "#price-max" ).val( $( "#slider-range" ).slider( "values", 1 ) );
 
 	$(".fancy-img").fancybox({
         padding : 0
