@@ -51,19 +51,22 @@ class ShopController extends Controller
 			}
 			array_push($goods,$temp);
 		}
-		$model = Attribute::model()->findAll();
+		$criteria=new CDbCriteria();
+		$criteria->condition = 'list=1';
+		$criteria->with = array('fields');
+		
+		$model = Attribute::model()->findAll($criteria);
 		$filter = array();
 		foreach ($model as $attr) {
 			$temp = array();
-			foreach ($attr->variants as $variant) {
-				array_push($temp,$variant->value);
+			$temp['code'] = $attr->code;
+			foreach ($attr->variants as $i => $variant) {
+				$temp[$i+1]['id'] = $variant->id;
+				$temp[$i+1]['value'] = $variant->value;
 			}
-			$filter[$attr->name] = array();
-			array_push($filter[$attr->name],$temp);
-			array_push($filter[$attr->name],$attr->code);
-			array_push($filter[$attr->name],$attr->id);
+			$filter[$attr->name] = $temp;			
 		}
-
+		print_r($filter);
 		if( !$partial ){
 			$this->render('adminIndex',array(
 				'goods'=>$goods,
@@ -87,28 +90,32 @@ class ShopController extends Controller
 				'post'=>$_POST
 			));
 		}
-		// $criteria=new CDbCriteria();
-		// $criteria->with = array(
-  //           'fields' => array(
-  //               'select' => array('attribute_id','int_value')
-  //               // 'condition' => 'fields.attribute_id>1'
-  //               // 'sort' => 'fields.varchar_value DESC',   
-  //           )
-  //       );
-  //       // $criteria->order = 'fields.int_value DESC';
-  //       $criteria->limit = 100;
-  //       $criteria->together = true;
+		$criteria=new CDbCriteria();
+		$criteria->select = 'id';
+		$criteria->with = array(
+            'fields'
+             => array(
+                'select' => 'id',
+                'condition' => 'attribute_id=3 OR attribute_id=20'
+                // 'sort' => 'fields.varchar_value DESC',   
+                )
+            );
+        
+        // $criteria->order = 'fields.int_value DESC';
 
-  //       $model = Good::model()->findAll($criteria);
-  //       foreach ($model as $key => $value) {
-  //       	foreach ($value->fields as $field) {
-  //       		// if($field->attribute_id==15) {
-  //       			echo $field->int_value;
-  //       			echo "<br>";
-  //       		// }
-  //       	}
-  //       }
-  //       print_r($model);
+        $criteria->limit = 100;
+        // $criteria->together = true;
+
+        $model = Good::model()->findAll($criteria);
+        // foreach ($model as $key => $value) {
+        // 	foreach ($value->fields as $field) {
+        // 		// if($field->attribute_id==15) {
+        // 			echo $field->int_value;
+        // 			echo "<br>";
+        // 		// }
+        // 	}
+        // }
+        print_r($model);
 	}
 	
 	public function actionAdminDetail($partial = false,$id)
