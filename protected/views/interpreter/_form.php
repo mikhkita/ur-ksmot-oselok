@@ -14,9 +14,9 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'text'); ?>
-		<?php echo $form->textArea($model,'text',array('style'=>'height:70px;','required'=>true)); ?>
-		<?php echo $form->error($model,'text'); ?>
+		<?php echo $form->labelEx($model,'template'); ?>
+		<?php echo $form->textArea($model,'template',array('maxlength'=>2000,'required'=>true,'style'=>'height: 300px;')); ?>
+		<?php echo $form->error($model,'template'); ?>
 	</div>
 
 	<div class="row buttons">

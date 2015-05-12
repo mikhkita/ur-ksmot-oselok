@@ -31,10 +31,10 @@ class Attribute extends CActiveRecord
 		return array(
 			array('name, attribute_type_id', 'required'),
 			array('attribute_type_id, multi, list', 'numerical', 'integerOnly'=>true),
-			array('name, code', 'length', 'max'=>255),
+			array('name', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, code, attribute_type_id, multi, list', 'safe', 'on'=>'search'),
+			array('id, name, attribute_type_id, multi, list', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -63,8 +63,7 @@ class Attribute extends CActiveRecord
 			'name' => 'Название',
 			'attribute_type_id' => 'Тип данных',
 			'multi' => 'Множественный',
-			'list' => 'Список',
-			'code' => 'Код'
+			'list' => 'Список'
 		);
 	}
 
@@ -88,7 +87,6 @@ class Attribute extends CActiveRecord
 
 		$criteria->compare('id',$this->id,true);
 		$criteria->compare('name',$this->name,true);
-		$criteria->compare('code',$this->code,true);
 		$criteria->compare('attribute_type_id',$this->attribute_type_id);
 		$criteria->compare('multi',$this->multi);
 		$criteria->compare('list',$this->list);

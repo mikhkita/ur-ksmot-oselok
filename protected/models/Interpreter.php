@@ -1,25 +1,21 @@
 <?php
 
 /**
- * This is the model class for table "texts".
+ * This is the model class for table "interpreter".
  *
- * The followings are the available columns in table 'texts':
- * @property integer $txt_id
- * @property string $txt_title
- * @property string $txt_text
- * @property string $txt_date
- * @property integer $txt_complete
- * @property integer $txt_words
- * @property integer $txt_author
+ * The followings are the available columns in table 'interpreter':
+ * @property string $id
+ * @property string $name
+ * @property string $template
  */
-class Texts extends CActiveRecord
+class Interpreter extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'texts';
+		return 'interpreter';
 	}
 
 	/**
@@ -30,12 +26,12 @@ class Texts extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('txt_title, txt_text, txt_date, txt_words, txt_author', 'required'),
-			array('txt_complete, txt_words, txt_author', 'numerical', 'integerOnly'=>true),
-			array('txt_title', 'length', 'max'=>255),
+			array('name, template', 'required'),
+			array('name', 'length', 'max'=>255),
+			array('template', 'length', 'max'=>2000),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('txt_id, txt_title, txt_text, txt_date, txt_complete, txt_words, txt_author', 'safe', 'on'=>'search'),
+			array('id, name, template', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -47,21 +43,8 @@ class Texts extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'author' => array(self::BELONGS_TO, 'User', 'txt_author'),
-			'words' => array(self::HAS_MANY, 'TextWord', 'txt_id'),
-			'users' => array(self::HAS_MANY, 'TextUser', 'txt_id'),
 		);
 	}
-
-	public function  beforeDelete() {
-        foreach ($this->users as $row) {
-            $row->delete();
-        }
-        foreach ($this->words as $row) {
-            $row->delete();
-        }
-        return true;
-    }
 
 	/**
 	 * @return array customized attribute labels (name=>label)
@@ -69,13 +52,9 @@ class Texts extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'txt_id' => 'ID текста',
-			'txt_title' => 'Заголовок',
-			'txt_text' => 'Текст',
-			'txt_date' => 'Дата создания',
-			'txt_complete' => 'Завершен',
-			'txt_words' => 'Количество слов',
-			'txt_author' => 'Автор',
+			'id' => 'ID',
+			'name' => 'Название',
+			'template' => 'Шаблон',
 		);
 	}
 
@@ -97,13 +76,9 @@ class Texts extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('txt_id',$this->txt_id);
-		$criteria->compare('txt_title',$this->txt_title,true);
-		$criteria->compare('txt_text',$this->txt_text,true);
-		$criteria->compare('txt_date',$this->txt_date,true);
-		$criteria->compare('txt_complete',$this->txt_complete);
-		$criteria->compare('txt_words',$this->txt_words);
-		$criteria->compare('txt_author',$this->txt_author);
+		$criteria->compare('id',$this->id,true);
+		$criteria->compare('name',$this->name,true);
+		$criteria->compare('template',$this->template,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -114,7 +89,7 @@ class Texts extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Texts the static model class
+	 * @return Interpreter the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

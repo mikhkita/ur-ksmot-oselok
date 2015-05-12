@@ -1,6 +1,6 @@
 <?php
 
-class PageController extends Controller
+class InterpreterController extends Controller
 {
 	public function filters()
 	{
@@ -13,7 +13,7 @@ class PageController extends Controller
 	{
 		return array(
 			array('allow',
-				'actions'=>array('adminIndex','adminCreate','adminUpdate','adminDelete','adminView'),
+				'actions'=>array('adminIndex','adminCreate','adminUpdate','adminDelete'),
 				'roles'=>array('manager'),
 			),
 			array('allow',
@@ -28,11 +28,11 @@ class PageController extends Controller
 
 	public function actionAdminCreate()
 	{
-		$model=new Page;
+		$model=new Interpreter;
 
-		if(isset($_POST['Page']))
+		if(isset($_POST['Interpreter']))
 		{
-			$model->attributes=$_POST['Page'];
+			$model->attributes=$_POST['Interpreter'];
 			if($model->save()){
 				$this->actionAdminIndex(true);
 				return true;
@@ -49,9 +49,9 @@ class PageController extends Controller
 	{
 		$model=$this->loadModel($id);
 
-		if(isset($_POST['Page']))
+		if(isset($_POST['Interpreter']))
 		{
-			$model->attributes=$_POST['Page'];
+			$model->attributes=$_POST['Interpreter'];
 			if($model->save())
 				$this->actionAdminIndex(true);
 		}else{
@@ -59,17 +59,6 @@ class PageController extends Controller
 				'model'=>$model,
 			));
 		}
-	}
-
-	public function actionAdminView($id)
-	{
-		$this->layout='admin';
-
-		$model=$this->loadModel($id);
-
-		$this->render('adminView',array(
-			'item'=>$model,
-		));
 	}
 
 	public function actionAdminDelete($id)
@@ -84,53 +73,43 @@ class PageController extends Controller
 		if( !$partial ){
 			$this->layout='admin';
 		}
-		$filter = new Page('filter');
+		$filter = new Interpreter('filter');
 		$criteria = new CDbCriteria();
 
-		if (isset($_GET['Page']))
+		if (isset($_GET['Interpreter']))
         {
-            $filter->attributes = $_GET['Page'];
-            foreach ($_GET['Page'] AS $key => $val)
+            $filter->attributes = $_GET['Interpreter'];
+            foreach ($_GET['Interpreter'] AS $key => $val)
             {
                 if ($val != '')
                 {
-                    if( $key == "pag_title" ){
-                    	$criteria->addSearchCondition('pag_title', $val);
-                    }else{
-                    	$criteria->addCondition("$key = '{$val}'");
-                    }
+                    $criteria->addSearchCondition($key, $val);
                 }
             }
         }
 
-        $model = Page::model()->findAll($criteria);
+        $criteria->order = 'id DESC';
+
+        $model = Interpreter::model()->findAll($criteria);
 
 		if( !$partial ){
 			$this->render('adminIndex',array(
 				'data'=>$model,
 				'filter'=>$filter,
-				'labels'=>Page::attributeLabels()
+				'labels'=>Interpreter::attributeLabels()
 			));
 		}else{
 			$this->renderPartial('adminIndex',array(
 				'data'=>$model,
 				'filter'=>$filter,
-				'labels'=>Page::attributeLabels()
+				'labels'=>Interpreter::attributeLabels()
 			));
 		}
 	}
 
-	public function actionIndex($code){
-		$model = Page::model()->find(array('condition'=>"pag_code = '{$code}'"));
-
-		$this->render('index',array(
-			'model'=>$model
-		));
-	}
-
 	public function loadModel($id)
 	{
-		$model=Page::model()->findByPk($id);
+		$model=Interpreter::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
