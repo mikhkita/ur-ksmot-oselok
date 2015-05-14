@@ -31,23 +31,25 @@ $(document).ready(function(){
         progress.setColor("#D26A44");
         progress.start(3);
         $.ajax({
+            type: 'GET',
             url: $(this).attr("href")+"&partial=true",
+            data: $("#filter").serialize(),
             success: function(msg){
                 progress.end(function(){
                     $('.b-main-items').html(msg);
-                    if( $("#yw0 .selected a").text()*1==4 ) {
+                    if( $("#yw0 .selected a").text()*1>3 ) {
                         $("#yw0 .first").show();
                     }
-                    if( $("#yw0 .selected a").text()*1>4 ) {
+                    if( ($("#yw0 li.page").eq(0).find("a").text()*1)>2 ) {
                         $("#yw0 .first").show();
-                        if(!$(".first-points").length) $("<li class='first-points'>...</li>").insertAfter("#yw0 .first");
+                        $("<li class='first-points'>...</li>").insertAfter("#yw0 .first");
                     }
                     if( ($("#yw0 .last a").text()*1-$("#yw0 li.page").last().find("a").text()*1)==1 ) {
                         $("#yw0 .last").show();
                     }
                     if( ($("#yw0 .last a").text()*1-$("#yw0 li.page").last().find("a").text()*1)>1 ) {
                         $("#yw0 .last").show();
-                        if(!$(".last-points").length) $("<li class='last-points'>...</li>").insertBefore("#yw0 .last");
+                        $("<li class='last-points'>...</li>").insertBefore("#yw0 .last");
                     }
                 });
             }
@@ -75,6 +77,36 @@ $(document).ready(function(){
                 });        
             }
         });  
+    });
+
+    $("#filter").submit(function(){
+        progress.setColor("#D26A44");
+        progress.start(3);
+        $.ajax({
+            type: 'GET',
+            url: "/admin/shop/filter?partial=true",
+            data: $("#filter").serialize(),
+            success: function(msg){
+                progress.end(function(){
+                    $('.b-main-items').html(msg);
+                    if( $("#yw0 .selected a").text()*1==4 ) {
+                        $("#yw0 .first").show();
+                    }
+                    if( $("#yw0 .selected a").text()*1>4 ) {
+                        $("#yw0 .first").show();
+                        if(!$(".first-points").length) $("<li class='first-points'>...</li>").insertAfter("#yw0 .first");
+                    }
+                    if( ($("#yw0 .last a").text()*1-$("#yw0 li.page").last().find("a").text()*1)==1 ) {
+                        $("#yw0 .last").show();
+                    }
+                    if( ($("#yw0 .last a").text()*1-$("#yw0 li.page").last().find("a").text()*1)>1 ) {
+                        $("#yw0 .last").show();
+                        if(!$(".last-points").length) $("<li class='last-points'>...</li>").insertBefore("#yw0 .last");
+                    }
+                });        
+            }
+        });
+        return false;  
     });
  	
  	// var progress = new KitProgress("#D26A44",2);

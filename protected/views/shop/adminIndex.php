@@ -24,16 +24,14 @@
                             <div class="check-cont">
                                 <ul class="hor clearfix">
                                     <? foreach ($items as $i => $item): ?>
-                                        <? if($i!='code'): ?>
                                     <li>
-                                        <input type="checkbox" id="<?=$items['code'].'-'.$i?>" name="<?=$items['code'].'['.$i.']'?>" value="<?=$item['id']?>" >
-                                        <label class="clearfix" for="<?=$items['code'].'-'.$i?>">
+                                        <input type="checkbox" id="f<?=$item['variant_id']?>" name="<?=$item['variant_id']?>" value="<?=$item['variant_id']?>" >
+                                        <label class="clearfix" for="f<?=$item['variant_id']?>">
                                             <span class="checked"></span>
                                             <span class="default"></span>   
                                             <h3><?=$item['value']?></h3>
                                         </label>
                                     </li>
-                                        <? endif; ?>
                                     <? endforeach; ?>
                                 </ul>
                             </div>  
