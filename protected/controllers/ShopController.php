@@ -124,13 +124,11 @@ class ShopController extends Controller
 		    	'fields' 
 		    	=> array(
 		    		'select'=> array('int_value','varchar_value','text_value','float_value','variant_id')
-		    		)
-		    	),
+		    		),
 		    	'fields.attribute'
 		    	=> array(
 		    		'select'=> array('code')
 		    		)
-		    	),
 		    );
 		    $model=Good::model()->findAllbyPk($goods_id,$criteria);
 			$goods = array();
