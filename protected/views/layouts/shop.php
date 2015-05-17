@@ -20,6 +20,9 @@
     <?php foreach ($this->scripts AS $script): ?><script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/<?php echo $script?>.js"></script><? endforeach; ?>
 </head>
 <body> 
+	<? if(Yii::app()->params['debug']): ?>
+	<div class="b-debug"><?=$this->debugText?></div>
+	<? endif; ?>
     <div class="b b-header">
         <div class="b-block">
         <img src="<?php echo Yii::app()->request->baseUrl; ?>/i/logo.png" alt="">
