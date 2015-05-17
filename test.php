@@ -67,8 +67,6 @@ foreach ($rules as $i => $rule) {
 	}else{
 		die("Отсутствует параметр \"ATTR\"");
 	}
-
-	$rules[$i] = $params;
 }
 $result = str_replace($matches[0], $matches[1], $template);
 

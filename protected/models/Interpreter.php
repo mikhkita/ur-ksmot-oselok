@@ -95,4 +95,78 @@ class Interpreter extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+	private function getArrayValue($value,$type) {
+        if( $value[0] == "{" && $value[strlen($value)-1] == "}" ){
+            $tmp = explode("|", substr($value, 1,-1));
+            $value = ($type == "REPLACE")?[0=>array(),1=>array()]:[];
+            foreach ($tmp as $v) {
+                $arr = explode("=", $v);
+                if( count($arr) == 2 ){
+                    if( $type == "REPLACE" ){
+                        $value[0][] = trim($arr[0]);
+                        $value[1][] = trim($arr[1]);
+                    }else{
+                        $value[trim($arr[0])] = trim($arr[1]);
+                    }
+                }else{
+                    throw new CHttpException(500,"В параметре \"".$type."\" отсутствует знак \"=\" или он присутствует больше одного раза");
+                }
+            }
+            return $value;
+        }else{
+            throw new CHttpException(500,"Отсутствует одна или обе скобочки \"{}\" у значения параметра \"".$type."\"");
+        }
+    }
+
+    public function generate($interpreter_id,$attributes){
+    	if( isset($this->interpreters[(string)$interpreter_id]) ){
+    		$template = $this->interpreters[(string)$interpreter_id];
+    	}else{
+    		throw new CHttpException(500,'Не найден интерпретатор с идентефикатором:'.$interpreter_id);
+    	}
+
+    	preg_match_all("~\[\+([^\+\]]+)\+\]~", $template, $matches);
+
+		$rules = $matches[1];
+
+		foreach ($rules as $i => $rule) {
+			$tmp = explode(";", $rule);
+			$params = [];
+			foreach ($tmp as $param) {
+				$index = stripos($param, "=");
+				if( $index > 0 ){
+					$key = substr($param,0,$index);
+					$value = substr($param, $index+1);
+					$params[trim($key)] = trim($value);
+				}else{
+					throw new CHttpException(500,"Отсутствует знак \"=\" у параметра \"".$param."\"");
+				}
+				
+			}
+
+			if( isset($params["ALT"]) ){
+				$params["ALT"] = $this->getArrayValue($params["ALT"],"ALT");
+			}
+
+			if( isset($params["REPLACE"]) ){
+				$params["REPLACE"] = $this->getArrayValue($params["REPLACE"],"REPLACE");
+			}
+
+			if( isset($params["ATTR"]) ){
+				$val = ( isset($attributes[intval($params["ATTR"])]->value) )?$attributes[intval($params["ATTR"])]->value:"";
+
+				$val = ( isset($params["FLOAT"]) )?number_format((float)$val,intval($params["FLOAT"])):$val;
+
+				if( isset($params["REPLACE"]) ){
+					$val = str_replace($params["REPLACE"][0], $params["REPLACE"][1], $val);
+				}
+
+				$matches[1][$i] = ( isset($params["ALT"]) && isset($params["ALT"][$val]) )?$params["ALT"][$val]:$val;
+			}else{
+				throw new CHttpException(500,"Отсутствует параметр \"ATTR\"");
+			}
+		}
+		return str_replace($matches[0], $matches[1], $template);
+    }
 }
