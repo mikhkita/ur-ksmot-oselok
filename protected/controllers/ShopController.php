@@ -36,21 +36,32 @@ class ShopController extends Controller
 
 	   		$pages->pageSize=10;
 	   		$pages->applyLimit($criteria);
-			// $criteria->select='id';  // выбираем только поле 'title'
-			// $criteria->with = array('fields');
-			// $posts=Good::model()->findAll($criteria);
-			// // print_r($posts);
+			$criteria->select = 'id';
+		    $criteria->with = array(
+		    	'fields' 
+		    	=> array(
+		    		'select'=> array('int_value','varchar_value','float_value','text_value','attribute_id','variant_id')
+		    		)
+		    );
 			$model = Good::model()->findAll($criteria);
 			$goods = array();
-
+			// print_r($model);
 			foreach ($model as $i => $good) {
 				$temp = array();
 				$temp['id'] = $good->id;
-				foreach ($good->fields as $field) {
-					$temp[$field->attribute->code] = $field->value;
-				}
+				$temp['TIRE_WIDTH'] = $good->fields_assoc[7]->value;
+				$temp['TIRE_PROFILE'] = $good->fields_assoc[8]->value;
+				$temp['DIAMETER'] = $good->fields_assoc[9]->value;
+				$temp['SEASON'] = $good->fields_assoc[23]->value;
+				$temp['WEAR'] = $good->fields_assoc[29]->value;
+				$temp['AMOUNT'] = $good->fields_assoc[28]->value;
+				$temp['TIRE_BRAND'] = $good->fields_assoc[16]->value;
+				$temp['TIRE_MODEL'] = $good->fields_assoc[17]->value;
+				$temp['COUNTRY'] = $good->fields_assoc[11]->value;
+				$temp['CONDITION'] = $good->fields_assoc[26]->value;
+				$temp['PRICE'] = $good->fields_assoc[20]->value;
 				array_push($goods,$temp);
-			}
+			} 
 			$criteria=new CDbCriteria();
 			$criteria->condition = 'list=1';
 			$criteria->select = array('code','name');
@@ -88,34 +99,38 @@ class ShopController extends Controller
 
 	public function actionAdminFilter($partial = false)
 	{
-		if($_GET) {
-			print_r($_GET);
+
 			$criteria=new CDbCriteria();
 			$criteria->select = 'id';
 			$criteria->group = 'fields.good_id';
 			$criteria->order = 'fields.int_value ASC';
             $criteria->with = array('fields' => array('select'=> array('variant_id','attribute_id','int_value')));
             $count=0;
-			foreach ($_GET as $name => $value) {		
+			foreach ($_GET as $name => $arr) {		
 				if( !($name=='price-min' || $name=='price-max' || $name=='partial' || $name=='page') ) {
+					foreach ($arr as $value) {
 					$condition .= 'fields.variant_id='.$value.' OR ';
+					}
 					$count++;
 				}
 			}
 			$criteria->condition = $condition.'(fields.attribute_id=20 AND fields.int_value>='.$_GET['price-min'].' AND fields.int_value<='.$_GET['price-max'].')';
-        	$criteria->having = 'COUNT(fields.id)=2';
+        	$criteria->having = 'COUNT(fields.id)='.($count+1);
+        	$count=Good::model()->count($criteria);
+        	$pages=new CPagination($count);
+        	$pages->pageSize=10;
         	$model = Good::model()->findAll($criteria);
+
             $goods_id = array();
 			foreach ($model as $good) {
 				array_push($goods_id, $good->id); 
 			}
-		    $count=Good::model()->count($criteria);
-		    
-
+			if($_GET['page']>1) {
+				$order = array_slice($goods_id, ($_GET['page']-1)*$pages->pageSize, $pages->pageSize);
+			}else {
+				$order = array_slice($goods_id, 0, $pages->pageSize);
+			}
 		    $criteria=new CDbCriteria();
-		    $pages=new CPagination($count);
-		    $pages->pageSize=10;
-		    $pages->applyLimit($criteria);
 		    $criteria->select = 'id';
 		    $criteria->with = array(
 		    	'fields' 
@@ -123,7 +138,8 @@ class ShopController extends Controller
 		    		'select'=> array('int_value','varchar_value','float_value','text_value','attribute_id','variant_id')
 		    		)
 		    );
-		    $model=Good::model()->findAllbyPk($goods_id,$criteria);
+		   
+			$model=Good::model()->findAllbyPk($order,$criteria);
 			$goods = array();
 			foreach ($model as $i => $good) {
 				$temp = array();
@@ -141,7 +157,13 @@ class ShopController extends Controller
 				$temp['PRICE'] = $good->fields_assoc[20]->value;
 				array_push($goods,$temp);
 			} 
-
+			function cmp($a, $b) {
+			    if($a['PRICE'] == $b['PRICE']) {
+			        return 0;
+			    }
+			    return ($a['PRICE'] < $b['PRICE']) ? -1 : 1;
+			}
+			uasort($goods, 'cmp');
 			if( !$partial ){
 				$this->render('adminIndex',array(
 					'goods'=>$goods,
@@ -154,7 +176,6 @@ class ShopController extends Controller
 					'pages' => $pages
 				));
 			}		
-		}
 	}
 	
 	public function actionAdminDetail($partial = false,$id)
