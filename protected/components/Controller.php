@@ -100,7 +100,7 @@ class Controller extends CController
         $tmp = array();
         $model = Interpreter::model()->findAll();
         foreach ($model as $item) {
-            $tmp[$item->id.""] = $item->template;
+            $tmp[$item->id.""] = $item;
         }
         $this->interpreters = $tmp;
     }

@@ -7,6 +7,7 @@
  * @property string $id
  * @property string $name
  * @property string $template
+ * @property string $good_type_id
  */
 class Interpreter extends CActiveRecord
 {
@@ -26,12 +27,13 @@ class Interpreter extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, template', 'required'),
+			array('name, template, good_type_id', 'required'),
 			array('name', 'length', 'max'=>255),
 			array('template', 'length', 'max'=>2000),
+			array('good_type_id', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, template', 'safe', 'on'=>'search'),
+			array('id, name, template, good_type_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -43,6 +45,7 @@ class Interpreter extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'goodType' => array(self::BELONGS_TO, 'GoodType', 'good_type_id'),
 		);
 	}
 
@@ -55,6 +58,7 @@ class Interpreter extends CActiveRecord
 			'id' => 'ID',
 			'name' => 'Название',
 			'template' => 'Шаблон',
+			'good_type_id' => 'Тип товара',
 		);
 	}
 
@@ -79,6 +83,7 @@ class Interpreter extends CActiveRecord
 		$criteria->compare('id',$this->id,true);
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('template',$this->template,true);
+		$criteria->compare('good_type_id',$this->good_type_id,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -96,7 +101,7 @@ class Interpreter extends CActiveRecord
 		return parent::model($className);
 	}
 
-	private function getArrayValue($value,$type) {
+	public function getArrayValue($value,$type) {
         if( $value[0] == "{" && $value[strlen($value)-1] == "}" ){
             $tmp = explode("|", substr($value, 1,-1));
             $value = ($type == "REPLACE")?[0=>array(),1=>array()]:[];
@@ -119,11 +124,16 @@ class Interpreter extends CActiveRecord
         }
     }
 
-    public function generate($interpreter_id,$attributes){
+    public function generate($interpreter_id,$model){
+    	$attributes = $model->fields_assoc;
     	if( isset($this->interpreters[(string)$interpreter_id]) ){
-    		$template = $this->interpreters[(string)$interpreter_id];
+    		if( $this->interpreters[(string)$interpreter_id]->good_type_id == $model->good_type_id ){
+    			$template = $this->interpreters[(string)$interpreter_id]->template;
+    		}else{
+    			throw new CHttpException(500,'У типа товара "'.$model->type->name.'" нет интерпретатора с идентификатором '.$interpreter_id);
+    		}
     	}else{
-    		throw new CHttpException(500,'Не найден интерпретатор с идентефикатором:'.$interpreter_id);
+    		throw new CHttpException(500,'Не найден интерпретатор с идентификатором '.$interpreter_id);
     	}
 
     	preg_match_all("~\[\+([^\+\]]+)\+\]~", $template, $matches);
@@ -146,11 +156,11 @@ class Interpreter extends CActiveRecord
 			}
 
 			if( isset($params["ALT"]) ){
-				$params["ALT"] = $this->getArrayValue($params["ALT"],"ALT");
+				$params["ALT"] = Interpreter::getArrayValue($params["ALT"],"ALT");
 			}
 
 			if( isset($params["REPLACE"]) ){
-				$params["REPLACE"] = $this->getArrayValue($params["REPLACE"],"REPLACE");
+				$params["REPLACE"] = Interpreter::getArrayValue($params["REPLACE"],"REPLACE");
 			}
 
 			if( isset($params["ATTR"]) ){

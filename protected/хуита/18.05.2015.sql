@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Май 18 2015 г., 03:41
+-- Время создания: Май 18 2015 г., 04:06
 -- Версия сервера: 5.6.22
 -- Версия PHP: 5.4.38
 
@@ -6693,15 +6693,16 @@ INSERT INTO `good_type_attribute` (`good_type_id`, `attribute_id`, `sort`) VALUE
 CREATE TABLE IF NOT EXISTS `interpreter` (
 `id` int(10) unsigned NOT NULL,
   `name` varchar(255) NOT NULL,
-  `template` varchar(2000) NOT NULL
+  `template` varchar(2000) NOT NULL,
+  `good_type_id` int(10) unsigned NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `interpreter`
 --
 
-INSERT INTO `interpreter` (`id`, `name`, `template`) VALUES
-(1, 'Заголовок шины', '#[+ATTR=3+] [+ATTR=23+] [+ATTR=17+] [+ATTR=7+]/[+ATTR=8+]/[+ATTR=9+] [+ATTR=26+] в г.[+ATTR=27+]');
+INSERT INTO `interpreter` (`id`, `name`, `template`, `good_type_id`) VALUES
+(1, 'Заголовок шины', '#[+ATTR=3+] [+ATTR=23+] [+ATTR=17+] [+ATTR=7+]/[+ATTR=8+]/[+ATTR=9+] [+ATTR=26+] в [+ATTR=27;ALT={Томск=Томске|Новосибирск=Новосибирске}+]', 1);
 
 -- --------------------------------------------------------
 
