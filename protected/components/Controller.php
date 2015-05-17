@@ -22,6 +22,8 @@ class Controller extends CController
 	 */
 	public $breadcrumbs = array();
 
+    public $interpreters = array();
+
     public $user;
 
     public $start;
@@ -44,6 +46,8 @@ class Controller extends CController
         $this->adminMenu["cur"] = $this->toLowerCaseModelNames(ModelNames::model()->find(array("condition" => "code = '".Yii::app()->controller->id."'")));
         
         $this->start = microtime(true);
+
+        $this->getInterpreters();
     }
 
     public function beforeRender($view){
@@ -90,6 +94,15 @@ class Controller extends CController
         $el->rod_name = mb_strtolower($el->rod_name, "UTF-8");
 
         return $el;
+    }
+
+    public function getInterpreters(){
+        $tmp = array();
+        $model = Interpreter::model()->findAll();
+        foreach ($model as $item) {
+            $tmp[$item->id.""] = $item;
+        }
+        $this->interpreters = $tmp;
     }
 
     public function getMenuCodes(){

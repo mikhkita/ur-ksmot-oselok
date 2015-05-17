@@ -17,7 +17,7 @@ class GoodController extends Controller
 				'roles'=>array('manager'),
 			),
 			array('allow',
-				'actions'=>array('index'),
+				'actions'=>array('adminIndex2'),
 				'users'=>array('*'),
 			),
 			array('deny',
@@ -124,12 +124,13 @@ class GoodController extends Controller
 		}
 	}
 
-	public function actionIndex($id){
-		$model = Rubric::model()->findByPk($id);
+	public function actionAdminIndex2($goodTypeId = false){
+		if( $goodTypeId ){
+			$GoodType = GoodType::model()->with('goods.fields.variant','goods.fields.attribute')->findByPk($goodTypeId);
+		}
 
 		$this->render('index',array(
-			'data'=>$model->houses,
-			'title'=>$model->rub_name
+			'data'=>$GoodType->goods
 		));
 	}
 
