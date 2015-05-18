@@ -4,7 +4,8 @@
                  <?php $form=$this->beginWidget('CActiveForm', array(
                     'id'=>'filter',
                     'action' => Yii::app()->createUrl('/admin/shop/filter'),
-                    'enableAjaxValidation'=>false
+                    'enableAjaxValidation'=>false,
+                    'method' => 'GET'
                 )); ?>
                 <div class="filter-cont">
                     <h2>Цена (руб)</h2>
@@ -18,14 +19,14 @@
                 </div>
                
 
-                <? foreach ($filter as $name => $items): ?>
+                <? $index = 0; foreach ($filter as $name => $items): ?>
                         <div class="filter-cont">
                             <h2><?=$name?></h2>
                             <div class="check-cont">
                                 <ul class="hor clearfix">
                                     <? foreach ($items as $i => $item): ?>
                                     <li>
-                                        <input type="checkbox" id="f<?=$item['variant_id']?>" name="<?=$item['variant_id']?>" value="<?=$item['variant_id']?>" >
+                                        <input type="checkbox" id="f<?=$item['variant_id']?>" name="<?=$index?>[<?=$i?>]" value="<?=$item['variant_id']?>" >
                                         <label class="clearfix" for="f<?=$item['variant_id']?>">
                                             <span class="checked"></span>
                                             <span class="default"></span>   
@@ -36,7 +37,7 @@
                                 </ul>
                             </div>  
                         </div>
-                <? endforeach; ?>
+                <? $index++; endforeach; ?>
                 <input type="submit" value="Далее">
                 <?php $this->endWidget(); ?>
             </div>
