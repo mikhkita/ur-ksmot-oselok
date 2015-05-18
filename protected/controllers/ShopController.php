@@ -64,7 +64,7 @@ class ShopController extends Controller
 			} 
 			$criteria=new CDbCriteria();
 			$criteria->condition = 'list=1';
-			$criteria->select = array('code','name');
+			$criteria->select = array('name');
 			$criteria->with = array(
 	            'variants'
 	             => array(
@@ -130,6 +130,14 @@ class ShopController extends Controller
 			}else {
 				$order = array_slice($goods_id, 0, $pages->pageSize);
 			}
+
+									// $dataProvider = new CActiveDataProvider('Good', array(
+									//     'criteria'=>$criteria,
+									//     'pagination'=>array(
+									//         'pageSize'=>10
+									//     )
+									// ));
+									// print_r($dataProvider->getData());
 		    $criteria=new CDbCriteria();
 		    $criteria->select = 'id';
 		    $criteria->with = array(
@@ -138,7 +146,7 @@ class ShopController extends Controller
 		    		'select'=> array('int_value','varchar_value','float_value','text_value','attribute_id','variant_id')
 		    		)
 		    );
-		   
+		   	
 			$model=Good::model()->findAllbyPk($order,$criteria);
 			$goods = array();
 			foreach ($model as $i => $good) {
@@ -180,24 +188,24 @@ class ShopController extends Controller
 	
 	public function actionAdminDetail($partial = false,$id)
 	{
-		if(isset($id)) {
-			$model = Good::model()->findByPk($id);
-			$good = array();
-			foreach ($model->fields as $field) {
-				$good[$field->attribute->code] = array();
-				$good[$field->attribute->code]['NAME'] = $field->attribute->name;
-				$good[$field->attribute->code]['VALUE'] = $field->value;
-			}
-			if( !$partial ){
-				$this->render('adminDetail',array(
-					'good'=>$good
-				));
-			}else{
-				$this->renderPartial('adminDetail',array(
-					'good'=>$good
-				));
-			}
-		}
+		// if(isset($id)) {
+		// 	$model = Good::model()->findByPk($id);
+		// 	$good = array();
+		// 	foreach ($model->fields as $field) {
+		// 		$good[$field->attribute->code] = array();
+		// 		$good[$field->attribute->code]['NAME'] = $field->attribute->name;
+		// 		$good[$field->attribute->code]['VALUE'] = $field->value;
+		// 	}
+		// 	if( !$partial ){
+		// 		$this->render('adminDetail',array(
+		// 			'good'=>$good
+		// 		));
+		// 	}else{
+		// 		$this->renderPartial('adminDetail',array(
+		// 			'good'=>$good
+		// 		));
+		// 	}
+		// }
 	}
 	public function loadModel($id)
 	{
