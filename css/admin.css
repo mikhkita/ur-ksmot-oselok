@@ -1455,3 +1455,13 @@ li.ui-autocomplete-category {
     right: 10px;
     bottom: 10px;
 }
+.b-interpreter-preview{
+    width: 600px;
+}
+    .b-interpreter-preview .row p{
+        
+    }
+    .b-interpreter-preview .row div{
+        border: 1px solid #452716;
+        padding: 10px;
+    }

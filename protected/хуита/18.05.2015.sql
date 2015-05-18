@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Май 18 2015 г., 04:06
+-- Время создания: Май 18 2015 г., 17:56
 -- Версия сервера: 5.6.22
 -- Версия PHP: 5.4.38
 
@@ -6695,14 +6695,15 @@ CREATE TABLE IF NOT EXISTS `interpreter` (
   `name` varchar(255) NOT NULL,
   `template` varchar(2000) NOT NULL,
   `good_type_id` int(10) unsigned NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `interpreter`
 --
 
 INSERT INTO `interpreter` (`id`, `name`, `template`, `good_type_id`) VALUES
-(1, 'Заголовок шины', '#[+ATTR=3+] [+ATTR=23+] [+ATTR=17+] [+ATTR=7+]/[+ATTR=8+]/[+ATTR=9+] [+ATTR=26+] в [+ATTR=27;ALT={Томск=Томске|Новосибирск=Новосибирске}+]', 1);
+(1, 'Заголовок', '#[+ATTR=3+] [+ATTR=23+] [+ATTR=17+] [+ATTR=7+]/[+ATTR=8+]/[+ATTR=9+] [+ATTR=26+] в [+ATTR=27;ALT={Томск=Томске|Новосибирск=Новосибирске}+]', 1),
+(2, 'Заголовок', 'ы', 2);
 
 -- --------------------------------------------------------
 
@@ -6718,7 +6719,7 @@ CREATE TABLE IF NOT EXISTS `model_names` (
   `rod_name` varchar(128) NOT NULL,
   `admin_menu` tinyint(1) NOT NULL DEFAULT '0',
   `sort` smallint(6) DEFAULT '9999'
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `model_names`
@@ -6727,8 +6728,9 @@ CREATE TABLE IF NOT EXISTS `model_names` (
 INSERT INTO `model_names` (`id`, `code`, `name`, `vin_name`, `rod_name`, `admin_menu`, `sort`) VALUES
 (1, 'goodType', 'Типы товаров', 'Тип товара', 'Типа товара', 1, 100),
 (2, 'attribute', 'Атрибуты', 'Атрибут', 'Атрибута', 1, 200),
-(3, 'import', 'Импорт', 'Импорт', 'Импорта', 1, 300),
-(4, 'interpreter', 'Интерпретаторы', 'Интерпретатор', 'Интерпретатора', 1, 250);
+(3, 'import', 'Импорт', 'Импорт', 'Импорта', 1, 400),
+(4, 'interpreter', 'Интерпретаторы', 'Интерпретатор', 'Интерпретатора', 1, 300),
+(5, 'export', 'Экспорт', 'Экспорт', 'Экспорта', 1, 500);
 
 -- --------------------------------------------------------
 
@@ -6857,12 +6859,12 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 -- AUTO_INCREMENT для таблицы `interpreter`
 --
 ALTER TABLE `interpreter`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT для таблицы `model_names`
 --
 ALTER TABLE `model_names`
-MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT для таблицы `user`
 --

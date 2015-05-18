@@ -13,12 +13,8 @@ class InterpreterController extends Controller
 	{
 		return array(
 			array('allow',
-				'actions'=>array('adminIndex','adminCreate','adminUpdate','adminDelete'),
+				'actions'=>array('adminIndex','adminCreate','adminUpdate','adminDelete','adminPreview'),
 				'roles'=>array('manager'),
-			),
-			array('allow',
-				'actions'=>array('index'),
-				'users'=>array('*'),
 			),
 			array('deny',
 				'users'=>array('*'),
@@ -105,6 +101,23 @@ class InterpreterController extends Controller
 				'labels'=>Interpreter::attributeLabels()
 			));
 		}
+	}
+
+	public function actionAdminPreview($id)
+	{
+		$criteria = new CDbCriteria();
+		$criteria->limit = 5;
+
+        $model = Good::model()->findAll($criteria);
+        $data = array();
+
+        foreach ($model as $item) {
+        	$data[] = array("ID"=>$item->fields_assoc[3]->value,"VALUE"=>$this->replaceToBr(Interpreter::generate($id,$item)));
+        }
+
+		$this->renderPartial('adminPreview',array(
+			'data'=>$data,
+		));
 	}
 
 	public function loadModel($id)

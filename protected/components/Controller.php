@@ -96,6 +96,10 @@ class Controller extends CController
         return $el;
     }
 
+    public function replaceToBr($str){
+        return str_replace("\n", "<br>", $str);
+    }
+
     public function getInterpreters(){
         $tmp = array();
         $model = Interpreter::model()->findAll();
