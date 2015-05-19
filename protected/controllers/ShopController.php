@@ -107,7 +107,7 @@ class ShopController extends Controller
             $criteria->with = array('fields' => array('select'=> array('variant_id','attribute_id','int_value')));
             $count=0;
 			foreach ($_GET as $name => $arr) {		
-				if( !($name=='price-min' || $name=='price-max' || $name=='partial' || $name=='page') ) {
+				if( !($name=='price-min' || $name=='price-max' || $name=='partial' || $name=='Good_page') ) {
 					foreach ($arr as $value) {
 					$condition .= 'fields.variant_id='.$value.' OR ';
 					}
@@ -116,28 +116,30 @@ class ShopController extends Controller
 			}
 			$criteria->condition = $condition.'(fields.attribute_id=20 AND fields.int_value>='.$_GET['price-min'].' AND fields.int_value<='.$_GET['price-max'].')';
         	$criteria->having = 'COUNT(fields.id)='.($count+1);
-        	$count=Good::model()->count($criteria);
-        	$pages=new CPagination($count);
-        	$pages->pageSize=10;
-        	$model = Good::model()->findAll($criteria);
-
+        	$criteria->together = true;
+        	// $count=Good::model()->count($criteria);
+        	// $pages=new CPagination($count);
+        	// $pages->pageSize=10;
+        	// $model = Good::model()->findAll($criteria);
+        	$dataProvider = new CActiveDataProvider('Good', array(
+									    'criteria'=>$criteria,
+									    'pagination'=>array(
+									        'pageSize'=>10
+									    )
+									));
+									$model = $dataProvider->getData();
+			// print_r($model);
             $goods_id = array();
 			foreach ($model as $good) {
 				array_push($goods_id, $good->id); 
 			}
-			if($_GET['page']>1) {
-				$order = array_slice($goods_id, ($_GET['page']-1)*$pages->pageSize, $pages->pageSize);
-			}else {
-				$order = array_slice($goods_id, 0, $pages->pageSize);
-			}
+			// if($_GET['page']>1) {
+			// 	$order = array_slice($goods_id, ($_GET['page']-1)*$pages->pageSize, $pages->pageSize);
+			// }else {
+			// 	$order = array_slice($goods_id, 0, $pages->pageSize);
+			// }
 
-									// $dataProvider = new CActiveDataProvider('Good', array(
-									//     'criteria'=>$criteria,
-									//     'pagination'=>array(
-									//         'pageSize'=>10
-									//     )
-									// ));
-									// print_r($dataProvider->getData());
+									
 		    $criteria=new CDbCriteria();
 		    $criteria->select = 'id';
 		    $criteria->with = array(
@@ -147,7 +149,7 @@ class ShopController extends Controller
 		    		)
 		    );
 		   	
-			$model=Good::model()->findAllbyPk($order,$criteria);
+			$model=Good::model()->findAllbyPk($goods_id,$criteria);
 			$goods = array();
 			foreach ($model as $i => $good) {
 				$temp = array();
@@ -181,7 +183,7 @@ class ShopController extends Controller
 			}else{
 				$this->renderPartial('_list',array(
 					'goods'=>$goods,
-					'pages' => $pages
+					'pages' => $dataProvider->getPagination()
 				));
 			}		
 	}

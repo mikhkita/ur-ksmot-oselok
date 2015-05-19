@@ -13664,3 +13664,590 @@ Stack trace:
 REQUEST_URI=/css/print.css
 HTTP_REFERER=http://ur-ksmot-oselok:88/admin/shop/filter?price-min=13942&price-max=36000
 ---
+2015/05/19 14:56:33 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/form.css".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/form.css')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/form.css
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin
+---
+2015/05/19 14:56:33 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/screen.css".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/screen.css')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/screen.css
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin
+---
+2015/05/19 14:56:33 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/print.css".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/print.css')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/print.css
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin
+---
+2015/05/19 14:56:34 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon.ico".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('favicon.ico')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon.ico
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin
+---
+2015/05/19 14:56:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "favicon2.ico".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('favicon2.ico')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/favicon2.ico
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin/goodType
+---
+2015/05/19 14:56:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/images/ui-bg_gloss-wave_35_f6a828_500x100.png".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/images/ui-b...')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/images/ui-bg_gloss-wave_35_f6a828_500x100.png
+HTTP_REFERER=http://ur-ksmot-oselok:88/css/jquery-ui.min.css
+---
+2015/05/19 14:58:31 [error] [php] Invalid argument supplied for foreach() (C:\OpenServer\domains\ur-ksmot-oselok\protected\views\shop\adminIndex.php:22)
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(869): ShopController->renderFile()
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(782): ShopController->renderPartial()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\protected\controllers\ShopController.php(182): ShopController->render()
+#3 unknown(0): ShopController->actionAdminFilter()
+#4 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#5 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#6 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(133): ShopController->runAction()
+#8 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#9 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#10 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CInlineFilter.php(58): ShopController->filterAccessControl()
+#11 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#12 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(291): CFilterChain->run()
+#13 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(265): ShopController->runActionWithFilters()
+#14 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(282): ShopController->run()
+#15 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#16 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#17 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CWebApplication->run()
+REQUEST_URI=/admin/shop/filter?price-min=9712&price-max=36000
+2015/05/19 15:00:14 [error] [php] Invalid argument supplied for foreach() (C:\OpenServer\domains\ur-ksmot-oselok\protected\views\shop\adminIndex.php:22)
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(869): ShopController->renderFile()
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(782): ShopController->renderPartial()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\protected\controllers\ShopController.php(182): ShopController->render()
+#3 unknown(0): ShopController->actionAdminFilter()
+#4 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#5 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#6 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(133): ShopController->runAction()
+#8 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#9 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#10 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CInlineFilter.php(58): ShopController->filterAccessControl()
+#11 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#12 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(291): CFilterChain->run()
+#13 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(265): ShopController->runActionWithFilters()
+#14 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(282): ShopController->run()
+#15 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#16 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#17 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CWebApplication->run()
+REQUEST_URI=/admin/shop/filter?price-min=9712&price-max=36000
+2015/05/19 15:00:22 [error] [php] Invalid argument supplied for foreach() (C:\OpenServer\domains\ur-ksmot-oselok\protected\views\shop\adminIndex.php:22)
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(869): ShopController->renderFile()
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(782): ShopController->renderPartial()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\protected\controllers\ShopController.php(182): ShopController->render()
+#3 unknown(0): ShopController->actionAdminFilter()
+#4 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#5 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#6 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(133): ShopController->runAction()
+#8 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#9 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#10 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CInlineFilter.php(58): ShopController->filterAccessControl()
+#11 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#12 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(291): CFilterChain->run()
+#13 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(265): ShopController->runActionWithFilters()
+#14 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(282): ShopController->run()
+#15 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#16 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#17 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CWebApplication->run()
+REQUEST_URI=/admin/shop/filter?price-min=9712&price-max=36000
+2015/05/19 15:00:55 [error] [php] Invalid argument supplied for foreach() (C:\OpenServer\domains\ur-ksmot-oselok\protected\views\shop\adminIndex.php:22)
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(869): ShopController->renderFile()
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(782): ShopController->renderPartial()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\protected\controllers\ShopController.php(182): ShopController->render()
+#3 unknown(0): ShopController->actionAdminFilter()
+#4 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#5 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#6 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(133): ShopController->runAction()
+#8 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#9 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#10 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CInlineFilter.php(58): ShopController->filterAccessControl()
+#11 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#12 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(291): CFilterChain->run()
+#13 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(265): ShopController->runActionWithFilters()
+#14 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(282): ShopController->run()
+#15 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#16 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#17 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CWebApplication->run()
+REQUEST_URI=/admin/shop/filter?price-min=9712&price-max=36000
+2015/05/19 15:00:56 [error] [php] Invalid argument supplied for foreach() (C:\OpenServer\domains\ur-ksmot-oselok\protected\views\shop\adminIndex.php:22)
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(869): ShopController->renderFile()
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(782): ShopController->renderPartial()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\protected\controllers\ShopController.php(182): ShopController->render()
+#3 unknown(0): ShopController->actionAdminFilter()
+#4 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#5 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#6 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(133): ShopController->runAction()
+#8 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#9 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#10 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CInlineFilter.php(58): ShopController->filterAccessControl()
+#11 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#12 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(291): CFilterChain->run()
+#13 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(265): ShopController->runActionWithFilters()
+#14 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(282): ShopController->run()
+#15 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#16 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#17 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CWebApplication->run()
+REQUEST_URI=/admin/shop/filter?price-min=9712&price-max=36000
+2015/05/19 15:02:35 [error] [php] Invalid argument supplied for foreach() (C:\OpenServer\domains\ur-ksmot-oselok\protected\views\shop\adminIndex.php:22)
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(869): ShopController->renderFile()
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(782): ShopController->renderPartial()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\protected\controllers\ShopController.php(182): ShopController->render()
+#3 unknown(0): ShopController->actionAdminFilter()
+#4 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#5 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#6 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(133): ShopController->runAction()
+#8 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#9 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#10 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CInlineFilter.php(58): ShopController->filterAccessControl()
+#11 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#12 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(291): CFilterChain->run()
+#13 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(265): ShopController->runActionWithFilters()
+#14 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(282): ShopController->run()
+#15 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#16 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#17 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CWebApplication->run()
+REQUEST_URI=/admin/shop/filter?price-min=9712&price-max=36000
+2015/05/19 15:02:45 [error] [php] Invalid argument supplied for foreach() (C:\OpenServer\domains\ur-ksmot-oselok\protected\views\shop\adminIndex.php:22)
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(869): ShopController->renderFile()
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(782): ShopController->renderPartial()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\protected\controllers\ShopController.php(181): ShopController->render()
+#3 unknown(0): ShopController->actionAdminFilter()
+#4 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#5 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#6 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(133): ShopController->runAction()
+#8 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#9 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#10 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CInlineFilter.php(58): ShopController->filterAccessControl()
+#11 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#12 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(291): CFilterChain->run()
+#13 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(265): ShopController->runActionWithFilters()
+#14 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(282): ShopController->run()
+#15 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#16 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#17 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CWebApplication->run()
+REQUEST_URI=/admin/shop/filter?price-min=9712&price-max=36000
+2015/05/19 15:02:48 [error] [php] Invalid argument supplied for foreach() (C:\OpenServer\domains\ur-ksmot-oselok\protected\views\shop\adminIndex.php:22)
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(869): ShopController->renderFile()
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(782): ShopController->renderPartial()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\protected\controllers\ShopController.php(181): ShopController->render()
+#3 unknown(0): ShopController->actionAdminFilter()
+#4 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#5 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#6 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(133): ShopController->runAction()
+#8 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#9 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#10 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CInlineFilter.php(58): ShopController->filterAccessControl()
+#11 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#12 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(291): CFilterChain->run()
+#13 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(265): ShopController->runActionWithFilters()
+#14 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(282): ShopController->run()
+#15 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#16 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#17 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CWebApplication->run()
+REQUEST_URI=/admin/shop/filter?price-min=9712&price-max=36000
+2015/05/19 15:03:18 [error] [php] Invalid argument supplied for foreach() (C:\OpenServer\domains\ur-ksmot-oselok\protected\controllers\ShopController.php:132)
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(133): ShopController->runAction()
+#3 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#4 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#5 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CInlineFilter.php(58): ShopController->filterAccessControl()
+#6 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#7 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(291): CFilterChain->run()
+#8 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(265): ShopController->runActionWithFilters()
+#9 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(282): ShopController->run()
+#10 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#11 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#12 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CWebApplication->run()
+REQUEST_URI=/admin/shop/filter?price-min=9712&price-max=36000
+2015/05/19 15:05:24 [error] [php] Invalid argument supplied for foreach() (C:\OpenServer\domains\ur-ksmot-oselok\protected\views\shop\adminIndex.php:22)
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(869): ShopController->renderFile()
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(782): ShopController->renderPartial()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\protected\controllers\ShopController.php(181): ShopController->render()
+#3 unknown(0): ShopController->actionAdminFilter()
+#4 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#5 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#6 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(133): ShopController->runAction()
+#8 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#9 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#10 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CInlineFilter.php(58): ShopController->filterAccessControl()
+#11 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#12 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(291): CFilterChain->run()
+#13 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(265): ShopController->runActionWithFilters()
+#14 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(282): ShopController->run()
+#15 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#16 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#17 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CWebApplication->run()
+REQUEST_URI=/admin/shop/filter?price-min=9712&price-max=36000
+2015/05/19 15:05:38 [error] [php] Invalid argument supplied for foreach() (C:\OpenServer\domains\ur-ksmot-oselok\protected\views\shop\adminIndex.php:22)
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(869): ShopController->renderFile()
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(782): ShopController->renderPartial()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\protected\controllers\ShopController.php(182): ShopController->render()
+#3 unknown(0): ShopController->actionAdminFilter()
+#4 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#5 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#6 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(133): ShopController->runAction()
+#8 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#9 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#10 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CInlineFilter.php(58): ShopController->filterAccessControl()
+#11 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#12 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(291): CFilterChain->run()
+#13 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(265): ShopController->runActionWithFilters()
+#14 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(282): ShopController->run()
+#15 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#16 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#17 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CWebApplication->run()
+REQUEST_URI=/admin/shop/filter?price-min=9712&price-max=36000
+2015/05/19 15:06:43 [error] [php] Invalid argument supplied for foreach() (C:\OpenServer\domains\ur-ksmot-oselok\protected\views\shop\adminIndex.php:22)
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(869): ShopController->renderFile()
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(782): ShopController->renderPartial()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\protected\controllers\ShopController.php(182): ShopController->render()
+#3 unknown(0): ShopController->actionAdminFilter()
+#4 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#5 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#6 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(133): ShopController->runAction()
+#8 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#9 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#10 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CInlineFilter.php(58): ShopController->filterAccessControl()
+#11 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#12 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(291): CFilterChain->run()
+#13 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(265): ShopController->runActionWithFilters()
+#14 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(282): ShopController->run()
+#15 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#16 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#17 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CWebApplication->run()
+REQUEST_URI=/admin/shop/filter?price-min=9712&price-max=36000
+2015/05/19 15:06:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/images/ui-bg_gloss-wave_35_f6a828_500x100.png".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/images/ui-b...')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/images/ui-bg_gloss-wave_35_f6a828_500x100.png
+HTTP_REFERER=http://ur-ksmot-oselok:88/css/jquery-ui.min.css
+---
+2015/05/19 15:10:13 [error] [php] Invalid argument supplied for foreach() (C:\OpenServer\domains\ur-ksmot-oselok\protected\views\shop\adminIndex.php:22)
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(869): ShopController->renderFile()
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(782): ShopController->renderPartial()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\protected\controllers\ShopController.php(182): ShopController->render()
+#3 unknown(0): ShopController->actionAdminFilter()
+#4 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#5 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#6 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(133): ShopController->runAction()
+#8 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#9 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#10 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CInlineFilter.php(58): ShopController->filterAccessControl()
+#11 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#12 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(291): CFilterChain->run()
+#13 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(265): ShopController->runActionWithFilters()
+#14 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(282): ShopController->run()
+#15 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#16 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#17 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CWebApplication->run()
+REQUEST_URI=/admin/shop/filter?price-min=10865&price-max=36000
+2015/05/19 15:10:14 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/form.css".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/form.css')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/form.css
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin/shop/filter?price-min=10865&price-max=36000
+---
+2015/05/19 15:10:14 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/screen.css".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/screen.css')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/screen.css
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin/shop/filter?price-min=10865&price-max=36000
+---
+2015/05/19 15:10:14 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/print.css".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/print.css')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/print.css
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin/shop/filter?price-min=10865&price-max=36000
+---
+2015/05/19 15:10:29 [error] [php] Invalid argument supplied for foreach() (C:\OpenServer\domains\ur-ksmot-oselok\protected\views\shop\adminIndex.php:22)
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(869): ShopController->renderFile()
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(782): ShopController->renderPartial()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\protected\controllers\ShopController.php(183): ShopController->render()
+#3 unknown(0): ShopController->actionAdminFilter()
+#4 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#5 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#6 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(133): ShopController->runAction()
+#8 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#9 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#10 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CInlineFilter.php(58): ShopController->filterAccessControl()
+#11 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#12 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(291): CFilterChain->run()
+#13 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(265): ShopController->runActionWithFilters()
+#14 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(282): ShopController->run()
+#15 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#16 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#17 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CWebApplication->run()
+REQUEST_URI=/admin/shop/filter?price-min=10865&price-max=36000
+2015/05/19 15:10:30 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/form.css".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/form.css')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/form.css
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin/shop/filter?price-min=10865&price-max=36000
+---
+2015/05/19 15:10:30 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/screen.css".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/screen.css')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/screen.css
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin/shop/filter?price-min=10865&price-max=36000
+---
+2015/05/19 15:10:30 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/print.css".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/print.css')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/print.css
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin/shop/filter?price-min=10865&price-max=36000
+---
+2015/05/19 15:10:39 [error] [php] Invalid argument supplied for foreach() (C:\OpenServer\domains\ur-ksmot-oselok\protected\views\shop\adminIndex.php:22)
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(869): ShopController->renderFile()
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(782): ShopController->renderPartial()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\protected\controllers\ShopController.php(183): ShopController->render()
+#3 unknown(0): ShopController->actionAdminFilter()
+#4 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#5 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#6 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(133): ShopController->runAction()
+#8 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#9 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#10 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CInlineFilter.php(58): ShopController->filterAccessControl()
+#11 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#12 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(291): CFilterChain->run()
+#13 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(265): ShopController->runActionWithFilters()
+#14 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(282): ShopController->run()
+#15 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#16 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#17 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CWebApplication->run()
+REQUEST_URI=/admin/shop/filter?price-min=9712&price-max=36000
+2015/05/19 15:10:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/form.css".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/form.css')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/form.css
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin/shop/filter?price-min=9712&price-max=36000
+---
+2015/05/19 15:10:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/screen.css".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/screen.css')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/screen.css
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin/shop/filter?price-min=9712&price-max=36000
+---
+2015/05/19 15:10:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/print.css".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/print.css')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/print.css
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin/shop/filter?price-min=9712&price-max=36000
+---
+2015/05/19 15:13:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/images/ui-bg_gloss-wave_35_f6a828_500x100.png".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/images/ui-b...')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/images/ui-bg_gloss-wave_35_f6a828_500x100.png
+HTTP_REFERER=http://ur-ksmot-oselok:88/css/jquery-ui.min.css
+---
+2015/05/19 15:14:09 [error] [php] Invalid argument supplied for foreach() (C:\OpenServer\domains\ur-ksmot-oselok\protected\controllers\ShopController.php:111)
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(133): ShopController->runAction()
+#3 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#4 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#5 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CInlineFilter.php(58): ShopController->filterAccessControl()
+#6 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#7 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(291): CFilterChain->run()
+#8 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(265): ShopController->runActionWithFilters()
+#9 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(282): ShopController->run()
+#10 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#11 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#12 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CWebApplication->run()
+REQUEST_URI=/admin/shop/filter?partial=true&price-min=13750&price-max=36000&Good_page=2&partial=true&price-min=13750&price-max=36000
+2015/05/19 15:16:52 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/images/ui-bg_gloss-wave_35_f6a828_500x100.png".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/images/ui-b...')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/images/ui-bg_gloss-wave_35_f6a828_500x100.png
+HTTP_REFERER=http://ur-ksmot-oselok:88/css/jquery-ui.min.css
+---
+2015/05/19 15:18:35 [error] [php] Invalid argument supplied for foreach() (C:\OpenServer\domains\ur-ksmot-oselok\protected\controllers\ShopController.php:111)
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(133): ShopController->runAction()
+#3 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#4 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#5 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CInlineFilter.php(58): ShopController->filterAccessControl()
+#6 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#7 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(291): CFilterChain->run()
+#8 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(265): ShopController->runActionWithFilters()
+#9 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(282): ShopController->run()
+#10 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#11 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#12 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CWebApplication->run()
+REQUEST_URI=/admin/shop/filter?partial=true&price-min=11442&price-max=36000&Good_page=2&partial=true&price-min=11442&price-max=36000
+2015/05/19 15:19:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/images/ui-bg_gloss-wave_35_f6a828_500x100.png".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/images/ui-b...')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/images/ui-bg_gloss-wave_35_f6a828_500x100.png
+HTTP_REFERER=http://ur-ksmot-oselok:88/css/jquery-ui.min.css
+---
+2015/05/19 15:19:31 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/images/ui-bg_gloss-wave_35_f6a828_500x100.png".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/images/ui-b...')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/images/ui-bg_gloss-wave_35_f6a828_500x100.png
+HTTP_REFERER=http://ur-ksmot-oselok:88/css/jquery-ui.min.css
+---
+2015/05/19 15:19:33 [error] [system.db.CDbCommand] CDbCommand::fetchColumn() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND fields.int_value<=)) GROUP BY fields.good_id HAVING (COUNT(fields.id)=1)) sq' at line 1. The SQL statement executed was: SELECT COUNT(*) FROM (SELECT `t`.`id` AS `t0_c0`, `fields`.`variant_id` AS `t1_c7`, `fields`.`attribute_id` AS `t1_c2`, `fields`.`int_value` AS `t1_c3`, `fields`.`id` AS `t1_c0` FROM `good` `t`  LEFT OUTER JOIN `good_attribute` `fields` ON (`fields`.`good_id`=`t`.`id`)  WHERE ((fields.attribute_id=20 AND fields.int_value>= AND fields.int_value<=)) GROUP BY fields.good_id HAVING (COUNT(fields.id)=1)) sq.
+2015/05/19 15:19:33 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND fields.int_value<=)) GROUP BY fields.good_id HAVING (COUNT(fields.id)=1)) sq' at line 1' in C:\OpenServer\domains\ur-ksmot-oselok\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\db\CDbCommand.php(433): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\db\ar\CActiveFinder.php(740): CDbCommand->queryScalar()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\framework\db\ar\CActiveFinder.php(151): CJoinElement->count(Object(CDbCriteria))
+#3 C:\OpenServer\domains\ur-ksmot-oselok\framework\db\ar\CActiveRecord.php(1605): CActiveFinder->count(Object(CDbCriteria))
+#4 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CActiveDataProvider.php(228): CActiveRecord->count(Object(CDbCriteria))
+#5 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CDataProvider.php(224): CActiveDataProvider->calculateTotalItemCount()
+#6 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CActiveDataProvider.php(178): CDataProvider->getTotalItemCount()
+#7 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CDataProvider.php(168): CActiveDataProvider->fetchData()
+#8 C:\OpenServer\domains\ur-ksmot-oselok\protected\controllers\ShopController.php(130): CDataProvider->getData()
+#9 [internal function]: ShopController->actionAdminFilter('true')
+#10 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(ShopController), Array)
+#11 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(ShopController), Object(ReflectionMethod), Array)
+#12 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#13 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#14 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#15 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#16 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#17 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#18 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(291): CFilterChain->run()
+#19 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(282): CController->run('adminfilter')
+#21 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('shop/adminfilte...')
+#22 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#23 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#24 {main}
+REQUEST_URI=/admin/shop/filter?partial=true
+HTTP_REFERER=http://ur-ksmot-oselok:88/admin/shop/
+---
+2015/05/19 15:20:13 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/images/ui-bg_gloss-wave_35_f6a828_500x100.png".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/images/ui-b...')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/images/ui-bg_gloss-wave_35_f6a828_500x100.png
+HTTP_REFERER=http://ur-ksmot-oselok:88/css/jquery-ui.min.css
+---
+2015/05/19 15:20:22 [error] [php] Invalid argument supplied for foreach() (C:\OpenServer\domains\ur-ksmot-oselok\protected\controllers\ShopController.php:111)
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(133): ShopController->runAction()
+#3 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#4 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#5 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CInlineFilter.php(58): ShopController->filterAccessControl()
+#6 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#7 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(291): CFilterChain->run()
+#8 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CController.php(265): ShopController->runActionWithFilters()
+#9 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(282): ShopController->run()
+#10 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#11 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#12 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CWebApplication->run()
+REQUEST_URI=/admin/shop/filter?partial=true&price-min=14519&price-max=36000&Good_page=2
+2015/05/19 15:20:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/images/ui-bg_gloss-wave_35_f6a828_500x100.png".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('css/images/ui-b...')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/images/ui-bg_gloss-wave_35_f6a828_500x100.png
+HTTP_REFERER=http://ur-ksmot-oselok:88/css/jquery-ui.min.css
+---

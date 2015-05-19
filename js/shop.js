@@ -32,8 +32,8 @@ $(document).ready(function(){
         progress.start(3);
         $.ajax({
             type: 'GET',
-            url: $(this).attr("href")+"&partial=true",
-            data: $("#filter").serialize(),
+            url: $(this).attr("href"),
+            // data: $("#filter").serialize(),
             success: function(msg){
                 progress.end(function(){
                     $('.b-main-items').html(msg);
