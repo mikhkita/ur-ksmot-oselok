@@ -1,20 +1,21 @@
 <?php
 
 /**
- * This is the model class for table "good_type".
+ * This is the model class for table "export_attribute".
  *
- * The followings are the available columns in table 'good_type':
- * @property integer $id
- * @property string $name
+ * The followings are the available columns in table 'export_attribute':
+ * @property string $export_id
+ * @property string $attribute_id
+ * @property string $sort
  */
-class GoodType extends CActiveRecord
+class ExportAttribute extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'good_type';
+		return 'export_attribute';
 	}
 
 	/**
@@ -25,11 +26,11 @@ class GoodType extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name', 'required'),
-			array('name', 'length', 'max'=>255),
+			array('export_id, sort', 'required'),
+			array('export_id, attribute_id, sort', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name', 'safe', 'on'=>'search'),
+			array('export_id, attribute_id, sort', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -41,10 +42,8 @@ class GoodType extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'fields' => array(self::HAS_MANY, 'GoodTypeAttribute', 'good_type_id','order'=>'sort'),
-			'goods' => array(self::HAS_MANY, 'Good', 'good_type_id'),
-			'interpreters' => array(self::HAS_MANY, 'Interpreter', 'good_type_id'),
-			'exports' => array(self::HAS_MANY, 'Export', 'good_type_id'),
+			'export' => array(self::BELONGS_TO, 'Export', 'export_id'),
+			'attribute' => array(self::BELONGS_TO, 'Attribute', 'attribute_id'),
 		);
 	}
 
@@ -54,8 +53,9 @@ class GoodType extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'name' => 'Название',
+			'export_id' => 'Export',
+			'attribute_id' => 'Attribute',
+			'sort' => 'Sort',
 		);
 	}
 
@@ -77,8 +77,9 @@ class GoodType extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
-		$criteria->compare('name',$this->name,true);
+		$criteria->compare('export_id',$this->export_id,true);
+		$criteria->compare('attribute_id',$this->attribute_id,true);
+		$criteria->compare('sort',$this->sort,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -89,7 +90,7 @@ class GoodType extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return GoodType the static model class
+	 * @return ExportAttribute the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

@@ -1,10 +1,10 @@
+var customHandlers = [];
 $(document).ready(function(){   
     var myWidth,
         myHeight,
         title = window.location.href,
         titleVar = ( title.split("localhost").length > 1 )?4:3,
-        progress = new KitProgress("#FFF",2),
-        customHandlers = [];
+        progress = new KitProgress("#FFF",2);
 
     progress.endDuration = 0.3;
 
@@ -43,17 +43,21 @@ $(document).ready(function(){
         padding: 0,
         margin: 30,
         beforeShow: function(){
-            bindForm($(".fancybox-inner form"));
+            var $form = $(".fancybox-inner form");
+            bindForm($form);
             bindImageUploader();
             bindTinymce();
             bindAutocomplete();
             bindTooltip();
+            bindDoubleList();
+            if( $form.attr("data-beforeShow") && customHandlers[$form.attr("data-beforeShow")] ){
+                customHandlers[$form.attr("data-beforeShow")]($form);
+            }
         },
         afterClose:function(){
             unbindTinymce();
         },
         afterShow: function(){
-            bindDoubleList();
             bindVariants();
             $(".fancybox-inner").find("input").eq(0).focus();
         }
@@ -421,7 +425,7 @@ $(document).ready(function(){
             $("#sortable1").sortable({
                 connectWith: ".connectedSortable",
                 update: function( event, ui ) {
-                    sortList();
+                    customHandlers["sortList"]();
                 }
             }).disableSelection();
             $("#sortable2").sortable({
@@ -430,18 +434,19 @@ $(document).ready(function(){
                     $("#sortable2 li").append("<span></span>");
                 }
             }).disableSelection();
+            customHandlers["sortList"]();
         }
     }
     $("body").on("click",".double-list li span",function(){
         $("#sortable1").prepend($(this).parents("li"));
-        sortList();
+        customHandlers["sortList"]();
     });
 
     customHandlers["attributesAjax"] = function($form){
         $("#sortable1 input").remove();
     }
 
-    function sortList(){
+    customHandlers["sortList"] = function(){
         var min = "&";
         $("#sortable1 li").each(function(){
             var max = "№";

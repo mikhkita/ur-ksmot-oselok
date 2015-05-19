@@ -46,6 +46,7 @@ class Interpreter extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'goodType' => array(self::BELONGS_TO, 'GoodType', 'good_type_id'),
+			'exports' => array(self::HAS_MANY, 'ExportInterpreter', 'interpreter_id'),
 		);
 	}
 

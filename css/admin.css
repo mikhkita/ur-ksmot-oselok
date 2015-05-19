@@ -1,4 +1,4 @@
-@CHARSET "UTF-8";
+@charset "utf-8";
 @-webkit-keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}@-o-keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}@keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}
 @font-face {
     font-family: 'RobotoRegular';
@@ -1386,6 +1386,9 @@ li.ui-autocomplete-category {
                         background-color: #452716;
                         color: #F5E9BC;
                     }
+.qtip-content{
+    text-align: center;
+}
 .b-import{
     display: none;
 }
@@ -1462,6 +1465,7 @@ li.ui-autocomplete-category {
         
     }
     .b-interpreter-preview .row div{
+        background-color: #FFF4CD;
         border: 1px solid #452716;
         padding: 10px;
     }
