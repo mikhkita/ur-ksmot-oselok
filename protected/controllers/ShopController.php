@@ -105,7 +105,7 @@ class ShopController extends Controller
 			$criteria->group = 'fields.good_id';
 			$criteria->order = 'fields.int_value ASC';
             $criteria->with = array('fields' => array('select'=> array('variant_id','attribute_id','int_value')));
-            $count=0;
+            $count=0,$condition="";
 			foreach ($_GET as $name => $arr) {		
 				if( !($name=='price-min' || $name=='price-max' || $name=='partial' || $name=='Good_page') ) {
 					foreach ($arr as $value) {
