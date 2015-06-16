@@ -13,7 +13,7 @@ class GoodTypeController extends Controller
 	{
 		return array(
 			array('allow',
-				'actions'=>array('adminIndex','adminCreate','adminUpdate','adminDelete'),
+				'actions'=>array('adminIndex','adminCreate','adminUpdate','adminDelete','adminCodeDel'),
 				'roles'=>array('manager'),
 			),
 			array('allow',
@@ -79,6 +79,37 @@ class GoodTypeController extends Controller
 				'model'=>$model,
 				'allAttr'=>$allAttr,
 				'attr'=>$attr
+			));
+		}
+	}
+
+	public function actionAdminCodeDel($id)
+	{
+		
+		if(isset($_POST['GoodType']['CodeDel']))
+		{
+			$arr = explode(PHP_EOL,$_POST['GoodType']['CodeDel']);
+
+			$criteria=new CDbCriteria();
+			$criteria->condition = 'good_type_id=1 AND fields.attribute_id=3';
+			$criteria->select = 'id';
+			$criteria->addInCondition('fields.varchar_value',$arr); 
+			$criteria->with = array(
+	            'fields'
+	            => array(
+	                'select' => 'attribute_id, varchar_value'
+	            	)
+	            );
+
+			$model = Good::model()->findAll($criteria);
+			foreach ($model as $good) {
+				$good->delete();
+			}
+			$this->actionAdminIndex(true);
+		}else{
+			
+			$this->renderPartial('adminCodeDel',array(
+				
 			));
 		}
 	}
