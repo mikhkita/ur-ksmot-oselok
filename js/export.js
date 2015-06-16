@@ -10,4 +10,14 @@ $(document).ready(function(){
         });
     }
 
+    // $(".b-export-preview tr td").hover(function(){
+    // 	var divHeight = $(this).find("div").height(),
+    // 		pHeight = $(this).find("p").height();
+    // 	if( divHeight < pHeight ){
+    // 		$(this).append("<div class='b-view-more'>"+$(this).find("p").text()+"</div>");
+    // 	}
+    // },function(){
+    // 	$(this).find(".b-view-more").remove();
+    // });
+
 });

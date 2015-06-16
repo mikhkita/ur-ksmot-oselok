@@ -76,7 +76,7 @@ class ImportController extends Controller
 				if( $field->attribute->list ){
 					$variants = array();
 					foreach ($field->attribute->variants as $i => $variant) {
-						$variants[mb_strtolower($variant->value)] = true;
+						$variants[mb_strtolower($variant->value,'UTF-8')] = true;
 					}
 				}
             	$titles[intval($field->attribute->id)] = array(
@@ -180,7 +180,7 @@ class ImportController extends Controller
 			}
 
 			if( is_array($fieldValues) ){
-				if( mb_strtolower($fieldValues[0]) != mb_strtolower($values[0]) ){
+				if( mb_strtolower($fieldValues[0],'UTF-8') != mb_strtolower($values[0],'UTF-8') ){
 					$highlight = "overwrite";
 				}else{
 					$highlight = "equal";
@@ -193,7 +193,7 @@ class ImportController extends Controller
 
 		if( $highlight == NULL && is_array($variants) ){
 			foreach ($value as $i => $item) {
-				if( !isset($variants[mb_strtolower($item)]) ) $highlight = "new-variant";
+				if( !isset($variants[mb_strtolower($item,'UTF-8')]) ) $highlight = "new-variant";
 				// if( count(preg_grep("/". str_replace("/", "\/", preg_quote($item))."/i" , $variants )) < 1 ) $highlight = "new-variant";
 				// print_r($item);
 				// echo "<br>";
@@ -241,11 +241,12 @@ class ImportController extends Controller
 		        $sql = "INSERT INTO `$AttributeVariantTableName` (`attribute_id`,`int_value`,`varchar_value`,`float_value`,`sort`) VALUES ";
 		        foreach ($import["ITEMS"] as $i => $fields){
 		        	foreach ($fields as $key => $value){
+		        		if( intval($key) == $this->codeId ) $goodCode = $value;
 		        		$title = $titles[intval($key)];
 		        		$newFields[] = $key;
 		        		if( is_array($title["VARIANTS"]) ){
 		        			$variants = $title["VARIANTS"];
-		        			if( !isset($variants[mb_strtolower($value)]) )
+		        			if( !isset($variants[mb_strtolower($value,'UTF-8')]) )
 								$addVariants[] = "('".$key."',".(($title["TYPE"] == "int")?("'".mysql_real_escape_string($value)."'"):"NULL").",".(($title["TYPE"] == "varchar")?("'".mysql_real_escape_string($value)."'"):"NULL").",".(($title["TYPE"] == "float")?("'".mysql_real_escape_string($value)."'"):"NULL").",'1000')";
 		        		}
 		        	}
@@ -288,7 +289,6 @@ class ImportController extends Controller
 		        $sql = "INSERT INTO `$GoodAttributeTableName` (`good_id`,`attribute_id`,`int_value`,`varchar_value`,`text_value`,`float_value`,`variant_id`) VALUES ";
 		        foreach ($import["ITEMS"] as $i => $fields){
 		        	foreach ($fields as $key => $value){
-		        		if( $key == $this->codeId ) $goodCode = $value;
 		        		$title = $titles[intval($key)];
 
 		        		$val = array("int"=>"NULL","varchar"=>"NULL","text"=>"NULL","float"=>"NULL");
@@ -297,7 +297,7 @@ class ImportController extends Controller
 		        			$val[$title["TYPE"]] = "'".mysql_real_escape_string($value)."'";
 		        		}
 
-						$addFields[] = "('".$id."','".$key."',".implode(",", $val).",".((is_array($title["VARIANTS"]))?("'".$title["VARIANTS"][mb_strtolower($value)]."'"):"NULL").")";
+						$addFields[] = "('".$id."','".$key."',".implode(",", $val).",".((is_array($title["VARIANTS"]))?("'".$title["VARIANTS"][mb_strtolower($value,'UTF-8')]."'"):"NULL").")";
 		        	}
 		        }
 		        if( count($addFields) > 0 ){
@@ -328,7 +328,7 @@ class ImportController extends Controller
 			if( $field->attribute->list ){
 				$variants = array();
 				foreach ($field->attribute->variants as $i => $variant) {
-					$variants[mb_strtolower($variant->value)] = $variant->id;
+					$variants[mb_strtolower($variant->value,'UTF-8')] = $variant->id;
 				}
 			}
         	$titles[intval($field->attribute->id)] = array(

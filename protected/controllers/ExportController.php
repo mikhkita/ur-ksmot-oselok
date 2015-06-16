@@ -13,7 +13,7 @@ class ExportController extends Controller
 	{
 		return array(
 			array('allow',
-				'actions'=>array('adminIndex','adminCreate','adminUpdate','adminDelete','adminGetFields'),
+				'actions'=>array('adminIndex','adminCreate','adminUpdate','adminDelete','adminGetFields','adminPreview'),
 				'roles'=>array('manager'),
 			),
 			array('deny',
@@ -107,6 +107,7 @@ class ExportController extends Controller
 		{
 			$this->setAttr($model);
 		}else{
+
 			$attr = $this->getModelFields($model);
 			$allAttr = array_diff_key($this->getFields($model->good_type_id), $attr);
 
@@ -138,10 +139,11 @@ class ExportController extends Controller
 				foreach ($_POST["sorted"] as $key => $value) {
 					$tmpArr = explode("-", $value);
 
-					$values[$tmpArr[0]][] = "('".$model->id."','".$tmpArr[1]."','".$sort."')";
+					$values[trim($tmpArr[0])][] = "('".$model->id."','".$tmpArr[1]."','".$sort."')";
 					$sort+=10;
 				}
 			}
+			
 
 			if( count($values["attributes"]) )
 				$this->insertAll($tableName = ExportAttribute::tableName(),$values["attributes"]);
@@ -208,6 +210,33 @@ class ExportController extends Controller
 				'labels'=>Export::attributeLabels()
 			));
 		}
+	}
+
+	public function actionAdminPreview($goodTypeId = false){
+		$this->scripts[] = "export";
+
+		if( $goodTypeId ){
+			$GoodType = GoodType::model()->with('goods.fields.variant','goods.fields.attribute')->findByPk($goodTypeId);
+			$export = Export::model()->with('fields.attribute','interpreters.interpreter')->findByPk($goodTypeId);
+		}
+
+		$arr = array();
+
+		foreach ($export->fields as $key => $value) {
+			$arr[intval($value->sort)] = array("TYPE"=>"attr","VALUE"=>$value->attribute);
+		}
+
+		foreach ($export->interpreters as $key => $value) {
+			$arr[intval($value->sort)] = array("TYPE"=>"inter","VALUE"=>$value->interpreter);
+		}
+
+		ksort($arr);
+
+		$this->render('adminPreview',array(
+			'data'=>$GoodType,
+			'fields' => $arr,
+			'name'=>$export->name
+		));
 	}
 
 	public function loadModel($id)

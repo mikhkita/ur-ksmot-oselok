@@ -37,13 +37,17 @@ table
 {
 	display: none;
 }
+.tleft
+{
+	text-align: left !important;	
+}
 .tright
 {
-	text-align: right;	
+	text-align: right !important;	
 }
 .tcenter
 {
-	text-align: center;
+	text-align: center !important;
 }
 
 /* clearfix */	

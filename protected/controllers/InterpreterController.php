@@ -45,6 +45,8 @@ class InterpreterController extends Controller
 	{
 		$model=$this->loadModel($id);
 
+		$this->checkAccess($model);
+
 		if(isset($_POST['Interpreter']))
 		{
 			$model->attributes=$_POST['Interpreter'];
@@ -59,6 +61,8 @@ class InterpreterController extends Controller
 
 	public function actionAdminDelete($id)
 	{
+		$this->checkAccess( Interpreter::model()->findByPk($id) );
+
 		$this->loadModel($id)->delete();
 
 		$this->actionAdminIndex(true);
@@ -106,7 +110,7 @@ class InterpreterController extends Controller
 	public function actionAdminPreview($id)
 	{
 		$criteria = new CDbCriteria();
-		$criteria->limit = 5;
+		$criteria->limit = 30;
 
         $model = Good::model()->findAll($criteria);
         $data = array();

@@ -11,6 +11,7 @@
  * @property string $rod_name
  * @property integer $admin_menu
  * @property integer $sort
+ * @property string $rule_code
  */
 class ModelNames extends CActiveRecord
 {
@@ -33,9 +34,10 @@ class ModelNames extends CActiveRecord
 			array('code, name, vin_name, rod_name', 'required'),
 			array('admin_menu, sort', 'numerical', 'integerOnly'=>true),
 			array('code, name, vin_name, rod_name', 'length', 'max'=>128),
+			array('rule_code', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, code, name, vin_name, rod_name, admin_menu, sort', 'safe', 'on'=>'search'),
+			array('id, code, name, vin_name, rod_name, admin_menu, sort, rule_code', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -47,6 +49,7 @@ class ModelNames extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'rule' => array(self::BELONGS_TO, 'Rule', 'rule_code'),
 		);
 	}
 
@@ -58,11 +61,12 @@ class ModelNames extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'code' => 'Code',
-			'name' => 'Many Text',
-			'vin_name' => 'Vin Text',
-			'rod_name' => 'Rod Text',
+			'name' => 'Name',
+			'vin_name' => 'Vin Name',
+			'rod_name' => 'Rod Name',
 			'admin_menu' => 'Admin Menu',
 			'sort' => 'Sort',
+			'rule_code' => 'Rule Code',
 		);
 	}
 
@@ -91,6 +95,7 @@ class ModelNames extends CActiveRecord
 		$criteria->compare('rod_name',$this->rod_name,true);
 		$criteria->compare('admin_menu',$this->admin_menu);
 		$criteria->compare('sort',$this->sort);
+		$criteria->compare('rule_code',$this->rule_code,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
