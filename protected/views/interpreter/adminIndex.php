@@ -22,11 +22,11 @@
 					<td><?=$item->id?></td>
 					<td class="align-left"><?=$item->name?></td>
 					<td class="align-left"><?=$item->goodType->name?></td>
-					<td class="align-left"><?=$this->replaceToBr($item->template)?></td>
+					<td class="align-left"><? if($this->checkAccess($item,true)) echo $this->replaceToBr($item->template); ?></td>
 					<td class="b-tool-cont">
-						<a href="<?php echo Yii::app()->createUrl('/'.$this->adminMenu["cur"]->code.'/adminupdate',array('id'=>$item->id))?>" class="ajax-form ajax-update b-tool b-tool-update" title="Редактировать <?=$this->adminMenu["cur"]->vin_name?>"></a>
+						<? if($this->checkAccess($item,true)): ?><a href="<?php echo Yii::app()->createUrl('/'.$this->adminMenu["cur"]->code.'/adminupdate',array('id'=>$item->id))?>" class="ajax-form ajax-update b-tool b-tool-update" title="Редактировать <?=$this->adminMenu["cur"]->vin_name?>"></a><? endif; ?>
 						<a href="<?php echo Yii::app()->createUrl('/'.$this->adminMenu["cur"]->code.'/adminpreview',array('id'=>$item->id))?>" class="ajax-form ajax-update b-tool b-tool-list" title="Посмотреть примеры"></a>
-						<a href="<?php echo Yii::app()->createUrl('/'.$this->adminMenu["cur"]->code.'/admindelete',array('id'=>$item->id))?>" class="ajax-form ajax-delete b-tool b-tool-delete" title="Удалить <?=$this->adminMenu["cur"]->vin_name?>"></a>
+						<? if($this->checkAccess($item,true)): ?><a href="<?php echo Yii::app()->createUrl('/'.$this->adminMenu["cur"]->code.'/admindelete',array('id'=>$item->id))?>" class="ajax-form ajax-delete b-tool b-tool-delete" data-warning="Вы действительно хотите удалить <?=$this->adminMenu["cur"]->vin_name?> &quot;<?=$item->name?>&quot;?" title="Удалить <?=$this->adminMenu["cur"]->vin_name?>"></a><? endif; ?>
 					</td>
 				</tr>
 			<? endforeach; ?>

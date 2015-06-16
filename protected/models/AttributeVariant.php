@@ -109,6 +109,11 @@ class AttributeVariant extends CActiveRecord
 		return parent::model($className);
 	}
 
+	public function beforeDelete(){
+ 		GoodAttribute::model()->deleteAll("variant_id=".$this->id);
+  		return parent::beforeDelete();
+ 	}
+
 	public function afterFind()
 	{
 		parent::afterFind();

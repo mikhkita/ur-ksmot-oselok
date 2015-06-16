@@ -64,9 +64,11 @@ $(document).ready(function(){
     });
 
     $(document).on("click",".ajax-delete", function(){
+        var warning = ($(this).attr("data-warning"))?$(this).attr("data-warning"):"Вы действительно хотите удалить</br>запись?";
+        warning += ( $(this).parents(".b-table").attr("data-warning") )?"<br><b>"+$(this).parents(".b-table").attr("data-warning")+"</b>":"";
         $.fancybox.open({
             padding: 0,
-            content: '<div class="b-popup b-popup-delete"><h1>Вы действительно хотите удалить</br>запись?</h1><div class="row buttons"><input type="button" class="b-delete-yes" value="Да"><input type="button" onclick="$.fancybox.close();" value="Нет"></div></div>'
+            content: '<div class="b-popup b-popup-delete"><h1>'+warning+'</h1><div class="row buttons"><input type="button" class="b-delete-yes" value="Да"><input type="button" onclick="$.fancybox.close();" value="Нет"></div></div>'
         });
         bindDelete($(this).attr("href"));
         return false;
@@ -77,6 +79,7 @@ $(document).ready(function(){
 
         setTimeout(function(){
             bindFilter();
+            bindTooltip();
             bindAutocomplete();
         },100);
     }
@@ -90,7 +93,7 @@ $(document).ready(function(){
         });
         $(".fancybox-inner .b-delete-yes").click(function(){
 
-            progress.setColor("#D26A44");
+            progress.setColor("#FFF");
             progress.start(3);
 
             url = ( $(".main form").length ) ? (url+"&"+$(".main form").serialize()) : url;
@@ -140,6 +143,9 @@ $(document).ready(function(){
         $form.validate({
             ignore: ""
         });
+
+        $(".numeric").numericInput({ allowFloat: true, allowNegative: true });
+
         $form.submit(function(e,a){
             tinymce.triggerSave();
             if( $(this).valid() && !$(this).find("input[type=submit]").hasClass("blocked") ){

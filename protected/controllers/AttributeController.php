@@ -212,7 +212,10 @@ class AttributeController extends Controller
 			foreach ($delArr as $key => $value) {
 				$pks[] = $key;
 			}
-			AttributeVariant::model()->deleteByPk($pks);
+			$model = AttributeVariant::model()->findAllByPk($pks);
+			foreach ($model as $key => $value) {
+				$value->delete();
+			}
 		}
 	}
 

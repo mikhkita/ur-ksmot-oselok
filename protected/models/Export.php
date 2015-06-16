@@ -44,7 +44,7 @@ class Export extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'fields' => array(self::HAS_MANY, 'ExportAttribute', 'export_id','order'=>'fields.sort'),
-			'interpreters' => array(self::HAS_MANY, 'ExportInterpreter', 'interpreter_id','order'=>'interpreters.sort'),
+			'interpreters' => array(self::HAS_MANY, 'ExportInterpreter', 'export_id','order'=>'interpreters.sort'),
 			'goodType' => array(self::BELONGS_TO, 'GoodType', 'good_type_id'),
 		);
 	}

@@ -304,13 +304,20 @@ h2{
 h1{
     font-size: 20px;
 }
+.b-tables .b-table:nth-child(n+2){
+    display: none;
+}
 .b-table{
     width: 100%;
     border: #452716;
     border-radius: 5px;
     margin-top: 25px;
 }
+.b-export-preview{
+
+}
     .b-table tr{
+        overflow: visible;
         /*background-color: transparent !important;*/
     }
     .b-table tr.b-filter td{
@@ -318,6 +325,40 @@ h1{
         background-color: #452716;
         /*padding: 0px;*/
     }
+    .b-data tr th{
+        background-color: #FFD7B1;
+        /*color: #F5E9BC;*/
+        /*text-shadow: 0 1px 1px rgba(0,0,0,0.5);*/
+        font-weight: 900;
+    }
+    .b-data tr td{
+        overflow: visible;
+        min-width: 100px;
+    }
+    .b-export-preview tr td{
+        /*position: relative;*/
+        text-align: left;
+        background-color: inherit;
+    }
+    .b-export-preview tr td div{
+        max-height: 40px;
+        overflow: hidden;
+    } 
+    .b-export-preview tr td div.b-view-more{
+        max-height: none;
+        overflow: visible;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        background-color: inherit;
+    }
+       /* .b-export-preview tr td div:hover{
+            overflow: visible;
+        }
+        .b-export-preview tr td div:hover p{
+            background-color: #FFF5D1;
+        }*/
     .b-table tr.b-exist{
         /*border: 4px solid #452716;*/
         background-color: #FFC9B5 !important;
@@ -368,6 +409,17 @@ h1{
             .b-table tr td div:first-child{
                 border-top: 0px;
             }
+            .b-table-td-editable{
+                padding: 0px !important;
+            }
+                .b-table-td-editable input{
+                    background-color: transparent;
+                    width: 100%;
+                    padding: 5px 10px !important;
+                    box-sizing: border-box;
+                    height: 30px !important;
+                    border: 0px solid #452716 !important;
+                }
         .align-left{
             text-align: left !important;
         }
@@ -398,6 +450,11 @@ h1{
         right: 0px;
         top: -19px;
     }
+    .b-link-back{
+        position: absolute;
+        left: 0px;
+        top: 5px;
+    }
 .fancybox-skin{
     /*background-color: #F5E9BC;*/
     border-radius: 0px;
@@ -413,6 +470,11 @@ h1{
 }
 .fancybox-skin .b-popup-delete h1{
     width: 340px;
+}
+.fancybox-skin .b-popup-delete h1 b{
+    font-size: 20px;
+    font-weight: 900;
+    color: #CB0303;
 }
 .fancybox-wrap{
     margin-bottom: 30px;
@@ -538,6 +600,9 @@ h1{
                 .b-full-width .row select,
                 .b-full-width .row textarea{
                     width: 680px;
+                }
+                .b-full-width .row select{
+                    width: 700px;
                 }
                 .row-half{
                     float: left;
@@ -1450,6 +1515,12 @@ li.ui-autocomplete-category {
         .b-log li{
             margin-bottom: 10px;
             list-style: none;
+        }
+        .b-log li.error{
+            color: #c00;
+        }
+        .b-log li.success{
+            color: #452716;
         }
 .b-debug{
     position: absolute;

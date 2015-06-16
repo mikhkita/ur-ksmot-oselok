@@ -118,4 +118,11 @@ class Good extends CActiveRecord
 			$this->setAttribute("fields_assoc",$fields,true);
 		}
 	}
+
+	public function beforeDelete(){
+  		foreach ($this->fields as $key => $value) {
+  			$value->delete();
+  		}
+  		return parent::beforeDelete();
+ 	}
 }

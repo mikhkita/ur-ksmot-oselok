@@ -8,6 +8,8 @@
  * @property string $name
  * @property string $template
  * @property string $good_type_id
+ * @property string $rule_code
+ * @property integer $width
  */
 class Interpreter extends CActiveRecord
 {
@@ -27,13 +29,14 @@ class Interpreter extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, template, good_type_id', 'required'),
-			array('name', 'length', 'max'=>255),
+			array('name, template, good_type_id, rule_code, width', 'required'),
+			array('width', 'numerical', 'integerOnly'=>true),
+			array('name, rule_code', 'length', 'max'=>255),
 			array('template', 'length', 'max'=>2000),
 			array('good_type_id', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, template, good_type_id', 'safe', 'on'=>'search'),
+			array('id, name, template, good_type_id, rule_code, width', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -47,6 +50,7 @@ class Interpreter extends CActiveRecord
 		return array(
 			'goodType' => array(self::BELONGS_TO, 'GoodType', 'good_type_id'),
 			'exports' => array(self::HAS_MANY, 'ExportInterpreter', 'interpreter_id'),
+			'rule' => array(self::BELONGS_TO, 'Rule', 'rule_code'),
 		);
 	}
 
@@ -60,7 +64,15 @@ class Interpreter extends CActiveRecord
 			'name' => 'Название',
 			'template' => 'Шаблон',
 			'good_type_id' => 'Тип товара',
+			'rule_code' => 'Доступ',
+			'width' => 'Ширина в пикселях',
 		);
+	}
+
+	public function beforeSave(){
+		parent::beforeSave();
+		$this->rule_code = ( !isset($this->rule_code) )?Yii::app()->params['defaultRule']:$this->rule_code;
+		return true;
 	}
 
 	/**
@@ -85,6 +97,8 @@ class Interpreter extends CActiveRecord
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('template',$this->template,true);
 		$criteria->compare('good_type_id',$this->good_type_id,true);
+		$criteria->compare('rule_code',$this->rule_code,true);
+		$criteria->compare('width',$this->width);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -111,9 +125,9 @@ class Interpreter extends CActiveRecord
                 if( count($arr) == 2 ){
                     if( $type == "REPLACE" ){
                         $value[0][] = trim($arr[0]);
-                        $value[1][] = trim($arr[1]);
+                        $value[1][] = $arr[1];
                     }else{
-                        $value[trim($arr[0])] = trim($arr[1]);
+                        $value[trim($arr[0])] = $arr[1];
                     }
                 }else{
                     throw new CHttpException(500,"В параметре \"".$type."\" отсутствует знак \"=\" или он присутствует больше одного раза");
@@ -126,7 +140,8 @@ class Interpreter extends CActiveRecord
     }
 
     public function generate($interpreter_id,$model){
-    	$attributes = $model->fields_assoc;
+    	$attributes = (isset($model->fields_assoc))?$model->fields_assoc:$model;
+
     	if( isset($this->interpreters[(string)$interpreter_id]) ){
     		if( $this->interpreters[(string)$interpreter_id]->good_type_id == $model->good_type_id ){
     			$template = $this->interpreters[(string)$interpreter_id]->template;
@@ -149,9 +164,9 @@ class Interpreter extends CActiveRecord
 				if( $index > 0 ){
 					$key = substr($param,0,$index);
 					$value = substr($param, $index+1);
-					$params[trim($key)] = trim($value);
+					$params[trim($key)] = $value;
 				}else{
-					throw new CHttpException(500,"Отсутствует знак \"=\" у параметра \"".$param."\"");
+					throw new CHttpException(500,"Отсутствует знак \"=\" у параметра \"".$param."\" в интерпретаторе с идентификатором ".$interpreter_id);
 				}
 				
 			}
@@ -174,10 +189,42 @@ class Interpreter extends CActiveRecord
 				}
 
 				$matches[1][$i] = ( isset($params["ALT"]) && isset($params["ALT"][$val]) )?$params["ALT"][$val]:$val;
+			}else if( isset($params["INTER"]) ){
+				$matches[1][$i] = Interpreter::generate(intval($params["INTER"]),$model);
+			}else if( isset($params["LIST"]) ){
+				$matches[1][$i] = $this->getListValue(intval($params["LIST"]),$attributes);
+			}else if( isset($params["TABLE"]) ){
+				$matches[1][$i] = $this->getTableValue(intval($params["TABLE"]),$attributes);
+			}else if( isset($params["CUBE"]) ){
+				$matches[1][$i] = $this->getCubeValue(intval($params["CUBE"]),$attributes);
 			}else{
-				throw new CHttpException(500,"Отсутствует параметр \"ATTR\"");
+				throw new CHttpException(500,"Отсутствует параметр \"ATTR\" у интерпретатора с идентификатором ".$interpreter_id);
 			}
 		}
-		return str_replace($matches[0], $matches[1], $template);
+		$out = str_replace($matches[0], $matches[1], $template);
+
+		$calc = array(Interpreter::getArrayToCalculate($out),array());
+		foreach ($calc[0] as $key => $value) {
+			$calc[1][$key] = Interpreter::calculate($value);
+			$calc[0][$key] = '`'.$calc[0][$key]."`";
+		}
+
+		return str_replace($calc[0], $calc[1], $out);
+    }
+
+    public function getArrayToCalculate($str){
+    	$e = explode('`',$str); 
+		$result = array(); 
+		for ($i = 0, $s = count($e) ; $i < $s; ++$i){ 
+		 	if ($e[$i] === '') {continue;} 
+		 	if($i % 2 != 0) $result[] = $e[$i];
+		} 
+		return $result;
+    }
+
+    public function calculate($str){
+    	$out = 1;
+		eval("\$out = ".$str.";");
+		return $out;
     }
 }
