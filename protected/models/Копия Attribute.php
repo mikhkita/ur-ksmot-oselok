@@ -6,10 +6,10 @@
  * The followings are the available columns in table 'attribute':
  * @property string $id
  * @property string $name
- * @property string $code
  * @property integer $attribute_type_id
  * @property integer $multi
  * @property integer $list
+ * @property integer $width
  */
 class Attribute extends CActiveRecord
 {
@@ -29,12 +29,12 @@ class Attribute extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, attribute_type_id', 'required'),
-			array('attribute_type_id, multi, list', 'numerical', 'integerOnly'=>true),
+			array('name, attribute_type_id, width', 'required'),
+			array('attribute_type_id, multi, list, width', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, attribute_type_id, multi, list', 'safe', 'on'=>'search'),
+			array('id, name, attribute_type_id, multi, list, width', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -64,7 +64,8 @@ class Attribute extends CActiveRecord
 			'name' => 'Название',
 			'attribute_type_id' => 'Тип данных',
 			'multi' => 'Множественный',
-			'list' => 'Список'
+			'list' => 'Список',
+			'width' => 'Ширина в пикселях',
 		);
 	}
 
@@ -91,6 +92,7 @@ class Attribute extends CActiveRecord
 		$criteria->compare('attribute_type_id',$this->attribute_type_id);
 		$criteria->compare('multi',$this->multi);
 		$criteria->compare('list',$this->list);
+		$criteria->compare('width',$this->width);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -107,6 +109,7 @@ class Attribute extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
 	public function beforeSave(){
   		if( $this->type->code == "text" ) $this->setAttribute("list",0);
   		return parent::beforeSave();

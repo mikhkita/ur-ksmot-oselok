@@ -10,6 +10,7 @@
  * @property integer $multi
  * @property integer $list
  * @property integer $width
+ * @property integer $dynamic
  */
 class Attribute extends CActiveRecord
 {
@@ -29,12 +30,12 @@ class Attribute extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, attribute_type_id, width', 'required'),
-			array('attribute_type_id, multi, list, width', 'numerical', 'integerOnly'=>true),
+			array('name, attribute_type_id', 'required'),
+			array('attribute_type_id, multi, list, width, dynamic', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, attribute_type_id, multi, list, width', 'safe', 'on'=>'search'),
+			array('id, name, attribute_type_id, multi, list, width, dynamic', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -49,7 +50,7 @@ class Attribute extends CActiveRecord
 			'goods' => array(self::HAS_MANY, 'GoodAttribute', 'attribute_id'),
 			'goodTypes' => array(self::HAS_MANY, 'GoodTypeAttribute', 'attribute_id'),
 			'type' => array(self::BELONGS_TO, 'AttributeType', 'attribute_type_id'),
-			'variants' => array(self::HAS_MANY, 'AttributeVariant', 'attribute_id','order'=>'sort'),
+			'variants' => array(self::HAS_MANY, 'AttributeVariant', 'attribute_id','order'=>'variants.sort'),
 			'exports' => array(self::HAS_MANY, 'ExportAttribute', 'attribute_id'),
 		);
 	}
@@ -66,6 +67,7 @@ class Attribute extends CActiveRecord
 			'multi' => 'Множественный',
 			'list' => 'Список',
 			'width' => 'Ширина в пикселях',
+			'dynamic' => 'Динамичный атрибут',
 		);
 	}
 
@@ -93,6 +95,7 @@ class Attribute extends CActiveRecord
 		$criteria->compare('multi',$this->multi);
 		$criteria->compare('list',$this->list);
 		$criteria->compare('width',$this->width);
+		$criteria->compare('dynamic',$this->dynamic);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -32,6 +32,12 @@
 	</div>
 
 	<div class="row">
+		<?php echo $form->CheckBox($model,'dynamic',array("class"=>"b-checkbox")); ?>
+		<?php echo $form->labelEx($model,'dynamic'); ?>
+		<?php echo $form->error($model,'dynamic'); ?>
+	</div>
+
+	<div class="row">
 		<?php echo $form->labelEx($model,'width'); ?>
 		<?php echo $form->textField($model,'width',array('maxlength'=>255,'required'=>true,'class'=>'numeric')); ?>
 		<?php echo $form->error($model,'width'); ?>

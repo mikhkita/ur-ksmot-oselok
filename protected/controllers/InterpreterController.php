@@ -109,18 +109,39 @@ class InterpreterController extends Controller
 
 	public function actionAdminPreview($id)
 	{
+		$inter = Interpreter::model()->findByPk($id);
+
 		$criteria = new CDbCriteria();
+		$criteria->condition = "good_type_id=".$inter->good_type_id;
 		$criteria->limit = 30;
+		$criteria->with = array("fields.variant");
 
         $model = Good::model()->findAll($criteria);
-        $data = array();
+        
+        $criteria = new CDbCriteria();
+		$criteria->with = array("goodTypes","variants");
+		$criteria->condition = "goodTypes.good_type_id=".$inter->good_type_id." AND dynamic=1";
+        $modelDyn = Attribute::model()->findAll($criteria);
 
-        foreach ($model as $item) {
-        	$data[] = array("ID"=>$item->fields_assoc[3]->value,"VALUE"=>$this->replaceToBr(Interpreter::generate($id,$item)));
+        $dynamic = array();
+        $dynObjects = array();
+
+        foreach ($modelDyn as $key => $value) {
+        	$current = ( isset($_POST["dynamic"][$value->id]) )?$_POST["dynamic"][$value->id]:$value->variants[0]->id;
+        	$curObj = AttributeVariant::model()->findByPk($current);
+        	$dynamic[$value->id] = array("CURRENT" => $curObj->id, "ALL" => $value->variants);
+        	$dynObjects[$value->id] = (object) array("value"=>$curObj->value,"variant_id"=>$curObj->id);
         }
+
+        $data = array();
+        foreach ($model as $item) {
+        	$data[] = array("ID"=>$item->fields_assoc[3]->value,"VALUE"=>$this->replaceToBr(Interpreter::generate($id,$item,$dynObjects)));
+        }
+
 
 		$this->renderPartial('adminPreview',array(
 			'data'=>$data,
+			'dynamic'=>$dynamic
 		));
 	}
 

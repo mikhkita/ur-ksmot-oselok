@@ -47,6 +47,7 @@ $(document).ready(function(){
             bindForm($form);
             bindImageUploader();
             bindTinymce();
+            bindSelectDynamic();
             bindAutocomplete();
             bindTooltip();
             bindDoubleList();
@@ -584,6 +585,30 @@ $(document).ready(function(){
     }
     /* Variants ------------------------------------ Variants */
 
+    /* Dynamic ------------------------------------- Dynamic */
+    function bindSelectDynamic(){
+        if( $(".b-select-dynamic").length ){
+            $(".b-select-dynamic").change(function(){
+                var $form = $(this).parents("form");
+
+                progress.setColor("#FFF");
+                progress.start(3);
+
+                $.ajax({
+                    type: "POST",
+                    url: $form.attr("action"),
+                    data: $form.serialize(),
+                    success: function(msg){
+                        progress.end(function(){
+                            $(".fancybox-inner").html(msg);
+                            bindSelectDynamic();
+                        });
+                    }
+                });
+            });
+        }
+    }
+    /* Dynamic ------------------------------------- Dynamic */
     function transition(el,dur){
         el.css({
             "-webkit-transition":  "all "+dur+"s ease-in-out", "-moz-transition":  "all "+dur+"s ease-in-out", "-o-transition":  "all "+dur+"s ease-in-out", "transition":  "all "+dur+"s ease-in-out"
