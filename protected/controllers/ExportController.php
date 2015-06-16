@@ -212,12 +212,12 @@ class ExportController extends Controller
 		}
 	}
 
-	public function actionAdminPreview($goodTypeId = false){
+	public function actionAdminPreview($id = false){
 		$this->scripts[] = "export";
 
-		if( $goodTypeId ){
-			$GoodType = GoodType::model()->with('goods.fields.variant','goods.fields.attribute')->findByPk($goodTypeId);
-			$export = Export::model()->with('fields.attribute','interpreters.interpreter')->findByPk($goodTypeId);
+		if( $id ){
+			$export = Export::model()->with('fields.attribute','interpreters.interpreter')->findByPk($id);
+			$GoodType = GoodType::model()->with('goods.fields.variant','goods.fields.attribute')->findByPk($export->good_type_id);
 		}
 
 		$arr = array();
