@@ -90,18 +90,18 @@ class GoodTypeController extends Controller
 		{
 			$arr = explode(PHP_EOL,$_POST['GoodType']['CodeDel']);
 
+			foreach ($arr as $key => $value) {
+				$arr[$key] = trim($value);
+			}
+
 			$criteria=new CDbCriteria();
-			$criteria->condition = 'good_type_id=1 AND fields.attribute_id=3';
+			$criteria->condition = '(good_type_id='.$id.' AND fields.attribute_id=3)';
 			$criteria->select = 'id';
+			$criteria->with = array('fields' => array( 'select' => 'attribute_id, varchar_value'));
 			$criteria->addInCondition('fields.varchar_value',$arr); 
-			$criteria->with = array(
-	            'fields'
-	            => array(
-	                'select' => 'attribute_id, varchar_value'
-	            	)
-	            );
 
 			$model = Good::model()->findAll($criteria);
+
 			foreach ($model as $good) {
 				$good->delete();
 			}
