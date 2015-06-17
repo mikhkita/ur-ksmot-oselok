@@ -5830,6 +5830,32 @@ Stack trace:
 #3 {main}
 REQUEST_URI=/js/jquery.qtip.min.js.map
 ---
+<<<<<<< HEAD
+2015/06/17 01:21:19 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/jquery.qtip.min.js.map
+---
+2015/06/17 01:21:24 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/jquery.qtip.min.js.map
+---
+2015/06/17 01:21:27 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "js/jquery.qtip.min.js.map".' in C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\OpenServer\domains\ur-ksmot-oselok\framework\web\CWebApplication.php(141): CWebApplication->runController('js/jquery.qtip....')
+#1 C:\OpenServer\domains\ur-ksmot-oselok\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#2 C:\OpenServer\domains\ur-ksmot-oselok\index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/js/jquery.qtip.min.js.map
+---
+=======
 2015/06/17 04:58:24 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'fields.attribute_id' in 'where clause'. The SQL statement executed was: SELECT `t`.`id` AS `t0_c0` FROM `good` `t`  WHERE ((good_type_id=1 AND fields.attribute_id=3) AND (fields.varchar_value IN (:ycp0, :ycp1, :ycp2, :ycp3, :ycp4, :ycp5, :ycp6, :ycp7, :ycp8, :ycp9, :ycp10, :ycp11, :ycp12, :ycp13, :ycp14, :ycp15, :ycp16, :ycp17, :ycp18, :ycp19, :ycp20, :ycp21, :ycp22, :ycp23, :ycp24, :ycp25, :ycp26, :ycp27, :ycp28, :ycp29, :ycp30, :ycp31, :ycp32, :ycp33, :ycp34, :ycp35, :ycp36, :ycp37, :ycp38, :ycp39, :ycp40, :ycp41, :ycp42, :ycp43, :ycp44, :ycp45, :ycp46, :ycp47, :ycp48, :ycp49, :ycp50, :ycp51, :ycp52, :ycp53, :ycp54, :ycp55, :ycp56, :ycp57, :ycp58, :ycp59, :ycp60, :ycp61, :ycp62, :ycp63, :ycp64, :ycp65, :ycp66, :ycp67, :ycp68, :ycp69, :ycp70, :ycp71, :ycp72, :ycp73, :ycp74, :ycp75, :ycp76, :ycp77, :ycp78, :ycp79, :ycp80, :ycp81, :ycp82, :ycp83, :ycp84, :ycp85, :ycp86, :ycp87, :ycp88, :ycp89, :ycp90, :ycp91, :ycp92, :ycp93, :ycp94, :ycp95, :ycp96, :ycp97, :ycp98, :ycp99, :ycp100, :ycp101, :ycp102, :ycp103, :ycp104, :ycp105, :ycp106, :ycp107, :ycp108, :ycp109, :ycp110, :ycp111, :ycp112, :ycp113, :ycp114, :ycp115, :ycp116, :ycp117, :ycp118, :ycp119, :ycp120, :ycp121, :ycp122, :ycp123, :ycp124, :ycp125, :ycp126, :ycp127, :ycp128, :ycp129, :ycp130, :ycp131, :ycp132, :ycp133, :ycp134, :ycp135, :ycp136, :ycp137, :ycp138, :ycp139, :ycp140, :ycp141, :ycp142, :ycp143, :ycp144, :ycp145, :ycp146, :ycp147, :ycp148, :ycp149, :ycp150, :ycp151, :ycp152, :ycp153, :ycp154, :ycp155, :ycp156, :ycp157, :ycp158, :ycp159, :ycp160, :ycp161, :ycp162, :ycp163, :ycp164, :ycp165, :ycp166, :ycp167, :ycp168, :ycp169, :ycp170, :ycp171, :ycp172, :ycp173, :ycp174, :ycp175, :ycp176, :ycp177, :ycp178, :ycp179, :ycp180, :ycp181, :ycp182, :ycp183, :ycp184, :ycp185, :ycp186, :ycp187, :ycp188, :ycp189, :ycp190, :ycp191, :ycp192, :ycp193, :ycp194, :ycp195, :ycp196, :ycp197, :ycp198, :ycp199, :ycp200, :ycp201, :ycp202, :ycp203, :ycp204, :ycp205, :ycp206, :ycp207, :ycp208, :ycp209, :ycp210, :ycp211, :ycp212, :ycp213, :ycp214, :ycp215, :ycp216, :ycp217, :ycp218, :ycp219, :ycp220, :ycp221, :ycp222, :ycp223, :ycp224, :ycp225, :ycp226, :ycp227, :ycp228, :ycp229, :ycp230, :ycp231, :ycp232, :ycp233, :ycp234, :ycp235, :ycp236, :ycp237, :ycp238, :ycp239, :ycp240, :ycp241, :ycp242, :ycp243, :ycp244, :ycp245, :ycp246, :ycp247, :ycp248, :ycp249, :ycp250, :ycp251, :ycp252, :ycp253, :ycp254, :ycp255, :ycp256, :ycp257, :ycp258, :ycp259, :ycp260, :ycp261, :ycp262, :ycp263, :ycp264, :ycp265, :ycp266, :ycp267, :ycp268, :ycp269, :ycp270, :ycp271, :ycp272, :ycp273, :ycp274, :ycp275, :ycp276, :ycp277, :ycp278, :ycp279, :ycp280, :ycp281, :ycp282, :ycp283, :ycp284, :ycp285, :ycp286, :ycp287, :ycp288, :ycp289, :ycp290, :ycp291, :ycp292, :ycp293, :ycp294, :ycp295))) LIMIT 10000.
 2015/06/17 04:58:24 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'fields.attribute_id' in 'where clause'' in /Users/mikhkita/sites/koleso/framework/db/CDbCommand.php:543
 Stack trace:
@@ -5904,3 +5930,4 @@ Stack trace:
 REQUEST_URI=/admin/goodType/codedel?id=1&GoodType%5Bname%5D=
 HTTP_REFERER=http://dev.koleso.com/admin/goodType
 ---
+>>>>>>> 33e8d435117d6daabfa9895cf5c038ca82f6f319
