@@ -29,7 +29,7 @@ class Interpreter extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, template, good_type_id, rule_code, width', 'required'),
+			array('name, template, good_type_id, rule_code', 'required'),
 			array('width', 'numerical', 'integerOnly'=>true),
 			array('name, rule_code', 'length', 'max'=>255),
 			array('template', 'length', 'max'=>2000),
