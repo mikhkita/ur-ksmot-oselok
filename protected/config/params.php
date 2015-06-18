@@ -10,6 +10,7 @@ return array(
 	'tempFolder'=>'upload/temp',
 	'adminPanel'=>'/admin/',
 	'defaultAdminRedirect'=>'/admin/goodType',
+	'excelDir'=>'upload/excel',
 	'defaultRule'=>'managerActions',
 	// the copyright information displayed in the footer section
 	'copyrightInfo'=>'Copyright &copy; 2009 by My Company.',

@@ -185,10 +185,47 @@ class Controller extends CController
             throw new CHttpException(403,'Доступ запрещен');
     }
 
+    public function getDynObjects($dynamic,$good_type_id){
+        $criteria = new CDbCriteria();
+        $criteria->with = array("goodTypes","variants");
+        $criteria->condition = "goodTypes.good_type_id=".$good_type_id." AND dynamic=1";
+        $modelDyn = Attribute::model()->findAll($criteria);
+
+        foreach ($modelDyn as $key => $value) {
+            $curObj = AttributeVariant::model()->findByPk($_POST["dynamic"][$value->id]);
+            $dynObjects[$value->id] = (object) array("value"=>$curObj->value,"variant_id"=>$curObj->id);
+        }
+
+        return $dynObjects;
+    }
+
     public function removeExcess($model){
         foreach ($model as $key => $item) {
             if( !$this->checkAccess( $item, true ) ) unset($model[$key]);
         }
         return array_values($model);
+    }
+
+    public function DownloadFile($source,$filename) {
+        if (file_exists($source)) {
+        
+            if (ob_get_level()) {
+              ob_end_clean();
+            }
+
+            $arr = explode(".", $source);
+            
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/octet-stream');
+            header('Content-Disposition: attachment; filename='.$filename.".".array_pop($arr) );
+            header('Content-Transfer-Encoding: binary');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate');
+            header('Pragma: public');
+            header('Content-Length: ' . filesize($source));
+            
+            readfile($source);
+            exit;
+        }
     }
 }

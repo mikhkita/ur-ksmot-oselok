@@ -75,6 +75,13 @@ class Interpreter extends CActiveRecord
 		return true;
 	}
 
+	public function beforeDelete(){
+  		foreach ($this->exports as $key => $value) {
+  			$value->delete();
+  		}
+  		return parent::beforeDelete();
+ 	}
+
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 *

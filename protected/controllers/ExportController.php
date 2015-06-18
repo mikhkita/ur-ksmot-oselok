@@ -13,7 +13,7 @@ class ExportController extends Controller
 	{
 		return array(
 			array('allow',
-				'actions'=>array('adminIndex','adminCreate','adminUpdate','adminDelete','adminGetFields','adminPreview'),
+				'actions'=>array('adminIndex','adminCreate','adminUpdate','adminDelete','adminGetFields','adminPreview','adminDynamic','adminExport'),
 				'roles'=>array('manager'),
 			),
 			array('deny',
@@ -212,31 +212,151 @@ class ExportController extends Controller
 		}
 	}
 
+	public function actionAdminDynamic($id = false){
+		$this->scripts[] = "export";
+		$export = Export::model()->findByPk($id);
+
+		$criteria = new CDbCriteria();
+		$criteria->condition = "good_type_id=".$export->good_type_id." AND attribute.dynamic=1";
+		$criteria->with = array("attribute.variants");
+
+        $model = GoodTypeAttribute::model()->findAll($criteria);
+
+		$this->render('adminDynamic',array(
+			'data'=>$model,
+			'id'=>$id
+		));
+	}
+
 	public function actionAdminPreview($id = false){
 		$this->scripts[] = "export";
+		$this->scripts[] = "filterTable";
 
 		if( $id ){
 			$export = Export::model()->with('fields.attribute','interpreters.interpreter')->findByPk($id);
 			$GoodType = GoodType::model()->with('goods.fields.variant','goods.fields.attribute')->findByPk($export->good_type_id);
 		}
 
+		$dynObjects = array();
+
+		if( isset($_POST["dynamic"]) ){
+			$dynObjects = $this->getDynObjects($_POST["dynamic"],$export->good_type_id);
+		}
+
 		$arr = array();
 
 		foreach ($export->fields as $key => $value) {
-			$arr[intval($value->sort)] = array("TYPE"=>"attr","VALUE"=>$value->attribute);
+			$arr[intval($value->sort)] = array("TYPE"=>"attr", "VALUE"=>$value->attribute);
+			
+			if( $value->attribute->list ){
+				$variants = array();
+
+				foreach ($GoodType->goods as $good) {
+					if( !isset($variants[$good->fields_assoc[$value->attribute->id]->value]) )
+						$variants[$good->fields_assoc[$value->attribute->id]->variant_id] = $good->fields_assoc[$value->attribute->id]->value;
+				}
+
+				$arr[intval($value->sort)]["VARIANTS"] = $variants;
+			}
 		}
 
 		foreach ($export->interpreters as $key => $value) {
-			$arr[intval($value->sort)] = array("TYPE"=>"inter","VALUE"=>$value->interpreter);
+			$arr[intval($value->sort)] = array("TYPE"=>"inter", "VALUE"=>$value->interpreter);
 		}
 
 		ksort($arr);
 
 		$this->render('adminPreview',array(
+			'id' => $id,
 			'data'=>$GoodType,
 			'fields' => $arr,
-			'name'=>$export->name
+			'name'=>$export->name,
+			'dynObjects'=>$dynObjects,
+			'dynValues'=>(isset($_POST["dynamic_values"]))?$_POST["dynamic_values"]:false
 		));
+	}
+
+	public function actionAdminExport($id){
+		if( !isset($_POST["ids"]) || $_POST["ids"] == "" ) 
+			throw new CHttpException(500,"Не выбран ни один товар");
+
+		$export = Export::model()->with('fields.attribute','interpreters.interpreter')->findByPk($id);
+		$goods = Good::model()->with('fields.attribute')->findAllByPk(explode(",",$_POST["ids"]));
+
+		$fields = array();
+		$excel = array();
+
+		foreach ($export->fields as $key => $value) {
+			$fields[intval($value->sort)] = array("TYPE"=>"attr", "VALUE"=>$value->attribute);
+		}
+		foreach ($export->interpreters as $key => $value) {
+			$fields[intval($value->sort)] = array("TYPE"=>"inter", "VALUE"=>$value->interpreter);
+		}
+		ksort($fields);
+
+		$titles = array();
+		foreach ($fields as $value) {
+			array_push($titles, $value["VALUE"]->name);
+		}
+		array_push($excel, $titles);
+
+		// $dynamic_values = 
+
+		$this->generateFields($excel, $goods, $fields);
+
+		// $_POST[]
+
+
+
+		// $file = $this->writeExcel($excel);
+
+		// $this->DownloadFile($file,"DromAutoAdd_tires");
+
+		$this->render('adminExport',array(
+			'data'=>$excel
+		));
+	}
+
+	public function generateFields($excel, $goods, $fields, $dynObjects = NULL){
+		foreach ($goods as $good) {
+			$row = array();
+			foreach ($fields as $field) {
+				if( $field["TYPE"] == "attr" ){
+					array_push($row, $good->fields_assoc[intval($field["VALUE"]->id)]->value);
+				}else{
+					array_push($row, Interpreter::generate($field["VALUE"]->id,$good,$dynObjects));
+				}
+			}
+			array_push($excel, $row);
+		}
+		return $excel;
+	}
+
+	public function writeExcel($data){
+		include_once  Yii::app()->basePath.'/phpexcel/Classes/PHPExcel.php';
+		// include_once  Yii::app()->basePath.'/phpexcel/Classes/PHPExcel/IOFactory.php';
+
+		$excelDir = Yii::app()->params['excelDir'];
+
+		$phpexcel = new PHPExcel(); // Создаём объект PHPExcel
+		$filename = "example.xlsx";
+
+		/* Каждый раз делаем активной 1-ю страницу и получаем её, потом записываем в неё данные */
+		$page = $phpexcel->setActiveSheetIndex(0); // Делаем активной первую страницу и получаем её
+		foreach($data as $i => $ar){ // читаем массив
+			foreach($ar as $j => $val){
+				$page->setCellValueByColumnAndRow($j,$i+1,$val); // записываем данные массива в ячейку
+				$page->getStyleByColumnAndRow($j,$i+1)->getAlignment()->setWrapText(true);
+			}
+		}
+		$page->setTitle("Фотодоска"); // Заголовок делаем "Example"
+		$page->getColumnDimension('C')->setWidth(80);
+		/* Начинаем готовиться к записи информации в xlsx-файл */
+		$objWriter = PHPExcel_IOFactory::createWriter($phpexcel, 'Excel2007');
+		/* Записываем в файл */
+		$objWriter->save($excelDir."/".$filename);
+
+		return $excelDir."/".$filename;
 	}
 
 	public function loadModel($id)

@@ -313,8 +313,29 @@ h1{
     border-radius: 5px;
     margin-top: 25px;
 }
+.b-filter-export{
+    max-height: 155px;
+    overflow: auto;
+}
+    .b-filter-export li{
+        list-style: none;   
+    }
+        .b-filter-export li input{
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        .b-filter-export li label{
+            cursor: pointer;
+        }
 .b-export-preview{
 
+}
+.b-export-preview #target tr{
+    cursor: pointer;
+}
+.b-export-preview #target tr.selected{
+    background-color: #D26A44 !important;
+    color: #F5E9BC !important;
 }
     .b-table tr{
         overflow: visible;
@@ -337,7 +358,7 @@ h1{
     }
     .b-export-preview tr td{
         /*position: relative;*/
-        text-align: left;
+        text-align: left !important;
         background-color: inherit;
     }
     .b-export-preview tr td div{
@@ -431,6 +452,26 @@ h1{
         .b-clear-filter:hover{
             text-decoration: none;
         }
+.b-buttons-left{
+    position: absolute;
+    left: 0px;
+    top: -19px;
+}
+    .b-buttons-left .b-butt{
+        float: left;
+        margin-right: 10px;
+    }
+.b-buttons-right{
+    position: absolute;
+    right: 0px;
+    top: -19px;
+}
+.b-show-count{
+    float: right;
+    display: block;
+    margin-top: 26px;
+    margin-right: 10px;
+}
 .b-butt{
     border-radius: 5px;
     margin-top: 15px;
@@ -1540,3 +1581,39 @@ li.ui-autocomplete-category {
         border: 1px solid #452716;
         padding: 10px;
     }
+.b-choose-dynamic{
+    text-align: center;
+}
+    .b-choose-dynamic .clearfix{
+        display: inline-block;
+        text-align: left;
+    }
+        .b-choose-dynamic .left{
+            border: 1px solid #452716;
+            padding: 20px;
+            margin: 10px;
+        }
+            .b-choose-dynamic .b-error{
+                display: none;
+                margin-top: 15px;
+                color: #c00;
+            }
+            .b-dynamic-values{
+                margin-top: 20px;
+                border: 1px solid #452716;
+            }
+                .b-dynamic-values li{
+                    cursor: pointer;
+                    padding: 5px 10px;
+                    text-align: left;
+                    list-style: none;
+                    border-bottom: 1px solid #452716;
+                }
+                    .b-dynamic-values li:last-child{
+                        border-bottom: 0px;
+                    }
+                .b-dynamic-values li.selected{
+                    background-color: #D26A44 !important;
+                    color: #F5E9BC !important;
+                    text-shadow: 0 1px 1px rgba(0,0,0,0.5);
+                }
