@@ -248,12 +248,13 @@ class ExportController extends Controller
 		foreach ($export->fields as $key => $value) {
 			$arr[intval($value->sort)] = array("TYPE"=>"attr", "VALUE"=>$value->attribute);
 			
-			if( $value->attribute->list ){
+			if( $value->attribute->list && !$value->attribute->dynamic ){
 				$variants = array();
 
 				foreach ($GoodType->goods as $good) {
-					if( !isset($variants[$good->fields_assoc[$value->attribute->id]->value]) )
-						$variants[$good->fields_assoc[$value->attribute->id]->variant_id] = $good->fields_assoc[$value->attribute->id]->value;
+					$obj = $good->fields_assoc[$value->attribute->id];
+					if( !isset($variants[$obj->value]) )
+						$variants[$obj->variant_id] = $obj->value;
 				}
 
 				$arr[intval($value->sort)]["VARIANTS"] = $variants;
@@ -272,7 +273,7 @@ class ExportController extends Controller
 			'fields' => $arr,
 			'name'=>$export->name,
 			'dynObjects'=>$dynObjects,
-			'dynValues'=>(isset($_POST["dynamic_values"]))?$_POST["dynamic_values"]:false
+			'dynValues'=>(isset($_POST["dynamic_values"]))?$_POST["dynamic_values"]:array()
 		));
 	}
 
@@ -285,6 +286,7 @@ class ExportController extends Controller
 
 		$fields = array();
 		$excel = array();
+		$dynamic_values = array();
 
 		foreach ($export->fields as $key => $value) {
 			$fields[intval($value->sort)] = array("TYPE"=>"attr", "VALUE"=>$value->attribute);
@@ -300,21 +302,37 @@ class ExportController extends Controller
 		}
 		array_push($excel, $titles);
 
-		// $dynamic_values = 
+		if( isset($_POST["dynamic_values"]) ){
+			foreach ($_POST["dynamic_values"] as $key => $value) {
+				$vals = explode(",", $value);
+				// $_POST["dynamic_values"][$key] = $vals;
+				if( !count($dynamic_values) ){
+					foreach ($vals as $val) {
+						array_push($dynamic_values, array($key => intval($val)));
+					}
+				}else{
+					$tmp = array();
+					foreach ($vals as $val) {
+						foreach ($dynamic_values as $i => $a) {
+							$a[$key] = $val;
+							array_push($tmp, $a);
+						}
+					}
+					$dynamic_values = $tmp;
+				}
+			}
 
-		$this->generateFields($excel, $goods, $fields);
+			foreach ($dynamic_values as $dynVal) {
+				$excel = $this->generateFields($excel, $goods, $fields, $this->getDynObjects($dynVal,$export->good_type_id));
+			}
 
-		// $_POST[]
+		}else{
+			$excel = $this->generateFields($excel, $goods, $fields);
+		}
 
+		$file = $this->writeExcel($excel, $export->name);
 
-
-		// $file = $this->writeExcel($excel);
-
-		// $this->DownloadFile($file,"DromAutoAdd_tires");
-
-		$this->render('adminExport',array(
-			'data'=>$excel
-		));
+		$this->DownloadFile($file, $export->name);
 	}
 
 	public function generateFields($excel, $goods, $fields, $dynObjects = NULL){
@@ -322,7 +340,8 @@ class ExportController extends Controller
 			$row = array();
 			foreach ($fields as $field) {
 				if( $field["TYPE"] == "attr" ){
-					array_push($row, $good->fields_assoc[intval($field["VALUE"]->id)]->value);
+					$obj = ( isset($good->fields_assoc[intval($field["VALUE"]->id)]) )?$good->fields_assoc[intval($field["VALUE"]->id)]:$dynObjects[intval($field["VALUE"]->id)];
+					array_push($row, $obj->value);
 				}else{
 					array_push($row, Interpreter::generate($field["VALUE"]->id,$good,$dynObjects));
 				}
@@ -332,7 +351,7 @@ class ExportController extends Controller
 		return $excel;
 	}
 
-	public function writeExcel($data){
+	public function writeExcel($data,$title = "Новый экспорт"){
 		include_once  Yii::app()->basePath.'/phpexcel/Classes/PHPExcel.php';
 		// include_once  Yii::app()->basePath.'/phpexcel/Classes/PHPExcel/IOFactory.php';
 
@@ -349,8 +368,12 @@ class ExportController extends Controller
 				$page->getStyleByColumnAndRow($j,$i+1)->getAlignment()->setWrapText(true);
 			}
 		}
-		$page->setTitle("Фотодоска"); // Заголовок делаем "Example"
-		$page->getColumnDimension('C')->setWidth(80);
+		$page->setTitle($title); // Заголовок делаем "Example"
+		
+		for($col = 'A'; $col !== 'Z'; $col++) {
+		    $page->getColumnDimension($col)->setAutoSize(true);
+		}
+
 		/* Начинаем готовиться к записи информации в xlsx-файл */
 		$objWriter = PHPExcel_IOFactory::createWriter($phpexcel, 'Excel2007');
 		/* Записываем в файл */

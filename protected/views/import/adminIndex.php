@@ -7,17 +7,22 @@
 )); ?>
 
 	<?php echo $form->errorSummary($model); ?>
-	<ul>
-	<? foreach ($model as $i => $item): ?>
-		<li>
-			<input type="radio" id="GoodType-<?=$item->id?>" name="GoodTypeId" value="<?=$item->id?>">
-			<label for="GoodType-<?=$item->id?>"><?=$item->name?></label>
-		</li>
-	<? endforeach; ?>
-	</ul>	
-	<a href="#" data-path="<? echo Yii::app()->createUrl('/uploader/getForm',array('maxFiles'=>1,'extensions'=>'*', 'title' => 'Загрузка файла "Excel"', 'selector' => '.b-excel-input') ); ?>" class="b-get-image" >Загрузить файл</a>
+	<div>
+		<div class="b-choosable" style="width: 200px;">
+			<h3>Тип товара</h3>
+			<ul class="b-choosable-values">
+			<? foreach ($model as $i => $item): ?>
+				<li <? if($i == 0): ?>class="selected" <? endif; ?>data-id="<?=$item->id?>"><?=$item->name?></li>
+			<? endforeach; ?>
+			</ul>	
+		</div>
+	</div>
+	<a href="#" data-path="<? echo Yii::app()->createUrl('/uploader/getForm',array('maxFiles'=>1,'extensions'=>'xls,xlsx', 'title' => 'Загрузка файла "Excel"', 'selector' => '.b-excel-input') ); ?>" class="b-get-image b-get-xls" ><img class="b-import-image" src="/images/excel.png" alt=""><span>Загрузить файл</span></a>
 	<input type="hidden" name="excel_name" class="b-excel-input">
-	<input type="submit" value="Далее">
+	<div>
+		<a href="#" id="b-next" onclick="$('#import-step1').submit();" class="hidden b-import-butt b-butt">Импортировать</a>
+	</div>
+	<input type="hidden" name="GoodTypeId" id="GoodTypeId">
 <?php $this->endWidget(); ?>
 
 

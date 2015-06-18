@@ -32,11 +32,10 @@
         </div>
     </div>
 
-	<div class="row buttons">
-		<?php echo CHtml::submitButton('Перейти к предпросмотру'); ?>
+	<div class="row buttons" style="text-align: center;">
+        <a href="#" onclick="$('#import-step2').submit();" style="float:none;" class="b-butt">Перейти к предпросмотру</a>
 		<input type="hidden" name="excel_path" value="<?=$excel_path?>">
         <input type="hidden" name="GoodTypeId" value="<?=$GoodTypeId?>">
-		<input type="button" value="Отменить">
 	</div>
 
 <?php $this->endWidget(); ?>

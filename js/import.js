@@ -5,24 +5,23 @@ $(document).ready(function(){
 
     // Первый шаг --------------------------------------------------- Первый шаг
     if( $("#import-step1").length ){
-        $("input[name='GoodTypeId']").eq(0).attr("checked","checked");
-        $(".b-excel-input").change(function(){
-            $('input[type="submit"]').attr('disabled',false);
+        $("#import-step1").submit(function(){
+            $("#GoodTypeId").val($(".b-choosable-values li.selected").attr("data-id"));
         });
-        $("#import-step1").validate({
-            ignore: ""
-        });
-        $("#import-step1").submit(function(e,a){
-            if( $(this).valid() && !$(this).find("input[type=submit]").hasClass("blocked") ){
-                var $form = $(this),
-                    url = $("#import-step1").attr("action");
 
-                $(this).find("input[type=submit]").addClass("blocked");
+        $("input[name='excel_name']").change(function(){
+            if( $(this).val() != "" ){
+                $(".b-import-butt").removeClass("hidden");
             }else{
-                return false;
+                $(".b-import-butt").addClass("hidden");
             }
         });
     }
+
+    $(".b-choosable-values li").click(function(){
+        $(".b-choosable-values li").removeClass("selected");
+        $(this).addClass("selected");
+    });
     // Первый шаг --------------------------------------------------- Первый шаг
 
     // Второй шаг --------------------------------------------------- Второй шаг

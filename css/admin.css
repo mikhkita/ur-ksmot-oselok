@@ -77,10 +77,14 @@ textarea:focus{
 input,select{
     outline: none;
 }
-select
-{
-    height: 22px;
-    border: 1px solid #c8c8c8;
+select{
+    border-radius: 5px;
+    background-color: #FFF5D1;
+    border: 1px solid #452716;
+    padding: 5px 10px;
+    font-size: 14px;
+    display: inline-block;
+    min-width: 200px;
 }
 /* clearfix */  
 .clearfix:after 
@@ -549,14 +553,12 @@ h1{
         .fancybox-skin input,
         .fancybox-skin select{
             border-radius: 5px;
-            /*margin-top: 5px;*/
             background-color: #FFF5D1;
             border: 1px solid #452716;
             padding: 5px 10px;
             font-size: 14px;
             display: block;
             width: 420px;
-            /*height: 32px;*/
         }
         .fancybox-skin select{
             width: auto;
@@ -1563,6 +1565,39 @@ li.ui-autocomplete-category {
         .b-log li.success{
             color: #452716;
         }
+.b-get-xls{
+    margin-bottom: 10px;
+    border: 2px solid #452716;
+    border-radius: 10px;
+    /*padding: 20px;*/
+    height: 200px;
+    width: 200px;
+    text-align: center;
+    margin-top: 20px;
+    display: inline-block;
+    background-size: 120px;
+}
+    .b-get-xls img{
+        width: 120px;
+        margin-top: 20px;
+    }
+    .b-import-image{
+        opacity: 0.3;
+    }
+    .b-import-image.active{
+        opacity: 1;
+    }
+    .b-get-xls span{
+        text-decoration: underline;
+        margin-top: 15px;
+        display: inline-block;
+    }
+        .b-get-xls:hover span{
+            text-decoration: none;
+        }
+    .b-import-butt{
+        float: none;
+    }
 .b-debug{
     position: absolute;
     font-size: 10px;
@@ -1588,31 +1623,38 @@ li.ui-autocomplete-category {
         display: inline-block;
         text-align: left;
     }
-        .b-choose-dynamic .left{
+        .b-choosable{
             border: 1px solid #452716;
             padding: 20px;
             margin: 10px;
+            display: inline-block;
         }
+            .b-choosable h3{
+                font-size: 16px;
+                margin-bottom: 20px;
+            }
+            .b-choosable select{
+                margin-bottom: 20px;
+            }
             .b-choose-dynamic .b-error{
                 display: none;
                 margin-top: 15px;
                 color: #c00;
             }
-            .b-dynamic-values{
-                margin-top: 20px;
+            .b-choosable-values{
                 border: 1px solid #452716;
             }
-                .b-dynamic-values li{
+                .b-choosable-values li{
                     cursor: pointer;
                     padding: 5px 10px;
                     text-align: left;
                     list-style: none;
                     border-bottom: 1px solid #452716;
                 }
-                    .b-dynamic-values li:last-child{
+                    .b-choosable-values li:last-child{
                         border-bottom: 0px;
                     }
-                .b-dynamic-values li.selected{
+                .b-choosable-values li.selected{
                     background-color: #D26A44 !important;
                     color: #F5E9BC !important;
                     text-shadow: 0 1px 1px rgba(0,0,0,0.5);

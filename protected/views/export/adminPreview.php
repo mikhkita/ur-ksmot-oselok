@@ -32,7 +32,10 @@
 		<tbody id="target">
 			<? if( count($data->goods) ): ?>
 				<? foreach ($data->goods as $i => $item): ?>
-					<? $attr = $item->fields_assoc; ?>
+					<? 
+						$attr = $item->fields_assoc;
+						$attr = $attr + $dynObjects;
+					?>
 					<tr data-id="<?=$item->id?>">
 						<? foreach ($fields as $field): ?>
 							<td>

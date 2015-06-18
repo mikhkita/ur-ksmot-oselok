@@ -190,9 +190,9 @@ class Controller extends CController
         $criteria->with = array("goodTypes","variants");
         $criteria->condition = "goodTypes.good_type_id=".$good_type_id." AND dynamic=1";
         $modelDyn = Attribute::model()->findAll($criteria);
-
+        
         foreach ($modelDyn as $key => $value) {
-            $curObj = AttributeVariant::model()->findByPk($_POST["dynamic"][$value->id]);
+            $curObj = AttributeVariant::model()->findByPk($dynamic[$value->id]);
             $dynObjects[$value->id] = (object) array("value"=>$curObj->value,"variant_id"=>$curObj->id);
         }
 
