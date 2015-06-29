@@ -23,7 +23,7 @@
 						<!-- <a href="<?php echo Yii::app()->createUrl('/'.$this->adminMenu["cur"]->code.'/admindelete',array('id'=>$item->id))?>" class="ajax-form ajax-delete b-tool b-tool-delete" title="Удалить <?=$this->adminMenu["cur"]->vin_name?>"></a> -->
 					</td>
 				</tr>
-			<? endforeach; ?>
+			<? endforeach; ?>			
 		<? else: ?>
 			<tr>
 				<td colspan=10>Пусто</td>

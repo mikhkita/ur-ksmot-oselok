@@ -307,13 +307,18 @@ input:-moz-placeholder {
 				.b-main .b-block .b-main-items .pagination ul:nth-child(1) li:last-child {
 					margin-bottom: 0;
 				}
-					.b-main .b-block .b-main-items .pagination ul:nth-child(1) li div{
-						margin-left: 20px;
+					.b-main .b-block .b-main-items .pagination ul:nth-child(1) li .img{
+						width: 140px;
+						height: 92px;
+						background-size: cover;
+						background-position: 50% 50%;
+						
 					}
-						.b-main .b-block .b-main-items .pagination ul:nth-child(1) li h3{
-							margin-top: 8px;
-	  						
-						}
+					.b-main .b-block .b-main-items .pagination ul:nth-child(1) li .desc{
+						padding: 10px 20px;
+						width: 480px;
+						box-sizing: border-box;
+					}
 						.b-main .b-block .b-main-items .pagination ul:nth-child(1) li h4{
 							margin-top: 5px;
 						}
