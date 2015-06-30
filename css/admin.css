@@ -1659,3 +1659,16 @@ li.ui-autocomplete-category {
                     color: #F5E9BC !important;
                     text-shadow: 0 1px 1px rgba(0,0,0,0.5);
                 }
+
+.photo-preview {
+    margin-top: 20px;
+
+}
+    .photo-preview li{
+        display: inline-block;
+        width: 200px;
+        height: 200px;
+        background-size: cover;
+        background-position: 50% 50%;
+        margin: 20px;
+    }

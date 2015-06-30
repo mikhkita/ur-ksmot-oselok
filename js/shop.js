@@ -70,7 +70,7 @@ $(document).ready(function(){
         progress.start(3);
         $.ajax({
             type: 'GET',
-            url: "/admin/shop/detail?partial=true&id="+$(this).attr("data-id"),
+            url: "/shop/detail?partial=true&id="+$(this).attr("data-id"),
             success: function(msg){
                 progress.end(function(){
                     $('.b-content').html(msg);
@@ -84,7 +84,7 @@ $(document).ready(function(){
         progress.start(3);
         $.ajax({
             type: 'GET',
-            url: "/admin/shop/filter?partial=true",
+            url: "/shop/filter?partial=true",
             data: $("#filter").serialize(),
             success: function(msg){
                 progress.end(function(){

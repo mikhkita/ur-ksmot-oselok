@@ -15,7 +15,7 @@ class ShopController extends Controller
 	{
 		return array(
 			array('allow',
-				'actions'=>array('adminIndex','adminFilter','adminDetail'),
+				'actions'=>array('index','filter','detail'),
 				'roles'=>array('manager'),
 			),
 			array('allow',
@@ -28,7 +28,7 @@ class ShopController extends Controller
 		);
 	}
 
-	public function actionAdminIndex($partial = false)
+	public function actionIndex($partial = false)
 	{
 			$criteria=new CDbCriteria();
 	   		$count=Good::model()->count($criteria);
@@ -37,18 +37,14 @@ class ShopController extends Controller
 	   		$pages->pageSize=10;
 	   		$pages->applyLimit($criteria);
 			$criteria->select = 'id';
-		    $criteria->with = array(
-		    	'fields' 
-		    	=> array(
-		    		'select'=> array('int_value','varchar_value','float_value','text_value','attribute_id','variant_id')
-		    		)
-		    );
+		    $criteria->with = array('fields');
 			$model = Good::model()->findAll($criteria);
 			$goods = array();
 			// print_r($model);
 			foreach ($model as $i => $good) {
 				$temp = array();
 				$temp['id'] = $good->id;
+				$temp['CODE'] = $good->fields_assoc[3]->value;
 				$temp['TIRE_WIDTH'] = $good->fields_assoc[7]->value;
 				$temp['TIRE_PROFILE'] = $good->fields_assoc[8]->value;
 				$temp['DIAMETER'] = $good->fields_assoc[9]->value;
@@ -69,7 +65,7 @@ class ShopController extends Controller
 	            'variants'
 	             => array(
 	                'select' => array('int_value','varchar_value','float_value'),
-	                'condition' => 'attribute_id=7 OR attribute_id=8 OR attribute_id=9 OR attribute_id=23  OR attribute_id=28  OR attribute_id=10  OR attribute_id=16  OR attribute_id=26  OR attribute_id=27'
+	                'condition' => 'attribute_id=7 OR attribute_id=8 OR attribute_id=9 OR attribute_id=23 OR attribute_id=28 OR attribute_id=10 OR attribute_id=16 OR attribute_id=26 OR attribute_id=27'
 	                )
 	            );
 
@@ -84,7 +80,7 @@ class ShopController extends Controller
 				$filter[$attr->name] = $temp;			
 			}
 		if( !$partial ){
-			$this->render('adminIndex',array(
+			$this->render('index',array(
 				'goods'=>$goods,
 				'filter' =>$filter,
 				'pages' => $pages
@@ -97,7 +93,7 @@ class ShopController extends Controller
 		}
 	}
 
-	public function actionAdminFilter($partial = false)
+	public function actionFilter($partial = false)
 	{
 
 			$criteria=new CDbCriteria();
@@ -145,9 +141,9 @@ class ShopController extends Controller
 		    $criteria->select = 'id';
 		    $criteria->with = array(
 		    	'fields' 
-		    	=> array(
-		    		'select'=> array('int_value','varchar_value','float_value','text_value','attribute_id','variant_id')
-		    		)
+		    	// => array(
+		    	// 	'select'=> array('int_value','varchar_value','float_value','text_value','attribute_id','variant_id')
+		    	// 	)
 		    );
 		   	
 			$model=Good::model()->findAllbyPk($goods_id,$criteria);
@@ -176,7 +172,7 @@ class ShopController extends Controller
 			}
 			uasort($goods, 'cmp');
 			if( !$partial ){
-				$this->render('adminIndex',array(
+				$this->render('index',array(
 					'goods'=>$goods,
 					'filter' =>$filter,
 					'pages' => $pages
@@ -189,26 +185,38 @@ class ShopController extends Controller
 			}		
 	}
 	
-	public function actionAdminDetail($partial = false,$id)
+	public function actionDetail($partial = false,$id = NULL)
 	{
-		// if(isset($id)) {
-		// 	$model = Good::model()->findByPk($id);
-		// 	$good = array();
-		// 	foreach ($model->fields as $field) {
-		// 		$good[$field->attribute->code] = array();
-		// 		$good[$field->attribute->code]['NAME'] = $field->attribute->name;
-		// 		$good[$field->attribute->code]['VALUE'] = $field->value;
-		// 	}
-		// 	if( !$partial ){
-		// 		$this->render('adminDetail',array(
-		// 			'good'=>$good
-		// 		));
-		// 	}else{
-		// 		$this->renderPartial('adminDetail',array(
-		// 			'good'=>$good
-		// 		));
-		// 	}
-		// }
+		if($id) {
+			$criteria=new CDbCriteria();
+		    $criteria->select = 'id';
+		    $criteria->with = array('fields');
+		   	
+			$model=Good::model()->findbyPk($id,$criteria);
+			$good = array();
+
+			$good['TIRE_WIDTH'] = $model->fields_assoc[7]->value;
+			$good['TIRE_PROFILE'] = $model->fields_assoc[8]->value;
+			$good['DIAMETER'] = $model->fields_assoc[9]->value;
+			$good['SEASON'] = $model->fields_assoc[23]->value;
+			$good['WEAR'] = $model->fields_assoc[29]->value;
+			$good['AMOUNT'] = $model->fields_assoc[28]->value;
+			$good['TIRE_BRAND'] = $model->fields_assoc[16]->value;
+			$good['TIRE_MODEL'] = $model->fields_assoc[17]->value;
+			$good['COUNTRY'] = $model->fields_assoc[11]->value;
+			$good['CONDITION'] = $model->fields_assoc[26]->value;
+			$good['PRICE'] = $model->fields_assoc[20]->value;
+;
+			if( !$partial ){
+				$this->render('detail',array(
+					'good'=>$good
+				));
+			}else{
+				$this->renderPartial('detail',array(
+					'good'=>$good
+				));
+			}
+		}
 	}
 	public function loadModel($id)
 	{

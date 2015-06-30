@@ -14,16 +14,19 @@
 <script>
 $(function () {
     var maxfiles = <?=( (isset($_GET["maxFiles"]) && intval($_GET["maxFiles"]) > 0 && ($_GET["maxFiles"]) < 10000)?$_GET["maxFiles"]:"1")?>,
-        error = false;
-
+        error = false,uniq_name = true, multi_select = false;
+        if('<?=$_GET['selector']?>' == '.photo') {
+            uniq_name = false;
+            multi_select = true;
+        }
     $("#uploaderPj").pluploadQueue({
         runtimes : 'html5',                          
         url : "<? echo Yii::app()->createUrl('/uploader/upload'); ?>",
         max_file_size : '30mb',
         max_file_count: maxfiles,
         chunk_size : '1mb',
-        unique_names : true,
-        multi_selection:false,
+        unique_names : uniq_name,
+        multi_selection:multi_select,
         resize: {
             width: 800,
             height: 600
@@ -55,6 +58,11 @@ $(function () {
                     $(".plupload_filelist .plupload_done").each(function(){
                         tmpArr.push($(this).find("input").eq(0).val());
                     });
+                    <?if(isset($_GET['tmpPath'])):?>
+                        $.each( tmpArr, function( index, item ) {
+                            tmpArr[index] = "<?=$_GET['tmpPath']?>/"+item;
+                        });
+                    <?endif;?>
                     $("<?=$_GET['selector']?>").val(tmpArr.join(',')).trigger("change");
                     $(".plupload_save").click();
                     $(".b-save-buttons").fadeIn(300);
