@@ -103,7 +103,7 @@ class Good extends CActiveRecord
 		parent::afterFind();
 
 		if( count($this->fields) ){
-			$fields = [];
+			$fields = array();
 
 			foreach ($this->fields as $field) {
 				if( isset($fields[$field->attribute_id]) ){

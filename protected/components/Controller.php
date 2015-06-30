@@ -102,7 +102,7 @@ class Controller extends CController
 
         $sql = "INSERT INTO `$tableName` ".$structure." VALUES ";
 
-        $vals = [];
+        $vals = array();
         foreach ($values as $value) {
             $item = array();
             foreach ($value as $el) {

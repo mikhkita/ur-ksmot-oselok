@@ -143,7 +143,7 @@ class GoodTypeController extends Controller
 
 			$sql = "INSERT INTO `$tmpName` (`good_type_id`,`attribute_id`,`sort`) VALUES ";
 
-			$values = [];
+			$values = array();
 			$sort = 10;
 			foreach ($_POST["attributes"] as $key => $value) {
 				$values[] = "('".$model->id."','".$key."','".$sort."')";

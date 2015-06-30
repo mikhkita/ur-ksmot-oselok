@@ -225,13 +225,13 @@ class ImportController extends Controller
 			if( isset($_POST["IMPORT"]["ITEMS"]) ){
 				$model = GoodType::model()->findByPk($_POST["IMPORT"]["GOODTYPEID"]);
 				$import = $_POST["IMPORT"];
-				$titles = [];
-				$newFields = [];
+				$titles = array();
+				$newFields = array();
 				$AttributeVariantTableName = AttributeVariant::tableName();
 				$GoodAttributeTableName = GoodAttribute::tableName();
 
-				$addVariants = [];
-				$addFields = [];
+				$addVariants = array();
+				$addFields = array();
 				$goodCode;
 
 				// Получаем массив заголовков с их вариантами

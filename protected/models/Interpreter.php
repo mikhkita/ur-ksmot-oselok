@@ -29,7 +29,7 @@ class Interpreter extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, template, good_type_id, rule_code', 'required'),
+			array('name, template, good_type_id', 'required'),
 			array('width', 'numerical', 'integerOnly'=>true),
 			array('name, rule_code', 'length', 'max'=>255),
 			array('template', 'length', 'max'=>2000),
@@ -126,7 +126,7 @@ class Interpreter extends CActiveRecord
 	public function getArrayValue($value,$type) {
         if( $value[0] == "{" && $value[strlen($value)-1] == "}" ){
             $tmp = explode("|", substr($value, 1,-1));
-            $value = ($type == "REPLACE")?[0=>array(),1=>array()]:[];
+            $value = ($type == "REPLACE")?array(0=>array(),1=>array()):array();
             foreach ($tmp as $v) {
                 $arr = explode("=", $v);
                 if( count($arr) == 2 ){
@@ -166,7 +166,7 @@ class Interpreter extends CActiveRecord
 
 		foreach ($rules as $i => $rule) {
 			$tmp = explode(";", $rule);
-			$params = [];
+			$params = array();
 			foreach ($tmp as $param) {
 				$index = stripos($param, "=");
 				if( $index > 0 ){

@@ -62,7 +62,8 @@ class SiteController extends Controller
 	 * Displays the login page
 	 */
 	public function actionIndex(){
-		$this->redirect(array('login'));
+		// $this->redirect(array('login'));
+        $this->renderPartial('index',array());
 	}
 
 	public function actionLogin()
