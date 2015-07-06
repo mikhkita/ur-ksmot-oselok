@@ -20,28 +20,13 @@
     <?php foreach ($this->scripts AS $script): ?><script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/<?php echo $script?>.js"></script><? endforeach; ?>
 </head>
 <body> 
-	<? if(Yii::app()->params['debug']): ?>
-	<div class="b-debug"><?=$this->debugText?></div>
-	<? endif; ?>
+	
     <div class="b b-header">
         <div class="b-block">
         <img src="<?php echo Yii::app()->request->baseUrl; ?>/i/logo.png" alt="">
         </div>
     </div>
-    <div class="b b-menu">
-        <div class="b-block clearfix">
-            <ul class="hor left clearfix">
-                <li class="active">Диски</li>
-                <li>Шины</li>
-                <li>Контакты</li>
-            </ul>
-            <form class="right" action="#" method="POST" novalidate="novalidate">
-                <input type="text" name="search" placeholder="Поиск">
-                <img src="<?php echo Yii::app()->request->baseUrl; ?>/i/search-shop.png" alt="">
-            </form>
-        </div>
-    </div>
-    <div class='b b-content'><?php echo $content;?></div>
+    <?php echo $content;?>
     <div class="b b-bottom">
         <div class="b-block">
             <h3>© 2015 Михайло и Ко</h3>

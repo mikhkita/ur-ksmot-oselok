@@ -1,13 +1,15 @@
 <div class="pagination">
     <ul>
     	<? foreach ($goods as $good): ?>
-			<li class="clearfix good" data-id='<?=$good["id"]?>'>
-                <div class="img left" style="background-image: url(<?=Yii::app()->request->baseUrl?>/<?=Yii::app()->params["imageFolder"]?>/tires/<?=$good["CODE"]?>/<?=$good["CODE"]?>_00.jpg);"></div>
-           		<div class="desc left">
-                	<h3><?=$good["SEASON"]?> <?=$good["TIRE_BRAND"]?> <?=$good["TIRE_MODEL"]?> <?=$good["TIRE_WIDTH"]?>/<?=$good["TIRE_PROFILE"]?>/<?=$good["DIAMETER"]?> (<?=$good["COUNTRY"]?>) <?=$good["CONDITION"]?></h3>
-                	<h4><?=$good["TIRE_WIDTH"]?>/<?=$good["TIRE_PROFILE"]?>/<?=$good["DIAMETER"]?>, <?=$good["SEASON"]?>, износ <?=$good["WEAR"]?>%, <?=$good["AMOUNT"]?> шт.</h4>
-                	<h5><?=$good["PRICE"]?> руб.<span> + доставка 500 руб.</span></h5>
-           	    </div>
+			<li class="clearfix good">
+               <a href="<?=Yii::app()->createUrl('/shop/detail',array("id"=>$good->id))?>">
+                    <div class="img" style="background-image: url(<?=$this->getImages($good)[0]?>);"></div>
+                <div class="desc">
+                    <h3><?=Interpreter::generate(8, $good)?></h3>
+                    <h4><?=Interpreter::generate(13, $good)?></h4>
+                    <h5><?=$good->fields_assoc[20]->value?> руб.</h5>
+                </div>
+            </a>
 			</li>
 		<? endforeach; ?>
     </ul>  
@@ -21,3 +23,5 @@
         'htmlOptions' => array("class"=>"yiiPager hor clearfix")
     )) ?>
 </div>  
+
+

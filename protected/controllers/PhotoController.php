@@ -15,7 +15,7 @@ class PhotoController extends Controller
 	{
 		return array(
 			array('allow',
-				'actions'=>array('adminIndex','adminStep2','adminStep3','adminImport'),
+				'actions'=>array('adminIndex'),
 				'roles'=>array('manager'),
 			),
 			array('allow',
@@ -30,15 +30,18 @@ class PhotoController extends Controller
 
 	public function actionAdminIndex($partial = false,$error = NULL)
 	{
+		$model = GoodType::model()->findAll();
 		if(isset($_POST['photo'])) {
 			$files = array();
+			if($_POST['GoodTypeId']==1) $_POST['GoodTypeId'] = 'tires';
+			if($_POST['GoodTypeId']==2) $_POST['GoodTypeId'] = 'discs';
 			foreach ($_POST['photo'] as $img) {
 				$img_name = explode("/",$img);
 				$img_name = array_pop($img_name);
 				$img_code = explode(".",$img_name);
 				// if(strripos($img_code[0],"_")) {
 					$img_code = explode("_",$img_code[0]);
-					$dir = Yii::app()->params["imageFolder"]."/"."tires/".$img_code[0];
+					$dir = Yii::app()->params["imageFolder"]."/".$_POST['GoodTypeId']."/".$img_code[0];
 					if (!is_dir($dir)) mkdir($dir,0777, true);
 					copy( $img, $dir."/".$img_name);
 				// }
@@ -52,7 +55,8 @@ class PhotoController extends Controller
 			header('Location: '.$this->createUrl('/admin/photo'));
 		}
 		$this->render('adminIndex',array(
-			'error' => $error
+			'error' => $error,
+			'model' => $model
 		));
 
 		
