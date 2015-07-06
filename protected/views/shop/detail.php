@@ -9,9 +9,11 @@
 
 			<div id="bg-img" style="background-image:url('<?=$imgs[0]?>');"><a class="fancy-img" href="<?=$imgs[0]?>"></a></div>
 			<ul class="hor clearfix">
-				<? foreach ($imgs as $img): ?>
-				<li style="background-image:url('<?=$img?>');"><a href="<?=$img?>"></a></li>
-				<? endforeach; ?>
+				<? if (count($imgs)>1): ?>
+					<? foreach ($imgs as $img): ?>
+						<li style="background-image:url('<?=$img?>');"><a href="<?=$img?>"></a></li>
+					<? endforeach; ?>
+				<? endif; ?>
 			</ul>
 		</div>
 		<div class="desc left">
