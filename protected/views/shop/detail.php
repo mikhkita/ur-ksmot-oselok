@@ -14,7 +14,7 @@
 <div class="b b-item">
 	<div class="b-block clearfix">
 		<ul class="sub-menu hor clearfix">
-			<li id="go-back"><?if( $_GET['type']==1 ) echo "Шины"?><?if( $_GET['type']==2 ) echo "Диски"?> <span>><span></li>
+			<li id="go-back"><?echo ( $_GET['type']==1 )?"Шины":"Диски"?> <span>><span></li>
 		</ul>
 		
 		<h2><?=Interpreter::generate(48, $good)?></h2>
