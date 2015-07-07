@@ -315,6 +315,7 @@ input:-moz-placeholder {
 				.b-main .b-block .b-main-items .pagination ul:nth-child(1) li{
 					display: table;
 					width: 620px;
+					overflow: hidden;
 					margin-bottom: 12px;
 					border-bottom: 3px solid #e3e4e8;
 					border-radius: 5px;
