@@ -23,7 +23,7 @@
 	
     <div class="b b-header">
         <div class="b-block">
-        <img src="<?php echo Yii::app()->request->baseUrl; ?>/i/logo.png" alt="">
+        <a href="http://koleso.tomsk.ru/"><img src="<?php echo Yii::app()->request->baseUrl; ?>/i/logo.png" alt=""></a>
         </div>
     </div>
     <?php echo $content;?>

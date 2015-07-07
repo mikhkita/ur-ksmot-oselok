@@ -1,7 +1,20 @@
+<div class="b b-menu">
+    <div class="b-block clearfix">
+        <ul class="hor left clearfix">
+            <li <? if( $_GET['type']==1 ) echo 'class="active" onclick="return false;"'; ?> ><a href="<?=Yii::app()->createUrl('/shop/index',array("type"=>"1"))?>">Шины</a></li>
+            <li <? if( $_GET['type']==2 ) echo 'class="active" onclick="return false;"'; ?> ><a href="<?=Yii::app()->createUrl('/shop/index',array("type"=>"2"))?>">Диски</a></li>    
+            <li><a href="#">Контакты</a></li>
+        </ul>
+       <!--  <form class="right" action="#" method="POST" novalidate="novalidate">
+            <input type="text" name="search" placeholder="Поиск">
+            <img src="<?php echo Yii::app()->request->baseUrl; ?>/i/search-shop.png" alt="">
+        </form> -->
+    </div>
+</div>
 <div class="b b-item">
 	<div class="b-block clearfix">
 		<ul class="sub-menu hor clearfix">
-			<li>Шины <span>><span></li>
+			<li id="go-back"><?if( $_GET['type']==1 ) echo "Шины"?><?if( $_GET['type']==2 ) echo "Диски"?> <span>><span></li>
 		</ul>
 		
 		<h2><?=Interpreter::generate(8, $good)?></h2>

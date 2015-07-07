@@ -415,6 +415,7 @@ input:-moz-placeholder {
 
 			.b-item .b-block .sub-menu li {
 				margin-right: 5px;
+				cursor: pointer;
 			}
 				.b-item .b-block .sub-menu li span{
 					color: #939393;

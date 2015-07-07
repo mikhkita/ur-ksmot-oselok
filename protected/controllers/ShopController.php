@@ -84,7 +84,7 @@ class ShopController extends Controller
                 'variants'
                  => array(
                     'select' => array('int_value','varchar_value','float_value'),
-                    'condition' => 'attribute_id=7 OR attribute_id=8 OR attribute_id=9 OR attribute_id=23 OR attribute_id=28 OR attribute_id=10 OR attribute_id=16 OR attribute_id=26 OR attribute_id=27 OR attribute_id=28'
+                    'condition' => 'attribute_id=7 OR attribute_id=8 OR attribute_id=9 OR attribute_id=23 OR attribute_id=16'
                     )
                 );
            	}
@@ -97,7 +97,8 @@ class ShopController extends Controller
                     )
                 );
            	}
-            $model = Attribute::model()->findAll($criteria);
+           	$criteria->order="attribute_id";
+            $model = Attribute::model()->findAll($criteria); 
             $filter = array();
             foreach ($model as $attr) {
                 $temp = array();
@@ -145,11 +146,20 @@ class ShopController extends Controller
 			    }
 			    return ($a->fields_assoc[20]->value < $b->fields_assoc[20]->value) ? -1 : 1;
 			}
+			$criteria=new CDbCriteria();
+            $criteria->condition = 'attribute_id=20';
+            $criteria->select = array('int_value');
+            $criteria->order = 'int_value ASC';
+			$model = GoodAttribute::model()->findAll($criteria);
+			$price_min = $model[0]->int_value;
+			$price_max = array_pop($model)->int_value;
 			uasort($goods, 'cmp');
 			if( !$partial ){
 				$this->render('index',array(
 					'goods'=>$goods,
 					'filter' =>$filter,
+					'price_min' => $price_min,
+					'price_max' => $price_max,
 					'pages' => $dataProvider->getPagination()
 				));
 			}else{
