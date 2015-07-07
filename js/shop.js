@@ -1,19 +1,21 @@
 $(document).ready(function(){	
     // var progress = new KitProgress("#FFF",2);
-    var price_min = 0,
-    price_max = 36000;
+    var price_min_def = $( "#price_min" ).val()*1,
+    price_max_def = $( "#price_max" ).val()*1,
+    price_max = price_max_def*0.7,price_min=price_min_def,type;
     if(location.search!='') {
         var price = decodeURIComponent(location.search.substr(1)).split('&');
         $.each( price, function( key, value ) {
-            if(value.indexOf('price-min') + 1) price_min = value.split('=').pop();
-            if(value.indexOf('price-max') + 1) price_max = value.split('=').pop();
+            if(value.indexOf('price-min') + 1) price_min = value.split('=').pop()*1;
+            if(value.indexOf('price-max') + 1) price_max = value.split('=').pop()*1;
+            if(value.indexOf('type') + 1) type = value.split('=').pop()*1;
         });
         
     }
 	$( "#slider-range" ).slider({
 		range: true,
-		min: 0,
-		max: 50000,
+		min: price_min_def,
+		max: price_max_def,
 		values: [ price_min, price_max ],
 		slide: function( event, ui ) {
 			$( "#amount-l" ).text( ui.values[ 0 ] );
@@ -41,6 +43,10 @@ $(document).ready(function(){
     $("#filter label").click(function(){
         $("#filter-search").remove();
         $(this).closest(".filter-cont").append('<input type="submit" id="filter-search" value="Поиск">');
+    });
+
+    $("#go-back").click(function(){
+        window.history.back();
     });
  	// $(".b-main-items").on("click","#yw0 li a", function(){
   //       progress.setColor("#D26A44");

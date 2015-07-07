@@ -2,7 +2,7 @@
     <ul>
     	<? foreach ($goods as $good): ?>
 			<li class="clearfix good">
-               <a href="<?=Yii::app()->createUrl('/shop/detail',array("id"=>$good->id))?>">
+               <a href="<?=Yii::app()->createUrl('/shop/detail',array('type'=> $_GET['type'],"id"=>$good->id))?>">
                     <div class="img" style="background-image: url(<?=$this->getImages($good)[0]?>);"></div>
                 <div class="desc">
                     <h3><?=Interpreter::generate(8, $good)?></h3>
