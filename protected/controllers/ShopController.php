@@ -61,7 +61,7 @@ class ShopController extends Controller
         	$dataProvider = new CActiveDataProvider('Good', array(
 									    'criteria'=>$criteria,
 									    'pagination'=>array(
-									        'pageSize'=>10
+									        'pageSize'=>12
 									    )
 									));
 									$model = $dataProvider->getData();
@@ -122,7 +122,7 @@ class ShopController extends Controller
 		    // 	// 	)
 		    // );
 		   	
-			$goods=Good::model()->findAllbyPk($goods_id,$criteria);
+			$goods=Good::model()->with("fields")->findAllbyPk($goods_id);
 			// $goods = array();
 			// foreach ($model as $i => $good) {
 			// 	$temp = array();

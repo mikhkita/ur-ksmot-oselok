@@ -5,7 +5,7 @@
                <a href="<?=Yii::app()->createUrl('/shop/detail',array('type'=> $_GET['type'],"id"=>$good->id))?>">
                     <div class="img" style="background-image: url(<?=$this->getImages($good)[0]?>);"></div>
                 <div class="desc">
-                    <h3><?=Interpreter::generate(8, $good)?></h3>
+                    <h3><?=Interpreter::generate(48, $good)?></h3>
                     <h4><?=Interpreter::generate(13, $good)?></h4>
                     <h5><?=$good->fields_assoc[20]->value?> руб.</h5>
                 </div>

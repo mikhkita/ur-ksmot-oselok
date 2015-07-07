@@ -140,6 +140,8 @@ class Controller extends CController
             }
             $this->cache[$i] = $tmp;
         }
+        // print_r();
+        // die();
         return (isset($this->cache[$i]["VALUES"][$attrs[$this->cache[$i]["ATTRS"]["attr_1"]]->variant_id]))?$this->cache[$i]["VALUES"][$attrs[$this->cache[$i]["ATTRS"]["attr_1"]]->variant_id]:"";
     }
 

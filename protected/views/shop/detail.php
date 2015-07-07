@@ -17,7 +17,7 @@
 			<li id="go-back"><?if( $_GET['type']==1 ) echo "Шины"?><?if( $_GET['type']==2 ) echo "Диски"?> <span>><span></li>
 		</ul>
 		
-		<h2><?=Interpreter::generate(8, $good)?></h2>
+		<h2><?=Interpreter::generate(48, $good)?></h2>
 		<div class="images left">
 
 			<div id="bg-img" style="background-image:url('<?=$imgs[0]?>');"><a class="fancy-img" href="<?=$imgs[0]?>"></a></div>
