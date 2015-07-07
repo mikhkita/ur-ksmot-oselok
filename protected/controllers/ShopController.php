@@ -19,7 +19,7 @@ class ShopController extends Controller
 				'roles'=>array('manager'),
 			),
 			array('allow',
-				'actions'=>array('index'),
+				'actions'=>array('index', 'detail'),
 				'users'=>array('*'),
 			),
 			array('deny',
