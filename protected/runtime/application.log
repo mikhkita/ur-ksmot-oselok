@@ -225,3 +225,107 @@ Stack trace:
 REQUEST_URI=/css/print.css
 HTTP_REFERER=http://dev.koleso.com/admin/shop
 ---
+2015/07/07 14:11:28 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'koleso.user' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `user`.
+2015/07/07 14:11:28 [error] [exception.CDbException] exception 'CDbException' with message 'The table "user" for active record class "User" cannot be found in the database.' in /Users/mikhkita/sites/koleso/framework/db/ar/CActiveRecord.php:2364
+Stack trace:
+#0 /Users/mikhkita/sites/koleso/framework/db/ar/CActiveRecord.php(413): CActiveRecordMetaData->__construct(Object(User))
+#1 /Users/mikhkita/sites/koleso/framework/db/ar/CActiveRecord.php(660): CActiveRecord->getMetaData()
+#2 /Users/mikhkita/sites/koleso/framework/db/ar/CActiveRecord.php(1487): CActiveRecord->getTableSchema()
+#3 /Users/mikhkita/sites/koleso/protected/components/Controller.php(40): CActiveRecord->findByPk('1')
+#4 /Users/mikhkita/sites/koleso/framework/web/CWebApplication.php(281): Controller->init()
+#5 /Users/mikhkita/sites/koleso/framework/web/CWebApplication.php(141): CWebApplication->runController('shop/detail')
+#6 /Users/mikhkita/sites/koleso/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /Users/mikhkita/sites/koleso/index.php(11): CApplication->run()
+#8 {main}
+REQUEST_URI=/shop/detail?id=190
+HTTP_REFERER=http://dev.koleso.com/shop/index?type=1&price-min=0&price-max=36000
+---
+2015/07/07 14:11:33 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'koleso.user' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `user`.
+2015/07/07 14:11:33 [error] [exception.CDbException] exception 'CDbException' with message 'The table "user" for active record class "User" cannot be found in the database.' in /Users/mikhkita/sites/koleso/framework/db/ar/CActiveRecord.php:2364
+Stack trace:
+#0 /Users/mikhkita/sites/koleso/framework/db/ar/CActiveRecord.php(413): CActiveRecordMetaData->__construct(Object(User))
+#1 /Users/mikhkita/sites/koleso/framework/db/ar/CActiveRecord.php(660): CActiveRecord->getMetaData()
+#2 /Users/mikhkita/sites/koleso/framework/db/ar/CActiveRecord.php(1487): CActiveRecord->getTableSchema()
+#3 /Users/mikhkita/sites/koleso/protected/components/Controller.php(40): CActiveRecord->findByPk('1')
+#4 /Users/mikhkita/sites/koleso/framework/web/CWebApplication.php(281): Controller->init()
+#5 /Users/mikhkita/sites/koleso/framework/web/CWebApplication.php(141): CWebApplication->runController('shop/index')
+#6 /Users/mikhkita/sites/koleso/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /Users/mikhkita/sites/koleso/index.php(11): CApplication->run()
+#8 {main}
+REQUEST_URI=/shop/index?type=1&price-min=0&price-max=36000
+HTTP_REFERER=http://dev.koleso.com/shop/index?type=1&price-min=0&price-max=36000&Good_page=24
+---
+2015/07/07 14:11:38 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'koleso.user' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `user`.
+2015/07/07 14:11:38 [error] [exception.CDbException] exception 'CDbException' with message 'The table "user" for active record class "User" cannot be found in the database.' in /Users/mikhkita/sites/koleso/framework/db/ar/CActiveRecord.php:2364
+Stack trace:
+#0 /Users/mikhkita/sites/koleso/framework/db/ar/CActiveRecord.php(413): CActiveRecordMetaData->__construct(Object(User))
+#1 /Users/mikhkita/sites/koleso/framework/db/ar/CActiveRecord.php(660): CActiveRecord->getMetaData()
+#2 /Users/mikhkita/sites/koleso/framework/db/ar/CActiveRecord.php(1487): CActiveRecord->getTableSchema()
+#3 /Users/mikhkita/sites/koleso/protected/components/Controller.php(40): CActiveRecord->findByPk('1')
+#4 /Users/mikhkita/sites/koleso/framework/web/CWebApplication.php(281): Controller->init()
+#5 /Users/mikhkita/sites/koleso/framework/web/CWebApplication.php(141): CWebApplication->runController('shop/index')
+#6 /Users/mikhkita/sites/koleso/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /Users/mikhkita/sites/koleso/index.php(11): CApplication->run()
+#8 {main}
+REQUEST_URI=/shop/index?type=1&price-min=0&price-max=36000&Good_page=24
+HTTP_REFERER=http://dev.koleso.com/shop/index?type=1&price-min=0&price-max=36000
+---
+2015/07/07 14:11:40 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'koleso.user' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `user`.
+2015/07/07 14:11:40 [error] [exception.CDbException] exception 'CDbException' with message 'The table "user" for active record class "User" cannot be found in the database.' in /Users/mikhkita/sites/koleso/framework/db/ar/CActiveRecord.php:2364
+Stack trace:
+#0 /Users/mikhkita/sites/koleso/framework/db/ar/CActiveRecord.php(413): CActiveRecordMetaData->__construct(Object(User))
+#1 /Users/mikhkita/sites/koleso/framework/db/ar/CActiveRecord.php(660): CActiveRecord->getMetaData()
+#2 /Users/mikhkita/sites/koleso/framework/db/ar/CActiveRecord.php(1487): CActiveRecord->getTableSchema()
+#3 /Users/mikhkita/sites/koleso/protected/components/Controller.php(40): CActiveRecord->findByPk('1')
+#4 /Users/mikhkita/sites/koleso/framework/web/CWebApplication.php(281): Controller->init()
+#5 /Users/mikhkita/sites/koleso/framework/web/CWebApplication.php(141): CWebApplication->runController('shop')
+#6 /Users/mikhkita/sites/koleso/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#7 /Users/mikhkita/sites/koleso/index.php(11): CApplication->run()
+#8 {main}
+REQUEST_URI=/shop/
+---
+2015/07/07 15:07:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/images/ui-bg_gloss-wave_35_f6a828_500x100.png".' in /Users/mikhkita/sites/koleso/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/koleso/framework/web/CWebApplication.php(141): CWebApplication->runController('css/images/ui-b...')
+#1 /Users/mikhkita/sites/koleso/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/koleso/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/images/ui-bg_gloss-wave_35_f6a828_500x100.png
+HTTP_REFERER=http://dev.koleso.com/css/jquery-ui.min.css
+---
+2015/07/07 15:20:52 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/images/ui-bg_gloss-wave_35_f6a828_500x100.png".' in /Users/mikhkita/sites/koleso/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/koleso/framework/web/CWebApplication.php(141): CWebApplication->runController('css/images/ui-b...')
+#1 /Users/mikhkita/sites/koleso/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/koleso/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/images/ui-bg_gloss-wave_35_f6a828_500x100.png
+HTTP_REFERER=http://dev.koleso.com/css/jquery-ui.min.css
+---
+2015/07/07 16:12:54 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/images/ui-bg_gloss-wave_35_f6a828_500x100.png".' in /Users/mikhkita/sites/koleso/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/koleso/framework/web/CWebApplication.php(141): CWebApplication->runController('css/images/ui-b...')
+#1 /Users/mikhkita/sites/koleso/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/koleso/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/images/ui-bg_gloss-wave_35_f6a828_500x100.png
+HTTP_REFERER=http://dev.koleso.com/css/jquery-ui.min.css
+---
+2015/07/07 16:14:09 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/images/ui-bg_gloss-wave_35_f6a828_500x100.png".' in /Users/mikhkita/sites/koleso/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/koleso/framework/web/CWebApplication.php(141): CWebApplication->runController('css/images/ui-b...')
+#1 /Users/mikhkita/sites/koleso/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/koleso/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/images/ui-bg_gloss-wave_35_f6a828_500x100.png
+HTTP_REFERER=http://dev.koleso.com/css/jquery-ui.min.css
+---
+2015/07/07 16:14:15 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/images/ui-bg_gloss-wave_35_f6a828_500x100.png".' in /Users/mikhkita/sites/koleso/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/mikhkita/sites/koleso/framework/web/CWebApplication.php(141): CWebApplication->runController('css/images/ui-b...')
+#1 /Users/mikhkita/sites/koleso/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/mikhkita/sites/koleso/index.php(11): CApplication->run()
+#3 {main}
+REQUEST_URI=/css/images/ui-bg_gloss-wave_35_f6a828_500x100.png
+HTTP_REFERER=http://dev.koleso.com/css/jquery-ui.min.css
+---
