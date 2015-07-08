@@ -231,8 +231,20 @@ class Interpreter extends CActiveRecord
     }
 
     public function calculate($str){
-    	$out = 1;
-		eval("\$out = ".$str.";");
+    	$out = "";
+    	// echo $str."<br>";
+    	ini_set('display_errors','Off');
+    	eval("\$out = ".$str.";");	
+    	// $newfunc = create_function('','return '.$str.';');
+    	ini_set('display_errors','On');	
+  //   	try {
+		//     
+		// } catch (Exception $e) {
+		//     eval("\$out = \"\";");
+		// }
+
+		// echo $newfunc();
+		
 		return $out;
     }
 }
