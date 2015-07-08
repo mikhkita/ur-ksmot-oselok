@@ -32,7 +32,7 @@ class Interpreter extends CActiveRecord
 			array('name, template, good_type_id', 'required'),
 			array('width', 'numerical', 'integerOnly'=>true),
 			array('name, rule_code', 'length', 'max'=>255),
-			array('template', 'length', 'max'=>2000),
+			array('template', 'length', 'max'=>20000),
 			array('good_type_id', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
