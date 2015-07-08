@@ -291,7 +291,7 @@ class ShopController extends Controller
 		if($good->good_type_id==2) $path .= "/discs/";
 		$dir = $path.$code;
 		if (is_dir($dir)) {
-			$imgs = array_values(array_diff(scandir($dir), array('..', '.')));
+			$imgs = array_values(array_diff(scandir($dir), array('..', '.', 'Thumbs.db')));
 			$dir = Yii::app()->request->baseUrl."/".$path.$code;
 			if(count($imgs)) {
 				if($number) {
@@ -299,7 +299,7 @@ class ShopController extends Controller
 						$imgs[$i] = $dir."/".$imgs[$i];
 					}
 				} else {
-					foreach ($imgs as &$value) {
+					foreach ($imgs as $key => &$value) {
 						$value = $dir."/".$value;
 					}
 				}			

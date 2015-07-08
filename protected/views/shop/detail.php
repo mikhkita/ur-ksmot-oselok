@@ -19,11 +19,11 @@
 		<h2><? if( $_GET['type']==1 ) echo Interpreter::generate(50, $good); if( $_GET['type']==2 ) echo Interpreter::generate(50, $good);?></h2>
 		<div class="images left">
 
-			<div id="bg-img" style="background-image:url('<?=$imgs[0]?>');"><a class="fancy-img" href="<?=$imgs[0]?>"></a></div>
+			<div id="bg-img" style="background-image:url('<?=$imgs[0]?>');"><a class="fancy-img-big" href="<?=$imgs[0]?>"></a></div>
 			<ul class="hor clearfix">
 				<? if (count($imgs)>1): ?>
 					<? foreach ($imgs as $img): ?>
-						<li style="background-image:url('<?=$img?>');"><a href="<?=$img?>"></a></li>
+						<li style="background-image:url('<?=$img?>');"><a class="fancy-img-thumb" href="<?=$img?>"></a><a href="<?=$img?>" class="fancy-img" style="display:none !important;" rel="one"></a></li>
 					<? endforeach; ?>
 				<? endif; ?>
 			</ul>

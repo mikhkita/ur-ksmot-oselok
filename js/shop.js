@@ -34,9 +34,15 @@ $(document).ready(function(){
 	$(".fancy-img").fancybox({
         padding : 0
     });
-    $("body").on("click",".images ul li", function(){
-        $("#bg-img").css("background-image",$(this).css("background-image"));
-        $("#bg-img a").attr("href",$(this).find("a").attr("href"));
+    $("body").on("click",".fancy-img-thumb", function(){
+        $("#bg-img").css("background-image",$(this).parents("li").css("background-image"));
+        $("#bg-img a").attr("href",$(this).attr("href"));
+        return false;
+    });
+
+    $(".fancy-img-big").click(function(){
+        // alert($(".fancy-img[href='"+$(this).attr("href")+"']").attr("href"));
+        $(".fancy-img[href='"+$(this).attr("href")+"']").click();
         return false;
     });
 

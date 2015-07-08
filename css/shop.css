@@ -437,9 +437,11 @@ input:-moz-placeholder {
 		}
 			.b-item .b-block .images div {
 				width: 100%;
-				height: 307px;
-				background-size: cover;
-				background-position: 50%;
+ 				height: 347px;
+ 				background-size: contain;
+ 				background-color: #E3E4E8;
+ 				background-position: 50%;
+ 				background-repeat: no-repeat;
 			}
 			.b-item .b-block .images a {
 				display: block;
