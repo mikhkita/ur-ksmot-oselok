@@ -17,11 +17,10 @@
 			<li id="go-back"><?echo ( $_GET['type']==1 )?"Шины":"Диски"?> <span>><span></li>
 		</ul>
 		
-<<<<<<< HEAD
-		<h2><? if( $_GET['type']==1 ) echo Interpreter::generate(8, $good); if( $_GET['type']==2 ) echo Interpreter::generate(8, $good);?></h2>
-=======
+
+		<h2><? if( $_GET['type']==1 ) echo Interpreter::generate(48, $good); if( $_GET['type']==2 ) echo Interpreter::generate(48, $good);?></h2>
+
 		<h2><?=Interpreter::generate(48, $good)?></h2>
->>>>>>> 6819ba6b6f57d38d96af10a6d959116efa6f9592
 		<div class="images left">
 
 			<div id="bg-img" style="background-image:url('<?=$imgs[0]?>');"><a class="fancy-img" href="<?=$imgs[0]?>"></a></div>
