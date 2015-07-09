@@ -180,6 +180,16 @@ class Controller extends CController
         return (isset($this->cache[$i]["VALUES"][$attrs[$this->cache[$i]["ATTRS"]["attr_1"]]->variant_id][$attrs[$this->cache[$i]["ATTRS"]["attr_2"]]->variant_id][$attrs[$this->cache[$i]["ATTRS"]["attr_3"]]->variant_id]))?$this->cache[$i]["VALUES"][$attrs[$this->cache[$i]["ATTRS"]["attr_1"]]->variant_id][$attrs[$this->cache[$i]["ATTRS"]["attr_2"]]->variant_id][$attrs[$this->cache[$i]["ATTRS"]["attr_3"]]->variant_id]:"";
     }
 
+    public function getVarValue($cube_id){
+        $i = "var_".$cube_id;
+        if( !isset($this->cache[$i]) ){
+            $model = Vars::model()->findByPk($cube_id);
+            $this->cache[$i] = (isset($model->value))?$model->value:"";
+        }
+        
+        return $this->cache[$i];
+    }
+
     public function checkAccess($model, $return = false){
         if( $return ){
             return Yii::app()->user->checkAccess($model->rule_code);
