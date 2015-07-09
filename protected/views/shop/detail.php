@@ -16,7 +16,7 @@
 		<ul class="sub-menu hor clearfix">
 			<li id="go-back"><?echo ( $_GET['type']==1 )?"Шины":"Диски"?> <span>><span></li>
 		</ul>
-		<h2><? if( $_GET['type']==1 ) echo Interpreter::generate(50, $good); if( $_GET['type']==2 ) echo Interpreter::generate(50, $good);?></h2>
+		<h2><? if( $_GET['type']==1 ) echo Interpreter::generate(50, $good); if( $_GET['type']==2 ) echo "Тайтл дисков"?></h2>
 		<div class="images left">
 
 			<div id="bg-img" style="background-image:url('<?=$imgs[0]?>');"><a class="fancy-img-big" href="<?=$imgs[0]?>"></a></div>
@@ -95,7 +95,7 @@
 				</li>
 				<? endif; ?>
 			</ul> 
-			<p><span>Описание: </span><? if( $_GET['type']==1 ) echo $this->replaceToBr(Interpreter::generate(10, $good)); if( $_GET['type']==2 ) echo $this->replaceToBr(Interpreter::generate(10, $good));?></p>
+			<p><span>Описание: </span><? if( $_GET['type']==1 ) echo $this->replaceToBr(Interpreter::generate(10, $good)); if( $_GET['type']==2 ) echo "Описание дисков";?></p>
 		</div>
 		
 	</div>
