@@ -13,7 +13,7 @@ class DataController extends Controller
 	{
 		return array(
 			array('allow',
-				'actions'=>array('adminIndex','adminDictionary','adminDictionaryUpdate','adminDictionaryCreate','adminDictionaryDelete','adminDictionaryEdit','adminTable','adminTableUpdate','adminTableCreate','adminTableDelete','adminTableEdit','adminCube','adminCubeUpdate','adminCubeCreate','adminCubeDelete','adminCubeEdit'),
+				'actions'=>array('adminIndex','adminVars','adminVarsUpdate','adminVarsCreate','adminVarsDelete','adminVarsEdit','adminDictionary','adminDictionaryUpdate','adminDictionaryCreate','adminDictionaryDelete','adminDictionaryEdit','adminTable','adminTableUpdate','adminTableCreate','adminTableDelete','adminTableEdit','adminCube','adminCubeUpdate','adminCubeCreate','adminCubeDelete','adminCubeEdit'),
 				'roles'=>array('manager'),
 			),
 			array('allow',
@@ -24,6 +24,91 @@ class DataController extends Controller
 				'users'=>array('*'),
 			),
 		);
+	}
+
+	public function actionAdminVarsCreate()
+	{
+		$model=new Vars;
+
+		if(isset($_POST['Vars']))
+		{
+			$model->attributes=$_POST['Vars'];
+			if($model->save()){
+				$this->actionAdminVars(true);
+				return true;
+			}
+		}
+
+		$this->renderPartial('adminVarsCreate',array(
+			'model'=>$model,
+		));
+
+	}
+
+	public function actionAdminVarsUpdate($id)
+	{
+		$model=Vars::model()->findByPk($id);
+
+		if(isset($_POST['Vars']))
+		{
+			$model->attributes=$_POST['Vars'];
+			if($model->save())
+				$this->actionAdminVars(true);
+		}else{
+			$this->renderPartial('adminVarsUpdate',array(
+				'model'=>$model,
+			));
+		}
+	}
+
+	public function actionAdminVarsDelete($id)
+	{
+		Vars::model()->findByPk($id)->delete();
+
+		$this->actionAdminVars(true);
+	}
+
+	public function actionAdminVars($partial = false)
+	{
+		if( !$partial )
+			$this->layout='admin';
+
+		$filter = new Vars('filter');
+		$criteria = new CDbCriteria();
+
+		if (isset($_GET['Vars']))
+        {
+            $filter->attributes = $_GET['Vars'];
+            foreach ($_GET['Vars'] AS $key => $val)
+            {
+                if ($val != '')
+                {
+                    if( $key == "name" ){
+                    	$criteria->addSearchCondition('name', $val);
+                    }else{
+                    	$criteria->addCondition("$key = '{$val}'");
+                    }
+                }
+            }
+        }
+
+        $criteria->order = 'name DESC';
+
+        $model = Vars::model()->findAll($criteria);
+
+        if( !$partial ){
+        	$this->render('adminVars',array(
+				'data'=>$model,
+				'filter'=>$filter,
+				'labels'=>Vars::attributeLabels()
+			));
+        }else{
+        	$this->renderPartial('adminVars',array(
+				'data'=>$model,
+				'filter'=>$filter,
+				'labels'=>Vars::attributeLabels()
+			));
+        }
 	}
 
 	public function actionAdminDictionaryCreate()

@@ -205,6 +205,8 @@ class Interpreter extends CActiveRecord
 				$matches[1][$i] = $this->getTableValue(intval($params["TABLE"]),$attributes);
 			}else if( isset($params["CUBE"]) ){
 				$matches[1][$i] = $this->getCubeValue(intval($params["CUBE"]),$attributes);
+			}else if( isset($params["VAR"]) ){
+				$matches[1][$i] = $this->getVarValue($params["VAR"]);
 			}else{
 				throw new CHttpException(500,"Отсутствует параметр \"ATTR\" у интерпретатора с идентификатором ".$interpreter_id);
 			}
