@@ -99,7 +99,7 @@ class ShopController extends Controller
                     )
                 );
            	}
-           	// $criteria->order="attribute_id";
+           	$criteria->order="attribute_id";
             $model = Attribute::model()->findAll($criteria); 
             $filter = array();
             foreach ($model as $attr) {
