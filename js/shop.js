@@ -84,7 +84,7 @@ $(document).ready(function(){
  	// 	return false;
  	// });
     
-    if( $("#yw0 .selected a").text()*1>3 ) {
+    if( $("#yw0 .selected a").text()*1>3 && $("#yw0 li.page").eq(0).find("a").text()*1>1 ) {
         $("#yw0 .first").show();
     }
     if( ($("#yw0 li.page").eq(0).find("a").text()*1)>2 ) {
