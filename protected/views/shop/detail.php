@@ -1,6 +1,4 @@
 <?php $this->renderPartial('_menu', array()); ?>
-<input type='hidden' name="price_min" id="price_min" value="<?=$price_min?>">
-<input type='hidden' name="price_max" id="price_max" value="<?=$price_max?>">
 <div class="b b-item">
 	<div class="b-block clearfix">
 		<ul class="sub-menu hor clearfix">
