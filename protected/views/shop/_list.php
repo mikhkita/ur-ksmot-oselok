@@ -1,3 +1,4 @@
+<? if(count($goods)): ?>
 <div class="pagination">
     <ul>
     	<? foreach ($goods as $good): ?>
@@ -23,5 +24,6 @@
         'htmlOptions' => array("class"=>"yiiPager hor clearfix")
     )) ?>
 </div>  
-
-
+<? else: ?>
+    <h3 class="b-no-goods">Товаров не найдено</h3>
+<? endif; ?>

@@ -29,7 +29,7 @@
     <?php echo $content;?>
     <div class="b b-bottom">
         <div class="b-block">
-            <h3>© 2015 Михайло и Ко</h3>
+            <h3>© 2015 Godzilla</h3>
         </div>
     </div>
                 

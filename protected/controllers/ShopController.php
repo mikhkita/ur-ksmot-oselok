@@ -61,7 +61,7 @@ class ShopController extends Controller
         	$dataProvider = new CActiveDataProvider('Good', array(
 									    'criteria'=>$criteria,
 									    'pagination'=>array(
-									        'pageSize'=>12
+									        'pageSize'=>13
 									    )
 									));
 									$model = $dataProvider->getData();
