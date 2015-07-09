@@ -1,16 +1,6 @@
-<div class="b b-menu">
-    <div class="b-block clearfix">
-        <ul class="hor left clearfix">
-            <li <? if( $_GET['type']==1 ) echo 'class="active" onclick="return false;"'; ?> ><a href="<?=Yii::app()->createUrl('/shop/index',array("type"=>"1"))?>">Шины</a></li>
-            <li <? if( $_GET['type']==2 ) echo 'class="active" onclick="return false;"'; ?> ><a href="<?=Yii::app()->createUrl('/shop/index',array("type"=>"2"))?>">Диски</a></li>    
-            <li><a href="#">Контакты</a></li>
-        </ul>
-       <!--  <form class="right" action="#" method="POST" novalidate="novalidate">
-            <input type="text" name="search" placeholder="Поиск">
-            <img src="<?php echo Yii::app()->request->baseUrl; ?>/i/search-shop.png" alt="">
-        </form> -->
-    </div>
-</div>
+<?php $this->renderPartial('_menu', array()); ?>
+<input type='hidden' name="price_min" id="price_min" value="<?=$price_min?>">
+<input type='hidden' name="price_max" id="price_max" value="<?=$price_max?>">
 <div class="b b-item">
 	<div class="b-block clearfix">
 		<ul class="sub-menu hor clearfix">

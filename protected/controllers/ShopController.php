@@ -15,11 +15,11 @@ class ShopController extends Controller
 	{
 		return array(
 			array('allow',
-				'actions'=>array('index','filter','detail'),
+				'actions'=>array('filter'),
 				'roles'=>array('manager'),
 			),
 			array('allow',
-				'actions'=>array('index', 'detail'),
+				'actions'=>array('index', 'detail','contacts'),
 				'users'=>array('*'),
 			),
 			array('deny',
@@ -280,6 +280,11 @@ class ShopController extends Controller
 				));
 			}
 		}
+	}
+
+	public function actionContacts()
+	{
+		$this->render('contacts');
 	}
 
 	public function getImages($good, $number = NULL)

@@ -10,5 +10,5 @@ $this->breadcrumbs=array(
 
 <div class="error">
 <?php echo Yii::app()->errorHandler->error["message"]; ?><br>
-<?php echo Yii::app()->errorHandler->error["file"]."(".Yii::app()->errorHandler->error["line"].")"; ?>
+<?php $tmp = explode("/koleso/",Yii::app()->errorHandler->error["file"]); echo $tmp[1]."(".Yii::app()->errorHandler->error["line"].")"; ?>
 </div>
