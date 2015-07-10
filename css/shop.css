@@ -220,15 +220,33 @@ input:-moz-placeholder {
 			}
 			.b-main .b-block .b-main-filter .filter-cont #filter-search {
 				position: absolute;
-  				left: -85px;
-  				padding: 8px 20px;
-  				border: none;
-  				border-radius: 5px;
-  				background-color: rgb(68, 140, 203);
+  				
+				left: -115px;
+  				
+				width: 100px;
+				border: none;
+  				
   				top: 10px;
-  				color: #fff;
-  				cursor: pointer;
+  				text-align: center;
 			}
+				.b-main .b-block .b-main-filter .filter-cont #filter-search  input{
+					border-radius: 5px;
+  					background-color: rgb(68, 140, 203);
+	  				border: none;
+	  				
+					padding: 8px;
+	  				background-color: rgb(68, 140, 203);
+	  				color: #fff;
+	  				font-size: 16px;
+	  				cursor: pointer;
+				}
+				.b-main .b-block .b-main-filter .filter-cont #filter-search  span{
+	  				display: block;
+	  				font-size: 13px;
+					
+	  				padding: 5px;
+	  				
+}
 			.b-main .b-block .b-main-filter .filter-cont:last-child {
 				margin-bottom: 0;
 			}

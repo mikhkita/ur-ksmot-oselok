@@ -2,7 +2,7 @@ $(document).ready(function(){
     // var progress = new KitProgress("#FFF",2);
     var price_min_def = $( "#price_min" ).val()*1,
     price_max_def = $( "#price_max" ).val()*1,
-    price_max = price_max_def*0.7,price_min=price_min_def,type;
+    price_max = price_max_def*0.7,price_min=price_min_def,type,filter=0;
     if(location.search!='') {
         var price = decodeURIComponent(location.search.substr(1)).split('&');
         $.each( price, function( key, value ) {
@@ -23,8 +23,17 @@ $(document).ready(function(){
             $( "#price-min" ).val( ui.values[ 0 ] );
             $( "#price-max" ).val( ui.values[ 1 ] );
             $("#filter-search").remove();
-            $(this).closest(".filter-cont").append('<input type="submit" id="filter-search" value="Поиск">');
-		}
+            $(this).closest(".filter-cont").append('<div id="filter-search"><input type="submit" value="Поиск"></div>'); 
+		},
+    change: function( event, ui ) {
+        filter++;
+         setTimeout(function() {
+           filter--;
+        }, 1900);
+        setTimeout(function() {
+            showCount(filter);
+        }, 2000);
+    }
 	});
 	$( "#amount-l" ).text( $( "#slider-range" ).slider( "values", 0 ) );
 	$( "#amount-r" ).text( $( "#slider-range" ).slider( "values", 1 ) );
@@ -47,13 +56,33 @@ $(document).ready(function(){
     });
 
     $("#filter label").click(function(){
+        filter++;
         $("#filter-search").remove();
-        $(this).closest(".filter-cont").append('<input type="submit" id="filter-search" value="Поиск">');
+        $(this).closest(".filter-cont").append('<div id="filter-search"><input type="submit" value="Поиск"></div>');  
+        setTimeout(function() {
+           filter--;
+        }, 1900);
+        setTimeout(function() {
+            showCount(filter);
+        }, 2000);
+        
     });
 
     $("#go-back").click(function(){
         window.history.back();
     });
+    function showCount() {
+        if(filter==0) {
+            $.ajax({
+                type: 'GET',
+                url: "/shop/index?countGood=true",
+                data: $("#filter").serialize(),
+                success: function(msg){
+                    $("#filter-search").append("<span>Найдено: "+msg+"</span>")
+                }
+            }); 
+        }
+    }
  	// $(".b-main-items").on("click","#yw0 li a", function(){
   //       progress.setColor("#D26A44");
   //       progress.start(3);
