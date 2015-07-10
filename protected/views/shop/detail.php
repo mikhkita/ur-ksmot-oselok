@@ -19,7 +19,7 @@
 		<div class="desc left">
 			<div class="clearfix">
 				<h3 class="left"><?=$good->fields_assoc[20]->value?> руб.</h3>
-				<a class="red-btn right" href="#">Купить</a>
+				<a class="red-btn right fancy" data-block="#b-popup-thanks" href="#">Купить</a>
 			</div>
 			<ul>
 				<? if(isset($good->fields_assoc[28])): ?>

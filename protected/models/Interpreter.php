@@ -188,15 +188,32 @@ class Interpreter extends CActiveRecord
 			}
 
 			if( isset($params["ATTR"]) ){
-				$val = ( isset($attributes[intval($params["ATTR"])]->value) )?$attributes[intval($params["ATTR"])]->value:"";
+				$val = "";
 
-				$val = ( isset($params["FLOAT"]) )?number_format((float)$val,intval($params["FLOAT"])):$val;
+				if( isset($attributes[intval($params["ATTR"])]) ){
+					$tmpArr = array();
 
-				if( isset($params["REPLACE"]) ){
-					$val = str_replace($params["REPLACE"][0], $params["REPLACE"][1], $val);
+					if( is_array($attributes[intval($params["ATTR"])]) ){
+						foreach ($attributes[intval($params["ATTR"])] as $key => $v) {
+							$tmpArr[] = $v->value;
+						}
+					}else{
+						$tmpArr[] = $attributes[intval($params["ATTR"])]->value;
+					}
+
+					foreach ($tmpArr as $key => &$v) {
+						$v = ( isset($params["FLOAT"]) )?number_format((float)$v,intval($params["FLOAT"])):$v;
+
+						if( isset($params["REPLACE"]) ){
+							$v = str_replace($params["REPLACE"][0], $params["REPLACE"][1], $v);
+						}
+
+						$v = ( isset($params["ALT"]) && isset($params["ALT"][$v]) )?$params["ALT"][$v]:$v;
+					}
+					$val = implode( (isset($params["SEP"]))?$params["SEP"]:"/", $tmpArr);
 				}
 
-				$matches[1][$i] = ( isset($params["ALT"]) && isset($params["ALT"][$val]) )?$params["ALT"][$val]:$val;
+				$matches[1][$i] = $val;
 			}else if( isset($params["INTER"]) ){
 				$matches[1][$i] = Interpreter::generate(intval($params["INTER"]),$model);
 			}else if( isset($params["LIST"]) ){

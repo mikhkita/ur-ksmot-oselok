@@ -41,7 +41,19 @@
 							<td>
 								<? if( $field["TYPE"] == "attr" ): ?>
 									<? if( isset($attr[$field["VALUE"]->id]) ): ?>
-										<div><p><?=$attr[$field["VALUE"]->id]->value?></p></div>
+										<div><p>
+											<? if( is_array($attr[$field["VALUE"]->id]) ): ?>
+												<? 
+													$printArr = array(); 
+													foreach ($attr[$field["VALUE"]->id] as $key => $value){
+														$printArr[] = $value->value;
+													} 
+													echo implode("/", $printArr);
+												?>
+											<? else: ?>
+												<?=$attr[$field["VALUE"]->id]->value?>
+											<? endif; ?>
+										</p></div>
 									<? endif; ?>
 								<? else: ?>
 									<div><p><?=Interpreter::generate($field["VALUE"]->id,$item,$dynObjects)?></p></div>

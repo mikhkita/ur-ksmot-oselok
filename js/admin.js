@@ -537,7 +537,7 @@ $(document).ready(function(){
         var regArr;
         switch( $("#new-variant").attr("data-type") ) {
             case "float":
-                regArr = /^[^\d-]*(-{0,1}\d+\.{0,1}\d+)[\D]*$/.exec(val);
+                regArr = /^[^\d-]*(-{0,1}\d*\.{0,1}\d+)[\D]*$/.exec(val);
 
                 break;
             case "int":

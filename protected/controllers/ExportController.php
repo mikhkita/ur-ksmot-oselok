@@ -253,8 +253,15 @@ class ExportController extends Controller
 
 				foreach ($GoodType->goods as $good) {
 					$obj = $good->fields_assoc[$value->attribute->id];
-					if( !isset($variants[$obj->value]) )
-						$variants[$obj->variant_id] = $obj->value;
+					if( is_array($obj) ){
+						foreach ($obj as $key => $v) {
+							if( !isset($variants[$v->value]) )
+								$variants[$v->variant_id] = $v->value;
+						}
+					}else{
+						if( !isset($variants[$obj->value]) )
+							$variants[$obj->variant_id] = $obj->value;
+					}
 				}
 
 				$arr[intval($value->sort)]["VARIANTS"] = $variants;

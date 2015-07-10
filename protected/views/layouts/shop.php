@@ -16,6 +16,9 @@
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery-ui.min.js"></script>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.fancybox.js"></script>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/KitProgress.js"></script>
+    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.maskedinput.min.js"></script>
+    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/KitSend.js"></script>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/shop.js"></script>
     <?php foreach ($this->scripts AS $script): ?><script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/<?php echo $script?>.js"></script><? endforeach; ?>
 </head>
@@ -32,6 +35,29 @@
             <h3>© 2015 Godzilla</h3>
         </div>
     </div>
-                
+    <div style="display: none;">
+        <div id="b-popup-buy">
+            <div class="b-popup b-popup-buy">
+                <h3>Для покупки позвоните по телефону</h3>
+                <h4>+7 (999) 999 99-99</h4>
+                <h5>или</h5>
+                <h6>Оставьте заявку<br>и мы Вам перезвоним в ближайшее время</h6>
+                <form action="#" id="b-form-buy">
+                    <input type="text" name="phone" id="phone" placeholder="Ваш номер телефона" required/>
+                    <input type="text" name="1" id="region" placeholder="Ваш регион" required/>
+                    <input type="hidden" name="1-name" value="Регион" />
+                    <a href="#" class="ajax b-blue-butt" onclick="$('#b-form-buy').submit();">Отправить</a>
+                </form>
+            </div>
+        </div>
+        <div id="b-popup-thanks">
+            <div class="b-thanks b-popup">
+                <h3>Спасибо за заявку</h3>
+                <h4>В ближайшее время мы Вам перезвоним для уточнения заказа</h4>
+                <a href="#" class="ajax b-blue-butt" onclick="$.fancybox.close();">Закрыть</a>
+            </div>
+        </div>
+    </div>        
+
 </body>
 </html>

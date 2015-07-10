@@ -1,7 +1,3 @@
-<? foreach ($allAttr["ATTRIBUTES"] as $key => $value): ?>
-<li class="ui-state-default" data-id="<?=$value?>"><p><?=$value?></p><input type="hidden" name="attributes[<?=$key?>]" value="<?=$value?>"></li>
-<? endforeach; ?>
-
-<? foreach ($allAttr["INTERPRETERS"] as $key => $value): ?>
-<li class="ui-state-default" data-id="<?=$value?>"><p><?=$value?></p><input type="hidden" name="interpreters[<?=$key?>]" value="<?=$value?>"></li>
+<? foreach ($allAttr as $key => $value): ?>
+<li class="ui-state-default" data-id="<?=$value->name?>"><p><?=$value->name?></p><input type="hidden" name="sorted[]" value="<?if($key[strlen($key)-1] == "a"):?>attributes<?else:?>interpreters<?endif;?>-<?=$value->id?>"></li>
 <? endforeach; ?>
