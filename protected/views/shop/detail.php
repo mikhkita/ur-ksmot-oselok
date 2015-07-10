@@ -18,7 +18,7 @@
 		</div>
 		<div class="desc left">
 			<div class="clearfix">
-				<h3 class="left"><?=$good->fields_assoc[20]->value?> руб.</h3>
+				<h3 class="left"><?=$good->fields_assoc[20]->value==0 ? Yii::app()->params["zeroPrice"] : $good->fields_assoc[20]->value." руб."?></h3>
 				<a class="red-btn right" href="#">Купить</a>
 			</div>
 			<ul>

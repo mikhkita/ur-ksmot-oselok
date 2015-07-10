@@ -28,7 +28,7 @@ class ShopController extends Controller
 		);
 	}
 
-	public function actionIndex($partial = false)
+	public function actionIndex($partial = false,$countGood = false)
 	{
 			$criteria=new CDbCriteria();
 			$criteria->select = 'id';
@@ -43,7 +43,7 @@ class ShopController extends Controller
            	isset($_GET['Good_page']) ? $_GET['Good_page'] : $_GET['Good_page'] = 1;
            	isset($_GET['type']) ? $_GET['type'] : $_GET['type'] = 1;
 			foreach ($_GET as $name => $arr) {		
-				if( !($name=='price-min' || $name=='price-max' || $name=='partial' || $name=='Good_page' || $name=='type') ) {
+				if( !($name=='price-min' || $name=='price-max' || $name=='partial' || $name=='Good_page' || $name=='type' || $name=='countGood') ) {
 					foreach ($arr as $value) {
 					$check[$value] = true;
 					$condition .= 'fields.variant_id='.$value.' OR ';
@@ -54,121 +54,101 @@ class ShopController extends Controller
 			$criteria->condition = $condition.'(good_type_id='.$_GET['type'].' AND fields.attribute_id=20 AND fields.int_value>='.$_GET['price-min'].' AND fields.int_value<='.$_GET['price-max'].')';
         	$criteria->having = 'COUNT(fields.id)='.($count+1);
         	$criteria->together = true;
-        	// $count=Good::model()->count($criteria);
+        	$count=Good::model()->count($criteria);
         	// $pages=new CPagination($count);
         	// $pages->pageSize=10;
         	// $model = Good::model()->findAll($criteria);
-        	$dataProvider = new CActiveDataProvider('Good', array(
-									    'criteria'=>$criteria,
-									    'pagination'=>array(
-									        'pageSize'=>13
-									    )
-									));
-									$model = $dataProvider->getData();
-			// print_r($model);
-            $goods_id = array();
-			foreach ($model as $good) {
-				array_push($goods_id, $good->id); 
-			}
-			// if($_GET['page']>1) {
-			// 	$order = array_slice($goods_id, ($_GET['page']-1)*$pages->pageSize, $pages->pageSize);
-			// }else {
-			// 	$order = array_slice($goods_id, 0, $pages->pageSize);
-			// }
+        	if( !$countGood ) {
+	        	$dataProvider = new CActiveDataProvider('Good', array(
+										    'criteria'=>$criteria,
+										    'pagination'=>array(
+										        'pageSize'=>13
+										    )
+										));
+										$model = $dataProvider->getData();
+	            $goods_id = array();
+				foreach ($model as $good) {
+					array_push($goods_id, $good->id); 
+				}
+				// if($_GET['page']>1) {
+				// 	$order = array_slice($goods_id, ($_GET['page']-1)*$pages->pageSize, $pages->pageSize);
+				// }else {
+				// 	$order = array_slice($goods_id, 0, $pages->pageSize);
+				// }
 
-			$criteria=new CDbCriteria();
-            $criteria->condition = 'list=1';
-            $criteria->select = array('name');
-            if($_GET['type']==1) {
-            $criteria->with = array(
-                'variants'
-                 => array(
-                    'select' => array('int_value','varchar_value','float_value'),
-                    'condition' => 'attribute_id=7 OR attribute_id=8 OR attribute_id=9 OR attribute_id=23 OR attribute_id=16',
-                    'order'=>'sort ASC'
-                    )
-                );
-           	}
-           	if($_GET['type']==2) {
-            $criteria->with = array(
-                'variants'
-                 => array(
-                    'select' => array('int_value','varchar_value','float_value'),
-                    'condition' => 'attribute_id=6 OR attribute_id=9 OR attribute_id=9 OR attribute_id=5 OR attribute_id=31 OR attribute_id=32',
-                    'order'=>'sort ASC'
-                    )
-                );
-           	}
-           	$criteria->order="attribute_id";
-            $model = Attribute::model()->findAll($criteria); 
-            $filter = array();
-            foreach ($model as $attr) {
-                $temp = array();
-                foreach ($attr->variants as $i => $variant) {
-                    $temp[$i]['variant_id'] = $variant->id;
-                    $temp[$i]['value'] = $variant->value;
-                    if(isset($check[$variant->id])) {
-                    $temp[$i]['checked'] = "checked";
-                	} else {
-                		$temp[$i]['checked'] = "";
-                	}
-                }
-                $filter[$attr->name] = $temp;           
-            }					
-		    $criteria=new CDbCriteria();
-		    // $criteria->select = 'id';
-		    // $criteria->with = array(
-		    // 	'fields' 
-		    // 	// => array(
-		    // 	// 	'select'=> array('int_value','varchar_value','float_value','text_value','attribute_id','variant_id')
-		    // 	// 	)
-		    // );
-		   	
-			$goods=Good::model()->with("fields")->findAllbyPk($goods_id);
-			// $goods = array();
-			// foreach ($model as $i => $good) {
-			// 	$temp = array();
-			// 	$temp['id'] = $good->id;
-			// 	$temp['TIRE_WIDTH'] = $good->fields_assoc[7]->value;
-			// 	$temp['TIRE_PROFILE'] = $good->fields_assoc[8]->value;
-			// 	$temp['DIAMETER'] = $good->fields_assoc[9]->value;
-			// 	$temp['SEASON'] = $good->fields_assoc[23]->value;
-			// 	$temp['WEAR'] = $good->fields_assoc[29]->value;
-			// 	$temp['AMOUNT'] = $good->fields_assoc[28]->value;
-			// 	$temp['TIRE_BRAND'] = $good->fields_assoc[16]->value;
-			// 	$temp['TIRE_MODEL'] = $good->fields_assoc[17]->value;
-			// 	$temp['COUNTRY'] = $good->fields_assoc[11]->value;
-			// 	$temp['CONDITION'] = $good->fields_assoc[26]->value;
-			// 	$temp['PRICE'] = $good->fields_assoc[20]->value;
-			// 	array_push($goods,$temp);
-			// } 
-			function cmp($a, $b) {
-			    if($a->fields_assoc[20]->value == $b->fields_assoc[20]->value) {
-			        return 0;
-			    }
-			    return ($a->fields_assoc[20]->value < $b->fields_assoc[20]->value) ? -1 : 1;
-			}
-			$criteria=new CDbCriteria();
-            $criteria->condition = 'attribute_id=20';
-            $criteria->select = array('int_value');
-            $criteria->order = 'int_value ASC';
-			$model = GoodAttribute::model()->findAll($criteria);
-			$price_min = $model[0]->int_value;
-			$price_max = array_pop($model)->int_value;
-			uasort($goods, 'cmp');
-			if( !$partial ){
-				$this->render('index',array(
-					'goods'=>$goods,
-					'filter' =>$filter,
-					'price_min' => $price_min,
-					'price_max' => $price_max,
-					'pages' => $dataProvider->getPagination()
-				));
-			}else{
-				$this->renderPartial('_list',array(
-					'goods'=>$goods,
-					'pages' => $dataProvider->getPagination()
-				));
+				$criteria=new CDbCriteria();
+	            $criteria->condition = 'list=1';
+	            $criteria->select = array('name');
+	            if($_GET['type']==1) {
+	            $criteria->with = array(
+	                'variants'
+	                 => array(
+	                    'select' => array('int_value','varchar_value','float_value'),
+	                    'condition' => 'attribute_id=7 OR attribute_id=8 OR attribute_id=9 OR attribute_id=23 OR attribute_id=16',
+	                    'order'=>'sort ASC'
+	                    )
+	                );
+	           	}
+	           	if($_GET['type']==2) {
+	            $criteria->with = array(
+	                'variants'
+	                 => array(
+	                    'select' => array('int_value','varchar_value','float_value'),
+	                    'condition' => 'attribute_id=6 OR attribute_id=9 OR attribute_id=9 OR attribute_id=5 OR attribute_id=31 OR attribute_id=32',
+	                    'order'=>'sort ASC'
+	                    )
+	                );
+	           	}
+	           	$criteria->order="attribute_id";
+	            $model = Attribute::model()->findAll($criteria); 
+	            $filter = array();
+	            foreach ($model as $attr) {
+	                $temp = array();
+	                foreach ($attr->variants as $i => $variant) {
+	                    $temp[$i]['variant_id'] = $variant->id;
+	                    $temp[$i]['value'] = $variant->value;
+	                    if(isset($check[$variant->id])) {
+	                    $temp[$i]['checked'] = "checked";
+	                	} else {
+	                		$temp[$i]['checked'] = "";
+	                	}
+	                }
+	                $filter[$attr->name] = $temp;           
+	            }					
+			    $criteria=new CDbCriteria();
+			   	
+				$goods=Good::model()->with("fields")->findAllbyPk($goods_id);
+
+				function cmp($a, $b) {
+				    if($a->fields_assoc[20]->value == $b->fields_assoc[20]->value) {
+				        return 0;
+				    }
+				    return ($a->fields_assoc[20]->value < $b->fields_assoc[20]->value) ? -1 : 1;
+				}
+				$criteria=new CDbCriteria();
+	            $criteria->condition = 'attribute_id=20';
+	            $criteria->select = array('int_value');
+	            $criteria->order = 'int_value ASC';
+				$model = GoodAttribute::model()->findAll($criteria);
+				$price_min = $model[0]->int_value;
+				$price_max = array_pop($model)->int_value;
+				uasort($goods, 'cmp');
+				if( !$partial ){
+					$this->render('index',array(
+						'goods'=>$goods,
+						'filter' =>$filter,
+						'price_min' => $price_min,
+						'price_max' => $price_max,
+						'pages' => $dataProvider->getPagination()
+					));
+				}else{
+					$this->renderPartial('_list',array(
+						'goods'=>$goods,
+						'pages' => $dataProvider->getPagination()
+					));
+				}
+			} else {
+				echo $count;
 			}		
 	}
 
@@ -287,6 +267,11 @@ class ShopController extends Controller
 	public function actionContacts()
 	{
 		$this->render('contacts');
+	}
+
+	public function actionCount()
+	{
+		$goods=Good::model()->findAllbyPk($goods_id,$criteria);
 	}
 
 	public function getImages($good, $number = NULL)
