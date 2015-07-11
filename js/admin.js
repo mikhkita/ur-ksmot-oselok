@@ -278,32 +278,85 @@ $(document).ready(function(){
     /* Preloader ----------------------------------- Preloader */
 
     /* Hot keys ------------------------------------ Hot keys */
+    
+    var cmddown = false,
+        ctrldown = false;
+    function down(e){
+        // alert(e.keyCode);
+        if( e.keyCode == 13 && ( cmddown || ctrldown ) ){
+            if( !$(".b-popup form").length ){
+                $(".ajax-create").click();
+            }else{
+                $(".fancybox-wrap form").trigger("submit",[false]);
+            }
+        }
+        if( e.keyCode == 86 && ( cmddown || ctrldown ) ){
+            alert();
+        }
+        if( e.keyCode == 13 ){
+            enterVariantsHandler();
+        }
+        if( e.keyCode == 91 ) cmddown = true;
+        if( e.keyCode == 17 ) ctrldown = true;
+        if( e.keyCode == 27 && $(".fancybox-wrap").length ) $.fancybox.close();
+    }
+    function up(e){
+        if( e.keyCode == 91 ) cmddown = false;
+        if( e.keyCode == 17 ) ctrldown = false;
+    }
     if( $(".ajax-create").length ){
-        var cmddown = false,
-            ctrldown = false;
-        function down(e){
-            if( e.keyCode == 13 && ( cmddown || ctrldown ) ){
-                if( !$(".b-popup form").length ){
-                    $(".ajax-create").click();
-                }else{
-                    $(".fancybox-wrap form").trigger("submit",[false]);
-                }
-            }
-            if( e.keyCode == 13 ){
-                enterVariantsHandler();
-            }
-            if( e.keyCode == 91 ) cmddown = true;
-            if( e.keyCode == 17 ) ctrldown = true;
-            if( e.keyCode == 27 && $(".fancybox-wrap").length ) $.fancybox.close();
-        }
-        function up(e){
-            if( e.keyCode == 91 ) cmddown = false;
-            if( e.keyCode == 17 ) ctrldown = false;
-        }
         $(document).keydown(down);
         $(document).keyup(up);
     }
     /* Hot keys ------------------------------------ Hot keys */
+
+    /* Редактирование таблиц ------------------------------------ Редактирование таблиц */
+    function downTable(e,el){
+        if( e.keyCode == 86 && ( cmddown || ctrldown ) ){
+            el.val("");
+            setTimeout(function(){ pasteHandler(el); },10);
+        }
+        if( e.keyCode == 91 ) cmddown = true;
+        if( e.keyCode == 17 ) ctrldown = true;
+    }
+    function upTable(e){
+        if( e.keyCode == 91 ) cmddown = false;
+        if( e.keyCode == 17 ) ctrldown = false;
+    }
+
+    function pasteHandler(el){
+        var splitted = el.val().split("\n");
+        for( i in splitted ){
+            splitted[i] = splitted[i].split("\t");
+        }
+        console.log(splitted);
+
+        var table = el.parents("table"),
+            colCount = el.parents("tr").find("td").length-1,
+            rowCount = table.find("tr").length-1,
+            colCur = el.parents("td").index()-1,
+            rowCur = el.parents("tr").index(),
+            rowTo = (splitted.length-1 <= rowCount-rowCur)?(splitted.length-1):(rowCount-rowCur),
+            colTo = (splitted[0].length-1 <= colCount-colCur)?(splitted[0].length-1):(colCount-colCur);
+
+        for (var i = 0; i <= rowTo ; i++) {
+            var rowNum = rowCur + i;
+            for (var j = 0; j <= colTo ; j++) {
+                var colNum = colCur + j;
+                table.find("tr").eq(rowNum).find("td").eq(colNum).find("textarea").val(splitted[i][j]);
+            }
+        }
+
+        // alert([rowCur,colTo,rowNum,colNum]);
+    }
+
+    if( $(".b-table.b-data").length ){
+        $(".b-table-td-editable textarea").keydown(function(e){
+            downTable(e,$(this));
+        });
+        $(document).keyup(upTable);
+    }
+    /* Редактирование таблиц ------------------------------------ Редактирование таблиц */
 
     /* Autocomplete -------------------------------- Autocomplete */
     function bindAutocomplete(){

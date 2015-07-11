@@ -24,9 +24,9 @@
 				<tr>
 					<td><?=$item->id?></td>
 					<td class="align-left"><a href="<?php echo Yii::app()->createUrl('/'.$this->adminMenu["cur"]->code.'/admincubeedit',array('id'=>$item->id))?>"><?=$item->name?></a></td>
-					<td><?=$item->attribute_1->name?></td>
-					<td><?=$item->attribute_2->name?></td>
-					<td><?=$item->attribute_3->name?></td>
+					<td><?=(isset($item->attribute_1->name))?$item->attribute_1->name:""?></td>
+					<td><?=(isset($item->attribute_2->name))?$item->attribute_2->name:""?></td>
+					<td><?=(isset($item->attribute_3->name))?$item->attribute_3->name:""?></td>
 					<td class="b-tool-cont">
 						<a href="<?php echo Yii::app()->createUrl('/'.$this->adminMenu["cur"]->code.'/admincubeupdate',array('id'=>$item->id))?>" class="ajax-form ajax-update b-tool b-tool-update" title="Параметры массива"></a>
 						<a href="<?php echo Yii::app()->createUrl('/'.$this->adminMenu["cur"]->code.'/admincubeedit',array('id'=>$item->id))?>" class="b-tool b-tool-list" title="Редактировать массив"></a>

@@ -8,7 +8,9 @@
          url('../fonts/roboto-regular.ttf') format('truetype'),
          url('../fonts/roboto-regular.svg#RobotoRegular') format('svg');
 }
-
+.hidden{
+    display: none !important;
+}
 * 
 {
     font-family: 'RobotoRegular','Arial';
@@ -437,12 +439,12 @@ h1{
             .b-table-td-editable{
                 padding: 0px !important;
             }
-                .b-table-td-editable input{
+                .b-table-td-editable textarea{
                     background-color: transparent;
                     width: 100%;
                     padding: 5px 10px !important;
                     box-sizing: border-box;
-                    height: 30px !important;
+                    resize: none;
                     border: 0px solid #452716 !important;
                 }
         .align-left{

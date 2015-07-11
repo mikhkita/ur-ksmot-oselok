@@ -23,16 +23,16 @@ $(document).ready(function(){
             $( "#price-min" ).val( ui.values[ 0 ] );
             $( "#price-max" ).val( ui.values[ 1 ] );
             $("#filter-search").remove();
-            $(this).closest(".filter-cont").append('<div id="filter-search"><input type="submit" value="Поиск"></div>'); 
+            setTo($(this));
 		},
     change: function( event, ui ) {
         filter++;
          setTimeout(function() {
            filter--;
-        }, 1900);
+        }, 900);
         setTimeout(function() {
             showCount(filter);
-        }, 2000);
+        }, 1000);
     }
 	});
 	$( "#amount-l" ).text( $( "#slider-range" ).slider( "values", 0 ) );
@@ -58,15 +58,19 @@ $(document).ready(function(){
     $("#filter label").click(function(){
         filter++;
         $("#filter-search").remove();
-        $(this).closest(".filter-cont").append('<div id="filter-search"><input type="submit" value="Поиск"></div>');  
+        setTo($(this));
         setTimeout(function() {
            filter--;
-        }, 1900);
+        }, 900);
         setTimeout(function() {
             showCount(filter);
-        }, 2000);
+        }, 1000);
         
     });
+
+    function setTo(el){
+        el.closest(".filter-cont").append('<div id="filter-search" class="filter-search"><input type="submit" value="Показать"><img src="/i/294.GIF"></div>');  
+    }
 
     $("#go-back").click(function(){
         window.history.back();
@@ -78,7 +82,8 @@ $(document).ready(function(){
                 url: "/shop/index?countGood=true",
                 data: $("#filter").serialize(),
                 success: function(msg){
-                    $("#filter-search").append("<span>Найдено: "+msg+"</span>")
+                    $("#filter-search img").hide();
+                    $("#filter-search").append("<span>Товаров: "+msg+"</span>")
                 }
             }); 
         }

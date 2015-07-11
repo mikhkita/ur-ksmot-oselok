@@ -124,4 +124,14 @@ $(document).ready(function(){
   		}
   		return false;
   	});
+
+	customHandlers["myHandler"] = function(el){
+		var popup = $(el.attr("data-block"));
+
+		popup.find("input[name='subject']").val("Покупка "+$("#b-good-title").text());
+
+		$("#good").val($("#b-good-title").text());
+		$("#good-url").val(document.location.href);
+	}
+
 });

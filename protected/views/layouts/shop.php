@@ -38,15 +38,19 @@
     <div style="display: none;">
         <div id="b-popup-buy">
             <div class="b-popup b-popup-buy">
-                <h3>Для покупки позвоните по телефону</h3>
-                <h4>+7 (999) 999 99-99</h4>
+                <h3>Для покупки позвоните одному из телефонов</h3>
+                <h4>+7 (913) 827 57-56,</h4>
+                <h4>57-57-56</h4>
                 <h5>или</h5>
-                <h6>Оставьте заявку<br>и мы Вам перезвоним в ближайшее время</h6>
-                <form action="#" id="b-form-buy">
+                <h6>оставьте заявку<br>и мы Вам перезвоним в ближайшее время</h6>
+                <form action="/kitsend.php" method="POST" data-block="#b-popup-thanks" id="b-form-buy">
+                    <input type="hidden" name="good" id="good" required/>
+                    <input type="hidden" name="good-url" id="good-url" required/>
                     <input type="text" name="phone" id="phone" placeholder="Ваш номер телефона" required/>
                     <input type="text" name="1" id="region" placeholder="Ваш регион" required/>
                     <input type="hidden" name="1-name" value="Регион" />
-                    <a href="#" class="ajax b-blue-butt" onclick="$('#b-form-buy').submit();">Отправить</a>
+                    <input type="hidden" name="subject" value="Покупка с сайта" />
+                    <a href="#" class="ajax b-blue-butt" onclick="$('#b-form-buy').submit(); return false;">Отправить</a>
                 </form>
             </div>
         </div>
@@ -54,7 +58,15 @@
             <div class="b-thanks b-popup">
                 <h3>Спасибо за заявку</h3>
                 <h4>В ближайшее время мы Вам перезвоним для уточнения заказа</h4>
-                <a href="#" class="ajax b-blue-butt" onclick="$.fancybox.close();">Закрыть</a>
+                <a href="#" class="ajax b-blue-butt" onclick="$.fancybox.close(); return false;">Закрыть</a>
+            </div>
+        </div>
+        <div id="b-popup-error">
+            <div class="b-thanks b-popup">
+                <h3>Ошибка отправки</h3>
+                <h4>Попробуйте оставить заявку позднее или позвоните по телефону</h4>
+                <h5>+7 (913) 827-57-56</h5>
+                <a href="#" class="ajax b-blue-butt" onclick="$.fancybox.close(); return false;">Закрыть</a>
             </div>
         </div>
     </div>        

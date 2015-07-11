@@ -8,7 +8,7 @@
                 <div class="desc">
                     <h3><? if( $_GET['type']==1 ) echo Interpreter::generate(50, $good); if( $_GET['type']==2 ) echo Interpreter::generate(53, $good); ?></h3>
                     <h4><? if( $_GET['type']==1 ) echo Interpreter::generate(13, $good); if( $_GET['type']==2 ) echo Interpreter::generate(54, $good); ?></h4>
-                    <h5><?=$good->fields_assoc[20]->value==0 ? Yii::app()->params["zeroPrice"] : $good->fields_assoc[20]->value." руб."?></h5>
+                    <h5><?=$good->fields_assoc[20]->value==0 ? Yii::app()->params["zeroPrice"] : number_format( $good->fields_assoc[20]->value, 0, ',', ' ' )." руб."?></h5>
                 </div>
             </a>
 			</li>

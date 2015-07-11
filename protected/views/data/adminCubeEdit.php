@@ -21,7 +21,7 @@
 						<input type="hidden" name="Values[<?=$index?>][attribute_1]" value="<?=$itemX->id?>">
 						<input type="hidden" name="Values[<?=$index?>][attribute_2]" value="<?=$itemY->id?>">
 						<input type="hidden" name="Values[<?=$index?>][attribute_3]" value="<?=$itemZ->id?>">
-						<input type="text" name="Values[<?=$index?>][value]" value="<?=((isset($values[$itemX->id][$itemY->id][$itemZ->id]))?$values[$itemX->id][$itemY->id][$itemZ->id]:"")?>">
+						<textarea name="Values[<?=$index?>][value]"><?=((isset($values[$itemX->id][$itemY->id][$itemZ->id]))?$values[$itemX->id][$itemY->id][$itemZ->id]:"")?></textarea>
 					</td>
 					<? $index++; ?>
 				<? endforeach; ?>
