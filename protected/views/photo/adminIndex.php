@@ -17,6 +17,8 @@
 	<ul class='photo-preview'></ul>
 	<input type="hidden" id="GoodTypeId" name="GoodTypeId">
 	<input type="submit" class="hidden b-butt" value="Сохранить">
+	
+<?php $this->endWidget(); ?>
 	<script>
 		$(".photo").change(function(){
 			var arr = $('.photo').val().split(','),error="";
@@ -43,6 +45,4 @@
         	$(this).addClass("selected");
    		});
 	</script>
-<?php $this->endWidget(); ?>
-
 
