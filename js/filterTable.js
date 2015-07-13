@@ -16,12 +16,18 @@ $(document).ready(function(){
             if( $(this).prop("checked") ) filterArr[$(this).val()] = true;
         });
 
+        console.log(filterArr);
+
         $("#target tr td:nth-child("+(index+1)+")").each(function(){
-            var td = $(this);
-            if( filterArr[td.find("p").text()] ){
-                td.removeClass("hide").addClass("show");
-            }else{
-                td.addClass("hide").removeClass("show");
+            var td = $(this),
+                tmpArr = td.find("p").text().trim().split("/");
+            td.addClass("hide").removeClass("show");
+
+            for( var i in tmpArr ){
+                if( filterArr[tmpArr[i]] ){
+                    td.removeClass("hide").addClass("show");
+                    return true;
+                }
             }
         });
         if( !Object.keys(filterArr).length ) $("#target tr td:nth-child("+(index+1)+")").removeClass("hide").addClass("show");
