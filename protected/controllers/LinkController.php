@@ -30,8 +30,9 @@ class LinkController extends Controller
 
 	public function actionAdminIndex($partial = false,$error = NULL)
 	{
-		// $this->scripts[] = "link";
+		$this->scripts[] = "link";
 		if(isset($_POST['link'])) {
+			
 			include_once  Yii::app()->basePath.'/simple_html_dom.php';
 			$url=$_POST['link'];
 			    $c = curl_init(); 
@@ -44,13 +45,13 @@ class LinkController extends Controller
 			curl_close($c);  
 			$links_arr = array();
 			//регулярнымвыражением парсим страницу, и находим все картники с расширением png и jpg
+			
 			$url = array_pop(explode("/",$url));
 			$url = str_replace(".html","",$url);
-			$url = trim($url);
 			$dir = Yii::app()->params["imageFolder"]."/links/".$url;
 					if (!is_dir($dir)) mkdir($dir,0777, true);
-			foreach ($html->find('tr[class=left_previews] img') as $i => $item) { 
-  				copy( $item->full_src, $dir."/".$url."_".$i.".jpg");
+			foreach ($html->find('div[class=old_lot_images] img') as $i => $item) { 
+				copy( $item->src, $dir."/".$url."_".$i.".jpg");
   			}
   			$imgs = array_values(array_diff(scandir($dir), array('..', '.', 'Thumbs.db')));
   			if(count($imgs)) {
