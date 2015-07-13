@@ -14,6 +14,10 @@
 					<li data-id="<?=$variant->id?>" class="selected"><?=$variant->value?></li>
 				<? endforeach; ?>
 			</ul>
+			<div class="b-select-buttons">
+				<a href="#" class="b-select-all" style="margin-right: 10px;">Выделить все</a>
+				<a href="#" class="b-select-none">Снять выделение</a>
+			</div>
 		</div>
 	<? endforeach; ?>
 	</div>

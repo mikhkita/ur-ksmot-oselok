@@ -4,6 +4,22 @@ class ShopController extends Controller
 {
 	public $layout='//layouts/shop';
 
+	public $params = array(
+		1 => array(
+			"NAME" => "Шины",
+			"TITLE_CODE" => 50,
+			"TITLE_2_CODE" => 13,
+			"DESCRIPTION_CODE" => 74,
+			"GARANTY_CODE" => 77,
+		),
+		2 => array(
+			"NAME" => "Диски",
+			"TITLE_CODE" => 53,
+			"TITLE_2_CODE" => 54,
+			"DESCRIPTION_CODE" => 75,
+			"GARANTY_CODE" => 78,
+		));
+
 	public function filters()
 	{
 		return array(
@@ -249,6 +265,7 @@ class ShopController extends Controller
 		if($id) {
 
 			$good=Good::model()->findbyPk($id);
+
 			$imgs = $this->getImages($good);
 			if( !$partial ){
 				$this->render('detail',array(

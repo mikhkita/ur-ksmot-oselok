@@ -17,7 +17,7 @@
 			<? foreach ($data as $i => $item): ?>
 				<tr>
 					<td class="align-left"><?=$item->name?></td>
-					<td><?=$item->value?></td>
+					<td class="align-left"><?=$item->value?></td>
 					<td class="b-tool-cont">
 						<a href="<?php echo Yii::app()->createUrl('/'.$this->adminMenu["cur"]->code.'/adminvarsupdate',array('id'=>$item->name))?>" class="ajax-form ajax-update b-tool b-tool-update" title="Параметры списока"></a>
 						<a href="<?php echo Yii::app()->createUrl('/'.$this->adminMenu["cur"]->code.'/adminvarsdelete',array('id'=>$item->name))?>" class="ajax-form ajax-delete b-tool b-tool-delete" data-warning="Вы действительно хотите удалить список &quot;<?=$item->name?>&quot;?" title="Удалить список"></a>

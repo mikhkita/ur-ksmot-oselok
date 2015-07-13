@@ -10,6 +10,7 @@
  * @property string $good_type_id
  * @property string $rule_code
  * @property integer $width
+ * @property integer $category_id
  */
 class Interpreter extends CActiveRecord
 {
@@ -29,14 +30,14 @@ class Interpreter extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, template, good_type_id', 'required'),
-			array('width', 'numerical', 'integerOnly'=>true),
+			array('name, template, good_type_id, rule_code', 'required'),
+			array('width, category_id', 'numerical', 'integerOnly'=>true),
 			array('name, rule_code', 'length', 'max'=>255),
 			array('template', 'length', 'max'=>20000),
 			array('good_type_id', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, template, good_type_id, rule_code, width', 'safe', 'on'=>'search'),
+			array('id, name, template, good_type_id, rule_code, width, category_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -51,6 +52,7 @@ class Interpreter extends CActiveRecord
 			'goodType' => array(self::BELONGS_TO, 'GoodType', 'good_type_id'),
 			'exports' => array(self::HAS_MANY, 'ExportInterpreter', 'interpreter_id'),
 			'rule' => array(self::BELONGS_TO, 'Rule', 'rule_code'),
+			'category' => array(self::BELONGS_TO, 'Category', 'category_id'),
 		);
 	}
 
@@ -66,6 +68,7 @@ class Interpreter extends CActiveRecord
 			'good_type_id' => 'Тип товара',
 			'rule_code' => 'Доступ',
 			'width' => 'Ширина в пикселях',
+			'category_id' => 'Категория',
 		);
 	}
 
@@ -106,6 +109,7 @@ class Interpreter extends CActiveRecord
 		$criteria->compare('good_type_id',$this->good_type_id,true);
 		$criteria->compare('rule_code',$this->rule_code,true);
 		$criteria->compare('width',$this->width);
+		$criteria->compare('category_id',$this->category_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
