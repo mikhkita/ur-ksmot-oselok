@@ -252,15 +252,19 @@ class ExportController extends Controller
 				$variants = array();
 
 				foreach ($GoodType->goods as $good) {
-					$obj = $good->fields_assoc[$value->attribute->id];
-					if( is_array($obj) ){
-						foreach ($obj as $key => $v) {
-							if( !isset($variants[$v->value]) )
-								$variants[$v->variant_id] = $v->value;
+					if( isset($good->fields_assoc[$value->attribute->id]) ){
+						$obj = $good->fields_assoc[$value->attribute->id];
+						if( is_array($obj) ){
+							foreach ($obj as $key => $v) {
+								if( !isset($variants[$v->value]) )
+									$variants[$v->variant_id] = $v->value;
+							}
+						}else{
+							if( !isset($variants[$obj->value]) )
+								$variants[$obj->variant_id] = $obj->value;
 						}
 					}else{
-						if( !isset($variants[$obj->value]) )
-							$variants[$obj->variant_id] = $obj->value;
+						$variants[$obj->variant_id] = "";
 					}
 				}
 
@@ -347,8 +351,16 @@ class ExportController extends Controller
 			$row = array();
 			foreach ($fields as $field) {
 				if( $field["TYPE"] == "attr" ){
-					$obj = ( isset($good->fields_assoc[intval($field["VALUE"]->id)]) )?$good->fields_assoc[intval($field["VALUE"]->id)]:$dynObjects[intval($field["VALUE"]->id)];
-					array_push($row, $obj->value);
+					$obj = ( isset($good->fields_assoc[intval($field["VALUE"]->id)]) )?$good->fields_assoc[intval($field["VALUE"]->id)]:( isset($dynObjects[intval($field["VALUE"]->id)])?$dynObjects[intval($field["VALUE"]->id)]:NULL );
+					if( isset($obj) ){
+						if( is_array($obj) ){
+							array_push($row, $this->implodeValues($obj));
+						}else{
+							array_push($row, $obj->value);
+						}
+					}else{
+						array_push($row, "");
+					}
 				}else{
 					array_push($row, Interpreter::generate($field["VALUE"]->id,$good,$dynObjects));
 				}

@@ -20,7 +20,7 @@
 				<tr>
 					<td><?=$item->id?></td>
 					<td class="align-left"><a href="<?php echo Yii::app()->createUrl('/'.$this->adminMenu["cur"]->code.'/admindictionaryedit',array('id'=>$item->id))?>"><?=$item->name?></a></td>
-					<td><?=$item->attribute_1->name?></td>
+					<td><?=isset($item->attribute_1->name)?$item->attribute_1->name:""?></td>
 					<td class="b-tool-cont">
 						<a href="<?php echo Yii::app()->createUrl('/'.$this->adminMenu["cur"]->code.'/admindictionaryupdate',array('id'=>$item->id))?>" class="ajax-form ajax-update b-tool b-tool-update" title="Параметры списока"></a>
 						<a href="<?php echo Yii::app()->createUrl('/'.$this->adminMenu["cur"]->code.'/admindictionaryedit',array('id'=>$item->id))?>" class="b-tool b-tool-list" title="Редактировать список"></a>

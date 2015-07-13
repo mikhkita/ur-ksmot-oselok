@@ -1,8 +1,8 @@
 <?php
 	require_once("phpmail.php");
 
-	$email_admin = "beatbox787@gmail.com";
-	// $email_admin = "i.e.alekseev@gmail.com, alyzoya@gmail.com";
+	// $email_admin = "beatbox787@gmail.com";
+	$email_admin = "godzilla.wheels@gmail.com";
 
 	$from = "Koleso Tomsk Ru";
 	$email_from = "koleso@tomsk.ru";

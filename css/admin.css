@@ -86,7 +86,7 @@ select{
     padding: 5px 10px;
     font-size: 14px;
     display: inline-block;
-    min-width: 200px;
+    min-width: 100px;
 }
 /* clearfix */  
 .clearfix:after 
@@ -445,6 +445,13 @@ h1{
                     padding: 5px 10px !important;
                     box-sizing: border-box;
                     resize: none;
+                    border: 0px solid #452716 !important;
+                }
+                .b-table-td-editable input{
+                    background-color: transparent;
+                    width: 100%;
+                    padding: 15px 10px !important;
+                    box-sizing: border-box;
                     border: 0px solid #452716 !important;
                 }
         .align-left{
@@ -1674,6 +1681,12 @@ li.ui-autocomplete-category {
         background-position: 50% 50%;
         margin: 20px;
     }
+.b-dynamic select{
+    min-width: 230px;
+}
+.b-select-buttons{
+    margin-top: 15px;
+}
 #link textarea{ 
     border-radius: 5px;
     background-color: #FFF5D1;

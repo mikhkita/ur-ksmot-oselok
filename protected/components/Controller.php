@@ -227,6 +227,13 @@ class Controller extends CController
         return array_values($model);
     }
 
+    public function cutText($str, $max_char = 255){
+        if( mb_strlen($str,"UTF-8") >= $max_char-3 ){
+            $str = mb_substr($str, 0, $max_char-3,"UTF-8")."...";
+        }
+        return $str;
+    }
+
     public function DownloadFile($source,$filename) {
         if (file_exists($source)) {
         
@@ -248,5 +255,13 @@ class Controller extends CController
             readfile($source);
             exit;
         }
+    }
+
+    public function implodeValues($arr){
+        $out = array();
+        foreach ($arr as $key => $value) {
+            $out[] = $value->value;
+        }
+        return implode("/",$out);
     }
 }

@@ -290,9 +290,6 @@ $(document).ready(function(){
                 $(".fancybox-wrap form").trigger("submit",[false]);
             }
         }
-        if( e.keyCode == 86 && ( cmddown || ctrldown ) ){
-            alert();
-        }
         if( e.keyCode == 13 ){
             enterVariantsHandler();
         }
@@ -660,6 +657,17 @@ $(document).ready(function(){
                 });
             });
         }
+    }
+    if( $(".b-dynamic select").length ){
+        $(".b-dynamic .b-select-all").click(function(){
+            $(this).parents(".b-dynamic").find("ul li").addClass("selected");
+            return false;
+        });
+
+        $(".b-dynamic .b-select-none").click(function(){
+            $(this).parents(".b-dynamic").find("ul li").removeClass("selected");
+            return false;
+        });
     }
     /* Dynamic ------------------------------------- Dynamic */
     function transition(el,dur){

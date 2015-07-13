@@ -106,6 +106,8 @@ $(document).ready(function(){
 					var $form;
 					if( msg == "1" ){
 						$form = $thanks;
+						ga('send', 'event', 'REQUEST', 'REQUEST');
+						yaCounter31382368.reachGoal('REQUEST');
 					}else{
 						$form = $("#b-popup-error");
 					}

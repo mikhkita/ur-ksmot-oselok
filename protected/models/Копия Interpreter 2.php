@@ -9,6 +9,7 @@
  * @property string $template
  * @property string $good_type_id
  * @property string $rule_code
+ * @property integer $width
  */
 class Interpreter extends CActiveRecord
 {
@@ -29,12 +30,13 @@ class Interpreter extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('name, template, good_type_id', 'required'),
+			array('width', 'numerical', 'integerOnly'=>true),
 			array('name, rule_code', 'length', 'max'=>255),
-			array('template', 'length', 'max'=>2000),
+			array('template', 'length', 'max'=>20000),
 			array('good_type_id', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, template, good_type_id, rule_code', 'safe', 'on'=>'search'),
+			array('id, name, template, good_type_id, rule_code, width', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -63,6 +65,7 @@ class Interpreter extends CActiveRecord
 			'template' => 'Шаблон',
 			'good_type_id' => 'Тип товара',
 			'rule_code' => 'Доступ',
+			'width' => 'Ширина в пикселях',
 		);
 	}
 
@@ -71,6 +74,13 @@ class Interpreter extends CActiveRecord
 		$this->rule_code = ( !isset($this->rule_code) )?Yii::app()->params['defaultRule']:$this->rule_code;
 		return true;
 	}
+
+	public function beforeDelete(){
+  		foreach ($this->exports as $key => $value) {
+  			$value->delete();
+  		}
+  		return parent::beforeDelete();
+ 	}
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
@@ -95,6 +105,7 @@ class Interpreter extends CActiveRecord
 		$criteria->compare('template',$this->template,true);
 		$criteria->compare('good_type_id',$this->good_type_id,true);
 		$criteria->compare('rule_code',$this->rule_code,true);
+		$criteria->compare('width',$this->width);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -115,7 +126,7 @@ class Interpreter extends CActiveRecord
 	public function getArrayValue($value,$type) {
         if( $value[0] == "{" && $value[strlen($value)-1] == "}" ){
             $tmp = explode("|", substr($value, 1,-1));
-            $value = ($type == "REPLACE")?[0=>array(),1=>array()]:[];
+            $value = ($type == "REPLACE")?array(0=>array(),1=>array()):array();
             foreach ($tmp as $v) {
                 $arr = explode("=", $v);
                 if( count($arr) == 2 ){
@@ -135,8 +146,9 @@ class Interpreter extends CActiveRecord
         }
     }
 
-    public function generate($interpreter_id,$model){
+    public function generate($interpreter_id,$model,$dynObjects = NULL){
     	$attributes = (isset($model->fields_assoc))?$model->fields_assoc:$model;
+    	if( $dynObjects !== NULL ) $attributes = $attributes + $dynObjects;
 
     	if( isset($this->interpreters[(string)$interpreter_id]) ){
     		if( $this->interpreters[(string)$interpreter_id]->good_type_id == $model->good_type_id ){
@@ -154,7 +166,7 @@ class Interpreter extends CActiveRecord
 
 		foreach ($rules as $i => $rule) {
 			$tmp = explode(";", $rule);
-			$params = [];
+			$params = array();
 			foreach ($tmp as $param) {
 				$index = stripos($param, "=");
 				if( $index > 0 ){
@@ -176,15 +188,32 @@ class Interpreter extends CActiveRecord
 			}
 
 			if( isset($params["ATTR"]) ){
-				$val = ( isset($attributes[intval($params["ATTR"])]->value) )?$attributes[intval($params["ATTR"])]->value:"";
+				$val = "";
 
-				$val = ( isset($params["FLOAT"]) )?number_format((float)$val,intval($params["FLOAT"])):$val;
+				if( isset($attributes[intval($params["ATTR"])]) ){
+					$tmpArr = array();
 
-				if( isset($params["REPLACE"]) ){
-					$val = str_replace($params["REPLACE"][0], $params["REPLACE"][1], $val);
+					if( is_array($attributes[intval($params["ATTR"])]) ){
+						foreach ($attributes[intval($params["ATTR"])] as $key => $v) {
+							$tmpArr[] = $v->value;
+						}
+					}else{
+						$tmpArr[] = $attributes[intval($params["ATTR"])]->value;
+					}
+
+					foreach ($tmpArr as $key => &$v) {
+						$v = ( isset($params["FLOAT"]) )?number_format((float)$v,intval($params["FLOAT"])):$v;
+
+						if( isset($params["REPLACE"]) ){
+							$v = str_replace($params["REPLACE"][0], $params["REPLACE"][1], $v);
+						}
+
+						$v = ( isset($params["ALT"]) && isset($params["ALT"][$v]) )?$params["ALT"][$v]:$v;
+					}
+					$val = implode( (isset($params["SEP"]))?$params["SEP"]:"/", $tmpArr);
 				}
 
-				$matches[1][$i] = ( isset($params["ALT"]) && isset($params["ALT"][$val]) )?$params["ALT"][$val]:$val;
+				$matches[1][$i] = $val;
 			}else if( isset($params["INTER"]) ){
 				$matches[1][$i] = Interpreter::generate(intval($params["INTER"]),$model);
 			}else if( isset($params["LIST"]) ){
@@ -193,6 +222,8 @@ class Interpreter extends CActiveRecord
 				$matches[1][$i] = $this->getTableValue(intval($params["TABLE"]),$attributes);
 			}else if( isset($params["CUBE"]) ){
 				$matches[1][$i] = $this->getCubeValue(intval($params["CUBE"]),$attributes);
+			}else if( isset($params["VAR"]) ){
+				$matches[1][$i] = $this->getVarValue($params["VAR"]);
 			}else{
 				throw new CHttpException(500,"Отсутствует параметр \"ATTR\" у интерпретатора с идентификатором ".$interpreter_id);
 			}
@@ -219,8 +250,20 @@ class Interpreter extends CActiveRecord
     }
 
     public function calculate($str){
-    	$out = 1;
-		eval("\$out = ".$str.";");
+    	$out = "";
+    	// echo $str."<br>";
+    	ini_set('display_errors','Off');
+    	eval("\$out = ".$str.";");	
+    	// $newfunc = create_function('','return '.$str.';');
+    	ini_set('display_errors','On');	
+  //   	try {
+		//     
+		// } catch (Exception $e) {
+		//     eval("\$out = \"\";");
+		// }
+
+		// echo $newfunc();
+		
 		return $out;
     }
 }
