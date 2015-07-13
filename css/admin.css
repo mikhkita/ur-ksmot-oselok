@@ -1687,3 +1687,19 @@ li.ui-autocomplete-category {
 .b-select-buttons{
     margin-top: 15px;
 }
+#link textarea{ 
+    border-radius: 5px;
+    background-color: #FFF5D1;
+    border: 1px solid #452716;
+    padding: 5px 10px;
+    font-size: 14px;
+    width: 420px;
+    resize: none;
+    height: 200px;
+    display: block;
+    margin: 15px auto;
+}
+#link .b-butt {
+    display: inline-block;
+    float: none;
+}
