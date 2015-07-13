@@ -1,70 +1,74 @@
+
 $(document).ready(function(){
     var progress = new KitProgress("#D26A44",2);
     progress.endDuration = 0.3,
     errors = 0;
         var log = $(".b-log"),
             count,
-            ready = 0;
-        $(".b-import-butt").click(function(){
+            ready = 0,
+            arr;
+
+    $("#link").submit(function(){    
+            var str=$("textarea[name=link]").serialize();
+            str = str.substr(5);
+            str = decodeURIComponent(str);
+            arr = str.split('\r\n'); 
             startImport();
             return false;
         });
-    
+
     function startImport(){
-        count = $(".b-import-preview-table tr").length-1,
+        count = arr.length;
         showImport();
         sendNext();
     }
     function endImport(){
         $(".progress").addClass("ready");
-        setLog("Импорт завершен. Ошибок: "+errors);
+        setLog("Копирование завершено. Ошибок: "+errors);
     }
     function showImport(){
         $(".b-import").show();
-        $(".b-preview").hide();
+        $("#link").hide();
     }
     function sendNext(){
-        if( $(".b-import-preview-table tr").eq(1).length ){
-            var $tr = $(".b-import-preview-table tr").eq(1),
-                data = $('<form>').append( $tr.clone() ).serialize();
-
-            $tr.remove();
-
+        if(arr[ready] && arr[ready].indexOf("https")+1) {
             $.ajax({
-                type: "POST",
-                url: $(".b-preview").attr("data-url"),
-                data: data,
+                type: 'POST',
+                url: "/admin/link",
+                data: {link: arr[ready]},
                 success: function(msg){
-                    var json = JSON.parse(msg);
-                    setLog(json.message,json.result);
+                    if(msg=="1") {
+                        setLog("Изображения по ссылке "+arr[ready]+" скопированы","success");
+                    } else {
+                        setLog("Изображения по ссылке "+arr[ready]+" не скопированы","error");
+                    }
                 },
                 error: function(){
-                    setLog("Ошибка в работе php-скрипта","error");
+                    setLog("Ошибка в работе php-скрипта, изображения по ссылке "+arr[ready]+" не скопированы","error");
                 },
-                complete: function(){
-                    ready++;
-                    updateProgressBar();
-                    sendNext();
-                }
+                complete: function() {
+                    ready++; 
+                    updateProgressBar();                 
+                    sendNext();                  
+                } 
             });
-        }
+        } else if(typeof arr[ready] != 'undefined') {
+                ready++;
+                updateProgressBar();
+                sendNext();
+            }       
         
     }
     function setLog(string,result){
         if( result == "error" ) errors++;
         var li = $("<li>"+string+"</li>");
-        if( typeof result == "string" )
-            li.addClass(result);
-
         log.prepend(li);
     }
     function updateProgressBar(){
         var percent = Math.ceil(ready/count*100)+"%";
         $(".progress-bar").css("width",percent).html(percent);
-        if( count == ready ){
+        if( count == ready){
             setTimeout(endImport,200);
         }
     }
-    // Третий шаг --------------------------------------------------- Третий шаг
-
 });
