@@ -41,7 +41,7 @@ class LinkController extends Controller
 			    curl_setopt($c, CURLOPT_FOLLOWLOCATION, 1);
 			       
 			$html = new simple_html_dom();
-			$html = str_get_html(curl_exec($c));
+			$html = str_get_html(curl_exec($c));// Надо заменить на "$html = file_get_html($_POST['link']);"
 			curl_close($c);  
 			$links_arr = array();
 			//регулярнымвыражением парсим страницу, и находим все картники с расширением png и jpg

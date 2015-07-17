@@ -319,6 +319,9 @@ h1{
     border-radius: 5px;
     margin-top: 25px;
 }
+.b-index-img{
+    max-width: 100px;
+}
 .b-filter-export{
     max-height: 155px;
     overflow: auto;

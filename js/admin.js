@@ -32,6 +32,10 @@ $(document).ready(function(){
     $(window).resize(whenResize);
     whenResize();
 
+    $(".fancy-img").fancybox({
+        padding : 0
+    });
+
     $(".ajax-update,.ajax-create").fancybox({
         type: "ajax",
         helpers: {
