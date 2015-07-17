@@ -7,39 +7,96 @@
   	// unset($_SERVER['DOCUMENT_ROOT'].'/cookie.txt');
   	curl_setopt($ch, CURLOPT_URL, $url);
   	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);   // ГўГ®Г§ГўГ°Г Г№Г ГҐГІ ГўГҐГЎ-Г±ГІГ°Г Г­ГЁГ¶Гі
-  	// curl_setopt($ch, CURLOPT_HEADER, 1);           // Г­ГҐ ГўГ®Г§ГўГ°Г Г№Г ГҐГІ Г§Г ГЈГ®Г«Г®ГўГЄГЁ
+  	curl_setopt($ch, CURLOPT_HEADER, 1);           // Г­ГҐ ГўГ®Г§ГўГ°Г Г№Г ГҐГІ Г§Г ГЈГ®Г«Г®ГўГЄГЁ
   	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);   // ГЇГҐГ°ГҐГµГ®Г¤ГЁГІ ГЇГ® Г°ГҐГ¤ГЁГ°ГҐГЄГІГ Г¬
   	//   // useragent
 
   	// curl_setopt ($ch, CURLOPT_SSL_VERIFYPEER, 0);// Г­ГҐ ГЇГ°Г®ГўГҐГ°ГїГІГј SSL Г±ГҐГ°ГІГЁГґГЁГЄГ ГІ
   	// curl_setopt ($ch, CURLOPT_SSL_VERIFYHOST, 0);// Г­ГҐ ГЇГ°Г®ГўГҐГ°ГїГІГј Host SSL Г±ГҐГ°ГІГЁГґГЁГЄГ ГІГ 
-  	curl_setopt($ch, CURLOPT_COOKIEJAR, $_SERVER['DOCUMENT_ROOT'].'/cookie.txt'); // Г±Г®ГµГ°Г Г­ГїГІГј ГЄГіГЄГЁ Гў ГґГ Г©Г«
-  	curl_setopt($ch, CURLOPT_COOKIEFILE,  $_SERVER['DOCUMENT_ROOT'].'/cookie.txt');
+  	// curl_setopt($ch, CURLOPT_COOKIEJAR, $_SERVER['DOCUMENT_ROOT'].'/cookie.txt'); // Г±Г®ГµГ°Г Г­ГїГІГј ГЄГіГЄГЁ Гў ГґГ Г©Г«
+  	// curl_setopt($ch, CURLOPT_COOKIEFILE,  $_SERVER['DOCUMENT_ROOT'].'/cookie.txt');
   	curl_setopt($ch, CURLOPT_POST, 1); // ГЁГ±ГЇГ®Г«ГјГ§Г®ГўГ ГІГј Г¤Г Г­Г­Г»ГҐ Гў post
+    // curl_setopt($ch, CURLOPT_COOKIEJAR, '-');
+    // curl_setopt($ch, CURLOPT_REFERER, $url);
+    // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+   // cURL будет выводить подробные сообщения о всех производимых действиях
+   // curl_setopt($ch, CURLOPT_VERBOSE, 1);
+   // curl_setopt($ch, CURLOPT_COOKIESESSION,1);
+   // curl_setopt($ch, CURLOPT_CERTINFO,1);
+   // curl_setopt($ch, CURLOPT_POST, 1);
+   // curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+   // curl_setopt($ch, CURLOPT_POST, true);
+   // curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36");
+   curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+    // 'Content-type: application/x-www-form-urlencoded',
+    // 'Content-length: 59',
+    'Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+'Accept-Encoding:gzip, deflate',
+'Accept-Language:ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4',
+'Cache-Control:no-cache',
+'Connection:keep-alive',
+'Content-Length:59',
+'Content-Type:application/x-www-form-urlencoded',
+'Host:www.yahon.ru',
+'Origin:http://www.yahon.ru',
+'Pragma:no-cache',
+'Referer:http://www.yahon.ru/',
+'User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36'
+    ));
   	curl_setopt($ch, CURLOPT_POSTFIELDS, array(
   		'set_login'=>'svcl',
   		'set_pass'=>'kb5e1law',
-  		// 'set_from'=>'',
+  		'set_from'=>'',
   		'to_remain_here'=>'Y'
   	));
-  	$result = curl_exec( $ch );
+  	$content = curl_exec( $ch );
 
-	// preg_match_all('/^Set-Cookie:\s*([^;]*)/mi', $result, $matches);
+	preg_match_all('/^Set-Cookie:\s*([^;]*)/mi', $content, $results);
+  $cookies = implode(';', $results[1]);
+  
 	// $cookies = array();
 	// foreach($matches[1] as $item) {
 	//     parse_str($item, $cookie);
 	//     $cookies = array_merge($cookies, $cookie);
 	// }
-	// var_dump($result);
+	// var_dump($cookies);
 
   	curl_close( $ch );
-
+    $file = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/cookie.txt');
+    $file = explode(PHP_EOL,$file);
+    $file =  preg_split('/\s+/', $file[4]);
+    // print_r($content);
 
   	$ch = curl_init();
-  	curl_setopt($ch, CURLOPT_COOKIEFILE,  $_SERVER['DOCUMENT_ROOT'].'/cookie.txt');
+    // print_r($cookies);
+    // curl_setopt($ch, CURLOPT_HEADER, 1); 
+    curl_setopt($ch, CURLOPT_POST, 0);
+    // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+//     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+//     // 'Content-type: application/x-www-form-urlencoded',
+//     // 'Content-length: 59',
+//     'Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+// 'Accept-Encoding:gzip, deflate, sdch',
+// // 'Accept-Language:ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4',
+// 'Cache-Control:no-cache',
+// 'Connection:keep-alive',
+// // 'Host:www.yahon.ru',
+// 'Pragma:no-cache',
+// // 'Referer:http://www.yahon.ru/',
+// 'User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36'
+//     ));
+    
+    curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36");
+    print_r($cookies);
+    // print_r($file[4]);
+        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);   // ГўГ®Г§ГўГ°Г Г№Г ГҐГІ ГўГҐГЎ-Г±ГІГ°Г Г­ГЁГ¶Гі
+    curl_setopt($ch, CURLOPT_HEADER, 1); 
+    // curl_setopt($ch, CURLOPT_COOKIE, $cookies);
+    // curl_setopt($ch, CURLOPT_POST, 1);
+  	// curl_setopt($ch, CURLOPT_COOKIEFILE,  $_SERVER['DOCUMENT_ROOT'].'/cookie.txt');
   	$url = "https://www.yahon.ru/personal/bids";
   	curl_setopt($ch, CURLOPT_URL, $url);
-  	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+  	// curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
   	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
  	print_r(curl_exec( $ch ));
 
