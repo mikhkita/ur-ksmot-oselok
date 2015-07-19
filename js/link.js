@@ -39,6 +39,8 @@ $(document).ready(function(){
                 success: function(msg){
                     if(msg=="1") {
                         setLog("Изображения по ссылке "+arr[ready]+" скопированы","success");
+                    } else if(msg=="2"){
+                        setLog("Изображения по ссылке "+arr[ready]+" были скопированы раннее","success");
                     } else {
                         setLog("Изображения по ссылке "+arr[ready]+" не скопированы","error");
                     }
