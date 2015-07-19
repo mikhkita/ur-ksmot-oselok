@@ -11,9 +11,20 @@
  * @property integer $state
  * @property string $image
  * @property integer $price
+ * @property integer $current_price
  */
 class Auction extends CActiveRecord
 {
+	public $states = array(
+		0 => "В очереди",
+		1 => "Обрабатывается",
+		2 => "Ставка поставлена",
+		3 => "Торги завершены",
+		4 => "Ставка не состоялась: цена больше нашей",
+		5 => "Ставка была перебита",
+		6 => "Лот выйгран",
+	);
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -30,14 +41,14 @@ class Auction extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('code, name, date, image, price', 'required'),
-			array('state, price', 'numerical', 'integerOnly'=>true),
+			array('code, name, date, image, price, current_price', 'required'),
+			array('state, price, current_price', 'numerical', 'integerOnly'=>true),
 			array('code', 'length', 'max'=>100),
 			array('name', 'length', 'max'=>1000),
 			array('image', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, code, name, date, state, image, price', 'safe', 'on'=>'search'),
+			array('id, code, name, date, state, image, price, current_price', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -65,6 +76,7 @@ class Auction extends CActiveRecord
 			'state' => 'Состояние',
 			'image' => 'Изображение',
 			'price' => 'Цена выкупа',
+			'current_price' => 'Текущая цена',
 		);
 	}
 
@@ -93,6 +105,7 @@ class Auction extends CActiveRecord
 		$criteria->compare('state',$this->state);
 		$criteria->compare('image',$this->image,true);
 		$criteria->compare('price',$this->price);
+		$criteria->compare('current_price',$this->current_price);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -33,7 +33,7 @@ class LinkController extends Controller
 		$this->scripts[] = "link";
 		if(isset($_POST['link'])) {
 			
-			include_once  Yii::app()->basePath.'/simple_html_dom.php';
+			include_once  Yii::app()->basePath.'/extensions/simple_html_dom.php';
 			$url=$_POST['link'];
 			    $c = curl_init(); 
 			    curl_setopt($c, CURLOPT_URL, $url);       

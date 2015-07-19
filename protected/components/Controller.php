@@ -257,6 +257,14 @@ class Controller extends CController
         }
     }
 
+    public function convertDate($date_from,$hours_plus){
+        ini_set('date.timezone', 'UTC');
+
+        $date = strtotime($date_from);
+
+        return gmdate("Y-m-d H:i:s", $date + intval($hours_plus)*60*60);
+    }
+
     public function implodeValues($arr){
         $out = array();
         foreach ($arr as $key => $value) {
