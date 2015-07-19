@@ -2,8 +2,6 @@
 
 class LinkController extends Controller
 {
-	public $codeId = 3;
-
 	public function filters()
 	{
 		return array(
@@ -19,7 +17,7 @@ class LinkController extends Controller
 				'roles'=>array('manager'),
 			),
 			array('allow',
-				'actions'=>array('index'),
+				'actions'=>array(''),
 				'users'=>array('*'),
 			),
 			array('deny',
@@ -28,18 +26,13 @@ class LinkController extends Controller
 		);
 	}
 
-	public function actionAdminIndex($partial = false,$error = NULL)
+	public function actionAdminIndex()
 	{
 		$this->scripts[] = "link";
 		if(isset($_POST['link'])) {
-			
 			include_once  Yii::app()->basePath.'/simple_html_dom.php';
-		
 			$html = new simple_html_dom();
 			$html = file_get_html($_POST['link']); 
-			$links_arr = array();
-			//регулярнымвыражением парсим страницу, и находим все картники с расширением png и jpg
-			
 			$url = array_pop(explode("/",$_POST['link']));
 			$url = str_replace(".html","",$url);
 			$dir = Yii::app()->params["imageFolder"]."/links/".$url;
@@ -59,19 +52,8 @@ class LinkController extends Controller
 	  			echo "2";
 	  		}
 		} else {
-			$this->render('adminIndex',array());
+			$this->render('adminIndex');
 		}
 	}
-	
-	public function loadModel($id)
-	{
-		$model=Import::model()->findByPk($id);
-		if($model===null)
-			throw new CHttpException(404,'The requested page does not exist.');
-		return $model;
-	}
-
-
-
 
 }
