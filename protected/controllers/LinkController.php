@@ -34,15 +34,9 @@ class LinkController extends Controller
 		if(isset($_POST['link'])) {
 			
 			include_once  Yii::app()->basePath.'/simple_html_dom.php';
-			$url=$_POST['link'];
-			    $c = curl_init(); 
-			    curl_setopt($c, CURLOPT_URL, $url);       
-			    curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
-			    curl_setopt($c, CURLOPT_FOLLOWLOCATION, 1);
-			       
+		
 			$html = new simple_html_dom();
-			$html = str_get_html(curl_exec($c));// Надо заменить на "$html = file_get_html($_POST['link']);"
-			curl_close($c);  
+			$html = file_get_html($_POST['link']); 
 			$links_arr = array();
 			//регулярнымвыражением парсим страницу, и находим все картники с расширением png и jpg
 			
