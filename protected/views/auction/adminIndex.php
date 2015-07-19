@@ -25,7 +25,7 @@
 		<? if( count($data) ): ?>
 			<? foreach ($data as $i => $item): ?>
 				<tr>
-					<td class="align-left"><?=$item->code?></td>
+					<td class="align-left"><a href="https://injapan.ru/auction/<?=$item->code?>.html" target="_blank"><?=$item->code?></a></td>
 					<td class="align-left"><a href="<?=$item->image?>" class="fancy-img"><img src="<?=$item->image?>" class="b-index-img"></a></td>
 					<td class="align-left"><?=$item->name?></td>
 					<td><?=$item->date?></td>
