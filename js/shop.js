@@ -93,7 +93,13 @@ $(document).ready(function(){
     }
 
     $("#go-back").click(function(){
-        window.history.back();
+        if(document.referrer) {
+           window.history.back();
+        } else if($(this).text().indexOf('Шины') + 1){
+            window.location.assign("/shop");
+        } else if ($(this).text().indexOf('Диски') + 1) {
+            window.location.assign("/shop?type=2");
+        }
     });
     function showCount() {
         if(filter==0) {
