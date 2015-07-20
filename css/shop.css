@@ -310,6 +310,10 @@ input:-moz-placeholder {
 				.four-cols .check-cont li{
 					width: 25% !important;
 				}
+				.three-cols ul li:nth-child(2n),
+				.three-cols .check-cont li{
+					width: 33% !important;
+				}
 					.b-main .b-block .b-main-filter .filter-cont .check-cont li input {
 						display: none;
 					}

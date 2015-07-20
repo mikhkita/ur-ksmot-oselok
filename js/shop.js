@@ -20,7 +20,7 @@ $(document).ready(function(){
     // var progress = new KitProgress("#FFF",2);
     var price_min_def = $( "#price_min" ).val()*1,
     price_max_def = $( "#price_max" ).val()*1,
-    price_max = price_max_def*0.7,price_min=price_min_def,type,filter=0;
+    price_max = price_max_def,price_min=price_min_def,type,filter=0;
     if(location.search!='') {
         var price = decodeURIComponent(location.search.substr(1)).split('&');
         $.each( price, function( key, value ) {
