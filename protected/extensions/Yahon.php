@@ -3,7 +3,6 @@
 Class Yahon {
 
     private $cookies = NULL;
-    private $lot = NULL;
     
     function __construct() {
 
@@ -28,25 +27,23 @@ Class Yahon {
         $content = curl_exec($ch);
         preg_match_all('/^Set-Cookie:\s*([^;]*)/mi', $content, $result);
         $this->cookies = implode(';', $result[1]);
+        Log::debug("Yahon.php 30 строка. После авторизации cookies = ".$this->cookies); file_put_contents(Yii::app()->basePath."/logs/sniper/auth.txt", $content);
         curl_close($ch);
     }
     public function isAuth() {
-
         return ($this->cookies !== NULL);
     }
 
-    public function setLot($lot_number = NULL) {
-
-        $this->lot = $lot_number;
-    }
-
-    public function setBid($cur_price,$step,$max_price) {
+    public function setBid($lot_number,$cur_price,$step,$max_price) {
+        $cur_price = intval($cur_price);
+        $step = intval($step);
+        $max_price = intval($max_price);
 
         if($this->cookies === NULL) return "Авторизация не пройдена";
-        if($this->lot === NULL) return "Не указан номер лота";
         $bid = (($cur_price+$step*2)<=$max_price) ? ($cur_price+$step) : ( (($cur_price+$step)<=$max_price) ? $max_price : 0);
+        Log::debug("Yahon.php 44 строка. bid = ".$bid);
         if($bid===0) {
-            return array('result' => 4);
+            return array('result' => 5);
         }
 
         $ch = curl_init();
@@ -57,11 +54,12 @@ Class Yahon {
         curl_setopt($ch, CURLOPT_POSTFIELDS, array(
           'user_rate'=>$bid,
           'quantity'=>'1',
-          'lot_no'=>$this->lot
+          'lot_no'=>$lot_number
         ));
         curl_setopt($ch, CURLOPT_COOKIE, $this->cookies);
     
         $content = curl_exec($ch);
+        file_put_contents(Yii::app()->basePath."/logs/sniper/bid_preview.txt", $content);
         preg_match_all('/.(input [^>]*)/m', $content, $result);
         $fields = array(
           'comments' => '',
@@ -76,16 +74,18 @@ Class Yahon {
                 $fields[$name[1][0]] = $val[1][0];
             }
         }
+        Log::debug("Yahon.php 77 строка. signature = ".$fields["signature"]." token = ".$fields["token"]);
     
         if(!isset($fields["signature"])) {
             return array('result' => 4);
         }
-        // $fields['user_rate'] = 1100;
+        // $fields['user_rate'] = 500;
     
         curl_setopt($ch, CURLOPT_URL, "https://www.yahon.ru/yahoo/bid_place");
         curl_setopt($ch, CURLOPT_POSTFIELDS,$fields);
     
         $content = curl_exec($ch);
+        file_put_contents(Yii::app()->basePath."/logs/sniper/bid_place.txt", $content);
     
         preg_match_all('/.*signature=([^"]*)".*/',$content,$sign);
         preg_match_all('/.*token=([^&]*)&.*/',$content,$token);
@@ -96,17 +96,19 @@ Class Yahon {
         foreach ($fields as $key => $value) {
             $params[] = $key."=".$value;
         }
+        Log::debug("Yahon.php 99 строка. params = ".implode("&", $params));
     
         curl_setopt($ch, CURLOPT_COOKIE, $this->cookies.";lotViewMode=1");
         curl_setopt($ch, CURLOPT_URL,"https://www.yahon.ru/modules/yahoo_auction/data_request/rate.php?".implode("&", $params));
         curl_setopt($ch, CURLOPT_POST, 0);
     
         $content = curl_exec($ch);
+        file_put_contents(Yii::app()->basePath."/logs/sniper/rate.txt", $content);
         curl_close($ch);
         if(mb_stripos($content,"Ставка принята",0,"UTF-8")) {
             return array('price' => $bid, 'result' => 2);
         } else {
-            return array('result' => 0);
+            return array('price' => $bid, 'result' => 0);
         }
     }
 

@@ -6,7 +6,7 @@ Class Injapan {
 
     }
 
-    public function getFields($code){
+    public function getFields($code, $max_price){
         include_once  Yii::app()->basePath.'/extensions/simple_html_dom.php';
 
         $result = array("main"=>array(),"other"=>array());
@@ -27,18 +27,19 @@ Class Injapan {
         $query = $html->find('.left_previews td img');
         $result["main"]["image"] = $query[0]->src;
 
-        // Уточнение состояния аукциона. Завершен или не завершен
-        $query = $html->find("#bidplace input[name=account]");
-        $result["main"]["state"] = ( isset($query[0]) )?0:3;
-
-        // Получение текущей цены лота
-        $query = $html->find("#spanInfoPrice strong");
-        $result["main"]["current_price"] = intval(str_replace("&nbsp;", "", strip_tags($query[0]->innertext)));
-
         // Получение шага ставки
         $query = $html->find("#spanInfoStep");
         $arr = explode("<span", $query[0]->innertext);
         $result["other"]["step"] = intval(preg_replace("/[^0-9]/", '', $arr[0] ));
+
+        // Получение текущей цены лота
+        $query = $html->find("#spanInfoPrice strong");
+        $result["main"]["current_price"] = intval(str_replace("&nbsp;", "", strip_tags($query[0]->innertext)));
+        $result["main"]["state"] = ( $result["main"]["current_price"] + $result["other"]["step"] > $max_price )?5:0;
+
+        // Уточнение состояния аукциона. Завершен или не завершен
+        $query = $html->find("#bidplace input[name=account]");
+        if( !isset($query[0]) ) $result["main"]["state"] = 3;
 
         return $result;
     }
