@@ -101,9 +101,10 @@ $(document).ready(function(){
                 type: 'GET',
                 url: "/shop/index?countGood=true",
                 data: $("#filter").serialize(),
-                success: function(msg){
+                success: function(msg){ 
+                    $("#filter-search span").remove();
+                    $("#filter-search").append("<span>Товаров: "+msg+"</span>");
                     $("#filter-search img").hide();
-                    $("#filter-search").append("<span>Товаров: "+msg+"</span>")
                 }
             }); 
         }
