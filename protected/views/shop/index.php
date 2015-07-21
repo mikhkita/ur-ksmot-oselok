@@ -100,7 +100,6 @@
                     </div>
                     <div id="slider-range"></div>
                 </div>
-
                 <? if ($_GET['type'] == 1): ?>
                     <div class="filter-cont">
                         <h2>Модель</h2>

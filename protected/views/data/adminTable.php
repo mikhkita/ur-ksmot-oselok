@@ -19,7 +19,7 @@
 		</tr>
 		<? if( count($data) ): ?>
 			<? foreach ($data as $i => $item): ?>
-				<tr>
+				<tr<?if(isset($_GET["id"]) && $item->id == $_GET["id"]):?> class="b-refresh"<?endif;?>>
 					<td><?=$item->id?></td>
 					<td class="align-left"><a href="<?php echo Yii::app()->createUrl('/'.$this->adminMenu["cur"]->code.'/admintableedit',array('id'=>$item->id))?>"><?=$item->name?></a></td>
 					<td><?=$item->attribute_1->name?></td>

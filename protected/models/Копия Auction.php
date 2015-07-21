@@ -12,10 +12,9 @@
  * @property string $image
  * @property integer $price
  * @property integer $current_price
- * @property integer $archive
  */
 class Auction extends CActiveRecord
-{	
+{
 	public $states = array(
 		0 => "В очереди",
 		1 => "Обрабатывается",
@@ -43,13 +42,13 @@ class Auction extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('code, name, date, image, price, current_price', 'required'),
-			array('state, price, current_price, archive', 'numerical', 'integerOnly'=>true),
+			array('state, price, current_price', 'numerical', 'integerOnly'=>true),
 			array('code', 'length', 'max'=>100),
 			array('name', 'length', 'max'=>1000),
 			array('image', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, code, name, date, state, image, price, current_price, archive', 'safe', 'on'=>'search'),
+			array('id, code, name, date, state, image, price, current_price', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -78,7 +77,6 @@ class Auction extends CActiveRecord
 			'image' => 'Изображение',
 			'price' => 'Цена выкупа',
 			'current_price' => 'Текущая цена',
-			'archive' => 'Архивирован',
 		);
 	}
 
@@ -108,7 +106,6 @@ class Auction extends CActiveRecord
 		$criteria->compare('image',$this->image,true);
 		$criteria->compare('price',$this->price);
 		$criteria->compare('current_price',$this->current_price);
-		$criteria->compare('archive',$this->archive);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

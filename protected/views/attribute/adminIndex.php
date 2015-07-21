@@ -20,7 +20,7 @@
 		</tr>
 		<? if( count($data) ): ?>
 			<? foreach ($data as $i => $item): ?>
-				<tr>
+				<tr<?if(isset($_GET["id"]) && $item->id == $_GET["id"]):?> class="b-refresh"<?endif;?>>
 					<td><?=$item->id?></td>
 					<td class="align-left"><?=$item->name?></td>
 					<td class="align-left"><?=$item->type->name?></td>

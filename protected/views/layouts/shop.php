@@ -5,7 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=8" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="language" content="ru" />
-	<title><?php echo $this->pageTitle; ?></title>
+	<title><?php echo $this->title; ?></title>
     <link rel="shortcut icon" href="/favicon2.ico" type="image/x-icon"> 
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/jquery.fancybox.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/jquery-ui.min.css" />

@@ -2,18 +2,18 @@ HTTP/1.1 100 Continue
 
 HTTP/1.1 302 Found
 Server: nginx
-Date: Sun, 19 Jul 2015 21:39:14 GMT
+Date: Mon, 20 Jul 2015 08:28:10 GMT
 Content-Type: text/html; charset=utf-8
 Content-Length: 0
 Connection: keep-alive
 Keep-Alive: timeout=1180
-Set-Cookie: session=y85%2CCJACY8aHkRy-Hjq2s5-Ymcc; expires=Mon, 20-Jul-2015 21:39:14 GMT; path=/
+Set-Cookie: session=9HFhp2wzYGTve4y2j90LtZgIm2f; expires=Tue, 21-Jul-2015 08:28:10 GMT; path=/
 Expires: Mon, 26 Jul 1997 05:00:00 GMT
 Cache-Control: no-store, no-cache, must-revalidate
 Pragma: no-cache
-Last-Modified: Sun, 19 Jul 2015 21:39:14 GMT
+Last-Modified: Mon, 20 Jul 2015 08:28:10 GMT
 Cache-Control: post-check=0, pre-check=0
-Set-Cookie: verify=f02f81343d; expires=Mon, 20-Jul-2015 21:39:14 GMT; path=/; secure; httponly
+Set-Cookie: verify=60d69eb7c7; expires=Tue, 21-Jul-2015 08:28:10 GMT; path=/; secure; httponly
 Location: https://www.yahon.ru
 Vary: Accept-Encoding
 X-Content-Type-Options: nosniff
@@ -22,30 +22,31 @@ X-XSS-Protection: 1; mode=block
 
 HTTP/1.1 301 Moved Permanently
 Server: nginx
-Date: Sun, 19 Jul 2015 21:39:15 GMT
+Date: Mon, 20 Jul 2015 08:28:11 GMT
 Content-Type: text/html; charset=utf-8
-Content-Length: 0
+Content-Length: 20
 Connection: keep-alive
 Keep-Alive: timeout=1180
-Expires: Sun, 19 Jul 2015 22:39:15 GMT
-Last-Modified: Sun, 19 Jul 2015 21:39:15 GMT
+Expires: Mon, 20 Jul 2015 09:27:22 GMT
+Last-Modified: Mon, 20 Jul 2015 08:27:22 GMT
 Cache-Control: private, max-age=3600
 Pragma: cache
 Location: http://www.yahon.ru/
 Vary: Accept-Encoding
+Content-Encoding: gzip
 X-Content-Type-Options: nosniff
 X-Frame-Options: SAMEORIGIN
 X-XSS-Protection: 1; mode=block
 
 HTTP/1.1 200 OK
 Server: nginx
-Date: Sun, 19 Jul 2015 21:39:15 GMT
+Date: Mon, 20 Jul 2015 08:28:11 GMT
 Content-Type: text/html; charset=utf-8
 Transfer-Encoding: chunked
 Connection: keep-alive
 Keep-Alive: timeout=1180
 Expires: Mon, 26 Jul 1997 05:00:00 GMT
-Last-Modified: Sun, 19 Jul 2015 21:35:01 GMT
+Last-Modified: Mon, 20 Jul 2015 08:25:01 GMT
 Cache-Control: no-store, no-cache, must-revalidate
 Cache-Control: post-check=0, pre-check=0
 Pragma: no-cache

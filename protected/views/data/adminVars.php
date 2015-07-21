@@ -15,7 +15,7 @@
 		</tr>
 		<? if( count($data) ): ?>
 			<? foreach ($data as $i => $item): ?>
-				<tr>
+				<tr<?if(isset($_GET["id"]) && $item->name == $_GET["id"]):?> class="b-refresh"<?endif;?>>
 					<td class="align-left"><?=$item->name?></td>
 					<td class="align-left"><?=$item->value?></td>
 					<td class="b-tool-cont">

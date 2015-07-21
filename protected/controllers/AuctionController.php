@@ -2,7 +2,8 @@
 
 class AuctionController extends Controller
 {
-	public $minutes_before = 2;
+	public $minutes_before = 3;
+	public $tryes = 5;
 
 	public function filters()
 	{
@@ -15,11 +16,11 @@ class AuctionController extends Controller
 	{
 		return array(
 			array('allow',
-				'actions'=>array('adminIndex','adminCreate','adminUpdate','adminDelete'),
+				'actions'=>array('adminIndex','adminCreate','adminUpdate','adminRefresh','adminArchive','adminArchiveBack'),
 				'roles'=>array('root'),
 			),
 			array('allow',
-				'actions'=>array('adminCheck'),
+				'actions'=>array('adminCheck','adminDelete'),
 				'users'=>array('*'),
 			),
 			array('deny',
@@ -53,11 +54,7 @@ class AuctionController extends Controller
 
 		if(isset($_POST['Auction']))
 		{
-			$prevState = $model->state;
-			$prevCurrentPrice = $model->current_price;
-			$model->attributes=$_POST['Auction']+Injapan::getFields($_POST['Auction']['code'],$_POST['Auction']['price'])["main"];
-			if( $prevState == 2 && $model->current_price <= $prevCurrentPrice ) $model->state = 2;
-			if($model->save())
+			if($this->update($model,$_POST['Auction']))
 				$this->actionAdminIndex(true);
 		}else{
 			$this->renderPartial('adminUpdate',array(
@@ -93,6 +90,8 @@ class AuctionController extends Controller
             }
         }
 
+        $criteria->addCondition("archive = '".( isset($_GET["archive"])?1:0 )."'");
+
         $criteria->order = 'date ASC';
 
         $model = Auction::model()->findAll($criteria);
@@ -114,17 +113,18 @@ class AuctionController extends Controller
 
 	public function actionAdminCheck()
 	{
+		Log::debug("Начало проверки");
 		$yahon = new Yahon();
 
-		// $model = Auction::model()->findAll(array("condition"=>"state=0 AND date<'".date("Y-m-d H:i:s", time()+$this->minutes_before*60)."'"));
-		$model = Auction::model()->findAll(array("condition"=>"state=0 AND date<'".date("Y-m-d H:i:s", strtotime("2015-07-20 19:21:00")+$this->minutes_before*60)."'"));
+		$model = Auction::model()->findAll(array("condition"=>"state=0 AND date<'".date("Y-m-d H:i:s", time()+$this->minutes_before*60)."'"));
+		// $model = Auction::model()->findAll(array("condition"=>"state=0 AND date<'".date("Y-m-d H:i:s", strtotime("2015-07-20 19:21:00")+$this->minutes_before*60)."'"));
 		foreach ($model as $key => $auction) {
 			$fields = NULL;
 			$fields = Injapan::getFields($auction->code, $auction->price);
 
 			if( intval($fields["main"]["state"]) == 0 ){ // ПОПРАВИТЬ НА 0
-				// if( strtotime($fields["main"]["date"]) < time()+$this->minutes_before*60 ){
-				if( strtotime($fields["main"]["date"]) < strtotime("2015-07-20 19:21:00")+$this->minutes_before*60 ){
+				if( strtotime($fields["main"]["date"]) < time()+$this->minutes_before*60 ){
+				// if( strtotime($fields["main"]["date"]) < strtotime("2015-07-20 19:21:00")+$this->minutes_before*60 ){
 					if( !$yahon->isAuth() ) $yahon->auth();
 
 					$fields = $this->setBid($auction,$fields,$yahon);
@@ -134,8 +134,12 @@ class AuctionController extends Controller
 			$auction->save();
 		}
 
-		// $model = Auction::model()->findAll(array("condition"=>"state=2 AND date<'".date("Y-m-d H:i:s", time()+$this->minutes_before*60)."'"));
-		$model = Auction::model()->findAll(array("condition"=>"state=2 AND date<'".date("Y-m-d H:i:s", strtotime("2015-07-20 19:21:00")+$this->minutes_before*60)."'"));
+		$model = Auction::model()->findAll(array("condition"=>"state=2 AND date<'".date("Y-m-d H:i:s", time()+$this->minutes_before*60)."'"));
+		// $model = Auction::model()->findAll(array("condition"=>"state=2 AND date<'".date("Y-m-d H:i:s", strtotime("2015-07-20 19:21:00")+$this->minutes_before*60)."'"));
+		foreach ($model as $key => $auction) {
+			$this->update($auction);
+		}
+		Log::debug("Конец проверки");
 	}
 
 	public function setBid($auction,$fields,$yahon){
@@ -145,7 +149,7 @@ class AuctionController extends Controller
 			$counter++;
 
 			// Если 5 раз пробовали уже ставить ставку, то на 6-й раз ставим максимум
-			$cur_price = ($counter == 1)?(intval($auction->price)-intval($fields["other"]["step"])):$fields["main"]["current_price"];
+			$cur_price = ($counter == $this->tryes+1)?(intval($auction->price)-intval($fields["other"]["step"])):$fields["main"]["current_price"];
 			
 			$result = $yahon->setBid($auction->code,$cur_price,$fields["other"]["step"],$auction->price);
 			Log::debug("Первый раз вернуло state=".$result["result"]."; cur_price = ".$cur_price);
@@ -157,7 +161,7 @@ class AuctionController extends Controller
 					$fields["main"]["state"] = 2;
 					$tog = true;
 				}else{
-					$tog = ($counter == 1)?true:false;
+					$tog = ($counter == $this->tryes+1)?true:false;
 				}
 			}else{
 				$fields["main"]["state"] = $result["result"];
@@ -167,6 +171,41 @@ class AuctionController extends Controller
 		}while(!$tog);
 
 		return $fields;
+	}
+
+	public function actionAdminRefresh($id){
+		$model=$this->loadModel($id);
+		if($this->update($model))
+			$this->actionAdminIndex(true);
+	}
+
+	public function actionAdminArchive($id){
+		$model=$this->loadModel($id);
+
+		$model->archive = 1;
+		if($model->save())
+			$this->actionAdminIndex(true);
+	}
+
+	public function actionAdminArchiveBack($id){
+		$model=$this->loadModel($id);
+
+		$model->archive = 0;
+		if($this->update($model))
+			$this->actionAdminIndex(true);
+	}
+
+	public function update($auction,$params = NULL){
+		$fields = Injapan::getFields($auction->code, $auction->price);
+
+		if( $params !== NULL )
+			$fields["main"] = $fields["main"]+$params;
+
+		if( intval($auction->state) == 2 && intval($fields["main"]["current_price"]) <= intval($auction->current_price) )
+			$fields["main"]["state"] = 2;
+
+		$auction->attributes = $fields["main"];
+		return $auction->save();
 	}
 
 	public function loadModel($id)
