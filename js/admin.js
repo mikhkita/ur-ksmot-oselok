@@ -4,7 +4,7 @@ $(document).ready(function(){
         myHeight,
         title = window.location.href,
         titleVar = ( title.split("localhost").length > 1 )?4:3,
-        progress = new KitProgress("#FFF",2);
+        progress = new KitProgress("#FFF",3);
 
     progress.endDuration = 0.3;
 
@@ -68,6 +68,32 @@ $(document).ready(function(){
         }
     });
 
+    $(document).on("click",".ajax-refresh, .ajax-archive",function(){
+        blockTr($(this).parents("tr"));
+        $(".qtip").remove();
+        progress.setColor("#D26A44");
+        progress.start(3);
+
+        $.ajax({
+            url: $(this).attr("href"),
+            success: function(msg){
+                progress.end(function(){
+                    $(".qtip").remove();
+                    setResult(msg);
+                });
+            }
+        });
+
+        return false;
+    });
+
+    function blockTr(el){
+        el.addClass("b-refresh");
+        el.click(function(){
+            return false;
+        });
+    }
+
     $(document).on("click",".ajax-delete", function(){
         var warning = ($(this).attr("data-warning"))?$(this).attr("data-warning"):"Вы действительно хотите удалить</br>запись?";
         warning += ( $(this).parents(".b-table").attr("data-warning") )?"<br><b>"+$(this).parents(".b-table").attr("data-warning")+"</b>":"";
@@ -86,6 +112,8 @@ $(document).ready(function(){
             bindFilter();
             bindTooltip();
             bindAutocomplete();
+
+            $(".b-refresh").removeClass("b-refresh").addClass("b-refresh-out");
         },100);
     }
 

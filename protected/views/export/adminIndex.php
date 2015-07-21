@@ -16,7 +16,7 @@
 		</tr>
 		<? if( count($data) ): ?>
 			<? foreach ($data as $i => $item): ?>
-				<tr>
+				<tr<?if(isset($_GET["id"]) && $item->id == $_GET["id"]):?> class="b-refresh"<?endif;?>>
 					<td><?=$item->id?></td>
 					<td class="align-left"><a href="<?php echo $this->createUrl('/export/admindynamic',array('id'=>$item->id))?>"><?=$item->name?></a></td>
 					<td class="align-left"><?=$item->goodType->name?></td>

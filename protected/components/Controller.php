@@ -15,6 +15,10 @@ class Controller extends CController
 	 * @var array context menu items. This property will be assigned to {@link CMenu::items}.
 	 */
 	public $menu=array();
+
+    public $title="Godzilla Wheels";
+    public $description="Godzilla Wheels";
+    public $keywords="Godzilla Wheels";
 	/**
 	 * @var array the breadcrumbs of the current page. The value of this property will
 	 * be assigned to {@link CBreadcrumbs::links}. Please refer to {@link CBreadcrumbs::links}
@@ -36,6 +40,8 @@ class Controller extends CController
 
     public function init() {
         parent::init();
+
+        date_default_timezone_set("Asia/Novosibirsk");
         
         $this->user = User::model()->with("role")->findByPk(Yii::app()->user->id);
 

@@ -10,7 +10,7 @@
 		<th style="width: 150px;">Действия</th>
 	</tr>
 	<? foreach ($data as $i => $item): ?>
-		<tr>
+		<tr<?if(isset($_GET["id"]) && $item->usr_id == $_GET["id"]):?> class="b-refresh"<?endif;?>>
 			<td><? echo $i+1; ?></td>
 			<td class="align-left"><? echo $item->usr_login; ?></td>
 			<td class="align-left"><? echo $item->usr_name; ?></td>

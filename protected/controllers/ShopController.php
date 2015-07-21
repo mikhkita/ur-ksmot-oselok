@@ -266,6 +266,10 @@ class ShopController extends Controller
 
 			$good=Good::model()->findbyPk($id);
 
+			$this->title = Interpreter::generate($this->params[$_GET['type']]["TITLE_CODE"], $good);
+
+			$this->description = $this->keywords = Interpreter::generate($this->params[$_GET['type']]["DESCRIPTION_CODE"], $good);
+
 			$imgs = $this->getImages($good);
 			if( !$partial ){
 				$this->render('detail',array(

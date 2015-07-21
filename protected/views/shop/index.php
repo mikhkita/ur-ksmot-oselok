@@ -25,7 +25,7 @@
                
 
                 <? $index = 1; foreach ($filter as $name => $items): ?>
-                    <div class="filter-cont four-cols">
+                    <div class="filter-cont"><!--  добавить four-cols -->
                         <h2><?=$name?></h2>
                         <div class="check-cont">
                             <ul class="hor clearfix">

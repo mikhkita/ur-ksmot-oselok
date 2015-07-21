@@ -115,12 +115,12 @@
 
 <div id="bid_place_box" align="center"></div>
 <script language="JavaScript">
-var lot_no = "g155199809";
-var user_rate = 3001;
+var lot_no = "w122643808";
+var user_rate = 1501;
 var quantity = 1;
 var deliveryType = 2;
 var comments = "";
-var script_url = "/modules/yahoo_auction/data_request/rate.php?token=55ac1920f3d06&signature=a632daa630d6d740ea08f251a381616bc2c71286";
+var script_url = "/modules/yahoo_auction/data_request/rate.php?token=55acb11d3916c&signature=203b46f6c2ae4a114ee86b5f71588dfba9ffa006";
 
 MakeBid(script_url, lot_no, user_rate, quantity, deliveryType, comments);
 
