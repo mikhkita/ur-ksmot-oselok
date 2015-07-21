@@ -14,6 +14,11 @@ function KitProgress(c,h){
     this.step;
     this.max;
     this.counter = 0;
+    this.blocked = false;
+
+    this.isBlocked = function(){
+        return this.blocked;
+    }
 
     this.init = function(){
         var html = $("<div id='"+this.myId+"'></div>");
@@ -34,6 +39,7 @@ function KitProgress(c,h){
         this.elem.css({"background-color" : this.color});
     }
     this.start = function(seconds){
+        this.blocked = true;
         this.now = 0;
         this.max = 100;
         this.elem.fadeIn(100);
@@ -80,6 +86,7 @@ function KitProgress(c,h){
                 if (tmp.now>=100){
                     tmp.elem.fadeOut(200);
                     clearInterval(tmp.timer);
+                    tmp.blocked = false;
                     if( callback ) callback();
                 }
             },tmp.delay);

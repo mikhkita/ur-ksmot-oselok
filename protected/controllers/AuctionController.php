@@ -3,7 +3,7 @@
 class AuctionController extends Controller
 {
 	public $minutes_before = 3;
-	public $tryes = 5;
+	public $tryes = 9;
 
 	public function filters()
 	{
@@ -16,7 +16,7 @@ class AuctionController extends Controller
 	{
 		return array(
 			array('allow',
-				'actions'=>array('adminIndex','adminCreate','adminUpdate','adminRefresh','adminArchive','adminArchiveBack'),
+				'actions'=>array('adminIndex','adminCreate','adminUpdate','adminRefresh','adminArchive','adminArchiveBack','adminLive','adminArchiveAll'),
 				'roles'=>array('root'),
 			),
 			array('allow',
@@ -116,7 +116,7 @@ class AuctionController extends Controller
 		Log::debug("Начало проверки");
 		$yahon = new Yahon();
 
-		$model = Auction::model()->findAll(array("condition"=>"state=0 AND date<'".date("Y-m-d H:i:s", time()+$this->minutes_before*60)."'"));
+		$model = Auction::model()->findAll(array("condition"=>"state=0 AND archive=0 AND date<'".date("Y-m-d H:i:s", time()+$this->minutes_before*60)."'"));
 		// $model = Auction::model()->findAll(array("condition"=>"state=0 AND date<'".date("Y-m-d H:i:s", strtotime("2015-07-20 19:21:00")+$this->minutes_before*60)."'"));
 		foreach ($model as $key => $auction) {
 			$fields = NULL;
@@ -134,12 +134,28 @@ class AuctionController extends Controller
 			$auction->save();
 		}
 
-		$model = Auction::model()->findAll(array("condition"=>"state=2 AND date<'".date("Y-m-d H:i:s", time()+$this->minutes_before*60)."'"));
+		$model = Auction::model()->findAll(array("condition"=>"state=2 AND archive=0 AND date<'".date("Y-m-d H:i:s", time()+$this->minutes_before*60)."'"));
 		// $model = Auction::model()->findAll(array("condition"=>"state=2 AND date<'".date("Y-m-d H:i:s", strtotime("2015-07-20 19:21:00")+$this->minutes_before*60)."'"));
 		foreach ($model as $key => $auction) {
 			$this->update($auction);
 		}
 		Log::debug("Конец проверки");
+	}
+
+	public function actionAdminLive()
+	{
+		$model = Auction::model()->findAll(array("condition"=>"archive=0 AND date<'".date("Y-m-d H:i:s", time()+15*60)."'"));
+		
+		$out = array();
+		foreach ($model as $key => $auction) {
+			$item = array();
+			$item["id"] = $auction->id;
+			$item["date"] = $auction->date;
+			$item["current_price"] = $auction->current_price;
+			$item["state"] = Auction::model()->states[$auction->state];
+			array_push($out, $item);
+		}
+		echo json_encode($out);
 	}
 
 	public function setBid($auction,$fields,$yahon){
@@ -158,9 +174,11 @@ class AuctionController extends Controller
 
 				Log::debug("Ставили: ".$result["price"]."; Сейчас: ".$fields["main"]["current_price"]);
 				if( intval($fields["main"]["current_price"]) <= intval($result["price"]) ){
+					Log::sniper("Лот ".$auction->code.". Поставили ставку ".$result["price"].". Текущая цена ".$fields["main"]["current_price"]);
 					$fields["main"]["state"] = 2;
 					$tog = true;
 				}else{
+					Log::sniper("Лот ".$auction->code.". Нашу ставку в ".$result["price"]." перебили ценой ".$fields["main"]["current_price"]);
 					$tog = ($counter == $this->tryes+1)?true:false;
 				}
 			}else{
@@ -185,6 +203,17 @@ class AuctionController extends Controller
 		$model->archive = 1;
 		if($model->save())
 			$this->actionAdminIndex(true);
+	}
+
+	public function actionAdminArchiveAll(){
+		$model= Auction::model()->findAll(array("condition" => "archive=0"));
+
+		foreach ($model as $key => $auction) {
+			$auction->archive = 1;
+			$auction->save();	
+		}
+		
+		$this->actionAdminIndex();
 	}
 
 	public function actionAdminArchiveBack($id){

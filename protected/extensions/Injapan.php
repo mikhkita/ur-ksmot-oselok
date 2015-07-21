@@ -39,7 +39,7 @@ Class Injapan {
 
         // Уточнение состояния аукциона. Завершен или не завершен
         $query = $html->find("#bidplace input[name=account]");
-        if( !isset($query[0]) ) $result["main"]["state"] = 3;
+        if( !isset($query[0]) ) $result["main"]["state"] = ( $result["main"]["current_price"] <= $max_price )?6:3;
 
         return $result;
     }

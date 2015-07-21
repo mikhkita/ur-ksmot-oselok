@@ -702,6 +702,46 @@ $(document).ready(function(){
         });
     }
     /* Dynamic ------------------------------------- Dynamic */
+
+    /* Auction ------------------------------------- Auction */
+    var refreshTimeout = 5000;
+    if( $(".b-auction-table").length ){
+        setTimeout(function run(){
+            console.log(progress.isBlocked());
+            if( !progress.isBlocked() ){
+                $.ajax({
+                    url: $(".b-auction-table").attr("data-url"),
+                    success: function(msg){
+                        setAuctionResults(msg);
+                        console.log("refreshed");
+                    }
+                });
+            }
+
+            setTimeout(run,refreshTimeout);
+        },refreshTimeout);
+
+        $("body").mousemove(function(){
+            if( $("td.b-refreshed").length )
+                $("td.b-refreshed").removeClass("b-refreshed").addClass("b-refreshed-out");
+        });
+    }
+
+    function setAuctionResults(msg){
+        var json = JSON.parse(msg);
+
+        for( var i in json ){
+            var tr = $(".b-auction-table tr[data-id='"+json[i].id+"']");
+            if( json[i].date != tr.find("td[data-field='date']").text() ) tr.find("td[data-field='date']").removeClass("b-refreshed-out").addClass("b-refreshed");
+            tr.find("td[data-field='date']").html(json[i].date);
+            if( json[i].current_price != tr.find("td[data-field='current_price']").text() ) tr.find("td[data-field='current_price']").removeClass("b-refreshed-out").addClass("b-refreshed");
+            tr.find("td[data-field='current_price']").html(json[i].current_price);
+            if( json[i].state != tr.find("td[data-field='state']").text() ) tr.find("td[data-field='state']").removeClass("b-refreshed-out").addClass("b-refreshed");
+            tr.find("td[data-field='state']").html(json[i].state);
+        }
+    }
+    /* Auction ------------------------------------- Auction */
+
     function transition(el,dur){
         el.css({
             "-webkit-transition":  "all "+dur+"s ease-in-out", "-moz-transition":  "all "+dur+"s ease-in-out", "-o-transition":  "all "+dur+"s ease-in-out", "transition":  "all "+dur+"s ease-in-out"

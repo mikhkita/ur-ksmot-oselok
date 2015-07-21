@@ -20,6 +20,10 @@ Class Log {
         Log::set("sniper",$message,$error);
     }
 
+    public function sniper($message,$error = false){
+        Log::set("sniper",$message,$error);
+    }
+
     public function debug($message,$error = false){
         Log::set("debug",$message,$error);
     }

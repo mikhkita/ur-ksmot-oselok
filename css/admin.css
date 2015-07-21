@@ -403,7 +403,21 @@ h1{
             -ms-transition: all 1500ms 500ms ease-in-out;
              -o-transition: all 1500ms 500ms ease-in-out;
                 transition: all 1500ms 500ms ease-in-out;
-        background-color: transparent; !important;
+        background-color: transparent;
+    }
+    .b-table td.b-refreshed{
+        background-color: rgba(210, 106, 68, 0.48) !important;
+    }
+    .b-table tr.b-win{
+        background-color: #93DE8A !important;
+    }
+    .b-table td.b-refreshed-out{
+        -webkit-transition: all 1500ms ease-in-out;
+           -moz-transition: all 1500ms ease-in-out;
+            -ms-transition: all 1500ms ease-in-out;
+             -o-transition: all 1500ms ease-in-out;
+                transition: all 1500ms ease-in-out;
+        background-color: transparent;
     }
     .b-table tr.b-exist{
         /*border: 4px solid #452716;*/
