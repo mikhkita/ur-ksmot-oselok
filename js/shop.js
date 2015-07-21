@@ -20,7 +20,7 @@ $(document).ready(function(){
     // var progress = new KitProgress("#FFF",2);
     var price_min_def = $( "#price_min" ).val()*1,
     price_max_def = $( "#price_max" ).val()*1,
-    price_max = price_max_def*0.7,price_min=price_min_def,type,filter=0;
+    price_max = price_max_def,price_min=price_min_def,type,filter=0;
     if(location.search!='') {
         var price = decodeURIComponent(location.search.substr(1)).split('&');
         $.each( price, function( key, value ) {
@@ -93,7 +93,13 @@ $(document).ready(function(){
     }
 
     $("#go-back").click(function(){
-        window.history.back();
+        if(document.referrer) {
+           window.history.back();
+        } else if($(this).text().indexOf('Шины') + 1){
+            window.location.assign("/shop");
+        } else if ($(this).text().indexOf('Диски') + 1) {
+            window.location.assign("/shop?type=2");
+        }
     });
     function showCount() {
         if(filter==0) {
@@ -101,9 +107,10 @@ $(document).ready(function(){
                 type: 'GET',
                 url: "/shop/index?countGood=true",
                 data: $("#filter").serialize(),
-                success: function(msg){
+                success: function(msg){ 
+                    $("#filter-search span").remove();
+                    $("#filter-search").append("<span>Товаров: "+msg+"</span>");
                     $("#filter-search img").hide();
-                    $("#filter-search").append("<span>Товаров: "+msg+"</span>")
                 }
             }); 
         }
