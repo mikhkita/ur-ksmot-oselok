@@ -347,6 +347,7 @@ input:-moz-placeholder {
 						.b-main .b-block .b-main-filter .filter-cont .check-cont li label h3 {
 							float: left;
 							margin-left: 7px;
+							max-width: 100px;
 						}
 	.b-main .b-block .b-main-items{
 		width: 641px;
