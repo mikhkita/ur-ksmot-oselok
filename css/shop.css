@@ -76,6 +76,9 @@ input.error,textarea.error{
 	border-color: #F00 !important;
 	box-shadow: 0 0px 0px 1px #F00 !important;
 }
+.hidden{
+	display: none !important;
+}
 .ps-lines{
 
 }

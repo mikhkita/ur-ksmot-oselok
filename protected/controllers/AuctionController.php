@@ -120,7 +120,7 @@ class AuctionController extends Controller
 		// $model = Auction::model()->findAll(array("condition"=>"state=0 AND date<'".date("Y-m-d H:i:s", strtotime("2015-07-20 19:21:00")+$this->minutes_before*60)."'"));
 		foreach ($model as $key => $auction) {
 			$fields = NULL;
-			$fields = Injapan::getFields($auction->code, $auction->price);
+			$fields = Injapan::getFields($auction->code, $auction->price, $auction->state);
 
 			if( intval($fields["main"]["state"]) == 0 ){ // ПОПРАВИТЬ НА 0
 				if( strtotime($fields["main"]["date"]) < time()+$this->minutes_before*60 ){
@@ -170,7 +170,7 @@ class AuctionController extends Controller
 			$result = $yahon->setBid($auction->code,$cur_price,$fields["other"]["step"],$auction->price);
 			Log::debug("Первый раз вернуло state=".$result["result"]."; cur_price = ".$cur_price);
 			if( $result["result"] == 2 || $result["result"] == 0 ){
-				$fields = Injapan::getFields($auction->code, $auction->price);
+				$fields = Injapan::getFields($auction->code, $auction->price, $auction->state);
 
 				Log::debug("Ставили: ".$result["price"]."; Сейчас: ".$fields["main"]["current_price"]);
 				if( intval($fields["main"]["current_price"]) <= intval($result["price"]) ){
@@ -225,12 +225,12 @@ class AuctionController extends Controller
 	}
 
 	public function update($auction,$params = NULL){
-		$fields = Injapan::getFields($auction->code, $auction->price);
+		$fields = Injapan::getFields($auction->code, $auction->price, $auction->state);
 
 		if( $params !== NULL )
 			$fields["main"] = $fields["main"]+$params;
 
-		if( intval($auction->state) == 2 && intval($fields["main"]["current_price"]) <= intval($auction->current_price) )
+		if( intval($auction->state) == 2 && intval($fields["main"]["current_price"]) <= intval($auction->current_price) && intval($fields["main"]["state"]) != 6 && intval($fields["main"]["state"]) != 3  )
 			$fields["main"]["state"] = 2;
 
 		$auction->attributes = $fields["main"];

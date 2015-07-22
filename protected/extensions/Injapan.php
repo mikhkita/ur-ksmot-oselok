@@ -6,7 +6,7 @@ Class Injapan {
 
     }
 
-    public function getFields($code, $max_price){
+    public function getFields($code, $max_price, $state = NULL){
         include_once  Yii::app()->basePath.'/extensions/simple_html_dom.php';
 
         $result = array("main"=>array(),"other"=>array());
@@ -39,7 +39,7 @@ Class Injapan {
 
         // Уточнение состояния аукциона. Завершен или не завершен
         $query = $html->find("#bidplace input[name=account]");
-        if( !isset($query[0]) ) $result["main"]["state"] = ( $result["main"]["current_price"] <= $max_price )?6:3;
+        if( !isset($query[0]) ) $result["main"]["state"] = ( $result["main"]["current_price"] <= $max_price && ($state == 2 || $state == 6) )?6:3;
 
         return $result;
     }

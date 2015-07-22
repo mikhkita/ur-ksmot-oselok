@@ -7,7 +7,7 @@
 		<h2 id="b-good-title"><?=Interpreter::generate($this->params[$_GET['type']]["TITLE_CODE"], $good);?></h2>
 		<div class="clearfix">
 			<div class="images left">
-
+				<img src="<?=$imgs[0]?>" style="display:none;" alt="">
 				<div id="bg-img" style="background-image:url('<?=$imgs[0]?>');"><a class="fancy-img-big" href="<?=$imgs[0]?>"></a></div>
 				<ul class="hor clearfix">
 					<? if (count($imgs)>1): ?>
