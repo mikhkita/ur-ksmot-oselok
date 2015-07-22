@@ -57,7 +57,7 @@ class ShopController extends Controller
 		$criteria=new CDbCriteria();
 		$criteria->select = 'id';
 		$criteria->group = 'fields.good_id';
-		$criteria->order = 'fields.good_id DESC';
+		
         $criteria->with = array('fields' => array('select'=> array('variant_id','attribute_id','int_value','varchar_value')));
         $count=0;
         $condition="";
@@ -109,6 +109,7 @@ class ShopController extends Controller
 		$criteria=new CDbCriteria();
 	   	$criteria->with = array('fields');
 	   	$criteria->addInCondition("t.id",$goods_id);
+	   	$criteria->order = 't.id DESC';
 		$dataProvider = new CActiveDataProvider('Good', array(
 		    'criteria'=>$criteria,
 		    'pagination'=>array(
