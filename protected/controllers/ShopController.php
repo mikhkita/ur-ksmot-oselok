@@ -127,7 +127,7 @@ class ShopController extends Controller
                 'variants'
                  => array(
                     'select' => array('int_value','varchar_value','float_value'),
-                    'condition' => 'attribute_id=7 OR attribute_id=8 OR attribute_id=9 OR attribute_id=23 OR attribute_id=16',
+                    'condition' => 'attribute_id=7 OR attribute_id=8 OR attribute_id=9 OR attribute_id=23 OR attribute_id=16 OR attribute_id=27',
                     'order'=>'sort ASC'
                     )
                 );
@@ -137,7 +137,7 @@ class ShopController extends Controller
                 'variants'
                  => array(
                     'select' => array('int_value','varchar_value','float_value'),
-                    'condition' => 'attribute_id=6 OR attribute_id=9 OR attribute_id=5 OR attribute_id=31 OR attribute_id=32',
+                    'condition' => 'attribute_id=6 OR attribute_id=9 OR attribute_id=5 OR attribute_id=31 OR attribute_id=32 OR attribute_id=27',
                     'order'=>'sort ASC'
                     )
                 );
