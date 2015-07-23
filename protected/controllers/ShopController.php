@@ -46,24 +46,32 @@ class ShopController extends Controller
 
 	public function actionIndex($countGood = false)
 	{	
-		$criteria=new CDbCriteria();
-        $criteria->condition = 'attribute_id=20';
-        $criteria->select = array('int_value');
-        $criteria->order = 'int_value ASC';
-		$model = GoodAttribute::model()->findAll($criteria);
-		$price_min = $model[0]->int_value;
-		$price_max = array_pop($model)->int_value;
-
 		$count=0;
         $condition="";
         $check = array();
         
-
-       	isset($_GET['price-min']) ? $_GET['price-min'] : $_GET['price-min'] = $price_min;
-       	isset($_GET['price-max']) ? $_GET['price-max'] : $_GET['price-max'] = $price_max;
-       	isset($_GET['Good_page']) ? $_GET['Good_page'] : $_GET['Good_page'] = 1;
        	isset($_GET['type']) ? $_GET['type'] : $_GET['type'] = 1;
 		$type = ($_GET['type']==1) ? "tires": "discs";
+
+		$criteria=new CDbCriteria();
+		$criteria->with = array(
+                'good'
+                 => array(
+                    'select' => false
+                    )
+
+                );
+        $criteria->condition = 'attribute_id=20 AND good.good_type_id='.$_GET['type'];
+        $criteria->select = array('int_value');
+        $criteria->order = 'int_value ASC';
+
+		$model = GoodAttribute::model()->findAll($criteria);
+		$price_min = $model[0]->int_value;
+		$price_max = array_pop($model)->int_value;
+
+		isset($_GET['Good_page']) ? $_GET['Good_page'] : $_GET['Good_page'] = 1;
+		isset($_GET['price-min']) ? $_GET['price-min'] : $_GET['price-min'] = $price_min;
+       	isset($_GET['price-max']) ? $_GET['price-max'] : $_GET['price-max'] = $price_max;
 
 		$criteria=new CDbCriteria();
 	   	$criteria->with = array('fields');
@@ -166,9 +174,16 @@ class ShopController extends Controller
             // }	
 
             $criteria=new CDbCriteria();
-            $criteria->with = array('good');
+            $criteria->with = array(
+                'good'
+                 => array(
+                    'select' => false,
+                    'condition' => 'good_type_id='.$_GET['type']
+                    )
 
-            $condition = 'good.good_type_id='.$_GET['type'].' AND';
+                );
+
+            // $condition = 'good.good_type_id='.$_GET['type'].' AND';
             if($_GET['type']==1) {
             	$criteria->condition = $condition.' (attribute_id=7 OR attribute_id=8 OR attribute_id=9 OR attribute_id=23 OR attribute_id=16 OR attribute_id=27)';
         	}	
