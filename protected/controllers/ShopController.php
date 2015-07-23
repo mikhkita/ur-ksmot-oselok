@@ -94,13 +94,12 @@ class ShopController extends Controller
 			array_push($goods_no_photo, $good->id); 
 		}
 
-
 		$criteria=new CDbCriteria();
 		$criteria->select = 'id';
 		$criteria->group = 'fields.good_id';
-		$criteria->addInCondition("fields.good_id",$goods_no_photo);
+		
         $criteria->with = array('fields' => array('select'=> array('variant_id','attribute_id','int_value','varchar_value')));
-
+        $criteria->addInCondition("id",$goods_no_photo);
         
        	
 		foreach ($_GET as $name => $arr) {		
@@ -183,12 +182,11 @@ class ShopController extends Controller
 
                 );
 
-            // $condition = 'good.good_type_id='.$_GET['type'].' AND';
             if($_GET['type']==1) {
-            	$criteria->condition = $condition.' (attribute_id=7 OR attribute_id=8 OR attribute_id=9 OR attribute_id=23 OR attribute_id=16 OR attribute_id=27)';
+            	$criteria->condition = 'attribute_id=7 OR attribute_id=8 OR attribute_id=9 OR attribute_id=23 OR attribute_id=16 OR attribute_id=27';
         	}	
         	if($_GET['type']==2) {
-            	$criteria->condition = $condition.' (attribute_id=6 OR attribute_id=9 OR attribute_id=5 OR attribute_id=31 OR attribute_id=32 OR attribute_id=27)';
+            	$criteria->condition = 'attribute_id=6 OR attribute_id=9 OR attribute_id=5 OR attribute_id=31 OR attribute_id=32 OR attribute_id=27';
         	}	
 
         	$criteria->addInCondition("good.id",$goods_no_photo);
