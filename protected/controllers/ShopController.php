@@ -120,46 +120,74 @@ class ShopController extends Controller
 		$count = $dataProvider->getTotalItemCount();					
     	if( !$countGood ) {
     		
-			$criteria=new CDbCriteria();
-            $criteria->condition = 'list=1';
-            $criteria->select = array('name');
-            if($_GET['type']==1) {
-            $criteria->with = array(
-                'variants'
-                 => array(
-                    'select' => array('int_value','varchar_value','float_value'),
-                    'condition' => 'attribute_id=7 OR attribute_id=8 OR attribute_id=9 OR attribute_id=23 OR attribute_id=16 OR attribute_id=27',
-                    'order'=>'sort ASC'
-                    )
-                );
-           	}
-           	if($_GET['type']==2) {
-            $criteria->with = array(
-                'variants'
-                 => array(
-                    'select' => array('int_value','varchar_value','float_value'),
-                    'condition' => 'attribute_id=6 OR attribute_id=9 OR attribute_id=5 OR attribute_id=31 OR attribute_id=32 OR attribute_id=27',
-                    'order'=>'sort ASC'
-                    )
-                );
-           	}
-            $model = Attribute::model()->findAll($criteria); 
-            $filter = array();
-            foreach ($model as $attr) {
-                $temp = array();
+			// $criteria=new CDbCriteria();
+   //          $criteria->condition = 'list=1';
+   //          $criteria->select = array('id');
+   //          if($_GET['type']==1) {
+   //          $criteria->with = array(
+   //              'variants'
+   //               => array(
+   //                  'select' => array('int_value','varchar_value','float_value'),
+   //                  'condition' => 'attribute_id=7 OR attribute_id=8 OR attribute_id=9 OR attribute_id=23 OR attribute_id=16 OR attribute_id=27'
+   //                  )
+   //              );
+   //         	}
+   //         	if($_GET['type']==2) {
+   //          $criteria->with = array(
+   //              'variants'
+   //               => array(
+   //                  'select' => array('int_value','varchar_value','float_value'),
+   //                  'condition' => 'attribute_id=6 OR attribute_id=9 OR attribute_id=5 OR attribute_id=31 OR attribute_id=32 OR attribute_id=27'
+   //                  )
 
-                foreach ($attr->variants as $i => $variant) {
-                    $temp[$i]['variant_id'] = $variant->id;
-                    $temp[$i]['value'] = $variant->value;
-                    if(isset($check[$variant->id])) {
-                    $temp[$i]['checked'] = "checked";
-                	} else {
-                		$temp[$i]['checked'] = "";
-                	}
-                }
-                $filter[$attr->id] = $temp;           
-            }					
-		    
+   //              );
+   //         	}
+            // $model = Attribute::model()->findAll($criteria);
+            // foreach ($model as $attr) { 
+            //     $temp = array();
+            //     foreach ($attr->variants as $i => $variant) {
+	           //          $temp[$i]['variant_id'] = $variant->id;
+	           //          $temp[$i]['value'] = $variant->value;
+	           //          if(isset($check[$variant->id])) {
+	           //          $temp[$i]['checked'] = "checked";
+	           //      	} else {
+	           //      		$temp[$i]['checked'] = "";
+	           //      	}	           
+            //     }
+            //     $filter[$attr->id] = $temp;           
+            // }	
+
+            $criteria=new CDbCriteria();
+            $criteria->with = array('good');
+
+            $condition = 'good.good_type_id='.$_GET['type'].' AND';
+            if($_GET['type']==1) {
+            	$criteria->condition = $condition.' (attribute_id=7 OR attribute_id=8 OR attribute_id=9 OR attribute_id=23 OR attribute_id=16 OR attribute_id=27)';
+        	}	
+        	if($_GET['type']==2) {
+            	$criteria->condition = $condition.' (attribute_id=6 OR attribute_id=9 OR attribute_id=5 OR attribute_id=31 OR attribute_id=32 OR attribute_id=27)';
+        	}	
+
+        	$criteria->addInCondition("good.id",$goods_id);
+            $criteria->group = 'variant_id';
+
+            $model = GoodAttribute::model()->findAll($criteria);
+            $filter = array();
+
+   			foreach ($model as $i => $item) {
+   				if(!isset($filter[$item->attribute_id])) {
+   					$filter[$item->attribute_id] = array();
+   					$temp = array();
+   				}
+   				$temp['variant_id'] = $item->variant_id;
+	                    $temp['value'] = $item->value;
+	                    if(isset($check[$item->variant_id])) {
+	                    $temp['checked'] = "checked";
+	                	} else {
+	                		$temp['checked'] = "";
+	                	}
+   				array_push($filter[$item->attribute_id], $temp);
+   			}
 			$this->render('index',array(
 				'goods'=>$goods,
 				'filter' =>$filter,
