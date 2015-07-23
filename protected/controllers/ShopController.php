@@ -54,40 +54,20 @@ class ShopController extends Controller
 		$price_min = $model[0]->int_value;
 		$price_max = array_pop($model)->int_value;
 
-		$criteria=new CDbCriteria();
-		$criteria->select = 'id';
-		$criteria->group = 'fields.good_id';
-		
-        $criteria->with = array('fields' => array('select'=> array('variant_id','attribute_id','int_value','varchar_value')));
-        $count=0;
+		$count=0;
         $condition="";
         $check = array();
+        
+
        	isset($_GET['price-min']) ? $_GET['price-min'] : $_GET['price-min'] = $price_min;
        	isset($_GET['price-max']) ? $_GET['price-max'] : $_GET['price-max'] = $price_max;
        	isset($_GET['Good_page']) ? $_GET['Good_page'] : $_GET['Good_page'] = 1;
        	isset($_GET['type']) ? $_GET['type'] : $_GET['type'] = 1;
-       	$type = ($_GET['type']==1) ? "tires": "discs";
-		foreach ($_GET as $name => $arr) {		
-			if( !($name=='price-min' || $name=='price-max' || $name=='partial' || $name=='Good_page' || $name=='type' || $name=='countGood') ) {
-				foreach ($arr as $value) {
-				$check[$value] = true;
-				$condition .= 'fields.variant_id='.$value.' OR ';
-				}
-				$count++;
-			}
-		}
-		$criteria->condition = $condition.'(good_type_id='.$_GET['type'].' AND fields.attribute_id=20 AND fields.int_value>='.$_GET['price-min'].' AND fields.int_value<='.$_GET['price-max'].' )';
-    	$criteria->having = 'COUNT(fields.id)='.($count+1);
-    	$model=Good::model()->findAll($criteria);
-
-        $goods_id = array();
-		foreach ($model as $good) {
-			array_push($goods_id, $good->id); 
-		}
+		$type = ($_GET['type']==1) ? "tires": "discs";
 
 		$criteria=new CDbCriteria();
 	   	$criteria->with = array('fields');
-	   	$criteria->addInCondition("fields.good_id",$goods_id);
+	   	
 		$imgs = array_values(array_diff(scandir(Yii::app()->params["imageFolder"]."/".$type), array('..', '.', 'Thumbs.db','default-big.png','default.jpg')));
 		$temp = "0";
 		if(count($imgs)) {
@@ -99,13 +79,41 @@ class ShopController extends Controller
 			
 		}
 		$criteria->condition = 'good_type_id='.$_GET['type'].' AND (fields.attribute_id=3 AND fields.varchar_value IN('.$temp.')) ';
-		$model=Good::model()->findAllbyPk($goods_id,$criteria);
+		$model=Good::model()->findAll($criteria);
 
-		$goods_id = array();
+		$goods_no_photo = array();
+		foreach ($model as $good) {
+			array_push($goods_no_photo, $good->id); 
+		}
+
+
+		$criteria=new CDbCriteria();
+		$criteria->select = 'id';
+		$criteria->group = 'fields.good_id';
+		$criteria->addInCondition("fields.good_id",$goods_no_photo);
+        $criteria->with = array('fields' => array('select'=> array('variant_id','attribute_id','int_value','varchar_value')));
+
+        
+       	
+		foreach ($_GET as $name => $arr) {		
+			if( !($name=='price-min' || $name=='price-max' || $name=='partial' || $name=='Good_page' || $name=='type' || $name=='countGood') ) {
+				foreach ($arr as $value) {
+				$check[$value] = true;
+				$condition .= 'fields.variant_id='.$value.' OR ';
+				}
+				$count++;
+			}
+		}
+		$criteria->condition = $condition.'(good_type_id='.$_GET['type'].' AND fields.attribute_id=20 AND fields.int_value>='.$_GET['price-min'].' AND fields.int_value<='.$_GET['price-max'].' )';
+    	$criteria->having = 'COUNT(fields.id)='.($count+1);
+    	$model=Good::model()->findAllbyPk($goods_no_photo,$criteria);
+
+        $goods_id = array();
 		foreach ($model as $good) {
 			array_push($goods_id, $good->id); 
 		}
 
+		
 		$criteria=new CDbCriteria();
 	   	$criteria->with = array('fields');
 	   	$criteria->addInCondition("t.id",$goods_id);
@@ -168,7 +176,7 @@ class ShopController extends Controller
             	$criteria->condition = $condition.' (attribute_id=6 OR attribute_id=9 OR attribute_id=5 OR attribute_id=31 OR attribute_id=32 OR attribute_id=27)';
         	}	
 
-        	$criteria->addInCondition("good.id",$goods_id);
+        	$criteria->addInCondition("good.id",$goods_no_photo);
             $criteria->group = 'variant_id';
 
             $model = GoodAttribute::model()->findAll($criteria);
