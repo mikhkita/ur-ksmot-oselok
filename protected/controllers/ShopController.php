@@ -54,13 +54,7 @@ class ShopController extends Controller
 		$type = ($_GET['type']==1) ? "tires": "discs";
 
 		$criteria=new CDbCriteria();
-		$criteria->with = array(
-                'good'
-                 => array(
-                    'select' => false
-                    )
-
-                );
+		$criteria->with = array('good' => array('select'=> false));
         $criteria->condition = 'attribute_id=20 AND good.good_type_id='.$_GET['type'];
         $criteria->select = array('int_value');
         $criteria->order = 'int_value ASC';
@@ -68,14 +62,7 @@ class ShopController extends Controller
 		$model = GoodAttribute::model()->findAll($criteria);
 		$price_min = $model[0]->int_value;
 		$price_max = array_pop($model)->int_value;
-
-		isset($_GET['Good_page']) ? $_GET['Good_page'] : $_GET['Good_page'] = 1;
-		isset($_GET['price-min']) ? $_GET['price-min'] : $_GET['price-min'] = $price_min;
-       	isset($_GET['price-max']) ? $_GET['price-max'] : $_GET['price-max'] = $price_max;
-
-		$criteria=new CDbCriteria();
-	   	$criteria->with = array('fields');
-	   	
+		
 		$imgs = array_values(array_diff(scandir(Yii::app()->params["imageFolder"]."/".$type), array('..', '.', 'Thumbs.db','default-big.png','default.jpg')));
 		$temp = "0";
 		if(count($imgs)) {
@@ -86,7 +73,12 @@ class ShopController extends Controller
 			$temp = substr($temp, 0, -1);
 			
 		}
+
+		$criteria=new CDbCriteria();
+		$criteria->select = 'id,good_type_id';
+	   	$criteria->with = array('fields' => array('select'=> array('attribute_id','varchar_value')));
 		$criteria->condition = 'good_type_id='.$_GET['type'].' AND (fields.attribute_id=3 AND fields.varchar_value IN('.$temp.')) ';
+
 		$model=Good::model()->findAll($criteria);
 
 		$goods_no_photo = array();
@@ -94,11 +86,15 @@ class ShopController extends Controller
 			array_push($goods_no_photo, $good->id); 
 		}
 
+		isset($_GET['Good_page']) ? $_GET['Good_page'] : $_GET['Good_page'] = 1;
+		isset($_GET['price-min']) ? $_GET['price-min'] : $_GET['price-min'] = $price_min;
+       	isset($_GET['price-max']) ? $_GET['price-max'] : $_GET['price-max'] = $price_max;
+
 		$criteria=new CDbCriteria();
 		$criteria->select = 'id';
 		$criteria->group = 'fields.good_id';
 		
-        $criteria->with = array('fields' => array('select'=> array('variant_id','attribute_id','int_value','varchar_value')));
+        $criteria->with = array('fields' => array('select'=> array('variant_id','attribute_id','int_value')));
         $criteria->addInCondition("id",$goods_no_photo);
         
        	
@@ -114,7 +110,6 @@ class ShopController extends Controller
 		$criteria->condition = $condition.'(good_type_id='.$_GET['type'].' AND fields.attribute_id=20 AND fields.int_value>='.$_GET['price-min'].' AND fields.int_value<='.$_GET['price-max'].' )';
     	$criteria->having = 'COUNT(fields.id)='.($count+1);
     	$model=Good::model()->findAllbyPk($goods_no_photo,$criteria);
-
         $goods_id = array();
 		foreach ($model as $good) {
 			array_push($goods_id, $good->id); 
