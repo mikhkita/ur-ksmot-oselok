@@ -5,9 +5,9 @@
             <div class="b-text">
                 <h3>По всем вопросам обращаться:</h3>
                 <p>
+                    тел.: +79095430402<br>
                     тел.: 977-327<br>
                     тел.: 57-57-56<br>
-                    тел.: 23-04-02<br>
                     e-mail: <a target="_blank" href="mailto:kolesotomskru@mail.ru">kolesotomskru@mail.ru</a>
                 </p><br>
 
