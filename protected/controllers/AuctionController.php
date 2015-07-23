@@ -225,7 +225,7 @@ class AuctionController extends Controller
 	}
 
 	public function update($auction,$params = NULL){
-		$fields = Injapan::getFields($auction->code, $auction->price, $auction->state);
+		$fields = Injapan::getFields($auction->code, ($params==NULL)?$auction->price:$params["price"], $auction->state);
 
 		if( $params !== NULL )
 			$fields["main"] = $fields["main"]+$params;

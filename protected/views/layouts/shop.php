@@ -24,7 +24,6 @@
     <?php foreach ($this->scripts AS $script): ?><script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/<?php echo $script?>.js"></script><? endforeach; ?>
 </head>
 <body> 
-	
     <div class="b b-header">
         <div class="b-block">
         <a href="http://koleso.tomsk.ru/"><img src="<?php echo Yii::app()->request->baseUrl; ?>/i/logo.png" alt=""></a><span class="b-top-title">Godzilla Wheels</span>
@@ -50,8 +49,11 @@
                     <input type="text" name="phone" id="phone" placeholder="Ваш номер телефона" required/>
                     <input type="text" name="1" id="region" placeholder="Ваш регион" required/>
                     <input type="hidden" name="1-name" value="Регион" />
+                    <input type="hidden" name="2" value="<?=$_SERVER["REMOTE_ADDR"];?>" />
+                    <input type="hidden" name="2-name" value="IP-адрес" />
                     <input type="hidden" name="subject" value="Покупка с сайта" />
                     <a href="#" class="ajax b-blue-butt" onclick="$('#b-form-buy').submit(); return false;">Отправить</a>
+                    <input type="submit" style="display:none;">
                 </form>
             </div>
         </div>
