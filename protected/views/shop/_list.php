@@ -8,7 +8,8 @@
                 <div class="desc">
                     <h3><?=Interpreter::generate($this->params[$_GET['type']]["TITLE_CODE"], $good);?></h3>
                     <h4><?=Interpreter::generate($this->params[$_GET['type']]["TITLE_2_CODE"], $good);?></h4>
-                    <h5><?=$good->fields_assoc[20]->value==0 ? Yii::app()->params["zeroPrice"] : number_format( $good->fields_assoc[20]->value, 0, ',', ' ' )." руб."?></h5>
+                    <? $price = 0; $price = Interpreter::generate($this->params[$_GET['type']]["PRICE_CODE"], $good); ?>
+                    <h5><?=$price==0 ? Yii::app()->params["zeroPrice"] : number_format( $price, 0, ',', ' ' )." руб."?></h5>
                 </div>
             </a>
 			</li>

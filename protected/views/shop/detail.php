@@ -19,7 +19,8 @@
 			</div>
 			<div class="desc left">
 				<div class="clearfix">
-					<h3 class="left"><?=(!$good->fields_assoc[20]->value )? Yii::app()->params["zeroPrice"] : number_format( $good->fields_assoc[20]->value, 0, ',', ' ' )." руб."?></h3>
+					<? $price = 0; $price = Interpreter::generate($this->params[$_GET['type']]["PRICE_CODE"], $good); ?>
+					<h3 class="left"><?=(!$price )? Yii::app()->params["zeroPrice"] : number_format( $price, 0, ',', ' ' )." руб."?></h3>
 					<a class="red-btn right fancy" data-afterShow="myHandler" data-block="#b-popup-buy" href="#">Купить</a>
 				</div>
 				<ul>

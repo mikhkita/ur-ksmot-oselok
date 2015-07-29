@@ -11,6 +11,7 @@ class ShopController extends Controller
 			"TITLE_2_CODE" => 13,
 			"DESCRIPTION_CODE" => 74,
 			"GARANTY_CODE" => 77,
+			"PRICE_CODE" => 95
 		),
 		2 => array(
 			"NAME" => "Диски",
@@ -18,6 +19,7 @@ class ShopController extends Controller
 			"TITLE_2_CODE" => 54,
 			"DESCRIPTION_CODE" => 75,
 			"GARANTY_CODE" => 78,
+			"PRICE_CODE" => 94
 		));
 
 	public function filters()
