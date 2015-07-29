@@ -84,6 +84,18 @@
 						<h5><?=$good->fields_assoc[26]->value?></h5>
 					</li>
 					<? endif; ?>
+					<? if(isset($good->fields_assoc[33]->value)): ?>
+					<li class="clearfix">
+						<h4>Центральное отверстие:</h4>
+						<h5><?=$good->fields_assoc[33]->value?> мм.</h5>
+					</li>
+					<? endif; ?>
+					<? if(isset($good->fields_assoc[10]->value)): ?>
+					<li class="clearfix">
+						<h4>Год выпуска:</h4>
+						<h5><?=$good->fields_assoc[10]->value?></h5>
+					</li>
+					<? endif; ?>
 					<? if(isset($good->fields_assoc[27]->value)): ?>
 					<li class="clearfix">
 						<h4>Местонахождение товара:</h4>
