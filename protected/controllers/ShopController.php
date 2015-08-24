@@ -221,8 +221,8 @@ class ShopController extends Controller
 	public function actionDetail($partial = false,$id = NULL)
 	{
 		if($id) {
-
-			$good=Good::model()->findbyPk($id);
+			$good = Good::model()->with("fields")->findAll("good_type_id=".$_GET['type']." AND fields.attribute_id=3 AND fields.varchar_value='".$id."'");
+			$good = Good::model()->findByPk($good[0]->id);
 
 			$this->title = Interpreter::generate($this->params[$_GET['type']]["TITLE_CODE"], $good);
 

@@ -234,20 +234,26 @@ class Interpreter extends CActiveRecord
 					throw new CHttpException(500,"Отсутствует параметр \"ATTR\" у интерпретатора с идентификатором ".$interpreter_id);
 				}
 			}
-			$out = str_replace($matches[0], $matches[1], $template);
-
-			$calc = array(Interpreter::getArrayToCalculate($out),array());
-			foreach ($calc[0] as $key => $value) {
-				$calc[1][$key] = Interpreter::calculate($value);
-				$calc[0][$key] = '`'.$calc[0][$key]."`";
-			}
-
-			$template = str_replace($calc[0], $calc[1], $out);
+			$template = str_replace($matches[0], $matches[1], $template);
 
 			preg_match_all("~\[\+([^\+\]]+)\+\]~", $template, $matches);
 		}
 
+		$template = Interpreter::calculateAll($template);
+
 		return $template;
+    }
+
+    public function calculateAll($str){
+
+    	$calc = array(Interpreter::getArrayToCalculate($str),array());
+
+		foreach ($calc[0] as $key => $value) {
+			$calc[1][$key] = Interpreter::calculate($value);
+			$calc[0][$key] = '`'.$calc[0][$key]."`";
+		}
+
+		return str_replace($calc[0], $calc[1], $str);
     }
 
     public function getArrayToCalculate($str){
@@ -262,18 +268,10 @@ class Interpreter extends CActiveRecord
 
     public function calculate($str){
     	$out = "";
-    	// echo $str."<br>";
+
     	ini_set('display_errors','Off');
     	eval("\$out = ".$str.";");	
-    	// $newfunc = create_function('','return '.$str.';');
     	ini_set('display_errors','On');	
-  //   	try {
-		//     
-		// } catch (Exception $e) {
-		//     eval("\$out = \"\";");
-		// }
-
-		// echo $newfunc();
 		
 		return $out;
     }
