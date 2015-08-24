@@ -178,12 +178,12 @@ class ShopController extends Controller
                     )
 
                 );
-
+            $criteria->condition = 'attribute_id=9 OR attribute_id=27 OR attribute_id=28 OR ';
             if($_GET['type']==1) {
-            	$criteria->condition = 'attribute_id=7 OR attribute_id=8 OR attribute_id=9 OR attribute_id=23 OR attribute_id=16 OR attribute_id=27';
+            	$criteria->condition .= 'attribute_id=7 OR attribute_id=8 OR attribute_id=23 OR attribute_id=16';
         	}	
         	if($_GET['type']==2) {
-            	$criteria->condition = 'attribute_id=6 OR attribute_id=9 OR attribute_id=5 OR attribute_id=31 OR attribute_id=32 OR attribute_id=27';
+            	$criteria->condition .= 'attribute_id=6 OR attribute_id=5 OR attribute_id=31 OR attribute_id=32';
         	}	
 
         	$criteria->addInCondition("good.id",$goods_no_photo);
@@ -221,8 +221,8 @@ class ShopController extends Controller
 	public function actionDetail($partial = false,$id = NULL)
 	{
 		if($id) {
-			$good = Good::model()->with("fields")->findAll("good_type_id=".$_GET['type']." AND fields.attribute_id=3 AND fields.varchar_value='".$id."'");
-			$good = Good::model()->findByPk($good[0]->id);
+			$good = Good::model()->with("fields")->find("good_type_id=".$_GET['type']." AND fields.attribute_id=3 AND fields.varchar_value='".$id."'");
+			$good = Good::model()->findByPk($good->id);
 
 			$this->title = Interpreter::generate($this->params[$_GET['type']]["TITLE_CODE"], $good);
 

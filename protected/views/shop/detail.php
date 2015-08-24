@@ -78,6 +78,24 @@
 						<h5><?=$good->fields_assoc[8]->value?> %</h5>
 					</li>
 					<? endif; ?>
+					<?  if( 
+							(isset($good->fields_assoc[12]->value) && $good->fields_assoc[12]->value) || 
+							(isset($good->fields_assoc[13]->value) && $good->fields_assoc[12]->value) || 
+							(isset($good->fields_assoc[14]->value) && $good->fields_assoc[12]->value) ||
+							(isset($good->fields_assoc[15]->value) && $good->fields_assoc[12]->value)
+						): 
+					?>
+					<li class="clearfix">
+						<h4>Остаток протектора (мм):</h4> 
+						<h5><? 
+							if(isset($good->fields_assoc[12]->value) && $good->fields_assoc[12]->value) echo $good->fields_assoc[12]->value;
+							if(isset($good->fields_assoc[13]->value) && $good->fields_assoc[13]->value) echo "/".$good->fields_assoc[13]->value;
+							if(isset($good->fields_assoc[14]->value) && $good->fields_assoc[14]->value) echo "/".$good->fields_assoc[14]->value;
+							if(isset($good->fields_assoc[15]->value) && $good->fields_assoc[15]->value) echo "/".$good->fields_assoc[15]->value;
+							?>
+						</h5>
+					</li>
+					<? endif; ?>
 					<? if(isset($good->fields_assoc[26]->value)): ?>
 					<li class="clearfix">
 						<h4>Состояние товара:</h4>

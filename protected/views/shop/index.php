@@ -175,6 +175,23 @@
                             </div>  
                         </div>
                     <? endif; ?>
+                    <div class="filter-cont four-cols">
+                        <h2>Количество</h2>
+                        <div class="check-cont ">
+                            <ul class="hor clearfix">
+                                <? foreach ($filter[28] as $item): ?>
+                                <li>
+                                    <input type="checkbox" id="f<?=$item['variant_id']?>" name="arr28[]" value="<?=$item['variant_id']?>" <?=$item['checked']?>>
+                                    <label class="clearfix" for="f<?=$item['variant_id']?>">
+                                        <span class="checked"></span>
+                                        <span class="default"></span>   
+                                        <h3><?=$item['value']?></h3>
+                                    </label>
+                                </li>
+                                <? endforeach; ?>
+                            </ul>
+                        </div>  
+                    </div>
                     <div class="filter-cont">
                         <h2>Город</h2>
                         <div class="check-cont ">
