@@ -1,10 +1,10 @@
+var customHandlers = [];
 $(document).ready(function(){   
     var myWidth,
         myHeight,
         title = window.location.href,
         titleVar = ( title.split("localhost").length > 1 )?4:3,
-        progress = new KitProgress("#FFF",2),
-        customHandlers = [];
+        progress = new KitProgress("#FFF",3);
 
     progress.endDuration = 0.3;
 
@@ -32,6 +32,10 @@ $(document).ready(function(){
     $(window).resize(whenResize);
     whenResize();
 
+    $(".fancy-img").fancybox({
+        padding : 0
+    });
+
     $(".ajax-update,.ajax-create").fancybox({
         type: "ajax",
         helpers: {
@@ -43,26 +47,59 @@ $(document).ready(function(){
         padding: 0,
         margin: 30,
         beforeShow: function(){
-            bindForm($(".fancybox-inner form"));
+            var $form = $(".fancybox-inner form");
+            bindForm($form);
             bindImageUploader();
             bindTinymce();
+            bindSelectDynamic();
             bindAutocomplete();
             bindTooltip();
+            bindDoubleList();
+            if( $form.attr("data-beforeShow") && customHandlers[$form.attr("data-beforeShow")] ){
+                customHandlers[$form.attr("data-beforeShow")]($form);
+            }
         },
         afterClose:function(){
             unbindTinymce();
         },
         afterShow: function(){
-            bindDoubleList();
             bindVariants();
             $(".fancybox-inner").find("input").eq(0).focus();
         }
     });
 
+    $(document).on("click",".ajax-refresh, .ajax-archive",function(){
+        blockTr($(this).parents("tr"));
+        $(".qtip").remove();
+        progress.setColor("#D26A44");
+        progress.start(3);
+
+        $.ajax({
+            url: $(this).attr("href"),
+            success: function(msg){
+                progress.end(function(){
+                    $(".qtip").remove();
+                    setResult(msg);
+                });
+            }
+        });
+
+        return false;
+    });
+
+    function blockTr(el){
+        el.addClass("b-refresh");
+        el.click(function(){
+            return false;
+        });
+    }
+
     $(document).on("click",".ajax-delete", function(){
+        var warning = ($(this).attr("data-warning"))?$(this).attr("data-warning"):"Вы действительно хотите удалить</br>запись?";
+        warning += ( $(this).parents(".b-table").attr("data-warning") )?"<br><b>"+$(this).parents(".b-table").attr("data-warning")+"</b>":"";
         $.fancybox.open({
             padding: 0,
-            content: '<div class="b-popup b-popup-delete"><h1>Вы действительно хотите удалить</br>запись?</h1><div class="row buttons"><input type="button" class="b-delete-yes" value="Да"><input type="button" onclick="$.fancybox.close();" value="Нет"></div></div>'
+            content: '<div class="b-popup b-popup-delete"><h1>'+warning+'</h1><div class="row buttons"><input type="button" class="b-delete-yes" value="Да"><input type="button" onclick="$.fancybox.close();" value="Нет"></div></div>'
         });
         bindDelete($(this).attr("href"));
         return false;
@@ -73,7 +110,10 @@ $(document).ready(function(){
 
         setTimeout(function(){
             bindFilter();
+            bindTooltip();
             bindAutocomplete();
+
+            $(".b-refresh").removeClass("b-refresh").addClass("b-refresh-out");
         },100);
     }
 
@@ -86,7 +126,7 @@ $(document).ready(function(){
         });
         $(".fancybox-inner .b-delete-yes").click(function(){
 
-            progress.setColor("#D26A44");
+            progress.setColor("#FFF");
             progress.start(3);
 
             url = ( $(".main form").length ) ? (url+"&"+$(".main form").serialize()) : url;
@@ -136,6 +176,9 @@ $(document).ready(function(){
         $form.validate({
             ignore: ""
         });
+
+        $(".numeric").numericInput({ allowFloat: true, allowNegative: true });
+
         $form.submit(function(e,a){
             tinymce.triggerSave();
             if( $(this).valid() && !$(this).find("input[type=submit]").hasClass("blocked") ){
@@ -267,32 +310,82 @@ $(document).ready(function(){
     /* Preloader ----------------------------------- Preloader */
 
     /* Hot keys ------------------------------------ Hot keys */
+    
+    var cmddown = false,
+        ctrldown = false;
+    function down(e){
+        // alert(e.keyCode);
+        if( e.keyCode == 13 && ( cmddown || ctrldown ) ){
+            if( !$(".b-popup form").length ){
+                $(".ajax-create").click();
+            }else{
+                $(".fancybox-wrap form").trigger("submit",[false]);
+            }
+        }
+        if( e.keyCode == 13 ){
+            enterVariantsHandler();
+        }
+        if( e.keyCode == 91 ) cmddown = true;
+        if( e.keyCode == 17 ) ctrldown = true;
+        if( e.keyCode == 27 && $(".fancybox-wrap").length ) $.fancybox.close();
+    }
+    function up(e){
+        if( e.keyCode == 91 ) cmddown = false;
+        if( e.keyCode == 17 ) ctrldown = false;
+    }
     if( $(".ajax-create").length ){
-        var cmddown = false,
-            ctrldown = false;
-        function down(e){
-            if( e.keyCode == 13 && ( cmddown || ctrldown ) ){
-                if( !$(".b-popup form").length ){
-                    $(".ajax-create").click();
-                }else{
-                    $(".fancybox-wrap form").trigger("submit",[false]);
-                }
-            }
-            if( e.keyCode == 13 ){
-                enterVariantsHandler();
-            }
-            if( e.keyCode == 91 ) cmddown = true;
-            if( e.keyCode == 17 ) ctrldown = true;
-            if( e.keyCode == 27 && $(".fancybox-wrap").length ) $.fancybox.close();
-        }
-        function up(e){
-            if( e.keyCode == 91 ) cmddown = false;
-            if( e.keyCode == 17 ) ctrldown = false;
-        }
         $(document).keydown(down);
         $(document).keyup(up);
     }
     /* Hot keys ------------------------------------ Hot keys */
+
+    /* Редактирование таблиц ------------------------------------ Редактирование таблиц */
+    function downTable(e,el){
+        if( e.keyCode == 86 && ( cmddown || ctrldown ) ){
+            el.val("");
+            setTimeout(function(){ pasteHandler(el); },10);
+        }
+        if( e.keyCode == 91 ) cmddown = true;
+        if( e.keyCode == 17 ) ctrldown = true;
+    }
+    function upTable(e){
+        if( e.keyCode == 91 ) cmddown = false;
+        if( e.keyCode == 17 ) ctrldown = false;
+    }
+
+    function pasteHandler(el){
+        var splitted = el.val().split("\n");
+        for( i in splitted ){
+            splitted[i] = splitted[i].split("\t");
+        }
+        console.log(splitted);
+
+        var table = el.parents("table"),
+            colCount = el.parents("tr").find("td").length-1,
+            rowCount = table.find("tr").length-1,
+            colCur = el.parents("td").index()-1,
+            rowCur = el.parents("tr").index(),
+            rowTo = (splitted.length-1 <= rowCount-rowCur)?(splitted.length-1):(rowCount-rowCur),
+            colTo = (splitted[0].length-1 <= colCount-colCur)?(splitted[0].length-1):(colCount-colCur);
+
+        for (var i = 0; i <= rowTo ; i++) {
+            var rowNum = rowCur + i;
+            for (var j = 0; j <= colTo ; j++) {
+                var colNum = colCur + j;
+                table.find("tr").eq(rowNum).find("td").eq(colNum).find("textarea").val(splitted[i][j]);
+            }
+        }
+
+        // alert([rowCur,colTo,rowNum,colNum]);
+    }
+
+    if( $(".b-table.b-data").length ){
+        $(".b-table-td-editable textarea").keydown(function(e){
+            downTable(e,$(this));
+        });
+        $(document).keyup(upTable);
+    }
+    /* Редактирование таблиц ------------------------------------ Редактирование таблиц */
 
     /* Autocomplete -------------------------------- Autocomplete */
     function bindAutocomplete(){
@@ -421,7 +514,7 @@ $(document).ready(function(){
             $("#sortable1").sortable({
                 connectWith: ".connectedSortable",
                 update: function( event, ui ) {
-                    sortList();
+                    customHandlers["sortList"]();
                 }
             }).disableSelection();
             $("#sortable2").sortable({
@@ -430,18 +523,19 @@ $(document).ready(function(){
                     $("#sortable2 li").append("<span></span>");
                 }
             }).disableSelection();
+            customHandlers["sortList"]();
         }
     }
     $("body").on("click",".double-list li span",function(){
         $("#sortable1").prepend($(this).parents("li"));
-        sortList();
+        customHandlers["sortList"]();
     });
 
     customHandlers["attributesAjax"] = function($form){
         $("#sortable1 input").remove();
     }
 
-    function sortList(){
+    customHandlers["sortList"] = function(){
         var min = "&";
         $("#sortable1 li").each(function(){
             var max = "№";
@@ -525,7 +619,7 @@ $(document).ready(function(){
         var regArr;
         switch( $("#new-variant").attr("data-type") ) {
             case "float":
-                regArr = /^[^\d-]*(-{0,1}\d+\.{0,1}\d+)[\D]*$/.exec(val);
+                regArr = /^[^\d-]*(-{0,1}\d*\.{0,1}\d+)[\D]*$/.exec(val);
 
                 break;
             case "int":
@@ -572,6 +666,81 @@ $(document).ready(function(){
         }
     }
     /* Variants ------------------------------------ Variants */
+
+    /* Dynamic ------------------------------------- Dynamic */
+    function bindSelectDynamic(){
+        if( $(".b-select-dynamic").length ){
+            $(".b-select-dynamic").change(function(){
+                var $form = $(this).parents("form");
+
+                progress.setColor("#FFF");
+                progress.start(3);
+
+                $.ajax({
+                    type: "POST",
+                    url: $form.attr("action"),
+                    data: $form.serialize(),
+                    success: function(msg){
+                        progress.end(function(){
+                            $(".fancybox-inner").html(msg);
+                            bindSelectDynamic();
+                        });
+                    }
+                });
+            });
+        }
+    }
+    if( $(".b-dynamic select").length ){
+        $(".b-dynamic .b-select-all").click(function(){
+            $(this).parents(".b-dynamic").find("ul li").addClass("selected");
+            return false;
+        });
+
+        $(".b-dynamic .b-select-none").click(function(){
+            $(this).parents(".b-dynamic").find("ul li").removeClass("selected");
+            return false;
+        });
+    }
+    /* Dynamic ------------------------------------- Dynamic */
+
+    /* Auction ------------------------------------- Auction */
+    var refreshTimeout = 5000;
+    if( $(".b-auction-table").length ){
+        setTimeout(function run(){
+            console.log(progress.isBlocked());
+            if( !progress.isBlocked() ){
+                $.ajax({
+                    url: $(".b-auction-table").attr("data-url"),
+                    success: function(msg){
+                        setAuctionResults(msg);
+                        console.log("refreshed");
+                    }
+                });
+            }
+
+            setTimeout(run,refreshTimeout);
+        },refreshTimeout);
+
+        $("body").mousemove(function(){
+            if( $("td.b-refreshed").length )
+                $("td.b-refreshed").removeClass("b-refreshed").addClass("b-refreshed-out");
+        });
+    }
+
+    function setAuctionResults(msg){
+        var json = JSON.parse(msg);
+
+        for( var i in json ){
+            var tr = $(".b-auction-table tr[data-id='"+json[i].id+"']");
+            if( json[i].date != tr.find("td[data-field='date']").text() ) tr.find("td[data-field='date']").removeClass("b-refreshed-out").addClass("b-refreshed");
+            tr.find("td[data-field='date']").html(json[i].date);
+            if( json[i].current_price != tr.find("td[data-field='current_price']").text() ) tr.find("td[data-field='current_price']").removeClass("b-refreshed-out").addClass("b-refreshed");
+            tr.find("td[data-field='current_price']").html(json[i].current_price);
+            if( json[i].state != tr.find("td[data-field='state']").text() ) tr.find("td[data-field='state']").removeClass("b-refreshed-out").addClass("b-refreshed");
+            tr.find("td[data-field='state']").html(json[i].state);
+        }
+    }
+    /* Auction ------------------------------------- Auction */
 
     function transition(el,dur){
         el.css({

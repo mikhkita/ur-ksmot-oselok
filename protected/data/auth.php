@@ -1,30 +1,16 @@
 <?php
 return array (
-  'createUser' => 
+  'rootActions' => 
   array (
     'type' => 0,
-    'description' => 'создание пользователя',
+    'description' => 'Доступ только root',
     'bizRule' => NULL,
     'data' => NULL,
   ),
-  'changeRole' => 
+  'managerActions' => 
   array (
     'type' => 0,
-    'description' => 'изменение роли пользователя',
-    'bizRule' => NULL,
-    'data' => NULL,
-  ),
-  'changeState' => 
-  array (
-    'type' => 0,
-    'description' => 'изменение статуса пользователя',
-    'bizRule' => NULL,
-    'data' => NULL,
-  ),
-  'seeAdminPanel' => 
-  array (
-    'type' => 0,
-    'description' => 'видеть панель администратора',
+    'description' => 'Доступ manager и root',
     'bizRule' => NULL,
     'data' => NULL,
   ),
@@ -36,37 +22,16 @@ return array (
     'data' => NULL,
     'children' => 
     array (
-      0 => 'seeAdminPanel',
+      0 => 'managerActions',
     ),
     'assignments' => 
     array (
-      3 => 
+      7 => 
       array (
         'bizRule' => NULL,
         'data' => NULL,
       ),
-      6 => 
-      array (
-        'bizRule' => NULL,
-        'data' => NULL,
-      ),
-    ),
-  ),
-  'admin' => 
-  array (
-    'type' => 2,
-    'description' => '',
-    'bizRule' => NULL,
-    'data' => NULL,
-    'children' => 
-    array (
-      0 => 'manager',
-      1 => 'changeState',
-      2 => 'createUser',
-    ),
-    'assignments' => 
-    array (
-      5 => 
+      8 => 
       array (
         'bizRule' => NULL,
         'data' => NULL,
@@ -81,8 +46,8 @@ return array (
     'data' => NULL,
     'children' => 
     array (
-      0 => 'admin',
-      1 => 'changeRole',
+      0 => 'manager',
+      1 => 'rootActions',
     ),
     'assignments' => 
     array (

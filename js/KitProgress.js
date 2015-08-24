@@ -13,6 +13,12 @@ function KitProgress(c,h){
     this.now;
     this.step;
     this.max;
+    this.counter = 0;
+    this.blocked = false;
+
+    this.isBlocked = function(){
+        return this.blocked;
+    }
 
     this.init = function(){
         var html = $("<div id='"+this.myId+"'></div>");
@@ -33,13 +39,16 @@ function KitProgress(c,h){
         this.elem.css({"background-color" : this.color});
     }
     this.start = function(seconds){
+        this.blocked = true;
         this.now = 0;
         this.max = 100;
         this.elem.fadeIn(100);
         this.elem.css({
             "width" : 0
         });
-        this.inc(seconds);
+        this.inc(seconds*Math.ceil((this.counter+1)/2));
+        this.counter++;
+        console.log("start "+this.counter);
     }
     this.incPar = function(int){
         this.randInt = int;
@@ -65,18 +74,25 @@ function KitProgress(c,h){
         },tmp.delay);
     }
     this.end = function(callback){
-        clearInterval(this.timer);
-        this.step = (100-this.now)/(this.endDuration*1000/this.delay);
-        var tmp = this;
-        tmp.timer = setInterval(function(){
-            tmp.now += tmp.step;
-            tmp.elem.css("width",tmp.now+"%");
-            if (tmp.now>=100){
-                tmp.elem.fadeOut(200);
-                clearInterval(tmp.timer);
-                if( callback ) callback();
-            }
-        },tmp.delay);
+        this.counter--;
+        console.log("end "+this.counter);
+        if( this.counter == 0 ){
+            clearInterval(this.timer);
+            this.step = (100-this.now)/(this.endDuration*1000/this.delay);
+            var tmp = this;
+            tmp.timer = setInterval(function(){
+                tmp.now += tmp.step;
+                tmp.elem.css("width",tmp.now+"%");
+                if (tmp.now>=100){
+                    tmp.elem.fadeOut(200);
+                    clearInterval(tmp.timer);
+                    tmp.blocked = false;
+                    if( callback ) callback();
+                }
+            },tmp.delay);
+        }else{
+            callback();
+        }
     }
     this.init();
 }

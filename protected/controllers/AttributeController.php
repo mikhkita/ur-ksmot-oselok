@@ -175,7 +175,7 @@ class AttributeController extends Controller
 
 				$sql = "INSERT INTO `$tmpName` (`id`,`attribute_id`,`sort`) VALUES ";
 
-				$values = [];
+				$values = array();
 				foreach ($_POST["Variants"] as $key => $value) {
 					$values[] = "('".$key."','".$model->id."','".$value."')";
 				}
@@ -194,7 +194,7 @@ class AttributeController extends Controller
 		if( isset($_POST["VariantsNew"]) ){
 			$sql = "INSERT INTO `$tableName` (`attribute_id`,`".$model->type->code."_value`,`sort`) VALUES ";
 
-			$values = [];
+			$values = array();
 			foreach ($_POST["VariantsNew"] as $key => $value) {
 				$values[] = "('".$model->id."','".$key."','".$value."')";
 			}
@@ -212,7 +212,10 @@ class AttributeController extends Controller
 			foreach ($delArr as $key => $value) {
 				$pks[] = $key;
 			}
-			AttributeVariant::model()->deleteByPk($pks);
+			$model = AttributeVariant::model()->findAllByPk($pks);
+			foreach ($model as $key => $value) {
+				$value->delete();
+			}
 		}
 	}
 

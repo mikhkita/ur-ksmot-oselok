@@ -107,7 +107,9 @@
 	border-radius: 100px;
 	border: 2px solid #FFF;
 	/*background-color: #2a7cb5;*/
-	background: #2a7cb5 url('../images/close.png') center center no-repeat;
+	background: #2a7cb5 url('../images/close.png') -7px -5px no-repeat;
+	background-image: url('fancybox_sprite@2x.png');
+	background-size: 44px 152px;
 	cursor: pointer;
 	z-index: 8040;
 	/*box-shadow: 0 2px 5px rgba(0,0,0,0.7);*/
@@ -273,8 +275,7 @@
 	   only screen and (min-device-pixel-ratio: 1.5){
 
 	#fancybox-loading, .fancybox-close, .fancybox-prev span, .fancybox-next span {
-		background-image: url('fancybox_sprite@2x.png');
-		background-size: 44px 152px; /*The size of the normal image, half the size of the hi-res image*/
+		
 	}
 
 	#fancybox-loading div {

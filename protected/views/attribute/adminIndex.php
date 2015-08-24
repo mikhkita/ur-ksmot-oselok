@@ -1,7 +1,7 @@
 <h1><?=$this->adminMenu["cur"]->name?></h1>
 <a href="<?php echo $this->createUrl('/'.$this->adminMenu["cur"]->code.'/admincreate')?>" class="ajax-form ajax-create b-butt b-top-butt">Добавить</a>
 <?php $form=$this->beginWidget('CActiveForm'); ?>
-	<table class="b-table" border="1">
+	<table class="b-table" border="1" data-warning="Все связанные с атрибутом справочники будут удалены!">
 		<tr>
 			<th style="width: 30px;"><? echo $labels['id']; ?></th>
 			<th><? echo $labels['name']; ?></th>
@@ -20,7 +20,7 @@
 		</tr>
 		<? if( count($data) ): ?>
 			<? foreach ($data as $i => $item): ?>
-				<tr>
+				<tr<?if(isset($_GET["id"]) && $item->id == $_GET["id"]):?> class="b-refresh"<?endif;?>>
 					<td><?=$item->id?></td>
 					<td class="align-left"><?=$item->name?></td>
 					<td class="align-left"><?=$item->type->name?></td>
@@ -31,7 +31,7 @@
 						<? if( $item->list ): ?>
 							<a href="<?php echo Yii::app()->createUrl('/'.$this->adminMenu["cur"]->code.'/adminedit',array('id'=>$item->id))?>" class="ajax-form ajax-update b-tool b-tool-list" title="Варианты <?=$this->adminMenu["cur"]->rod_name?>"></a>
 						<? endif; ?>
-						<a href="<?php echo Yii::app()->createUrl('/'.$this->adminMenu["cur"]->code.'/admindelete',array('id'=>$item->id))?>" class="ajax-form ajax-delete b-tool b-tool-delete" title="Удалить <?=$this->adminMenu["cur"]->vin_name?>"></a>
+						<a href="<?php echo Yii::app()->createUrl('/'.$this->adminMenu["cur"]->code.'/admindelete',array('id'=>$item->id))?>" class="ajax-form ajax-delete b-tool b-tool-delete" data-warning="Вы действительно хотите удалить <?=$this->adminMenu["cur"]->vin_name?> &quot;<?=$item->name?>&quot;?" title="Удалить <?=$this->adminMenu["cur"]->vin_name?>"></a>
 					</td>
 				</tr>
 			<? endforeach; ?>

@@ -49,6 +49,7 @@ class AttributeVariant extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'attribute' => array(self::BELONGS_TO, 'Attribute', 'attribute_id'),
+			'field' => array(self::HAS_MANY, 'GoodAttribute', 'variant_id'),
 		);
 	}
 
@@ -108,11 +109,16 @@ class AttributeVariant extends CActiveRecord
 		return parent::model($className);
 	}
 
+	public function beforeDelete(){
+ 		GoodAttribute::model()->deleteAll("variant_id=".$this->id);
+  		return parent::beforeDelete();
+ 	}
+
 	public function afterFind()
 	{
 		parent::afterFind();
-
-		$val = $this->attributes[$this->attribute->type->code."_value"];
+		 
+		$val = ($this->attributes["int_value"] == NULL)?( ($this->attributes["float_value"] == NULL)?($this->attributes["varchar_value"]):($this->attributes["float_value"]) ):($this->attributes["int_value"]);
 		
 		$this->setAttribute("value",($val != NULL)?$val:false,true);
 	}

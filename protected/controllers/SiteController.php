@@ -62,7 +62,8 @@ class SiteController extends Controller
 	 * Displays the login page
 	 */
 	public function actionIndex(){
-		$this->redirect(array('login'));
+		// $this->redirect(array('login'));
+        $this->renderPartial('index',array());
 	}
 
 	public function actionLogin()
@@ -219,55 +220,30 @@ class SiteController extends Controller
 	/*! Сброс всех правил. */
     public function actionInstall() {
 
+        $this->layout='admin';
+
         if ( $this->getUserRole() != "root" ) {
             throw new CHttpException(403,'Forbidden');
         }
 
         $auth=Yii::app()->authManager;
-        
-        //сбрасываем все существующие правила
         $auth->clearAll();
-        
-        //Операции управления пользователями.
-        $bizRule='return Yii::app()->user->id == $params["id"];';
 
-        $auth->createOperation('createUser', 'создание пользователя');
-        $auth->createOperation('changeRole', 'изменение роли пользователя');
-        $auth->createOperation('changeState', 'изменение статуса пользователя');
-
-        // $auth->createOperation('createAdv', 'создание объявлений');
-        // $auth->createOperation('updateAdv', 'редактирование объявлений');
-        // $auth->createOperation('makePremium', 'изменение роли пользователя');
-        // $task = $auth->createTask('updateOwnAdv', 'изменение своих данных', $bizRule);
-
-        // $auth->createOperation('createService', 'создание сервисного отчета');
-        // $auth->createOperation('updateService', 'редактирование всех сервисных отчетов');
-        // $task = $auth->createTask('updateOwnService', 'изменение своего сервисного отчета', $bizRule);
-
-        $auth->createOperation('seeAdminPanel', 'наличие доступа в админку');        
-
-        //$task->addChild('updateAdv');
+        $auth->createOperation('rootActions', 'Доступ только root');
+        $auth->createOperation('managerActions', 'Доступ manager и root');    
 
         $role = $auth->createRole('manager');
-        $role->addChild('seeAdminPanel');
-        //$role->addChild('createAdv');
-        //$role->addChild('updateOwnAdv');
-
-        $role = $auth->createRole('admin');
-        $role->addChild('manager');
-        //$role->addChild('makePremium');
-        $role->addChild('changeState');
-        $role->addChild('createUser');
-        $role->addChild('changeRole');
-        // $role->addChild('updateAdv');
-        // $role->addChild('updateService');
+        $role->addChild('managerActions');
 
         $role = $auth->createRole('root');
-        $role->addChild('admin');
+        $role->addChild('manager');
+        $role->addChild('rootActions');
         
         //связываем пользователя с ролью
-        $auth->assign('root', 1);
-        $auth->assign('manager', 3);
+        $users = User::model()->findAll();
+        foreach ($users as $key => $user) {
+            $auth->assign($user->role->code, $user->usr_id);   
+        }
 
         //сохраняем роли и операции
         $auth->save();

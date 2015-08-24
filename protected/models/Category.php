@@ -4,9 +4,9 @@
  * This is the model class for table "category".
  *
  * The followings are the available columns in table 'category':
- * @property integer $cat_id
- * @property string $cat_name
- * @property string $cat_text
+ * @property string $id
+ * @property string $name
+ * @property integer $sort
  */
 class Category extends CActiveRecord
 {
@@ -18,13 +18,6 @@ class Category extends CActiveRecord
 		return 'category';
 	}
 
-	public function defaultScope()
-    {
-        return array(
-            'order'=>'id DESC',
-        );
-    }
-
 	/**
 	 * @return array validation rules for model attributes.
 	 */
@@ -33,11 +26,12 @@ class Category extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, text', 'required'),
+			array('name, sort', 'required'),
+			array('sort', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, text', 'safe', 'on'=>'search'),
+			array('id, name, sort', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -49,7 +43,7 @@ class Category extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'articles' => array(self::HAS_MANY, 'Article', 'art_cat_id'),
+			'interpreters' => array(self::HAS_MANY, 'Interpreter', 'category_id'),
 		);
 	}
 
@@ -59,9 +53,9 @@ class Category extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID категории',
+			'id' => 'ID',
 			'name' => 'Название',
-			'text' => 'Краткое описание',
+			'sort' => 'Сортировка',
 		);
 	}
 
@@ -83,9 +77,9 @@ class Category extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
+		$criteria->compare('id',$this->id,true);
 		$criteria->compare('name',$this->name,true);
-		$criteria->compare('text',$this->text,true);
+		$criteria->compare('sort',$this->sort);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

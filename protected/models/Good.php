@@ -26,7 +26,7 @@ class Good extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('code, good_type_id', 'required'),
+			array('good_type_id', 'required'),
 			array('code', 'length', 'max'=>255),
 			array('good_type_id', 'length', 'max'=>10),
 			// The following rule is used by search().
@@ -43,7 +43,7 @@ class Good extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'fields' => array(self::HAS_MANY, 'Attributes', 'art_hou_id'),
+			'fields' => array(self::HAS_MANY, 'GoodAttribute', 'good_id'),
 			'type' => array(self::BELONGS_TO, 'GoodType', 'good_type_id'),
 		);
 	}
@@ -97,4 +97,32 @@ class Good extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+	public function afterFind()
+	{
+		parent::afterFind();
+
+		if( count($this->fields) ){
+			$fields = array();
+
+			foreach ($this->fields as $field) {
+				if( isset($fields[$field->attribute_id]) ){
+					if( !is_array($fields[$field->attribute_id]) ){
+						$fields[$field->attribute_id] = array(0 => $fields[$field->attribute_id]);
+					}
+					$fields[$field->attribute_id][] = $field;
+				}else{
+					$fields[$field->attribute_id] = $field;
+				}
+			}
+			$this->setAttribute("fields_assoc",$fields,true);
+		}
+	}
+
+	public function beforeDelete(){
+  		foreach ($this->fields as $key => $value) {
+  			$value->delete();
+  		}
+  		return parent::beforeDelete();
+ 	}
 }
