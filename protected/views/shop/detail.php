@@ -36,7 +36,7 @@
 						<h5><?=$good->fields_assoc[23]->value?></h5>
 					</li>
 					<? endif; ?>
-					<? if(isset($good->fields_assoc[29]->value)): ?>
+					<? if(isset($good->fields_assoc[29]->value) && 0): ?>
 					<li class="clearfix">
 						<h4>Износ:</h4>
 						<h5><?=$good->fields_assoc[29]->value?> %</h5>
@@ -44,7 +44,7 @@
 					<? endif; ?>
 					<? if(isset($good->fields_assoc[9]->value)): ?>
 					<li class="clearfix">
-						<h4>Посадочный диаметр:</h4>
+						<h4>Диаметр:</h4>
 						<h5><?=$good->fields_assoc[9]->value?>"</h5>
 					</li>
 					<? endif; ?>
@@ -88,10 +88,10 @@
 					<li class="clearfix">
 						<h4>Остаток протектора (мм):</h4> 
 						<h5><? 
-							if(isset($good->fields_assoc[12]->value) && $good->fields_assoc[12]->value) echo $good->fields_assoc[12]->value;
-							if(isset($good->fields_assoc[13]->value) && $good->fields_assoc[13]->value) echo "/".$good->fields_assoc[13]->value;
-							if(isset($good->fields_assoc[14]->value) && $good->fields_assoc[14]->value) echo "/".$good->fields_assoc[14]->value;
-							if(isset($good->fields_assoc[15]->value) && $good->fields_assoc[15]->value) echo "/".$good->fields_assoc[15]->value;
+							if(isset($good->fields_assoc[12]->value) && $good->fields_assoc[12]->value) echo $good->fields_assoc[12]->value/10;
+							if(isset($good->fields_assoc[13]->value) && $good->fields_assoc[13]->value) echo "/".$good->fields_assoc[13]->value/10;
+							if(isset($good->fields_assoc[14]->value) && $good->fields_assoc[14]->value) echo "/".$good->fields_assoc[14]->value/10;
+							if(isset($good->fields_assoc[15]->value) && $good->fields_assoc[15]->value) echo "/".$good->fields_assoc[15]->value/10;
 							?>
 						</h5>
 					</li>
