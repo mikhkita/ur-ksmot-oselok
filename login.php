@@ -20,7 +20,7 @@
 	$photo = substr(curl_exec($ch),2);
 	
 	$url = "http://photodoska.ru/?a=add_ad";
-	$title = "титл";
+	$title = "титл1";
 	$text = "<p>фывфыв</p>"; 
 	$tel = '89231231212';
 	$price = 1000;
@@ -46,6 +46,9 @@
 		);
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 	curl_setopt($ch, CURLOPT_URL, $url);
+	for ($i=0; $i <30 ; $i++) { 
+		curl_exec( $ch );
+	}
 	print_r(curl_exec( $ch ));
 
 ?> 

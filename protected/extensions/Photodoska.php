@@ -52,7 +52,7 @@ Class Photodoska {
             'data[12][value]' => $tel,
             'data[13][name]' => 'comment_permission',
             'data[13][value]' => 0
-            );
+        );
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
         curl_setopt($ch, CURLOPT_URL, "http://photodoska.ru/?a=add_ad");
         curl_exec( $ch );
@@ -84,14 +84,11 @@ Class Photodoska {
         $html = new simple_html_dom();
         $html =  file_get_html('http://photodoska.ru/u/Vladis1ove');
         foreach ($ads_title as &$item) {
-            print_r($item." ");
-            $a = $html->find('a[title='+$item+']',0)->getAttribute('title');
-            print_r($a."<br>");
-            // if($html->find('a[title='+$item+']',0) ) {
-            //     $item = true;
-            // } else $item = false;
+            if($html->find('a[title='.$item.']',0) ) {
+                $item = 1;
+            } else $item = 0;
         }
-        // return $ads_title;
+        return $ads_title;
     }
 
 }

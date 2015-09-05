@@ -178,7 +178,7 @@ class GoodTypeController extends Controller
 			$this->layout='admin';
 		}
 		$ph = new Photodoska;
-		// $ph->del_ads();
+		$ph->del_ads();
 		$arr = array("title","титл1");
 		print_r($ph->parse_ads($arr));
 		$filter = new GoodType('filter');
