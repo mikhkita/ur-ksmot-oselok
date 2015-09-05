@@ -253,36 +253,6 @@ class ShopController extends Controller
 		$goods=Good::model()->findAllbyPk($goods_id,$criteria);
 	}
 
-	public function getImages($good, $number = NULL)
-	{	
-		$imgs = array();
-		$path = Yii::app()->params["imageFolder"];
-		$code = $good->fields_assoc[3]->value;
-		if($good->good_type_id==1) $path .= "/tires/";
-		if($good->good_type_id==2) $path .= "/discs/";
-		$dir = $path.$code;
-		if (is_dir($dir)) {
-			$imgs = array_values(array_diff(scandir($dir), array('..', '.', 'Thumbs.db')));
-			$dir = Yii::app()->request->baseUrl."/".$path.$code;
-			if(count($imgs)) {
-				if($number) {
-					for ($i=0; $i < $number; $i++) { 
-						$imgs[$i] = $dir."/".$imgs[$i];
-					}
-				} else {
-					foreach ($imgs as $key => &$value) {
-						$value = $dir."/".$value;
-					}
-				}			
-			} else {
-				array_push($imgs, Yii::app()->request->baseUrl."/".$path."default.jpg");
-			}
-		}
-		else {
-			array_push($imgs, Yii::app()->request->baseUrl."/".$path."default.jpg");	
-		}
-		return $imgs;
-	}
 	public function loadModel($id)
 	{
 		$model=Good::model()->findByPk($id);

@@ -27,6 +27,7 @@ class IntegrateController extends Controller
         );
     }
 
+    // Фотодоска ------------------------------------------------------------- Фотодоска
     public function actionPhotodoska(){
         $model = GoodType::model()->with('goods.fields.variant','goods.fields.attribute')->findByPk(1)->goods;
         $result = array();
@@ -47,11 +48,21 @@ class IntegrateController extends Controller
             $result[$key] = array(
                 "TEXT" => $header."<br>".$this->generateList($group).$footer,
                 "TITLE" => $key,
-                "PRICE" => intval($group[0]->fields_assoc[20]->value)
+                "PRICE" => intval($group[0]->fields_assoc[20]->value),
+                "IMAGE" => $this->findImage($group)
             );
         }
 
-        print_r($result);
+        $photodoska = new Photodoska();
+
+        $photodoska->auth();
+
+        $photodoska->deleteAdverts("867053");
+
+        foreach ($result as $advert) {
+            // $photodoska->addAdvert(substr($advert["IMAGE"],1),$advert["TITLE"],$advert["TEXT"],"9234577327",$advert["PRICE"]);
+            // die();
+        }
     }
 
     public function generateList($group){
@@ -75,6 +86,15 @@ class IntegrateController extends Controller
 
         return $out;
     }
+
+    public function findImage($group){
+        foreach ($group as $item) {
+            $images = $this->getImages($item);
+            if( count($images) != 0 ) return $images[0];
+        }
+        return "";
+    }
+    // Фотодоска ------------------------------------------------------------- Фотодоска
 
     public function actionIndex(){
         

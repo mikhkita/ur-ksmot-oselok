@@ -1,4 +1,4 @@
-<?php echo '<?xml version="1.0" encoding="utf-8"?>'; ?>
+<? echo '<?xml version="1.0" encoding="utf-8"?>'; ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru">
 <head>
@@ -30,7 +30,9 @@
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/TweenMax.min.js"></script>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/form2js.js"></script>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/admin.js"></script>
-    <?php foreach ($this->scripts AS $script): ?><script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/<?php echo $script?>.js"></script><? endforeach; ?>
+    <? foreach ($this->scripts as $script): ?>
+        <script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/js/<?=$script?>.js"></script>
+    <? endforeach; ?>
 </head>
 <body>
     <div class="b-for-image-form"></div>
@@ -55,15 +57,9 @@
                 </div>
             </div>
             <ul class="modules">
-                <? 
-                // if( $this->getUserRole() == "manager" ): 
-                ?>
                 <?foreach ($this->adminMenu["items"] as $i => $menuItem):?>
                     <li data-name="<?=$menuItem->code?>"><a href="<?php echo $this->createUrl('/'.$menuItem->code.'/adminindex')?>"><?=$menuItem->name?></a></li>
                 <?endforeach;?>
-                <? 
-                // endif; 
-                ?>
             </ul>
             <? if(Yii::app()->params['debug']): ?>
                 <div class="b-debug"><?=$this->debugText?></div>

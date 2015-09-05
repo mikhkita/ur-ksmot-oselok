@@ -1,12 +1,16 @@
 <?
 
 Class Photodoska {
+
+    private $login = "wheels70";
+    private $password = "411447";
     
     function __construct() {
 
     }
 
     public function auth(){
+        unlink(dirname(__FILE__).'/cookie.txt');
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, 'http://photodoska.ru/?a=auth');
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -15,15 +19,14 @@ Class Photodoska {
         curl_setopt($ch, CURLOPT_COOKIEFILE,  dirname(__FILE__).'/cookie.txt');
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, array(
-            'data53'=>'Vladis1ove',
-            'data84'=>'261192'
+            'data53'=>$this->login,
+            'data84'=>$this->password
         ));
         curl_exec( $ch );
         curl_close($ch);
     }
 
-    public function add_ad($file,$title,$text,$tel,$price) {
-        $this->auth();
+    public function addAdvert($file,$title,$text,$tel,$price) {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_COOKIEFILE,  dirname(__FILE__).'/cookie.txt');
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -55,20 +58,19 @@ Class Photodoska {
         );
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
         curl_setopt($ch, CURLOPT_URL, "http://photodoska.ru/?a=add_ad");
-        curl_exec( $ch );
+        print_r( curl_exec( $ch ) );
         curl_close($ch);
     }
 
-    public function del_ads($save_id = NULL) {
+    public function deleteAdverts($save_id = NULL) {
         include_once  Yii::app()->basePath.'/extensions/simple_html_dom.php';
         $html = new simple_html_dom();
-        $this->auth();
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_COOKIEFILE,  dirname(__FILE__).'/cookie.txt');
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($ch, CURLOPT_URL, "http://photodoska.ru/u/Vladis1ove");
-        $html =  str_get_html(curl_exec($ch));
+        curl_setopt($ch, CURLOPT_URL, "http://photodoska.ru/u/".$this->login);
+        $html = str_get_html(curl_exec($ch));
         curl_setopt($ch, CURLOPT_URL, "http://photodoska.ru/?a=delete_ad");
         foreach($html->find('.delete_ad') as $element) {
             $id = $element->getAttribute('data-id');
@@ -79,10 +81,10 @@ Class Photodoska {
         }
         curl_close($ch);
     }
-    public function parse_ads($ads_title) {
+    public function parseAdverts($ads_title) {
         include_once  Yii::app()->basePath.'/extensions/simple_html_dom.php';
         $html = new simple_html_dom();
-        $html =  file_get_html('http://photodoska.ru/u/Vladis1ove');
+        $html =  file_get_html('http://photodoska.ru/u/'.$this->login);
         foreach ($ads_title as &$item) {
             if($html->find('a[title='.$item.']',0) ) {
                 $item = 1;
