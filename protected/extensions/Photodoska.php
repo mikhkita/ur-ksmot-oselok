@@ -32,7 +32,7 @@ Class Photodoska {
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
         $cfile = curl_file_create($file);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, array('upload' => $cfile));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, array('upload' => $cfile, 'image/jpeg', 'image.jpg'));
         curl_setopt($ch, CURLOPT_URL, "http://photodoska.ru/?a=upload_photo");
         $photo = substr(curl_exec($ch),2);
 
@@ -63,6 +63,7 @@ Class Photodoska {
     }
 
     public function deleteAdverts($save_id = NULL) {
+        print_r(Yii::app()->basePath);
         include_once  Yii::app()->basePath.'/extensions/simple_html_dom.php';
         $html = new simple_html_dom();
         $ch = curl_init();
@@ -70,27 +71,29 @@ Class Photodoska {
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($ch, CURLOPT_URL, "http://photodoska.ru/u/".$this->login);
-        $html = str_get_html(curl_exec($ch));
         curl_setopt($ch, CURLOPT_URL, "http://photodoska.ru/?a=delete_ad");
-        foreach($html->find('.delete_ad') as $element) {
-            $id = $element->getAttribute('data-id');
-            if($save_id != $id) {
-                curl_setopt($ch, CURLOPT_POSTFIELDS, array("id" => $id) );
+        $arr = $this->parseAdverts();
+        foreach($arr as $element) {
+            if($save_id != $element['id']) {
+                curl_setopt($ch, CURLOPT_POSTFIELDS, array("id" => $element['id']) );
                 curl_exec($ch);
             }
         }
         curl_close($ch);
     }
-    public function parseAdverts($ads_title) {
+    public function parseAdverts() {
         include_once  Yii::app()->basePath.'/extensions/simple_html_dom.php';
         $html = new simple_html_dom();
         $html =  file_get_html('http://photodoska.ru/u/'.$this->login);
-        foreach ($ads_title as &$item) {
-            if($html->find('a[title='.$item.']',0) ) {
-                $item = 1;
-            } else $item = 0;
+        $arr = array();
+        foreach ($html->find('a.f-ad') as $item) {
+            $temp = array();
+            $temp['url'] = $item->href;
+            $temp['title'] = $item->title;
+            $temp['id'] = array_pop(explode('-', $item->href));
+            array_push($arr, $temp);
         }
-        return $ads_title;
+        return $arr;
     }
 
 }

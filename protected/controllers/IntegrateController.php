@@ -4,10 +4,10 @@ class IntegrateController extends Controller
 {
     private $params = array(
         "TIRE" => array(
-            "TITLE_CODE" => 98
+            "TITLE_CODE" => 100
         ),
         "DISC" => array(
-            "TITLE_CODE" => 99
+            "TITLE_CODE" => 101
         )
     );
 
@@ -45,24 +45,36 @@ class IntegrateController extends Controller
         $footer = $this->replaceToBr($this->getParam("PHOTODOSKA","FOOTER_T"));
 
         foreach ($result as $key => $group) {
-            $result[$key] = array(
-                "TEXT" => $header."<br>".$this->generateList($group).$footer,
-                "TITLE" => $key,
-                "PRICE" => intval($group[0]->fields_assoc[20]->value),
-                "IMAGE" => $this->findImage($group)
-            );
+            $price = $this->findPrice($group);
+            if( $price != false ){
+                $result[$key] = array(
+                    "TEXT" => $header."<br>".$this->generateList($group).$footer,
+                    "TITLE" => $key,
+                    "PRICE" => $price,
+                    "IMAGE" => substr($this->findImage($group),1)
+                );
+            }else{
+                unset($result[$key]);
+            }
         }
 
         $photodoska = new Photodoska();
 
         $photodoska->auth();
 
-        // $photodoska->deleteAdverts("867053");
+        $photodoska->deleteAdverts("867053");
+        // die();
 
+        $i = 1 ;
         foreach ($result as $advert) {
-            echo $advert["IMAGE"]."<br>";
-            // $photodoska->addAdvert(substr($advert["IMAGE"],1),$advert["TITLE"],$advert["TEXT"],"9234577327",$advert["PRICE"]);
-            // die();
+            $resizeObj = new Resize($advert["IMAGE"]);
+            $resizeObj -> resizeImage(800, 600, 'auto');
+            $resizeObj -> saveImage(Yii::app()->params['tempFolder']."/photodoska.jpg", 100);
+
+            $photodoska->addAdvert(Yii::app()->params['tempFolder']."/photodoska.jpg",$advert["TITLE"],$advert["TEXT"],"9234577327",$advert["PRICE"]);
+            
+            if( $i >= 3 ) die();
+            $i++;
         }
     }
 
@@ -80,12 +92,25 @@ class IntegrateController extends Controller
                 } 
             }
 
-
-            $out .= Interpreter::generate($this->params["TIRE"]["TITLE_CODE"],$group[$min_id])."<br>";
+            if( $min != 0 )
+                $out .= Interpreter::generate($this->params["TIRE"]["TITLE_CODE"],$group[$min_id])."<br>";
             unset($group[$min_id]);
         }
 
         return $out;
+    }
+
+    public function findPrice($group){
+        $min = 999999;
+
+        foreach ($group as $i => $item) {
+            $price = intval($item->fields_assoc[20]->value);
+            if( $price < $min && $price != 0 ){
+                $min = $price;
+            } 
+        }
+
+        return ( $min == 999999 )?false:$min;
     }
 
     public function findImage($group){
