@@ -36,6 +36,8 @@ class Controller extends CController
     public $render;
     public $debugText = "";
 
+    public $settings = array();
+
     public $adminMenu = array();
 
     public function init() {
@@ -269,5 +271,27 @@ class Controller extends CController
             $out[] = $value->value;
         }
         return implode("/",$out);
+    }
+
+    public function getParam($category,$code){
+        if( $this->settings == NULL ) $this->getSettings();
+
+        $category_code = mb_strtoupper($category,"UTF-8");
+        $param_code = mb_strtoupper($code,"UTF-8");
+
+        return ( isset($this->settings[$category_code][$param_code]) )?$this->settings[$category_code][$param_code]:"";
+    }
+
+    public function getSettings(){
+        $model = Category::model()->findAll();
+
+        foreach ($model as $category) {
+            foreach ($category->settings as $param) {
+                $category_code = mb_strtoupper($category->code,"UTF-8");
+                $param_code = mb_strtoupper($param->code,"UTF-8");
+                if( !isset($this->settings[$category_code]) ) $this->settings[$category_code] = array();
+                $this->settings[$category_code][$param_code] = $param->value;
+            }
+        }
     }
 }

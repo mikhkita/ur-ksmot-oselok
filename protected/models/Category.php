@@ -7,6 +7,7 @@
  * @property string $id
  * @property string $name
  * @property integer $sort
+ * @property string $code
  */
 class Category extends CActiveRecord
 {
@@ -26,12 +27,13 @@ class Category extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, sort', 'required'),
+			array('name, sort, code', 'required'),
 			array('sort', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>255),
+			array('code', 'length', 'max'=>20),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, sort', 'safe', 'on'=>'search'),
+			array('id, name, sort, code', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -44,6 +46,7 @@ class Category extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'interpreters' => array(self::HAS_MANY, 'Interpreter', 'category_id'),
+			'settings' => array(self::HAS_MANY, 'Settings', 'category_id'),
 		);
 	}
 
@@ -56,6 +59,7 @@ class Category extends CActiveRecord
 			'id' => 'ID',
 			'name' => 'Название',
 			'sort' => 'Сортировка',
+			'code' => 'Код',
 		);
 	}
 
@@ -80,6 +84,7 @@ class Category extends CActiveRecord
 		$criteria->compare('id',$this->id,true);
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('sort',$this->sort);
+		$criteria->compare('code',$this->code,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

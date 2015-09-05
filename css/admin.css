@@ -446,6 +446,7 @@ h1{
             padding: 5px;
         }
         .b-table td{
+            height: 27px;
             padding: 5px 10px;
         }
         .b-table td.b-empty{
@@ -691,10 +692,19 @@ h1{
                 }
                 .row-half{
                     float: left;
+                    width: 210px;
+                }
+                .b-full-width .row-half{
                     width: 340px;
                 }
-                .b-full-width .row-half:nth-child(1){
+                .row-half:nth-child(1){
                     margin-right: 10px;
+                }
+                .row-half input{
+                    width: 190px;
+                }
+                .row-half select{
+                    width: 210px;
                 }
                 .b-full-width .row-half input{
                     width: 320px;
@@ -1740,6 +1750,9 @@ li.ui-autocomplete-category {
     height: 200px;
     display: block;
     margin: 15px auto;
+}
+.b-settings-textarea{
+    height: 300px !important;
 }
 #link .b-butt {
     display: inline-block;

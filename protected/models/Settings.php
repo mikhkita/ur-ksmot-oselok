@@ -1,36 +1,25 @@
 <?php
 
 /**
- * This is the model class for table "auction".
+ * This is the model class for table "settings".
  *
- * The followings are the available columns in table 'auction':
+ * The followings are the available columns in table 'settings':
  * @property string $id
- * @property string $code
+ * @property string $category_id
  * @property string $name
- * @property string $date
- * @property integer $state
- * @property string $image
- * @property integer $price
- * @property integer $current_price
+ * @property string $value
+ * @property string $code
+ * @property integer $sort
+ * @property string $rule_code
  */
-class Auction extends CActiveRecord
+class Settings extends CActiveRecord
 {
-	public $states = array(
-		0 => "В очереди",
-		1 => "Обрабатывается",
-		2 => "Ставка поставлена",
-		3 => "Торги завершены",
-		4 => "Ставка не состоялась",
-		5 => "Цена больше нашей",
-		6 => "Лот выйгран",
-	);
-
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'auction';
+		return 'settings';
 	}
 
 	/**
@@ -41,14 +30,14 @@ class Auction extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('code, name, date, image, price, current_price', 'required'),
-			array('state, price, current_price', 'numerical', 'integerOnly'=>true),
-			array('code', 'length', 'max'=>100),
-			array('name', 'length', 'max'=>1000),
-			array('image', 'length', 'max'=>255),
+			array('category_id, name, value, code, sort, rule_code', 'required'),
+			array('sort', 'numerical', 'integerOnly'=>true),
+			array('category_id', 'length', 'max'=>10),
+			array('name', 'length', 'max'=>255),
+			array('code, rule_code', 'length', 'max'=>20),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, code, name, date, state, image, price, current_price', 'safe', 'on'=>'search'),
+			array('id, category_id, name, value, code, sort, rule_code', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -60,6 +49,7 @@ class Auction extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'category' => array(self::BELONGS_TO, 'Category', 'category_id'),
 		);
 	}
 
@@ -70,13 +60,12 @@ class Auction extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'code' => 'Номер лота',
-			'name' => 'Заголовок',
-			'date' => 'Дата окончания',
-			'state' => 'Состояние',
-			'image' => 'Изображение',
-			'price' => 'Цена выкупа',
-			'current_price' => 'Текущая цена',
+			'category_id' => 'Раздел',
+			'name' => 'Название',
+			'value' => 'Значение',
+			'code' => 'Код',
+			'sort' => 'Сортировка',
+			'rule_code' => 'Роль',
 		);
 	}
 
@@ -99,13 +88,12 @@ class Auction extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id,true);
-		$criteria->compare('code',$this->code,true);
+		$criteria->compare('category_id',$this->category_id,true);
 		$criteria->compare('name',$this->name,true);
-		$criteria->compare('date',$this->date,true);
-		$criteria->compare('state',$this->state);
-		$criteria->compare('image',$this->image,true);
-		$criteria->compare('price',$this->price);
-		$criteria->compare('current_price',$this->current_price);
+		$criteria->compare('value',$this->value,true);
+		$criteria->compare('code',$this->code,true);
+		$criteria->compare('sort',$this->sort);
+		$criteria->compare('rule_code',$this->rule_code,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -116,7 +104,7 @@ class Auction extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Auction the static model class
+	 * @return Settings the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
