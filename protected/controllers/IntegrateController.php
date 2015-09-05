@@ -56,13 +56,12 @@ class IntegrateController extends Controller
         $photodoska = new Photodoska();
 
         $photodoska->auth();
-
         $photodoska->deleteAdverts("867053");
 
-        foreach ($result as $advert) {
+        // foreach ($result as $advert) {
             // $photodoska->addAdvert(substr($advert["IMAGE"],1),$advert["TITLE"],$advert["TEXT"],"9234577327",$advert["PRICE"]);
             // die();
-        }
+        // }
     }
 
     public function generateList($group){
