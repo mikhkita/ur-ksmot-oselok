@@ -57,9 +57,10 @@ class IntegrateController extends Controller
 
         $photodoska->auth();
 
-        $photodoska->deleteAdverts("867053");
+        // $photodoska->deleteAdverts("867053");
 
         foreach ($result as $advert) {
+            echo $advert["IMAGE"]."<br>";
             // $photodoska->addAdvert(substr($advert["IMAGE"],1),$advert["TITLE"],$advert["TEXT"],"9234577327",$advert["PRICE"]);
             // die();
         }
