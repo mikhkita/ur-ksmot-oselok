@@ -4,10 +4,20 @@ class IntegrateController extends Controller
 {
     private $params = array(
         "TIRE" => array(
-            "TITLE_CODE" => 100
+            "GOOD_TYPE_ID" => 1,
+            "TITLE_CODE" => 100,
+            "HEADER" => "HEADER_T",
+            "FOOTER" => "FOOTER_T",
+            "JOIN" => array(7,8,9),
+            "ADVERT_TITLE_CODE" => 13,
         ),
         "DISC" => array(
-            "TITLE_CODE" => 101
+            "GOOD_TYPE_ID" => 2,
+            "TITLE_CODE" => 101,
+            "HEADER" => "HEADER_D",
+            "FOOTER" => "FOOTER_D",
+            "JOIN" => array(9,5,31),
+            "ADVERT_TITLE_CODE" => 102,
         )
     );
 
@@ -29,26 +39,63 @@ class IntegrateController extends Controller
 
     // Фотодоска ------------------------------------------------------------- Фотодоска
     public function actionPhotodoska(){
-        $model = GoodType::model()->with('goods.fields.variant','goods.fields.attribute')->findByPk(1)->goods;
+        Log::debug("Начало выкладки на фотодоску");
+
+        $photodoska = new Photodoska();
+        $photodoska->auth();
+        $photodoska->deleteAdverts(trim($this->getParam("PHOTODOSKA","MAIN_ADVERT")));
+        // die();
+
+        $this->publicateAdverts($photodoska,$this->getGroups("TIRE"));
+
+        $this->publicateAdverts($photodoska,$this->getGroups("DISC"));
+
+        Log::debug("Конец выкладки на фотодоску");
+    }
+
+    public function publicateAdverts($photodoska,$adverts){
+        // $i = 1;
+        foreach ($adverts as $advert) {
+            sleep(2);
+            $resizeObj = new Resize($advert["IMAGE"]);
+            $resizeObj -> resizeImage(800, 600, 'auto');
+            $resizeObj -> saveImage(Yii::app()->params['tempFolder']."/photodoska.jpg", 100);
+
+            $photodoska->addAdvert(Yii::app()->params['tempFolder']."/photodoska.jpg",$advert["TITLE"],$advert["TEXT"],trim($this->getParam("PHOTODOSKA","PHONE")),$advert["PRICE"]);
+            
+            // if( $i >= 3 ) die();
+            // $i++;
+        }
+    }
+
+    public function getGroups($good_type_code){
+        $curParams = $this->params[$good_type_code];
+
+        $model = GoodType::model()->with('goods.fields.variant','goods.fields.attribute')->findByPk($curParams["GOOD_TYPE_ID"])->goods;
         $result = array();
 
         foreach ($model as $item) {
-            if( $item->fields_assoc[7]->value != 0 && $item->fields_assoc[8]->value != 0 && $item->fields_assoc[9]->value != 0 ){
-                $title = $item->fields_assoc[7]->value."/".$item->fields_assoc[8]->value."/".$item->fields_assoc[9]->value;
+            $tog = true;
+
+            foreach ($curParams["JOIN"] as $field)
+                if( $item->fields_assoc[intval($field)]->value == 0 ) $tog = false;
+
+            if( $tog ){
+                $title = Interpreter::generate($curParams["ADVERT_TITLE_CODE"],$item);
 
                 if( !isset($result[$title]) ) $result[$title] = array();
                 array_push($result[$title], $item);
             }
         }
 
-        $header = $this->replaceToBr($this->getParam("PHOTODOSKA","HEADER_T"));
-        $footer = $this->replaceToBr($this->getParam("PHOTODOSKA","FOOTER_T"));
+        $header = $this->replaceToBr($this->getParam("PHOTODOSKA",$curParams["HEADER"]));
+        $footer = $this->replaceToBr($this->getParam("PHOTODOSKA",$curParams["FOOTER"]));
 
         foreach ($result as $key => $group) {
             $price = $this->findPrice($group);
             if( $price != false ){
                 $result[$key] = array(
-                    "TEXT" => $header."<br>".$this->generateList($group).$footer,
+                    "TEXT" => $header."<br>".$this->generateList($group,$curParams["TITLE_CODE"]).$footer,
                     "TITLE" => $key,
                     "PRICE" => $price,
                     "IMAGE" => substr($this->findImage($group),1)
@@ -58,27 +105,10 @@ class IntegrateController extends Controller
             }
         }
 
-        $photodoska = new Photodoska();
-
-        $photodoska->auth();
-
-        $photodoska->deleteAdverts("867053");
-        // die();
-
-        $i = 1 ;
-        foreach ($result as $advert) {
-            $resizeObj = new Resize($advert["IMAGE"]);
-            $resizeObj -> resizeImage(800, 600, 'auto');
-            $resizeObj -> saveImage(Yii::app()->params['tempFolder']."/photodoska.jpg", 100);
-
-            $photodoska->addAdvert(Yii::app()->params['tempFolder']."/photodoska.jpg",$advert["TITLE"],$advert["TEXT"],"9234577327",$advert["PRICE"]);
-            
-            if( $i >= 3 ) die();
-            $i++;
-        }
+        return $result;
     }
 
-    public function generateList($group){
+    public function generateList($group,$interpreter_id){
         $out = "";
 
         for( $j = 0 ; $j < count($group); $j++ ) {
@@ -93,7 +123,7 @@ class IntegrateController extends Controller
             }
 
             if( $min != 0 )
-                $out .= Interpreter::generate($this->params["TIRE"]["TITLE_CODE"],$group[$min_id])."<br>";
+                $out .= Interpreter::generate($interpreter_id,$group[$min_id])."<br>";
             unset($group[$min_id]);
         }
 

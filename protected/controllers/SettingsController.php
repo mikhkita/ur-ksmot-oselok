@@ -153,6 +153,9 @@ class SettingsController extends Controller
   
 		$model = Settings::model()->findAll($criteria);
 
+		foreach ($model as $key => $item)
+			if(!$this->checkAccess($item,true)) unset($model[$key]);
+
 		$option = array(
 			'data'=>$model,
 			'filter'=>$filter,

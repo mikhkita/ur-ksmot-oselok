@@ -58,7 +58,7 @@ Class Photodoska {
         );
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
         curl_setopt($ch, CURLOPT_URL, "http://photodoska.ru/?a=add_ad");
-        print_r( curl_exec( $ch ) );
+        curl_exec( $ch );
         curl_close($ch);
     }
 

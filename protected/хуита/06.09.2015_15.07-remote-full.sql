@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Сен 06 2015 г., 01:05
+-- Время создания: Сен 06 2015 г., 12:07
 -- Версия сервера: 5.5.36-34.0-632.precise
 -- Версия PHP: 5.3.29
 
@@ -32445,7 +32445,7 @@ CREATE TABLE IF NOT EXISTS `interpreter` (
   `rule_code` varchar(255) NOT NULL,
   `width` int(11) NOT NULL DEFAULT '0',
   `category_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=102 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `interpreter`
@@ -32530,8 +32530,9 @@ INSERT INTO `interpreter` (`id`, `name`, `template`, `good_type_id`, `rule_code`
 (97, 'Заголовок авито шины 19082015', 'S[+ATTR=3+] [+TABLE=6+] [+INTER=13+] [+INTER=12+] [+ATTR=26+] ', 1, 'managerActions', 0, 1),
 (98, 'Заголовок диски авито  19082015', 'S[+ATTR=3+] [+LIST=31+] `(strlen("[+ATTR=6+]")>1)?("[+ATTR=6+]"):(" ")` R[+ATTR=9+] [+ATTR=5+] [+ATTR=31+] [+TABLE=18+] ', 2, 'managerActions', 0, 1),
 (99, 'текст авито шины 19082015', 'Продам [+TABLE=19+] [+ATTR=16+] [+ATTR=17+]. [+LIST=35+] \r\n`("[+ATTR=27+]"=="[+ATTR=38+]")?(""):("Шины находятся в г.[+ATTR=27+]. Цена указана с учетом доставки транспортной компанией до г. [+LIST=10+].")`\r\nБез грыж и порезов. Предоставлю дополнительные фотографии. Продаются без дисков, могу подобрать диски за отдельную плату. Обмен не интересен. Возможна отправка по России, в Казахстан, Беларусь.\r\n\r\n[+INTER=14+]\r\n\r\nБолее трех лет работы и больше 200 положительных отзывов на самом крупном автомобильном портале  России.', 1, 'managerActions', 0, 1),
-(100, 'Заголовок', '#[+ATTR=3+] [+INTER=12+] [+INTER=13+] износ [+ATTR=29+]% [+ATTR=28+]шт. [+ATTR=20+] руб.', 1, 'managerActions', 0, 4),
-(101, 'Заголовок', '[+LIST=14+][+ATTR=3+] [+LIST=31+] `(strlen("[+ATTR=6+]")>1)?("[+ATTR=6+]"):(" ")` R[+ATTR=9+] [+ATTR=5+] [+ATTR=31+]J+[+ATTR=32+] [+ATTR=26+]', 2, 'managerActions', 0, 4);
+(100, 'Заголовок одного товара', '#[+ATTR=3+] [+INTER=12+] [+INTER=13+] износ [+ATTR=29+]% [+ATTR=28+]шт. [+ATTR=20+] руб.', 1, 'managerActions', 0, 4),
+(101, 'Заголовок одного товара', '#[+ATTR=3+] `(strlen("[+ATTR=6+]")>1)?("[+ATTR=6+]"):(" ")` R[+ATTR=9+] [+ATTR=5+] [+ATTR=31+]J+[+ATTR=32+] [+ATTR=26+] [+ATTR=28+]шт. [+ATTR=20+] руб.', 2, 'managerActions', 0, 4),
+(102, 'Заголовок объявления', 'R[+ATTR=9+] [+ATTR=5+] [+ATTR=31+]J', 2, 'managerActions', 0, 4);
 
 -- --------------------------------------------------------
 
@@ -32548,7 +32549,7 @@ CREATE TABLE IF NOT EXISTS `model_names` (
   `admin_menu` tinyint(1) NOT NULL DEFAULT '0',
   `sort` smallint(6) DEFAULT '9999',
   `rule_code` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `model_names`
@@ -32563,7 +32564,8 @@ INSERT INTO `model_names` (`id`, `code`, `name`, `vin_name`, `rod_name`, `admin_
 (6, 'data', 'Справочники', 'Элемент', 'Элемента', 1, 450, 'managerActions'),
 (7, 'user', 'Пользователи', 'Пользователя', 'Пользователя', 1, 600, 'rootActions'),
 (8, 'photo', 'Фотографии', 'Фотографии', 'Фотографий', 1, 460, 'managerActions'),
-(9, 'auction', 'Аукцион', 'Аукцион', 'Аукциона', 1, 550, 'rootActions');
+(9, 'auction', 'Аукцион', 'Аукцион', 'Аукциона', 1, 550, 'rootActions'),
+(10, 'settings', 'Настройки', 'Параметр', 'Параметра', 1, 580, 'managerActions');
 
 -- --------------------------------------------------------
 
@@ -32618,15 +32620,19 @@ CREATE TABLE IF NOT EXISTS `settings` (
   `code` varchar(20) NOT NULL,
   `sort` int(11) NOT NULL,
   `rule_code` varchar(20) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `settings`
 --
 
 INSERT INTO `settings` (`id`, `category_id`, `name`, `value`, `code`, `sort`, `rule_code`) VALUES
-(6, 4, 'Шапка', 'Продам летние шины с японского аукциона. Без пробега по РФ. Без грыж и порезов.\r\nШины в наличии в г. Томске. Продаются без торга. Обмен не интересен. Подойдут на ваш авто или нет - не знаю.', 'HEADER_T', 100, 'managerActions'),
-(7, 4, 'Футер', '+7-923-457-7327\r\nwheels70@mail.ru\r\nМного резины, дисков в наличии в Томске: <a href="http://koleso.tomsk.ru">http://koleso.tomsk.ru</a>', 'FOOTER_T', 200, 'managerActions');
+(6, 4, 'Шапка шин', 'Продам летние шины с японского аукциона. Без пробега по РФ. Без грыж и порезов.\r\nШины в наличии в г. Томске. Продаются без торга. Обмен не интересен. Подойдут на ваш авто или нет - не знаю.', 'HEADER_T', 100, 'managerActions'),
+(7, 4, 'Футер шин', '+7-923-457-7327\r\nwheels70@mail.ru\r\nМного резины, дисков в наличии в Томске: <a href="http://koleso.tomsk.ru">http://koleso.tomsk.ru</a>', 'FOOTER_T', 200, 'managerActions'),
+(8, 4, 'ID платного объявления', '867053', 'MAIN_ADVERT', 500, 'managerActions'),
+(9, 4, 'Шапка дисков', 'Продам летние шины с японского аукциона. Без пробега по РФ. Без грыж и порезов.\r\nШины в наличии в г. Томске. Продаются без торга. Обмен не интересен. Подойдут на ваш авто или нет - не знаю.', 'HEADER_D', 300, 'managerActions'),
+(10, 4, 'Футер дисков', '+7-923-457-7327\r\nwheels70@mail.ru\r\nМного резины, дисков в наличии в Томске: <a href="http://koleso.tomsk.ru">http://koleso.tomsk.ru</a>', 'FOOTER_D', 400, 'managerActions'),
+(11, 4, 'Телефон', '9234577327', 'PHONE', 600, 'managerActions');
 
 -- --------------------------------------------------------
 
@@ -33819,7 +33825,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `usr_email` varchar(128) NOT NULL,
   `usr_rol_id` int(10) unsigned NOT NULL,
   `usr_state` int(11) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `user`
@@ -33827,7 +33833,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 INSERT INTO `user` (`usr_id`, `usr_login`, `usr_password`, `usr_name`, `usr_email`, `usr_rol_id`, `usr_state`) VALUES
 (1, 'root', 'eaaba36a95aedcfd1c21a0d011e12ecd', 'Китаев М.А.', 'beatbox787@gmail.com', 1, 1),
-(7, 'vitalo', 'cd7e8fec089e4ed8aff0032e7ff2f20d', 'Жалнин В. Е.', 'vitaliy.zhalnin@gmail.com', 3, 1);
+(7, 'vitalo', 'cd7e8fec089e4ed8aff0032e7ff2f20d', 'Жалнин В. Е.', 'vitaliy.zhalnin@gmail.com', 3, 1),
+(8, 'admin', 'f096c2795532d1d166decb00c4940e8d', 'asdasd', 'beatbox787@yandex.ru', 3, 1);
 
 -- --------------------------------------------------------
 
@@ -34155,12 +34162,12 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 -- AUTO_INCREMENT для таблицы `interpreter`
 --
 ALTER TABLE `interpreter`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=102;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=103;
 --
 -- AUTO_INCREMENT для таблицы `model_names`
 --
 ALTER TABLE `model_names`
-MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+MODIFY `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT для таблицы `role`
 --
@@ -34170,7 +34177,7 @@ MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 -- AUTO_INCREMENT для таблицы `settings`
 --
 ALTER TABLE `settings`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT для таблицы `table`
 --
@@ -34180,7 +34187,7 @@ MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
 -- AUTO_INCREMENT для таблицы `user`
 --
 ALTER TABLE `user`
-MODIFY `usr_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+MODIFY `usr_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
