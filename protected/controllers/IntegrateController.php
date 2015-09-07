@@ -37,20 +37,26 @@ class IntegrateController extends Controller
         );
     }
 
-    // Фотодоска ------------------------------------------------------------- Фотодоска
-    public function actionPhotodoska(){
+// Фотодоска ------------------------------------------------------------- Фотодоска
+    public function photodoska($good_type_code,$delete = false){
         Log::debug("Начало выкладки на фотодоску");
 
         $photodoska = new Photodoska();
         $photodoska->auth();
-        $photodoska->deleteAdverts(trim($this->getParam("PHOTODOSKA","MAIN_ADVERT")));
-        // die();
+        
+        if( $delete ) $photodoska->deleteAdverts(trim($this->getParam("PHOTODOSKA","MAIN_ADVERT")));
 
-        $this->publicateAdverts($photodoska,$this->getGroups("TIRE"));
-
-        $this->publicateAdverts($photodoska,$this->getGroups("DISC"));
+        $this->publicateAdverts($photodoska,$this->getGroups($good_type_code));
 
         Log::debug("Конец выкладки на фотодоску");
+    }
+
+    public function actionPhotodoskaTire(){
+        $this->photodoska("TIRE","1");
+    }
+
+    public function actionPhotodoskaDisc(){
+        $this->photodoska("DISC");
     }
 
     public function publicateAdverts($photodoska,$adverts){
@@ -63,7 +69,7 @@ class IntegrateController extends Controller
 
             $photodoska->addAdvert(Yii::app()->params['tempFolder']."/photodoska.jpg",$advert["TITLE"],$advert["TEXT"],trim($this->getParam("PHOTODOSKA","PHONE")),$advert["PRICE"]);
             
-            // if( $i >= 3 ) die();
+            // if( $i >= 1 ) return;
             // $i++;
         }
     }
@@ -150,11 +156,26 @@ class IntegrateController extends Controller
         }
         return "";
     }
-    // Фотодоска ------------------------------------------------------------- Фотодоска
+// Фотодоска ------------------------------------------------------------- Фотодоска
 
-    public function actionIndex(){
-        
+// Дром ------------------------------------------------------------------ Дром
+    public function actionDromUp(){
+        Log::debug("Начало автоподнятия дром");
+        $drom = new Drom();
+
+        $users = $this->getParam("DROM","USERS");
+
+        $users = explode("\n", $users);
+
+        foreach ($users as $value) {
+            $user = explode(" ", $value);
+            $drom->setUser($user[0],$user[1]);
+            $drom->upAdverts();
+        }
+
+        Log::debug("Кончало автоподнятия дром");
     }
+// Дром ------------------------------------------------------------------ Дром
 
     public function actionAdminIndex(){
         
