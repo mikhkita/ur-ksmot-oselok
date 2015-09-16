@@ -122,6 +122,7 @@ class ShopController extends Controller
 	   	$criteria->with = array('fields');
 	   	$criteria->addInCondition("t.id",$goods_id);
 	   	$criteria->order = 't.id DESC';
+	   	
 		$dataProvider = new CActiveDataProvider('Good', array(
 		    'criteria'=>$criteria,
 		    'pagination'=>array(
