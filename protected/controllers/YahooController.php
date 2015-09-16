@@ -25,15 +25,11 @@ class YahooController extends Controller
 
 	public function actionAdminIndex($partial = false, $page = NULL)
 	{	
-		$page_size = 24;
 		$criteria=new CDbCriteria();
 	   	$criteria->addCondition("state=0");
 	   	$criteria->order = 'sort DESC';
-	   	$pagination = array('pageSize'=>$page_size,'route' => 'yahoo/adminindex');
-	   	if($page!= NULL) {
-	   		$pagination['currentPage'] = $page;
-	   		unset($_GET['page']);
-	   	}
+	   	$pagination = array('pageSize'=>24,'route' => 'yahoo/adminindex');
+	   	if($page!= NULL) $pagination['currentPage'] = $page;
 		$dataProvider = new CActiveDataProvider('Yahoolot', array(
 		    'criteria'=>$criteria,
 		    'pagination'=>$pagination
@@ -57,6 +53,7 @@ class YahooController extends Controller
 
 	public function actionAdminDelete($page = 0)
 	{	
+		unset($_GET['page']);
 		$arr = json_decode($_POST['json']);
 		$command = Yii::app()->db->createCommand();
 		$temp = "";
@@ -67,6 +64,7 @@ class YahooController extends Controller
 		$command->update('yahoo_lot', array(
 		    'state'=>1,
 		), 'id IN ('.$temp.')');
+
 		$this->actionAdminIndex(true,$page);
 			
 	}
