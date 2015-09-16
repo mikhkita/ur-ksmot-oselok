@@ -25,25 +25,26 @@ class YahooController extends Controller
 
 	public function actionAdminIndex($partial = false, $page = NULL)
 	{	
+		$page_size = 24;
 		$criteria=new CDbCriteria();
 	   	$criteria->addCondition("state=0");
 	   	$criteria->order = 'sort DESC';
+	   	$pagination = array('pageSize'=>$page_size);
+	   	if($page!= NULL) {
+	   		$pagination['currentPage'] = $page;
+	   		$pagination['route'] = 'yahoo/adminindex';
+	   		unset($_GET['page']);
+	   	}
 		$dataProvider = new CActiveDataProvider('Yahoolot', array(
 		    'criteria'=>$criteria,
-		    'pagination'=>array(
-		        'pageSize'=>24
-		    )
+		    'pagination'=>$pagination
 		));
 		$data = $dataProvider->getData();
 		foreach ($data as &$item) {
 			$item->title = preg_replace("/[^A-z0-9]/", " ", $item->title);
 			// ("/[^A-z0-9]/", $item->title);
 		}
-		if($page!= NULL) {
-			$dataProvider->getPagination()->setCurrentPage($page);
-			$dataProvider->getPagination()->route = 'yahoo/adminindex';
-			unset($_GET['page']);
-		}
+		
 		$options = array(
 			'model'=>$dataProvider->getData(),
 			'pages' => $dataProvider->getPagination()
