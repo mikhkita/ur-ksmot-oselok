@@ -682,6 +682,17 @@ h1{
                 .row label{
                     cursor: pointer;
                 }
+                .checkbox-row label{
+                    float: left;
+                }
+                .checkbox-row input[type='checkbox']{
+                    display: inline-block;
+                    float: left;
+                    width: auto !important;
+                    position: relative;
+                    top: 4px;
+                    margin-left: 15px;
+                }
                 .b-full-width .row input,
                 .b-full-width .row select,
                 .b-full-width .row textarea{

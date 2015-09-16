@@ -16,7 +16,7 @@
 					<? if( $this->getUserRole() == "root" ):  ?>
 					<td class="align-left"><?=$item->code?></td>
 					<td class="b-tool-cont">
-						<a href="<?php echo Yii::app()->createUrl('/'.$this->adminMenu["cur"]->code.'/adminupdate',array('id'=>$item->id))?>" class="ajax-form ajax-update b-tool b-tool-update" title="Редактировать <?=$this->adminMenu["cur"]->vin_name?>"></a>
+						<a href="<?php echo Yii::app()->createUrl('/'.$this->adminMenu["cur"]->code.'/admincategoryupdate',array('id'=>$item->id))?>" class="ajax-form ajax-update b-tool b-tool-update" title="Редактировать <?=$this->adminMenu["cur"]->vin_name?>"></a>
 					</td>
 					<? endif; ?>
 				</tr>

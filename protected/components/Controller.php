@@ -11,6 +11,8 @@ class Controller extends CController
 	 */
 	public $layout='admin';
 	public $scripts = array();
+
+    public $courses = array("USD" => 120);
 	/**
 	 * @var array context menu items. This property will be assigned to {@link CMenu::items}.
 	 */
@@ -51,7 +53,11 @@ class Controller extends CController
         $this->adminMenu["items"] = $this->removeExcess($model);
 
         foreach ($this->adminMenu["items"] as $key => $value) {
-            $this->adminMenu["items"][$key] = $this->toLowerCaseModelNames($value);
+            if( $value->admin_menu == 0 ){
+                unset($this->adminMenu["items"][$key]);
+            }else{
+                $this->adminMenu["items"][$key] = $this->toLowerCaseModelNames($value);
+            }
         }
 
         $this->adminMenu["cur"] = $this->toLowerCaseModelNames(ModelNames::model()->find(array("condition" => "code = '".Yii::app()->controller->id."'")));

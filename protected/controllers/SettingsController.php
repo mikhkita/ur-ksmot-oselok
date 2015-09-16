@@ -13,6 +13,10 @@ class SettingsController extends Controller
 	{
 		return array(
 			array('allow',
+				'actions'=>array("adminYahooCategoryCreate","adminYahooCategoryUpdate","adminYahooCategoryDelete"),
+				'roles'=>array('root'),
+			),
+			array('allow',
 				'actions'=>array('adminIndex','adminCreate','adminUpdate','adminDelete','adminList',"adminCategoryCreate","adminCategoryUpdate"),
 				'roles'=>array('manager'),
 			),
@@ -20,6 +24,49 @@ class SettingsController extends Controller
 				'users'=>array('*'),
 			),
 		);
+	}
+
+	public function actionAdminYahooCategoryCreate()
+	{
+		$model=new YahooCategory;
+
+		if(isset($_POST['YahooCategory']))
+		{
+			$model->attributes=$_POST['YahooCategory'];
+			if($model->save()){
+				$this->actionAdminList(7,true);
+				return true;
+			}
+		}
+
+		$this->renderPartial('adminYahooCategoryCreate',array(
+			'model'=>$model,
+		));
+
+	}
+
+	public function actionAdminYahooCategoryUpdate($id)
+	{
+		$model=YahooCategory::model()->findByPk($id);
+
+		if(isset($_POST['YahooCategory']))
+		{
+			$model->attributes=$_POST['YahooCategory'];
+			if($model->save())
+				$this->actionAdminList(7,true);
+		}else{
+			$this->renderPartial('adminYahooCategoryUpdate',array(
+				'model'=>$model,
+			));
+		}
+	}
+
+	public function actionAdminYahooCategoryDelete($id)
+	{
+		$model=YahooCategory::model()->findByPk($id);
+		$model->delete();
+
+		$this->actionAdminList(7,true);
 	}
 
 	public function actionAdminCategoryCreate()
@@ -111,7 +158,7 @@ class SettingsController extends Controller
 			$this->layout='admin';
 		}
   
-		$model = Category::model()->findAll(array("order"=>'name ASC'));
+		$model = Category::model()->findAll(array("order"=>'sort ASC'));
 
 		$option = array(
 			'data'=>$model,

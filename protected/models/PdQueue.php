@@ -1,21 +1,24 @@
 <?php
 
 /**
- * This is the model class for table "category".
+ * This is the model class for table "photodoska".
  *
- * The followings are the available columns in table 'category':
+ * The followings are the available columns in table 'photodoska':
  * @property string $id
- * @property string $name
- * @property integer $sort
+ * @property string $good_type_id
+ * @property string $title
+ * @property string $text
+ * @property string $price
+ * @property string $image
  */
-class Category extends CActiveRecord
+class PdQueue extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'category';
+		return 'photodoska';
 	}
 
 	/**
@@ -26,12 +29,12 @@ class Category extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, sort', 'required'),
-			array('sort', 'numerical', 'integerOnly'=>true),
-			array('name', 'length', 'max'=>255),
+			array('good_type_id, title, text, price, image', 'required'),
+			array('good_type_id, price', 'length', 'max'=>10),
+			array('title, image', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, sort', 'safe', 'on'=>'search'),
+			array('id, good_type_id, title, text, price, image', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -43,8 +46,7 @@ class Category extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'interpreters' => array(self::HAS_MANY, 'Interpreter', 'category_id'),
-			'settings' => array(self::HAS_MANY, 'Settings', 'category_id'),
+			'goodType' => array(self::BELONGS_TO, 'GoodType', 'good_type_id'),
 		);
 	}
 
@@ -55,8 +57,11 @@ class Category extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'name' => 'Название',
-			'sort' => 'Сортировка',
+			'good_type_id' => 'Тип товара',
+			'title' => 'Заголовок',
+			'text' => 'Текст',
+			'price' => 'Цена',
+			'image' => 'Изображение',
 		);
 	}
 
@@ -79,8 +84,11 @@ class Category extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id,true);
-		$criteria->compare('name',$this->name,true);
-		$criteria->compare('sort',$this->sort);
+		$criteria->compare('good_type_id',$this->good_type_id,true);
+		$criteria->compare('title',$this->title,true);
+		$criteria->compare('text',$this->text,true);
+		$criteria->compare('price',$this->price,true);
+		$criteria->compare('image',$this->image,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -91,7 +99,7 @@ class Category extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Category the static model class
+	 * @return Photodoska the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

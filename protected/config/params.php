@@ -9,7 +9,7 @@ return array(
 	'imageFolder'=>'upload/images',
 	'tempFolder'=>'upload/temp',
 	'adminPanel'=>'/admin/',
-	'defaultAdminRedirect'=>'/admin/goodType',
+	'defaultAdminRedirect'=>'/admin/desktop',
 	'excelDir'=>'upload/excel',
 	'defaultRule'=>'managerActions',
 	// the copyright information displayed in the footer section

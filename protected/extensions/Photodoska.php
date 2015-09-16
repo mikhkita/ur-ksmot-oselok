@@ -2,39 +2,36 @@
 
 Class Photodoska {
 
-    private $login = "wheels70";
-    private $password = "411447";
+    public $login = "wheels70";
+    public $password = "411447";
+    public $isAuth = false;
+    private $curl;
     
     function __construct() {
-
+        $this->curl = new Curl();
     }
 
     public function auth(){
-        unlink(dirname(__FILE__).'/cookie.txt');
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'http://photodoska.ru/?a=auth');
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($ch, CURLOPT_COOKIEJAR, dirname(__FILE__).'/cookie.txt');
-        curl_setopt($ch, CURLOPT_COOKIEFILE,  dirname(__FILE__).'/cookie.txt');
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, array(
-            'data53'=>$this->login,
-            'data84'=>$this->password
-        ));
-        curl_exec( $ch );
-        curl_close($ch);
+        $this->curl->removeCookies();
+
+        $params = array(
+            'data53' => $this->login,
+            'data84' => $this->password
+        );
+
+        $this->curl->request("http://photodoska.ru/?a=auth",$params);
+
+        $this->isAuth = true;
     }
 
     public function addAdvert($file,$title,$text,$tel,$price) {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_COOKIEFILE,  dirname(__FILE__).'/cookie.txt');
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-        $cfile = curl_file_create($file);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, array('upload' => $cfile, 'image/jpeg', 'image.jpg'));
-        curl_setopt($ch, CURLOPT_URL, "http://photodoska.ru/?a=upload_photo");
-        $photo = substr(curl_exec($ch),2);
+        $params = array(
+            'upload' => curl_file_create($file), 
+            'image/jpeg', 
+            'image.jpg'
+        );
+
+        $photo = substr($this->curl->request("http://photodoska.ru/?a=upload_photo",$params),2);
 
         $data = array(
             'data[0][name]' => 'city_id',
@@ -56,37 +53,25 @@ Class Photodoska {
             'data[13][name]' => 'comment_permission',
             'data[13][value]' => 0
         );
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($ch, CURLOPT_URL, "http://photodoska.ru/?a=add_ad");
-        curl_exec( $ch );
-        curl_close($ch);
+        $this->curl->request("http://photodoska.ru/?a=add_ad",$data);
     }
 
     public function deleteAdverts($save_id = NULL) {
-        print_r(Yii::app()->basePath);
-        include_once  Yii::app()->basePath.'/extensions/simple_html_dom.php';
-        $html = new simple_html_dom();
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_COOKIEFILE,  dirname(__FILE__).'/cookie.txt');
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($ch, CURLOPT_URL, "http://photodoska.ru/u/".$this->login);
-        curl_setopt($ch, CURLOPT_URL, "http://photodoska.ru/?a=delete_ad");
         $arr = $this->parseAdverts();
         foreach($arr as $element) {
             if($save_id != $element['id']) {
-                curl_setopt($ch, CURLOPT_POSTFIELDS, array("id" => $element['id']) );
-                curl_exec($ch);
+                $this->curl->request("http://photodoska.ru/?a=delete_ad",array("id" => $element['id']));
             }
         }
-        curl_close($ch);
     }
     public function parseAdverts() {
-        include_once  Yii::app()->basePath.'/extensions/simple_html_dom.php';
-        $html = new simple_html_dom();
-        $html =  file_get_html('http://photodoska.ru/u/'.$this->login);
+        include_once Yii::app()->basePath.'/extensions/simple_html_dom.php';
+
+        $this->curl->request('http://photodoska.ru/u/'.$this->login);
+
+        $html = str_get_html($this->curl->request('http://photodoska.ru/u/'.$this->login));
         $arr = array();
-        foreach ($html->find('a.f-ad') as $item) {
+        foreach ($html->find('.title a') as $item) {
             $temp = array();
             $temp['url'] = $item->href;
             $temp['title'] = $item->title;
@@ -94,6 +79,10 @@ Class Photodoska {
             array_push($arr, $temp);
         }
         return $arr;
+    }
+
+    public function isAuth(){
+        return $this->isAuth;
     }
 
 }
