@@ -88,6 +88,36 @@ $(document).ready(function(){
         return false;
     });
 
+    $(document).on("click",".b-delete-selected,.b-nav-delete",function(){
+        progress.setColor("#D26A44");
+        progress.start(3);
+        var ids = [],
+        href = $('.b-delete-selected').attr("href"),
+        obj  = $(this);
+        if(obj.hasClass("b-delete-selected")) {
+            for (var i = 0; i < $(".yahoo-list li.selected").length; i++) {
+                ids.push($("li.selected").eq(i).attr("data-id"));
+            }
+        } else {
+            ids.push(obj.closest("li").attr("data-id"));
+        }
+        $.ajax({
+            method: "POST",
+            url: href,
+            data: 'json='+JSON.stringify(ids),
+            beforeSend: function() {
+                $('.b-delete-selected').hide();
+            },
+            success: function(msg){
+                progress.end(function(){
+                    setResult(msg);
+                });
+            }
+        });
+
+        return false;
+    });
+    
     function blockTr(el){
         el.addClass("b-refresh");
         el.click(function(){

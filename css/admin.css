@@ -543,6 +543,9 @@ h1{
         left: 0px;
         top: 5px;
     }
+        .b-link-back .b-delete-selected{
+            display: none;
+        }
 .fancybox-skin{
     /*background-color: #F5E9BC;*/
     border-radius: 0px;

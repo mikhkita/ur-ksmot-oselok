@@ -1,13 +1,13 @@
 <h1><?=$this->adminMenu["cur"]->name?></h1>
 <div class="b-link-back">
     <a href="#" class="b-select-all">Выделить все</a>
-    <a href="#" class="b-delete-selected">Удалить выбранное</a>
+    <a href="<?php echo Yii::app()->createUrl('/'.$this->adminMenu["cur"]->code.'/admindelete',array('page'=> $pages->getCurrentPage() ))?>" class="b-delete-selected">Удалить выбранное</a>
 </div>
 <? if(count($model)): ?>
 <div class="pagination">
     <ul class="yahoo-list">
     	<? foreach ($model as $item): ?>
-			<li class="">
+			<li class="" data-id="<?=$item->id?>">
                 <div class="image-cont" style="background-image:url('<?=$item->image?>');">
                     <div class="b-nav">
                         <span class="b-nav-delete b-tooltip" title="Не показывать лот"></span>
