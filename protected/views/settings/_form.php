@@ -15,7 +15,7 @@
 	<div class="clearfix">
 		<div class="row row-half">
 			<?php echo $form->labelEx($model,'code'); ?>
-			<?php echo $form->textField($model,'code',array('maxlength'=>255,'required'=>true)); ?>
+			<?php echo $form->textField($model,'code',array('maxlength'=>255)); ?>
 			<?php echo $form->error($model,'code'); ?>
 		</div>
 		<div class="row row-half">
@@ -43,6 +43,9 @@
 	</div>
 	<? if(isset($_GET["category_id"])): ?>
 		<input type="hidden" name="Settings[category_id]" value="<?=$_GET['category_id']?>">
+	<? endif; ?>
+	<? if(isset($_GET["parent_id"])): ?>
+		<input type="hidden" name="Settings[parent_id]" value="<?=$_GET['parent_id']?>">
 	<? endif; ?>
 <?php $this->endWidget(); ?>
 

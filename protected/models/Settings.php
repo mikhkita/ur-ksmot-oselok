@@ -11,6 +11,7 @@
  * @property string $code
  * @property integer $sort
  * @property string $rule_code
+ * @property string $parent_id
  */
 class Settings extends CActiveRecord
 {
@@ -30,14 +31,14 @@ class Settings extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('category_id, name, value, code, sort, rule_code', 'required'),
+			array('name, value, sort, rule_code', 'required'),
 			array('sort', 'numerical', 'integerOnly'=>true),
-			array('category_id', 'length', 'max'=>10),
+			array('category_id, parent_id', 'length', 'max'=>10),
 			array('name', 'length', 'max'=>255),
 			array('code, rule_code', 'length', 'max'=>20),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, category_id, name, value, code, sort, rule_code', 'safe', 'on'=>'search'),
+			array('id, category_id, name, value, code, sort, rule_code, parent_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -66,6 +67,7 @@ class Settings extends CActiveRecord
 			'code' => 'Код',
 			'sort' => 'Сортировка',
 			'rule_code' => 'Роль',
+			'parent_id' => 'Родительский элемент',
 		);
 	}
 
@@ -94,6 +96,7 @@ class Settings extends CActiveRecord
 		$criteria->compare('code',$this->code,true);
 		$criteria->compare('sort',$this->sort);
 		$criteria->compare('rule_code',$this->rule_code,true);
+		$criteria->compare('parent_id',$this->parent_id,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -34,7 +34,7 @@ class SettingsController extends Controller
 		{
 			$model->attributes=$_POST['YahooCategory'];
 			if($model->save()){
-				$this->actionAdminList(7,true);
+				$this->actionAdminList(13,false,true);
 				return true;
 			}
 		}
@@ -53,10 +53,48 @@ class SettingsController extends Controller
 		{
 			$model->attributes=$_POST['YahooCategory'];
 			if($model->save())
-				$this->actionAdminList(7,true);
+				$this->actionAdminList(13,false,true);
 		}else{
 			$this->renderPartial('adminYahooCategoryUpdate',array(
 				'model'=>$model,
+			));
+		}
+	}
+	public function actionAdminYahooCategoryIndex($partial = false)
+	{
+		if( !$partial ){
+			$this->layout='admin';
+		}
+		$filter = new YahooCategory('filter');
+		$criteria = new CDbCriteria();
+
+		if (isset($_GET['YahooCategory']))
+        {
+            $filter->attributes = $_GET['YahooCategory'];
+            foreach ($_GET['YahooCategory'] AS $key => $val)
+            {
+                if ($val != '')
+                {
+                    $criteria->addSearchCondition($key, $val);
+                }
+            }
+        }
+
+        $criteria->order = 'name ASC';
+
+        $model = YahooCategory::model()->findAll($criteria);
+
+		if( !$partial ){
+			$this->render('adminYahooCategoryIndex',array(
+				'data'=>$model,
+				'filter'=>$filter,
+				'labels'=>Interpreter::attributeLabels()
+			));
+		}else{
+			$this->renderPartial('adminYahooCategoryIndex',array(
+				'data'=>$model,
+				'filter'=>$filter,
+				'labels'=>Interpreter::attributeLabels()
 			));
 		}
 	}
@@ -66,7 +104,7 @@ class SettingsController extends Controller
 		$model=YahooCategory::model()->findByPk($id);
 		$model->delete();
 
-		$this->actionAdminList(7,true);
+		$this->actionAdminList(13,false,true);
 	}
 
 	public function actionAdminCategoryCreate()
@@ -112,7 +150,7 @@ class SettingsController extends Controller
 		{
 			$model->attributes=$_POST['Settings'];
 			if($model->save()){
-				$this->actionAdminList($model->category_id,true);
+				$this->actionAdminList($model->parent_id,$model->category_id,true);
 				return true;
 			}
 		}
@@ -133,7 +171,7 @@ class SettingsController extends Controller
 		{
 			$model->attributes=$_POST['Settings'];
 			if($model->save())
-				$this->actionAdminList($model->category_id,true);
+				$this->actionAdminList($model->parent_id,$model->category_id,true);
 		}else{
 			$this->renderPartial('adminUpdate',array(
 				'model'=>$model,
@@ -147,9 +185,8 @@ class SettingsController extends Controller
 
 		$model = $this->loadModel($id);
 		$model->delete();
-		$cat_id = $model->category_id;
 
-		$this->actionAdminList($cat_id,true);
+		$this->actionAdminList($model->parent_id,$model->category_id,true);
 	}
 
 	public function actionAdminIndex($partial = false)
@@ -171,13 +208,17 @@ class SettingsController extends Controller
 		}
 	}
 
-	public function actionAdminList($id,$partial = false)
+	public function actionAdminList($parent_id = false,$id = false,$partial = false)
 	{
 		if( !$partial ){
 			$this->layout='admin';
 		}
 
-		$category = Category::model()->findByPk($id);
+		if( $id ){
+        	$category = Category::model()->findByPk($id);
+        }else if( $parent_id ){
+        	$parent = Settings::model()->find("id=".$parent_id);
+        }
 
 		$filter = new Settings('filter');
 		$criteria = new CDbCriteria();
@@ -196,7 +237,18 @@ class SettingsController extends Controller
 
         $criteria->order = 'sort ASC';
 
-        $criteria->addSearchCondition('category_id', $id);
+        if( $id ){
+        	$criteria->addSearchCondition('category_id', $id);
+        	$backLink = $this->createUrl('/'.$this->adminMenu["cur"]->code.'/adminindex');
+        }else if( $parent_id ){
+        	$criteria->addSearchCondition('parent_id', $parent_id);
+
+        	if( $parent->parent_id == 0 ){
+        		$backLink = $this->createUrl('/'.$this->adminMenu["cur"]->code.'/adminlist',array('id'=>$parent->category_id));
+        	}else{
+        		$backLink = $this->createUrl('/'.$this->adminMenu["cur"]->code.'/adminlist',array('parent_id'=>$parent->parent_id));
+        	}
+        }
   
 		$model = Settings::model()->findAll($criteria);
 
@@ -206,14 +258,26 @@ class SettingsController extends Controller
 		$option = array(
 			'data'=>$model,
 			'filter'=>$filter,
-			'category'=>$category,
+			'backLink'=>$backLink,
 			'labels'=>Settings::attributeLabels()
 		);
-		if( !$partial ){
-			$this->render('adminList',$option);
-		}else{
-			$this->renderPartial('adminList',$option);
-		}
+
+		if( $id ){
+        	$option['category'] = $category;
+        }else if( $parent_id ){
+        	$option['parent'] = $parent;
+        }
+
+        if( $parent_id == 13 ){
+        	$this->actionAdminYahooCategoryIndex($partial);
+        }else{
+        	if( !$partial ){
+				$this->render('adminList',$option);
+			}else{
+				$this->renderPartial('adminList',$option);
+			}
+        }
+
 	}
 
 	public function loadModel($id)
