@@ -5,6 +5,7 @@
  *
  * The followings are the available columns in table 'yahoo_category':
  * @property string $id
+ * @property string $code
  * @property string $name
  * @property integer $max_price
  */
@@ -26,13 +27,13 @@ class YahooCategory extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id, name, max_price', 'required'),
+			array('code, name, max_price', 'required'),
 			array('max_price', 'numerical', 'integerOnly'=>true),
-			array('id', 'length', 'max'=>11),
+			array('code', 'length', 'max'=>11),
 			array('name', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, max_price', 'safe', 'on'=>'search'),
+			array('id, code, name, max_price', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -55,6 +56,7 @@ class YahooCategory extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
+			'code' => 'Код категории',
 			'name' => 'Название',
 			'max_price' => 'Максимальная цена',
 		);
@@ -79,6 +81,7 @@ class YahooCategory extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id,true);
+		$criteria->compare('code',$this->code,true);
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('max_price',$this->max_price);
 

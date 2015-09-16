@@ -35,9 +35,14 @@ class YahooController extends Controller
 		$dataProvider = new CActiveDataProvider('Yahoolot', array(
 		    'criteria'=>$criteria,
 		    'pagination'=>array(
-		        'pageSize'=>20
+		        'pageSize'=>24
 		    )
 		));
+		$data = $dataProvider->getData();
+		foreach ($data as &$item) {
+			$item->title = preg_replace("/[^A-z0-9]/", " ", $item->title);
+			// ("/[^A-z0-9]/", $item->title);
+		}
 		$this->render('adminIndex',array(
 			'model'=>$dataProvider->getData(),
 			'pages' => $dataProvider->getPagination()

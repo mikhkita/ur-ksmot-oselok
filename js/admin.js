@@ -11,6 +11,7 @@ $(document).ready(function(){
     title = title.split(/[\/#?]+/);
     title = title[titleVar];
 
+    $(".yiiPager .page.selected").click(function(){return false;});
 
     $(".modules li[data-name='"+title+"'],.modules li[data-nameAlt='"+title+"']").addClass("active");    
 
@@ -112,6 +113,7 @@ $(document).ready(function(){
             bindFilter();
             bindTooltip();
             bindAutocomplete();
+            bindYahoo();
 
             $(".b-refresh").removeClass("b-refresh").addClass("b-refresh-out");
         },100);
@@ -741,6 +743,50 @@ $(document).ready(function(){
         }
     }
     /* Auction ------------------------------------- Auction */
+
+    /* Yahoo ------------------------------------- Yahoo */
+    var yahooTog = false;
+    function checkDelete(){
+        if( $(".yahoo-list li.selected").length ){
+            $(".b-delete-selected").show();
+        }else{
+            $(".b-delete-selected").hide();
+        }
+        if( $(".yahoo-list li").length == $(".yahoo-list li.selected").length ){
+            $(".b-select-all").text("Снять выделение");
+        }else{
+            $(".b-select-all").text("Выделить все");
+        }
+    }
+    function bindYahoo(){
+        if( $(".yahoo-list").length ){
+            $(".b-delete-selected").hide();
+            $(".b-select-all").click(function(){
+                if( $(".yahoo-list li").length == $(".yahoo-list li.selected").length ){
+                    $(".yahoo-list li").removeClass("selected");
+                }else{
+                    $(".yahoo-list li").addClass("selected");
+                }
+                checkDelete();
+            });
+            $(".yahoo-list li .b-nav span").mousedown(function(){
+                yahooTog = true;
+            });
+            $(".yahoo-list li").mouseup(function(){
+                if( yahooTog ){
+                    yahooTog = false;
+                    return false;
+                }
+                yahooTog = false;
+                $(this).toggleClass("selected");
+                checkDelete();
+            });
+        }
+    }
+    if( $(".yahoo-list").length ){
+        bindYahoo();
+    }
+    /* Yahoo ------------------------------------- Yahoo */
 
     function transition(el,dur){
         el.css({

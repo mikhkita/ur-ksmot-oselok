@@ -60,7 +60,7 @@ class SettingsController extends Controller
 			));
 		}
 	}
-	public function actionAdminYahooCategoryIndex($partial = false)
+	public function actionAdminYahooCategoryIndex($partial = false,$back_link = false)
 	{
 		if( !$partial ){
 			$this->layout='admin';
@@ -88,13 +88,15 @@ class SettingsController extends Controller
 			$this->render('adminYahooCategoryIndex',array(
 				'data'=>$model,
 				'filter'=>$filter,
-				'labels'=>Interpreter::attributeLabels()
+				'back_link'=>$back_link,
+				'labels'=>YahooCategory::attributeLabels()
 			));
 		}else{
 			$this->renderPartial('adminYahooCategoryIndex',array(
 				'data'=>$model,
 				'filter'=>$filter,
-				'labels'=>Interpreter::attributeLabels()
+				'back_link'=>$back_link,
+				'labels'=>YahooCategory::attributeLabels()
 			));
 		}
 	}
@@ -239,14 +241,14 @@ class SettingsController extends Controller
 
         if( $id ){
         	$criteria->addSearchCondition('category_id', $id);
-        	$backLink = $this->createUrl('/'.$this->adminMenu["cur"]->code.'/adminindex');
+        	$back_link = $this->createUrl('/'.$this->adminMenu["cur"]->code.'/adminindex');
         }else if( $parent_id ){
         	$criteria->addSearchCondition('parent_id', $parent_id);
 
         	if( $parent->parent_id == 0 ){
-        		$backLink = $this->createUrl('/'.$this->adminMenu["cur"]->code.'/adminlist',array('id'=>$parent->category_id));
+        		$back_link = $this->createUrl('/'.$this->adminMenu["cur"]->code.'/adminlist',array('id'=>$parent->category_id));
         	}else{
-        		$backLink = $this->createUrl('/'.$this->adminMenu["cur"]->code.'/adminlist',array('parent_id'=>$parent->parent_id));
+        		$back_link = $this->createUrl('/'.$this->adminMenu["cur"]->code.'/adminlist',array('parent_id'=>$parent->parent_id));
         	}
         }
   
@@ -258,7 +260,7 @@ class SettingsController extends Controller
 		$option = array(
 			'data'=>$model,
 			'filter'=>$filter,
-			'backLink'=>$backLink,
+			'back_link'=>$back_link,
 			'labels'=>Settings::attributeLabels()
 		);
 
@@ -269,7 +271,7 @@ class SettingsController extends Controller
         }
 
         if( $parent_id == 13 ){
-        	$this->actionAdminYahooCategoryIndex($partial);
+        	$this->actionAdminYahooCategoryIndex($partial,$back_link);
         }else{
         	if( !$partial ){
 				$this->render('adminList',$option);

@@ -1771,20 +1771,125 @@ li.ui-autocomplete-category {
 }
 
 .yahoo-list {
-
+    margin-top: 20px;
+    margin-bottom: 30px;
 }
-.yahoo-list li{
-    width: 200px;
+    .yahoo-list li{
+        padding: 7px;
+        border: 1px solid rgba(69, 39, 22, 0.34);
+        width: 175px;
+        display: inline-block;
+        margin: 0px 3px 10px;
+        vertical-align: top;
+        text-align: left;
+    }
+    .yahoo-list li:hover{
+        background-color: #D26A44;
+    }
+    .yahoo-list li.selected{
+        background-color: #452617;
+    }
+        .yahoo-list li .image-cont{
+            width: 173px;
+            border: 1px solid rgba(69, 39, 22, 0.34);
+            background-color: rgba(69, 39, 22, 0.34);
+            height: 130px;
+            background-size: contain;
+            background-position: 50%;
+            background-repeat: no-repeat;
+            margin-bottom: 3px;
+            position: relative;
+        }
+            .yahoo-list .b-nav{
+                width: 100%;
+                height: 100%;
+                position: relative;
+            }
+                .yahoo-list .b-nav span{
+                    box-sizing: border-box;
+                    display: block;
+                    position: absolute;
+                    height: 40px;
+                    width: 50%;
+                    bottom: 0px;
+                    background-color: #F5E9BC;
+                    background-position: 50% 50%;
+                    background-repeat: no-repeat;
+                    background-size: 25px;
+                    opacity: 0;
+                    cursor: pointer;
+                    border-top: 1px solid #452716;
+                }
+                .yahoo-list li:hover .b-nav span{
+                    opacity: 0.3;
+                }
+                .yahoo-list li .b-nav:hover span{
+                    opacity: 0.7;
+                }
+                .yahoo-list li .b-nav span:hover{
+                    opacity: 1;
+                }
+                .yahoo-list .b-nav .b-nav-delete{
+                    left: 0px;
+                    border-right: 1px solid #452716;
+                    background-image: url("../images/delete.png");
+                }
+                .yahoo-list .b-nav .b-nav-sniper{
+                    left: 50%;
+                    background-image: url("../images/sight.png");
+                }
+        .yahoo-list li h5,
+        .yahoo-list li h4{
+            margin-top: 0px;
+        }
+        .yahoo-list li:hover,
+        .yahoo-list li.selected{
+            color: rgba(245, 233, 188, 0.75);
+        }
+        .yahoo-list li b{
+            color: #D26A44;
+            font-weight: 700;
+            font-size: 20px;
+        }
+        .yahoo-list li:hover b,
+        .yahoo-list li.selected b{
+            color: #F5E9BC;
+        }
+ul.yiiPager .page a,
+ul.yiiPager .first a,
+ul.yiiPager .last a,
+ul.yiiPager .previous a,
+ul.yiiPager .next a
+{
+    background-color: transparent;
+    border: 1px solid #452716;
+    padding: 10px;
+    display: inline-block;  
+    color: #452716;
+}
+ul.yiiPager .page:hover a,
+ul.yiiPager .first:hover a,
+ul.yiiPager .last:hover a,
+ul.yiiPager .previous:hover a,
+ul.yiiPager .next:hover a{
+    background-color: #D26A44;
+    border: 1px solid #D26A44;
+    color: #F5E9BC;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.5);
+    cursor: pointer;
+}
+ul.yiiPager .selected a{
+    border: 1px solid #452716 !important;
+    cursor: default !important;
+    background-color: #452716 !important;
+    color: #F5E9BC !important;
+}
+ul.yiiPager .first, ul.yiiPager .last{
     display: inline-block;
+}
+.b-link-back .b-select-all{
     margin-right: 20px;
-    margin-bottom: 20px;
-    vertical-align: top;
 }
-.yahoo-list li .image-cont{
-    width: 200px;
-    height: 150px;
-    background-size: contain;
-    background-position: 50%;
-    background-repeat: no-repeat;
 
-}
+
+
