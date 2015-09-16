@@ -1769,3 +1769,22 @@ li.ui-autocomplete-category {
     display: inline-block;
     float: none;
 }
+
+.yahoo-list {
+
+}
+.yahoo-list li{
+    width: 200px;
+    display: inline-block;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    vertical-align: top;
+}
+.yahoo-list li .image-cont{
+    width: 200px;
+    height: 150px;
+    background-size: contain;
+    background-position: 50%;
+    background-repeat: no-repeat;
+
+}
