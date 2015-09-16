@@ -29,10 +29,9 @@ class YahooController extends Controller
 		$criteria=new CDbCriteria();
 	   	$criteria->addCondition("state=0");
 	   	$criteria->order = 'sort DESC';
-	   	$pagination = array('pageSize'=>$page_size);
+	   	$pagination = array('pageSize'=>$page_size,'route' => 'yahoo/adminindex');
 	   	if($page!= NULL) {
 	   		$pagination['currentPage'] = $page;
-	   		$pagination['route'] = 'yahoo/adminindex';
 	   		unset($_GET['page']);
 	   	}
 		$dataProvider = new CActiveDataProvider('Yahoolot', array(
