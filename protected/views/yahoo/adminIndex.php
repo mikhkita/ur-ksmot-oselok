@@ -1,7 +1,6 @@
 <h1><?=$this->adminMenu["cur"]->name?></h1>
 <div class="b-link-back">
     <a href="#" class="b-select-all">Выделить все</a>
-    <a href=""><?=$pages->offset?></a>
     <a href="<?php echo Yii::app()->createUrl('/'.$this->adminMenu["cur"]->code.'/admindelete',array('page'=> $pages->getCurrentPage() ))?>" class="b-delete-selected">Удалить выбранное</a>
 </div>
 <? if(count($model)): ?>
