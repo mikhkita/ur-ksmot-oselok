@@ -30,6 +30,37 @@ class LinkController extends Controller
 	{
 		$this->scripts[] = "link";
 		if(isset($_POST['link'])) {
+			$directory = explode("+",$_POST['link']);
+			$link = $directory[1];
+			$dir_name = $directory[0];
+			include_once  Yii::app()->basePath.'/extensions/simple_html_dom.php';
+			$html = new simple_html_dom();
+			$html = file_get_html($link); 
+			$dir = Yii::app()->params["imageFolder"]."/drom/".$dir_name;
+			if (!is_dir($dir)) mkdir($dir,0777, true);
+			$imgs = array_values(array_diff(scandir($dir), array('..', '.', 'Thumbs.db')));
+			if(!count($imgs)) {
+				foreach ($html->find('.bulletinImages .image img') as $i => $item) { 
+					copy( $item->getAttribute("data-zoom-image"), $dir."/".$dir_name."_".sprintf("%'.02d", $i).".jpg");
+	  			}
+	  			$imgs = array_values(array_diff(scandir($dir), array('..', '.', 'Thumbs.db')));
+	  			if(count($imgs)) {
+	  				echo "1";
+	  			}	else {
+	  				echo "0";
+	  			}
+	  		} else {
+	  			echo "2";
+	  		}
+		} else {
+			$this->render('adminIndex');
+		}
+	}
+
+	public function actionAdminLinkParse()
+	{
+		$this->scripts[] = "link";
+		if(isset($_POST['link'])) {
 			include_once  Yii::app()->basePath.'/simple_html_dom.php';
 			$html = new simple_html_dom();
 			$html = file_get_html($_POST['link']); 

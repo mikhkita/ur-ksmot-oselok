@@ -529,6 +529,7 @@ h1{
     color: #F5E9BC;
     text-shadow: 0 2px 1px rgba(0,0,0,0.5);
     text-decoration: none;
+    border: none;
 }
     .b-butt:hover{
         background-color: #D26A44;
@@ -1771,6 +1772,7 @@ li.ui-autocomplete-category {
 #link .b-butt {
     display: inline-block;
     float: none;
+    cursor: pointer;
 }
 
 .yahoo-list {
