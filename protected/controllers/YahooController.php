@@ -25,6 +25,10 @@ class YahooController extends Controller
 
 	public function actionAdminIndex($partial = false, $page = NULL)
 	{	
+		// $sql = "INSERT IGNORE INTO `".YahooSeller::tableName()."` (`id`,`name`) VALUES (NULL,'first'),(NULL,'second'),(NULL,'third')";
+		// Yii::app()->db->createCommand($sql)->execute();
+		// die();
+
 		$criteria=new CDbCriteria();
 	   	$criteria->addCondition("state=0");
 	   	$criteria->order = 'sort DESC';
@@ -54,16 +58,10 @@ class YahooController extends Controller
 	public function actionAdminDelete($page = 0)
 	{	
 		unset($_GET['page']);
-		$arr = json_decode($_POST['json']);
-		$command = Yii::app()->db->createCommand();
-		$temp = "";
-		foreach ($arr as $value) {
-			$temp.="'".$value."',";
-		}
-		$temp = substr($temp, 0, -1);
-		$command->update('yahoo_lot', array(
+
+		Yii::app()->db->createCommand()->update(YahooLot::tableName(), array(
 		    'state'=>1,
-		), 'id IN ('.$temp.')');
+		), array('in', 'id', json_decode($_POST['json'])));
 
 		$this->actionAdminIndex(true,$page);
 			

@@ -54,6 +54,7 @@ class YahooLot extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'category' => array(self::BELONGS_TO, 'YahooCategory', 'category_id'),
+			'seller' => array(self::BELONGS_TO, 'YahooSeller', 'seller_id'),
 		);
 	}
 

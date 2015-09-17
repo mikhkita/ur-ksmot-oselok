@@ -246,53 +246,62 @@ class IntegrateController extends Controller
         $yahoo = new Yahoo($this->courses);
 
         while( $page = $yahoo->getNextPage("2084200190",32) ){
-            $this->updateLots($page["items"]);
+            $sellers = array();
+
+            foreach ($page["items"] as $key => $item) {
+                if( !in_array($item->Seller->Id, $sellers) ) array_push($sellers, $item->Seller->Id);
+            }
+            $this->updateSellers($sellers);
+
+            $this->getSellersID($sellers);
 
             print_r($page["result"]);
 
+            // $this->updateLots($page["items"]);
+            die();
             Log::debug("2084200190"." Страница: ".$yahoo->getLastPage());
         }
         
         Log::debug("2084200190"." Парсинг завершен. Количество полученных страниц: ".$yahoo->getLastPage());
     }
 
+    public function getSellersID($sellers){
+        // $model = YahooSeller::model()->
+
+        $model = Yii::app()->db->createCommand()->select("id, name")->from(YahooSeller::tableName())->where(array('in', 'name', $sellers))->queryAll();
+
+        foreach ($model as $seller) {
+            echo $seller["name"]." ".$seller["id"]."<br>";
+        }
+        // print_r($sellers);
+        // print_r($model);
+    }
+
+    public function updateSellers($sellers){
+        $sql = "INSERT IGNORE INTO `".YahooSeller::tableName()."` (`id`,`name`) VALUES ";
+
+        $values = array();
+        foreach ($sellers as $seller) {
+            array_push($values, "(NULL,'".$seller."')");
+        }
+
+        $sql .= implode(",", $values);
+        Yii::app()->db->createCommand($sql)->execute();
+    }
+
     public function updateLots($items){
+
         $tableName = YahooLot::tableName();
-
-        $tmpName = "tmp_".md5(rand().time());
-
-        Yii::app()->db->createCommand()->createTable($tmpName, array(
-            'sort' => 'int NULL',
-            'id' => 'varchar(255) NOT NULL',
-            'title' => 'varchar(255) NOT NULL',
-            'update_time' => 'datetime NOT NULL',
-            'image' => 'varchar(255) NOT NULL',
-            'cur_price' => 'int NOT NULL',
-            'bid_price' => 'int NOT NULL',
-            'bids' => 'int NOT NULL',
-            'end_time' => 'datetime NOT NULL',
-            'category_id' => 'int NOT NULL',
-            'seller_id' => 'int NOT NULL',
-            'state' => 'tinyint NOT NULL',
-            0 => 'PRIMARY KEY (`id`)'
-        ), 'ENGINE=InnoDB');
-
-        $sql = "INSERT INTO `$tmpName` (`sort`,`id`,`title`,`update_time`,`image`,`cur_price`,`bid_price`,`bids`,`end_time`,`category_id`,`seller_id`,`state`) VALUES ";
 
         $values = array();
         foreach ($items as $item) {
             $bidorbuy = (isset($item->BidOrBuy))?intval($item->BidOrBuy):0;
-            $values[] = "(NULL,'".$item->AuctionID."','".$item->Title."','".date("Y-m-d H:i:s", time())."','".$item->Image."','".intval($item->CurrentPrice)."','".$bidorbuy."','".$item->Bids."','".$this->convertTime($item->EndTime)."','1','1','0')";
+            array_push($values, array(NULL, $item->AuctionID, $item->Title, date("Y-m-d H:i:s", time()), $item->Image, intval($item->CurrentPrice), $bidorbuy, $item->Bids, $this->convertTime($item->EndTime), 1, 1, 0));
         }
 
-        $sql .= implode(",", $values);
+        $update = array("update_time","cur_price","bid_price","bids","end_time");
 
-        if( Yii::app()->db->createCommand($sql)->execute() ){
-            $sql = "INSERT INTO `$tableName` SELECT * FROM `$tmpName` ON DUPLICATE KEY UPDATE $tableName.update_time = $tmpName.update_time, $tableName.cur_price = $tmpName.cur_price, $tableName.bid_price = $tmpName.bid_price, $tableName.bids = $tmpName.bids, $tableName.end_time = $tmpName.end_time ";
-            Yii::app()->db->createCommand($sql)->execute();
-            
-            Yii::app()->db->createCommand()->dropTable($tmpName);
-        }
+        $this->updateRows(YahooLot::tableName(),$values,$update);
     }
 
     public function convertTime($time){

@@ -109,8 +109,10 @@ $(document).ready(function(){
                 $('.b-delete-selected').hide();
             },
             success: function(msg){
+                $(".qtip").remove();
                 progress.end(function(){
                     setResult(msg);
+                    $(".qtip").remove();
                 });
             }
         });

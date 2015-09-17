@@ -331,4 +331,51 @@ class Controller extends CController
             }
         }
     }
+
+    public function updateRows($table_name,$values = array(),$update){
+        $result = true;
+        if( count($values) ){
+            $query = Yii::app()->db->createCommand("SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '".$table_name."'")->query();
+
+            $structure = array();
+            $primary_keys = array();
+            $columns = array();
+            $vals = array();
+            while($next = $query->read()){
+                array_push($columns, "`".$next["COLUMN_NAME"]."`");
+                if( $next["COLUMN_KEY"] == "PRI" ) array_push($primary_keys, "`".$next["COLUMN_NAME"]."`");
+                $structure[$next["COLUMN_NAME"]] = $next["COLUMN_TYPE"]." ".(($next["IS_NULLABLE"] == "NO" && $next["EXTRA"] != "auto_increment")?"NOT ":"")."NULL";
+            }
+
+            $structure[0] = "PRIMARY KEY (".implode(",", $primary_keys).")";
+
+            $tmpName = "tmp_".md5(rand().time());
+
+            Yii::app()->db->createCommand()->createTable($tmpName, $structure, 'ENGINE=InnoDB');
+
+            $sql = "INSERT INTO `$tmpName` (".implode(",", $columns).") VALUES ";
+
+            foreach ($values as $arr) {
+                $strArr = array();
+                foreach ($arr as $item) {
+                    array_push($strArr, ( $item === NULL )?"NULL":("'".$item."'"));
+                }
+                array_push($vals, "(".implode(",", $strArr).")");
+            }
+
+            $sql .= implode(",", $vals);
+
+            foreach ($update as &$item) {
+                $item = " ".$table_name.".".$item." = ".$tmpName.".".$item;
+            }
+
+            if( Yii::app()->db->createCommand($sql)->execute() ){
+                $sql = "INSERT INTO `$table_name` SELECT * FROM `$tmpName` ON DUPLICATE KEY UPDATE".implode(",", $update);
+                $result = Yii::app()->db->createCommand($sql)->execute();
+                
+                Yii::app()->db->createCommand()->dropTable($tmpName);
+            }else $result = false;
+        }
+        return $result;
+    }
 }
