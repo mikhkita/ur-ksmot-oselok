@@ -31,10 +31,11 @@ $(document).ready(function(){
         $("#link").hide();
     }
     function sendNext(){
-        if(arr[ready] && arr[ready].indexOf("https")+1) {
+
+        if(arr[ready] && arr[ready].indexOf("http")+1) {
             $.ajax({
                 type: 'POST',
-                url: "/admin/link",
+                url: "/admin/link/",
                 data: {link: arr[ready]},
                 success: function(msg){
                     if(msg=="1") {
