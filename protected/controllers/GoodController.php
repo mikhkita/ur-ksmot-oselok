@@ -45,15 +45,22 @@ class GoodController extends Controller
 
 	}
 
-	public function actionAdminUpdate($id)
+	public function actionAdminUpdate($id,$goodTypeId)
 	{
 		$model=$this->loadModel($id);
-		// print_r($model->fields[1]->value);
-		if(isset($_POST['Good']))
+		if(isset($_POST['Good_attr']))
 		{
-			$model->attributes=$_POST['Good'];
-			if($model->save())
-				$this->actionAdminIndex(true);
+			foreach ($_POST['Good_attr'] as $key => $item) {
+				$attr = GoodAttribute::model()->findByPk($key);
+				if(!is_array($item) ) {
+					$attr[$attr->attribute->type->code."_value"] = $item;
+					$attr->save();
+				} else if(isset($item['single']) ){
+					$attr["variant_id"] = $item['single'];
+					$attr->save();
+				}
+			}
+			$this->actionAdminIndex(true,$goodTypeId);
 		}else{
 			$this->renderPartial('adminUpdate',array(
 				'model'=>$model,
