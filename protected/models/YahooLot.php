@@ -72,7 +72,7 @@ class YahooLot extends CActiveRecord
 			'cur_price' => 'Текущая цена',
 			'bid_price' => 'Блиц-цена',
 			'bids' => 'Количество ставок',
-			'end_time' => 'Время окончания',
+			'end_time' => 'Осталось часов',
 			'category_id' => 'Категория',
 			'seller_id' => 'Продавец',
 			'state' => 'Состояние',
@@ -113,6 +113,15 @@ class YahooLot extends CActiveRecord
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+
+	public function filter(){
+		return array(
+			"category_id" => array("TYPE" => "CHECKBOX", "VIEW" => "CHECKBOX", "FROM" => YahooCategory::tableName(), "FIELDS" => array("id","name") ),
+			"cur_price" => array("TYPE"=>"FROMTO", "VIEW" => "FROMTO"),
+			"bids" => array("TYPE"=>"FROMTO", "VIEW" => "FROMTO"),
+			"end_time" => array("TYPE"=>"CUSTOM_FROMTO", "VIEW" => "FROMTO"),
+		);
 	}
 
 	/**

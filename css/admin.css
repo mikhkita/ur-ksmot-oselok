@@ -597,7 +597,10 @@ h1{
             display: block;
             margin-bottom: 5px;
         }
-        .fancybox-skin input,
+        .fancybox-skin input[type="text"],
+        .fancybox-skin input[type="number"],
+        .fancybox-skin input[type="submit"],
+        .fancybox-skin input[type="button"],
         .fancybox-skin select{
             border-radius: 5px;
             background-color: #FFF5D1;
@@ -1778,13 +1781,14 @@ li.ui-autocomplete-category {
 .yahoo-list {
     margin-top: 20px;
     margin-bottom: 30px;
+    font-size: 0px;
 }
     .yahoo-list li{
         padding: 7px;
         border: 1px solid rgba(69, 39, 22, 0.34);
-        width: 175px;
+        width: 146px;
         display: inline-block;
-        margin: 0px 3px 10px;
+        margin: 0px 0px -1px -1px;
         vertical-align: top;
         text-align: left;
     }
@@ -1795,66 +1799,86 @@ li.ui-autocomplete-category {
         background-color: #452617;
     }
         .yahoo-list li .image-cont{
-            width: 173px;
+            width: 144px;
             border: 1px solid rgba(69, 39, 22, 0.34);
             background-color: rgba(69, 39, 22, 0.34);
-            height: 130px;
+            height: 108px;
             background-size: contain;
             background-position: 50%;
             background-repeat: no-repeat;
             margin-bottom: 3px;
             position: relative;
         }
-            .yahoo-list .b-nav{
+            .yahoo-list li .image-cont>a{
+                display: block;
+                position: absolute;
+                left: 0px;
+                top: 0px;
                 width: 100%;
                 height: 100%;
-                position: relative;
             }
-                .yahoo-list .b-nav span{
+            .yahoo-list .b-nav{
+                width: 100%;
+                position: absolute;
+                bottom: 0px;
+                left: 0px;
+            }
+                .yahoo-list .b-nav span,
+                .yahoo-list .b-nav a{
                     box-sizing: border-box;
                     display: block;
-                    position: absolute;
-                    height: 40px;
+                    height: 30px;
                     width: 50%;
-                    bottom: 0px;
+                    float: left;
                     background-color: #F5E9BC;
                     background-position: 50% 50%;
                     background-repeat: no-repeat;
-                    background-size: 25px;
-                    opacity: 0;
+                    background-size: 20px;
+                    opacity: 0; 
                     cursor: pointer;
                     border-top: 1px solid #452716;
                 }
-                .yahoo-list li:hover .b-nav span{
+                .yahoo-list li:hover .b-nav span,
+                .yahoo-list li:hover .b-nav a{
                     opacity: 0.3;
                 }
-                .yahoo-list li .b-nav:hover span{
+                .yahoo-list li .b-nav:hover span,
+                .yahoo-list li .b-nav:hover a{
                     opacity: 0.7;
                 }
-                .yahoo-list li .b-nav span:hover{
+                .yahoo-list li .b-nav span:hover,
+                .yahoo-list li .b-nav a:hover{
                     opacity: 1;
                 }
                 .yahoo-list .b-nav .b-nav-delete{
-                    left: 0px;
                     border-right: 1px solid #452716;
                     background-image: url("../images/delete.png");
                 }
                 .yahoo-list .b-nav .b-nav-sniper{
-                    left: 50%;
                     background-image: url("../images/sight.png");
                 }
         .yahoo-list li h5,
         .yahoo-list li h4{
             margin-top: 0px;
+            font-size: 14px;
+        }
+        .yahoo-list li h5.red,
+        .yahoo-list li h4.red{
+            color: #E70000;
+        }
+        .yahoo-list li:hover h5.red,
+        .yahoo-list li:hover h4.red{
+            color: #F5E9BC;
         }
         .yahoo-list li:hover,
         .yahoo-list li.selected{
             color: rgba(245, 233, 188, 0.75);
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.11);
         }
         .yahoo-list li b{
             color: #D26A44;
             font-weight: 700;
-            font-size: 20px;
+            font-size: 18px;
         }
         .yahoo-list li:hover b,
         .yahoo-list li.selected b{
@@ -1895,6 +1919,84 @@ ul.yiiPager .first, ul.yiiPager .last{
 .b-link-back .b-select-all{
     margin-right: 20px;
 }
+.b-popup-filter{
+    width: 400px;
+    padding: 30px;
+    background-color: #F5E9BC;
+    z-index: 100;
+}
+    .b-popup-filter .b-filter-block{
+        text-align: left;
+        margin-top: 10px;
+    }
+        .b-popup-filter .b-filter-block h3{
+            font-size: 16px;
+            margin-bottom: 5px; 
+        }
+        .b-popup-filter .b-filter-block label{
+            display: inline-block;
+        }
+        .b-popup-filter .b-filter-block input[type="checkbox"] + label{
+            margin-right: 20px;
+        }
+        .b-popup-filter .b-filter-block input[type="number"]{
+            width: 172px;
+            display: inline-block;
+        }
+        .b-popup-filter .buttons input{
+            width: 120px !important;
+            margin: 0px 3px 0px 3px !important;
+        }
+ul.b-filter-list{
+    margin-top: 20px;
+    /*margin-bottom: -10px;*/
+}
+    ul.b-filter-list li{
+        float: left;
+        list-style: none;
+        margin-right: 10px;
+        margin-bottom: 10px;
+    }
+        ul.b-filter-list li span{
+            display: inline-block;
+            border-radius: 50px;
+            border: 1px solid #452716;
+            padding: 5px 15px 5px 15px;
+            text-decoration: none;
+        }
+        ul.b-filter-list li:hover{
+           /* background-color: #D26A44;
+            color: #F5E9BC;
+            text-shadow: 1px 1px 0px rgba(0,0,0,0.3);*/
+        }
+        .b-clear-filter{
+            color: #452716;
+            display: inline-block;
+            margin-top: 5px;
+            text-decoration: underline;
+        }
+.b-sort-cont{
+    margin-top: 22px;
+    margin-right: 20px;
+}
+    .b-sort-cont label{
+        margin-right: 10px;
+        margin-left: 15px;
+    }
+    .b-sort-cont select{
 
+    }
 
-
+@media screen and (max-width: 1500px){
+    .b-hide-title{
+        opacity: 0;
+    }
+}
+@media screen and (max-width: 1200px){
+    .b-sort-cont label{
+        display: none;
+    }  
+    .b-link-back .b-select-all{
+        margin-right: 10px;
+    }
+}

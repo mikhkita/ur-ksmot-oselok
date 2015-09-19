@@ -33,9 +33,50 @@ $(document).ready(function(){
     $(window).resize(whenResize);
     whenResize();
 
-    $(".fancy-img").fancybox({
-        padding : 0
-    });
+    function bindFancy(){
+        $(".fancy-img").fancybox({
+            padding : 0
+        });
+
+        $(".fancy").each(function(){
+            var $popup = $($(this).attr("data-block")),
+                $this = $(this);
+            $this.fancybox({
+                padding : 0,
+                content : $popup,
+                helpers: {
+                    overlay: {
+                        locked: true 
+                    }
+                },
+                beforeShow: function(){
+                    $popup.find(".custom-field").remove();
+                    if( $this.attr("data-value") ){
+                        var name = getNextField($popup.find("form"));
+                        $popup.find("form").append("<input type='hidden' class='custom-field' name='"+name+"' value='"+$this.attr("data-value")+"'/><input type='hidden' class='custom-field' name='"+name+"-name' value='"+$this.attr("data-name")+"'/>");
+                    }
+                    if( $this.attr("data-beforeShow") && customHandlers[$this.attr("data-beforeShow")] ){
+                        customHandlers[$this.attr("data-beforeShow")]($this);
+                    }
+                },
+                afterShow: function(){
+                    if( $this.attr("data-afterShow") && customHandlers[$this.attr("data-afterShow")] ){
+                        customHandlers[$this.attr("data-afterShow")]($this);
+                    }
+                },
+                beforeClose: function(){
+                    if( $this.attr("data-beforeClose") && customHandlers[$this.attr("data-beforeClose")] ){
+                        customHandlers[$this.attr("data-beforeClose")]($this);
+                    }
+                },
+                afterClose: function(){
+                    if( $this.attr("data-afterClose") && customHandlers[$this.attr("data-afterClose")] ){
+                        customHandlers[$this.attr("data-afterClose")]($this);
+                    }
+                }
+            });
+        });
+    }
 
     $(".ajax-update,.ajax-create").fancybox({
         type: "ajax",
@@ -92,7 +133,6 @@ $(document).ready(function(){
         progress.setColor("#D26A44");
         progress.start(3);
         var ids = [],
-        href = $('.b-delete-selected').attr("href"),
         obj  = $(this);
         if(obj.hasClass("b-delete-selected")) {
             for (var i = 0; i < $(".yahoo-list li.selected").length; i++) {
@@ -101,10 +141,11 @@ $(document).ready(function(){
         } else {
             ids.push(obj.closest("li").attr("data-id"));
         }
+        $("#b-filter-form").append("<input type='hidden' name='delete' value='"+JSON.stringify(ids)+"'>");
         $.ajax({
             method: "POST",
-            url: href,
-            data: 'json='+JSON.stringify(ids),
+            url: document.location.href.replace("#","")+( (document.location.href.indexOf('?') == -1)?"?":"&" )+"partial=1",// Сделать ? или &
+            data: $("#b-filter-form").serialize(),
             beforeSend: function() {
                 $('.b-delete-selected').hide();
             },
@@ -146,6 +187,7 @@ $(document).ready(function(){
             bindTooltip();
             bindAutocomplete();
             bindYahoo();
+            bindFancy();
 
             $(".b-refresh").removeClass("b-refresh").addClass("b-refresh-out");
         },100);
@@ -801,7 +843,7 @@ $(document).ready(function(){
                 }
                 checkDelete();
             });
-            $(".yahoo-list li .b-nav span").mousedown(function(){
+            $(".yahoo-list li span, .yahoo-list li a").mousedown(function(){
                 yahooTog = true;
             });
             $(".yahoo-list li").mouseup(function(){
@@ -820,12 +862,35 @@ $(document).ready(function(){
     }
     /* Yahoo ------------------------------------- Yahoo */
 
+    /* Filter Pagination ------------------------- Filter Pagination */
+    if( $(".b-filter-pagination").length ){
+        $("body").on("click",".b-filter-pagination .yiiPager a",function(){
+            $("#b-filter-form").attr("action",$(this).attr("href")).submit();
+            return false;
+        });
+        $("body").on("click",".b-clear-filter",function(){
+            $("#b-filter-form input[class!='hidden'], #b-filter-form select[class!='hidden']").remove();
+            $("#b-filter-form").submit();
+            return false;
+        });
+        $("body").on("change","#b-sort-1",function(){
+            $("#b-sort-2").val($(this).val());
+            $("#b-filter-form").submit();
+        });
+        $("body").on("change","#b-order-1",function(){
+            $("#b-order-2").val($(this).val());
+            $("#b-filter-form").submit();
+        });
+    }
+    /* Filter Pagination ------------------------- Filter Pagination */
+
     function transition(el,dur){
         el.css({
             "-webkit-transition":  "all "+dur+"s ease-in-out", "-moz-transition":  "all "+dur+"s ease-in-out", "-o-transition":  "all "+dur+"s ease-in-out", "transition":  "all "+dur+"s ease-in-out"
         });
     }
 
+    bindFancy();
     bindFilter();
     bindAutocomplete();
     bindTooltip();
