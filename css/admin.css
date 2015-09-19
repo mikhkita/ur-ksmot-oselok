@@ -1777,7 +1777,6 @@ li.ui-autocomplete-category {
 
 .yahoo-list {
     margin-top: 20px;
-    margin-bottom: 30px;
 }
     .yahoo-list li{
         padding: 7px;
@@ -1860,6 +1859,11 @@ li.ui-autocomplete-category {
         .yahoo-list li.selected b{
             color: #F5E9BC;
         }
+ul.yiiPager {
+    margin-top: 30px;
+    display: inline-block;
+}
+
 ul.yiiPager .page a,
 ul.yiiPager .first a,
 ul.yiiPager .last a,

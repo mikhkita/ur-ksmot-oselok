@@ -119,7 +119,7 @@ class ShopController extends Controller
 
 		
 		$criteria=new CDbCriteria();
-	   	$criteria->with = array('fields');
+	   	// $criteria->with = array('fields');
 	   	$criteria->addInCondition("t.id",$goods_id);
 	   	$criteria->order = 't.id DESC';
 	   	

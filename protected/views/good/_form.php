@@ -6,31 +6,18 @@
 )); ?>
 
 	<?php echo $form->errorSummary($model); ?>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'name'); ?>
-		<?php echo $form->textField($model,'name',array('maxlength'=>255,'required'=>true)); ?>
-		<?php echo $form->error($model,'name'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'attribute_type_id'); ?>
-		<?php echo $form->DropDownList($model,'attribute_type_id',CHtml::listData(AttributeType::model()->findAll(array('order'=>'id ASC')), 'id', 'name')); ?>
-		<?php echo $form->error($model,'attribute_type_id'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->CheckBox($model,'multi',array("class"=>"b-checkbox")); ?>
-		<?php echo $form->labelEx($model,'multi'); ?>
-		<?php echo $form->error($model,'multi'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->CheckBox($model,'list',array("class"=>"b-checkbox")); ?>
-		<?php echo $form->labelEx($model,'list'); ?>
-		<?php echo $form->error($model,'list'); ?>
-	</div>
-
+	<? foreach ($model->fields as $key => $item): ?>
+		<div class="row">
+			<label for="a-<?=$item->attribute_id?>"><?=$item->attribute->name?></label>
+			<? if($item->attribute->list): ?>
+				<?php echo Chtml::dropDownList("a-".$item->attribute_id, $item->variant->id, CHtml::listData(AttributeVariant::model()->findAll(array("condition" => "attribute_id=".$item->attribute_id,"order" => "sort ASC")), 'id', $item->attribute->type->code.'_value')); ?>
+			<? else:?>
+				<?php echo Chtml::textField("a-".$item->attribute_id,$item->value,array('maxlength'=>255)); ?>
+			<?endif;?>
+		</div>
+		
+	<? endforeach; ?>
+	
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Добавить' : 'Сохранить'); ?>
 		<input type="button" onclick="$.fancybox.close(); return false;" value="Отменить">
