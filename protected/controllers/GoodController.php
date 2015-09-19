@@ -48,7 +48,7 @@ class GoodController extends Controller
 	public function actionAdminUpdate($id)
 	{
 		$model=$this->loadModel($id);
-
+		// print_r($model->fields[1]->value);
 		if(isset($_POST['Good']))
 		{
 			$model->attributes=$_POST['Good'];
@@ -90,37 +90,44 @@ class GoodController extends Controller
 		}
 
 		if( $goodTypeId ){
-			$GoodType = GoodType::model()->with('goods.fields.variant','goods.fields.attribute')->findByPk($goodTypeId);
+
+			$criteria = new CDbCriteria();
+			$criteria->addCondition("good_type_id=".$goodTypeId);
+			$dataProvider = new CActiveDataProvider('Good', array(
+			    'criteria'=>$criteria,
+			    'pagination'=>array(
+			        'pageSize'=>25
+			    )
+			));
+			$Goods = $dataProvider->getData();
+			// $GoodType = GoodType::model()->with('goods.fields.variant','goods.fields.attribute')->findByPk($goodTypeId);
 		}
 
-		$data = array();
+		// $data = array();
 
-		foreach ($GoodType->goods as $good) {
-			$item = array();
+		// foreach ($GoodType as $good) {
+		// 	$item = array();
+		// 	foreach ($good->fields as $field) {
+		// 		if( isset($field->attribute) ){
+		// 			$attrId = $field->attribute->id;
+		// 			if( !isset($item[$attrId]) )
+		// 				$item[$attrId] = array();
+		// 			$item[$attrId][] = $field;
+		// 		}
+		// 	}
+		// 	$data[$good->id] = $item;
+		// }
 
-			foreach ($good->fields as $field) {
-				if( isset($field->attribute) ){
-					$attrId = $field->attribute->id;
-					if( !isset($item[$attrId]) )
-						$item[$attrId] = array();
-					$item[$attrId][] = $field;
-				}
-			}
-			$data[] = $item;
-		}
-
+		$options = array(
+			'data'=>$Goods,
+			'fields' => $Goods[0]->fields,
+			'name'=>$Goods[0]->type->name,
+			'pages' => $dataProvider->getPagination()
+		);
 		if( !$partial ){
-			$this->render('adminIndex',array(
-				'data'=>$data,
-				'fields' => $GoodType->fields,
-				'name'=>$GoodType->name
-			));
+			$this->render('adminIndex',$options);
 		}else{
-			$this->renderPartial('adminIndex',array(
-				'data'=>$data,
-				'fields' => $GoodType->fields,
-				'name'=>$GoodType->name
-			));
+			$this->renderPartial('adminIndex',$options);
 		}
 	}
 
