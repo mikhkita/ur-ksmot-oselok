@@ -1,4 +1,4 @@
-<div class="form">
+ <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'faculties-form',
@@ -20,9 +20,13 @@
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Добавить' : 'Сохранить'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Добавить' : 'Добавить'); ?>
 		<input type="button" onclick="$.fancybox.close(); return false;" value="Отменить">
 	</div>
+
+	<? if(isset($_GET["id"])): ?>
+		<input type="hidden" name="id" value="<?=$_GET['id']?>">
+	<? endif; ?>
 
 <?php $this->endWidget(); ?>
 

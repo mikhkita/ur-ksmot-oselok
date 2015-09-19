@@ -243,38 +243,63 @@ class IntegrateController extends Controller
 
 // Yahoo ----------------------------------------------------------------- Yahoo
     public function actionYahoo(){
+        $category = $this->getNextCategory();
+        
+        $this->parseCategory($category);
+    }
+
+    public function getNextCategory(){
+        $cur_cat_id = intval($this->getParam("YAHOO","CURRENT_CATEGORY"));
+
+        $model = YahooCategory::model()->findAll(array("order"=>"id ASC"));
+
+        $first = NULL;
+        $next = false;
+        foreach ($model as $item) {
+            if( $first === NULL ) $first = $item;
+            if( $next ){
+                $this->setParam("YAHOO","CURRENT_CATEGORY",$item->id);
+                return $item;
+            }
+            if( intval($item->id) == $cur_cat_id ) $next = true;
+        }
+
+        $this->setParam("YAHOO","CURRENT_CATEGORY",$first->id);
+        return $first;
+    }
+
+    public function parseCategory($category){
         $yahoo = new Yahoo($this->courses);
 
-        while( $page = $yahoo->getNextPage("2084200190",32) ){
+        while( $page = $yahoo->getNextPage($category->code,$category->max_price) ){
             $sellers = array();
 
-            foreach ($page["items"] as $key => $item) {
+            foreach ($page["items"] as $key => $item)
                 if( !in_array($item->Seller->Id, $sellers) ) array_push($sellers, $item->Seller->Id);
-            }
+
             $this->updateSellers($sellers);
 
-            $this->getSellersID($sellers);
+            $sellers_id = $this->getSellersID($sellers);
 
-            print_r($page["result"]);
+            foreach ($page["items"] as &$item)
+                $item->Seller->Id = $sellers_id[$item->Seller->Id];
 
-            // $this->updateLots($page["items"]);
-            die();
-            Log::debug("2084200190"." Страница: ".$yahoo->getLastPage());
+            $this->updateLots($page["items"],$category->id);
+
+            Log::debug($category->name." Страница: ".$yahoo->getLastPage());
         }
         
-        Log::debug("2084200190"." Парсинг завершен. Количество полученных страниц: ".$yahoo->getLastPage());
+        Log::debug($category->name." Парсинг завершен. Количество полученных страниц: ".$yahoo->getLastPage());
     }
 
     public function getSellersID($sellers){
-        // $model = YahooSeller::model()->
-
         $model = Yii::app()->db->createCommand()->select("id, name")->from(YahooSeller::tableName())->where(array('in', 'name', $sellers))->queryAll();
 
+        $result = array();
         foreach ($model as $seller) {
-            echo $seller["name"]." ".$seller["id"]."<br>";
+            $result[$seller["name"]] = $seller["id"];
         }
-        // print_r($sellers);
-        // print_r($model);
+        return $result;
     }
 
     public function updateSellers($sellers){
@@ -289,14 +314,16 @@ class IntegrateController extends Controller
         Yii::app()->db->createCommand($sql)->execute();
     }
 
-    public function updateLots($items){
+    public function updateLots($items,$category_id){
 
         $tableName = YahooLot::tableName();
 
         $values = array();
         foreach ($items as $item) {
-            $bidorbuy = (isset($item->BidOrBuy))?intval($item->BidOrBuy):0;
-            array_push($values, array(NULL, $item->AuctionID, $item->Title, date("Y-m-d H:i:s", time()), $item->Image, intval($item->CurrentPrice), $bidorbuy, $item->Bids, $this->convertTime($item->EndTime), 1, 1, 0));
+            if( $item->IsReserved == "false" ){
+                $bidorbuy = (isset($item->BidOrBuy))?intval($item->BidOrBuy):0;
+                array_push($values, array(NULL, $item->AuctionID, $item->Title, date("Y-m-d H:i:s", time()), $item->Image, intval($item->CurrentPrice), $bidorbuy, $item->Bids, $this->convertTime($item->EndTime), $category_id, $item->Seller->Id, 0));
+            }
         }
 
         $update = array("update_time","cur_price","bid_price","bids","end_time");

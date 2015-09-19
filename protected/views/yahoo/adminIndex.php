@@ -1,27 +1,46 @@
-<h1><?=$this->adminMenu["cur"]->name?></h1>
+<h1 class="b-hide-title"><?=$this->adminMenu["cur"]->name?></h1>
 <div class="b-link-back">
     <a href="#" class="b-select-all">Выделить все</a>
-    <a href="<?php echo Yii::app()->createUrl('/'.$this->adminMenu["cur"]->code.'/admindelete',array('page'=> $pages->getCurrentPage() ))?>" class="b-delete-selected">Удалить выбранное</a>
+    <a href="<?php echo Yii::app()->createUrl('/'.$this->adminMenu["cur"]->code.'/adminindex')?>" class="b-delete-selected">Удалить выбранное</a>
 </div>
+<div class="b-top-butt clearfix">
+    <div class="b-sort-cont left">
+        <label for="sort">Сортировать: </label>
+        <?=CHTML::dropDownList("sort", $_POST["sort"], $sort_fields,array('id'=>'b-sort-1')); ?>
+        <label for="sort">Порядок: </label>
+        <?=CHTML::dropDownList("order", $_POST["order"], array("ASC"=>"По возрастанию", "DESC"=>"По убыванию"),array('id'=>'b-order-1')); ?>
+    </div>
+    <a href="#" class="fancy left b-butt" data-block=".b-popup-filter">Фильтр</a>
+</div>
+
+<?php $this->renderPartial('_filter', array('arr_name'=>$arr_name, 'filter'=>$filter, 'filter_values'=>$filter_values, 'labels'=>$labels, 'sort_fields'=>$sort_fields)); ?>
+
+<?php $this->renderPartial('_filterList', array('filter_list'=>$filter_list)); ?>
+
 <? if(count($model)): ?>
-<div class="pagination">
+<div class="pagination b-filter-pagination">
     <ul class="yahoo-list">
     	<? foreach ($model as $item): ?>
 			<li class="" data-id="<?=$item->id?>">
                 <div class="image-cont" style="background-image:url('<?=$item->image?>');">
-                    <div class="b-nav">
+                    <a href="https://injapan.ru/auction/<?=$item->id?>.html" target="_blank"></a>
+                    <div class="b-nav clearfix">
                         <span class="b-nav-delete b-tooltip" title="Не показывать лот"></span>
-                        <span class="b-nav-sniper b-tooltip" title="Добавить в снайпер"></span>
+                        <a href="<?php echo Yii::app()->createUrl('/'.$this->adminMenu["cur"]->code.'/adminauctioncreate',array('id'=> $item->id ))?>" class="ajax-form ajax-create b-nav-sniper b-tooltip" title="Добавить в снайпер"></a>
                     </div>
                 </div>
                 <!-- <h3><?=$item->title?></h3> -->
                 <div class="clearfix">
-                    <h4 class="left">Цена: <b><?=$item->cur_price?></b></h4>
-                    <h5 class="right">Ставок: <b><?=$item->bids?></b></h5>
+                    <h4 class="left">Price: <b><?=$item->cur_price?></b></h4>
+                    <h5 class="right">Bids: <b><?=$item->bids?></b></h5>
                 </div>
                 <div class="clearfix">
-                    <h4 class="left">Окончание:</h4>
-                    <h5 class="right"><? $date = new DateTime($item->end_time); echo date_format($date, 'd.m.y H:i');?></h5>
+                    <h4 class="left"><?=$item->category->name?></b></h4>
+                    <h5 class="right"><?=$this->cutText($item->seller->name,16)?></h5>
+                </div>
+                <div class="clearfix">
+                    <h4 class="left">Осталось:</h4>
+                    <h5 class="right<?if(strpos($item->end_time, "м") && strpos($item->end_time, "ч") == -1):?> red<?endif;?>"><?=$item->end_time?></h5>
                 </div>
 			</li>
 		<? endforeach; ?>

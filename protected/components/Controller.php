@@ -248,6 +248,34 @@ class Controller extends CController
         return $str;
     }
 
+    public function declOfNum($number, $titles){
+        $cases = array (2, 0, 1, 1, 1, 2);
+        return $number." ".$titles[ ($number%100 > 4 && $number %100 < 20) ? 2 : $cases[min($number%10, 5)] ];
+    }
+
+    public function getTextTime($min){
+        $min = intval($min);
+        $hours = floor($min/60)%(24);
+        $days = floor($min/24/60);
+        $minutes = $min%60;
+
+        if( $days ){
+            $out = $days."д. ";
+        }else{
+            $out = "";
+        }
+
+        if( $hours ){
+            $out .= $hours."ч. ";
+        }
+
+        if( $minutes && !$days ){
+            $out .= $minutes."м.";
+        }
+
+        return $out;
+    }
+
     public function DownloadFile($source,$filename) {
         if (file_exists($source)) {
         
@@ -288,6 +316,26 @@ class Controller extends CController
         return ( isset($this->settings[$category_code][$param_code]) )?$this->settings[$category_code][$param_code]:"";
     }
 
+    public function setParam($category,$code,$value){
+        $model = Settings::model()->with("category")->find("category.code='".$category."' AND t.code='".$code."'");
+        $model->value = $value;
+        $this->settings[$category][$code] = $value;
+        return $model->save();
+    }
+
+    public function getSettings(){
+        $model = Category::model()->findAll();
+
+        foreach ($model as $category) {
+            foreach ($category->settings as $param) {
+                $category_code = mb_strtoupper($category->code,"UTF-8");
+                $param_code = mb_strtoupper($param->code,"UTF-8");
+                if( !isset($this->settings[$category_code]) ) $this->settings[$category_code] = array();
+                $this->settings[$category_code][$param_code] = $param->value;
+            }
+        }
+    }
+
     public function getImages($good, $number = NULL)
     {   
         $imgs = array();
@@ -317,19 +365,6 @@ class Controller extends CController
             array_push($imgs, Yii::app()->request->baseUrl."/".$path."default.jpg");    
         }
         return $imgs;
-    }
-
-    public function getSettings(){
-        $model = Category::model()->findAll();
-
-        foreach ($model as $category) {
-            foreach ($category->settings as $param) {
-                $category_code = mb_strtoupper($category->code,"UTF-8");
-                $param_code = mb_strtoupper($param->code,"UTF-8");
-                if( !isset($this->settings[$category_code]) ) $this->settings[$category_code] = array();
-                $this->settings[$category_code][$param_code] = $param->value;
-            }
-        }
     }
 
     public function updateRows($table_name,$values = array(),$update){
