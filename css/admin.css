@@ -603,7 +603,7 @@ h1{
         .fancybox-skin input[type="button"],
         .fancybox-skin select{
             border-radius: 5px;
-            background-color: #FFF5D1;
+            background: #FFF5D1;
             border: 1px solid #452716;
             padding: 5px 10px;
             font-size: 14px;
@@ -613,6 +613,19 @@ h1{
         .fancybox-skin select{
             width: auto;
             height: 32px;
+        }
+
+        .fancybox-skin .select2-choices,.fancybox-skin .select2-choice{
+            border-radius: 5px;
+            background: #FFF5D1;
+            border: 1px solid #452716;
+            padding: 5px 10px;
+            font-size: 14px;
+            display: block;
+            min-width: 150px;
+        }
+        .fancybox-skin .select2-choices {
+            padding: 4px 0 0;
         }
         .fancybox-skin textarea{
             /*margin-top: 5px;*/

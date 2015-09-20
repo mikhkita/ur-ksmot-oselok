@@ -250,6 +250,8 @@ $(document).ready(function(){
     }
 
     function bindForm($form){
+
+        $(".select2").select2();
         $form.validate({
             ignore: ""
         });

@@ -10,7 +10,7 @@
 		<? if( count($data) ): ?>
 			<? foreach ($data as $i => $item): ?>
 				<tr>
-					<td><a href="<?php echo Yii::app()->createUrl('/good/adminupdate',array('id'=>$item->id))?>" class="ajax-form ajax-update b-tool b-tool-update" title="Редактировать"></a></td>
+					<td><a href="<?php echo Yii::app()->createUrl('/good/adminupdate',array('id'=>$item->id,'goodTypeId' => $_GET['goodTypeId']))?>" class="ajax-form ajax-update b-tool b-tool-update" title="Редактировать"></a></td>
 					<? foreach ($fields as $field): ?>
 						<td>
 							<? if( isset($item->fields_assoc[$field->attribute->id]) ): ?>
