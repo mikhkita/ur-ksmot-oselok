@@ -1878,10 +1878,12 @@ li.ui-autocomplete-category {
         .yahoo-list li h5.red,
         .yahoo-list li h4.red{
             color: #E70000;
+            font-weight: 900;
         }
         .yahoo-list li:hover h5.red,
         .yahoo-list li:hover h4.red{
             color: #F5E9BC;
+            font-weight: 900;
         }
         .yahoo-list li:hover,
         .yahoo-list li.selected{
@@ -1987,7 +1989,7 @@ ul.b-filter-list{
             color: #F5E9BC;
             text-shadow: 1px 1px 0px rgba(0,0,0,0.3);*/
         }
-        .b-clear-filter{
+        .b-clear-filter-form{
             color: #452716;
             display: inline-block;
             margin-top: 5px;

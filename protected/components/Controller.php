@@ -253,11 +253,12 @@ class Controller extends CController
         return $number." ".$titles[ ($number%100 > 4 && $number %100 < 20) ? 2 : $cases[min($number%10, 5)] ];
     }
 
-    public function getTextTime($min){
-        $min = intval($min);
+    public function getTextTime($sec){
+        $min = intval($sec/60);
         $hours = floor($min/60)%(24);
         $days = floor($min/24/60);
         $minutes = $min%60;
+        $sec = $sec%60;
 
         if( $days ){
             $out = $days."д. ";
@@ -270,10 +271,14 @@ class Controller extends CController
         }
 
         if( $minutes && !$days ){
-            $out .= $minutes."м.";
+            $out .= $minutes."м. ";
         }
 
-        return $out;
+        if( $sec && !$days && !$hours ){
+            $out .= $sec."с.";
+        }
+
+        return trim($out);
     }
 
     public function DownloadFile($source,$filename) {

@@ -53,14 +53,15 @@ class YahooController extends Controller
 		$arr_name = "YL";
 		$filter_values = isset( $_POST[$arr_name] )?$_POST[$arr_name]:array();
 
-		YahooLot::model()->deleteAll("end_time<'".date("Y-m-d H:i:s", time())."'");
+		YahooLot::model()->deleteAll("end_time<'".date("Y-m-d H:i:s", time()-60*60*5)."'");
 		$criteria=new CDbCriteria();
 
 	   	if( count($filter_values) ){
 	   		$criteria = $this->filterYL($criteria,$filter,$filter_values);
 	   	}
 
-	   	$criteria->addCondition("state=0");
+	   	$criteria->addCondition("state='0'");
+	   	$criteria->addCondition("end_time>'".date("Y-m-d H:i:s", time())."'");
 	   	$criteria->order = $_POST["sort"].' '.$_POST["order"];
 
 	   	$pagination = array('pageSize'=>40,'route' => 'yahoo/adminindex');
@@ -74,7 +75,7 @@ class YahooController extends Controller
 		$data = $dataProvider->getData();
 		foreach ($data as &$item) {
 			$item->title = preg_replace("/[^A-z0-9]/", " ", $item->title);
-			$item->end_time = $this->getTextTime(intval((strtotime($item->end_time)-time())/60));
+			$item->end_time = $this->getTextTime((strtotime($item->end_time)-time()));
 		}
 
 		foreach ($filter as &$item) {
@@ -134,8 +135,8 @@ class YahooController extends Controller
 						if( $value["FROM"] != "" ) array_push($result, $labels[$key]." от ".$value["FROM"]." до ".$value["TO"]);
 					}
 				}else{
-					if( $value["FROM"] != "" ) array_push($result, $labels[$key]." больше ".$value["FROM"]);
-					if( $value["TO"] != "" ) array_push($result, $labels[$key]." меньше ".$value["TO"]);
+					if( $value["FROM"] != "" ) array_push($result, $labels[$key]." от ".$value["FROM"]);
+					if( $value["TO"] != "" ) array_push($result, $labels[$key]." до ".$value["TO"]);
 				}
 			}
 		}

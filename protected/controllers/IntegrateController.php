@@ -242,7 +242,15 @@ class IntegrateController extends Controller
 // Дром ------------------------------------------------------------------ Дром
 
 // Yahoo ----------------------------------------------------------------- Yahoo
-    public function actionYahoo(){
+    public function actionYahooBids(){
+        $model = YahooCategory::model()->findAll(array("order"=>"id ASC"));
+        foreach ($model as $item) {
+            $this->parseCategory($item,true);
+        }
+        
+    }
+
+    public function actionYahooAll(){
         $category = $this->getNextCategory();
         
         $this->parseCategory($category);
@@ -268,10 +276,13 @@ class IntegrateController extends Controller
         return $first;
     }
 
-    public function parseCategory($category){
+    public function parseCategory($category, $bids = false){
         $yahoo = new Yahoo($this->courses);
+        $tog = true;
 
-        while( $page = $yahoo->getNextPage($category->code,$category->max_price) ){
+        $page = $yahoo->getNextPage($category->code,$category->max_price,( ($bids)?"a":"d" ));
+
+        while( $page && $tog ){
             $sellers = array();
 
             foreach ($page["items"] as $key => $item)
@@ -281,15 +292,25 @@ class IntegrateController extends Controller
 
             $sellers_id = $this->getSellersID($sellers);
 
-            foreach ($page["items"] as &$item)
+            foreach ($page["items"] as &$item){
                 $item->Seller->Id = $sellers_id[$item->Seller->Id];
+                echo $item->Bids."<br>";
+            }
 
             $this->updateLots($page["items"],$category->id);
 
             Log::debug($category->name." Страница: ".$yahoo->getLastPage());
+
+            if( $bids ){
+                $tog = ( intval(array_pop($page["items"])->Bids) > 0 )?true:false;
+            }else{
+                $tog = ( intval(array_pop($page["items"])->Bids) == 0 )?true:false;
+            }
+
+            $page = $yahoo->getNextPage($category->code,$category->max_price,( ($bids)?"a":"d" ));
         }
         
-        Log::debug($category->name." Парсинг завершен. Количество полученных страниц: ".$yahoo->getLastPage());
+        Log::debug($category->name." Парсинг завершен. Количество полученных страниц: ".$yahoo->getLastPage()-1);
     }
 
     public function getSellersID($sellers){

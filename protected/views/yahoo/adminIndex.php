@@ -40,7 +40,7 @@
                 </div>
                 <div class="clearfix">
                     <h4 class="left">Осталось:</h4>
-                    <h5 class="right<?if(strpos($item->end_time, "м") && strpos($item->end_time, "ч") == -1):?> red<?endif;?>"><?=$item->end_time?></h5>
+                    <h5 class="right<?if(!mb_strpos($item->end_time, "д",0,"UTF-8") && !mb_strpos($item->end_time, "ч",0,"UTF-8")):?> red<?endif;?>"><?=$item->end_time?></h5>
                 </div>
 			</li>
 		<? endforeach; ?>

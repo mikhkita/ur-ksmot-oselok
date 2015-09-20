@@ -16,11 +16,12 @@ Class Yahoo {
         $this->cur_page = 1;
     }
 
-    public function getNextPage($category_id,$max_price){
+    public function getNextPage($category_id,$max_price,$order){
         $params = array(
             "appid" => "dj0zaiZpPTFFVXE5clJCTVY3ayZzPWNvbnN1bWVyc2VjcmV0Jng9YzQ-", // ID приложения
             "category" => $category_id, // ID категории
-            "sort" => "end", // Сортировка. end - по времени окончания, bids - по кол-ву ставок, cbids - по текущей цене, bidorbuy - по блиц-цене, img - есть ли имаги.
+            "sort" => "bids", // Сортировка. end - по времени окончания, bids - по кол-ву ставок, cbids - по текущей цене, bidorbuy - по блиц-цене, img - есть ли имаги.
+            "order" => $order, // Порядок сортировки. a - по возрастанию, d - по убыванию
             "item_status" => 2, // Состояние товара, 0 - не важно, 1 - новые, 2 - б/у
             // "timebuf" => 10,
             "aucmaxprice" => intval($max_price*$this->courses["USD"]), // Ограничение текущей цены сверху

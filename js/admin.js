@@ -871,7 +871,7 @@ $(document).ready(function(){
             $("#b-filter-form").attr("action",$(this).attr("href")).submit();
             return false;
         });
-        $("body").on("click",".b-clear-filter",function(){
+        $("body").on("click",".b-clear-filter-form",function(){
             $("#b-filter-form input[class!='hidden'], #b-filter-form select[class!='hidden']").remove();
             $("#b-filter-form").submit();
             return false;
