@@ -48,8 +48,23 @@ class GoodController extends Controller
 	public function actionAdminUpdate($id,$goodTypeId)
 	{
 		$model=$this->loadModel($id);
+		$check = array();
+		foreach ($model->type->fields as $attr) {
+			$check[$attr->attribute_id] = "";
+			foreach ($model->fields as $item) {
+				if($attr->attribute_id == $item->attribute_id) {
+					if($item->attribute->list) {
+						if($item->attribute->multi) {
+							$check[$attr->attribute_id][] = $item->variant->id;
+						} else $check[$attr->attribute_id] = $item->variant->id;
+					} else $check[$attr->attribute_id] = $item->value;
+				}
+			}
+		}
+		print_r($check);
 		if(isset($_POST['Good_attr']))
 		{
+
 			foreach ($_POST['Good_attr'] as $key => $item) {
 				$attr = GoodAttribute::model()->findByPk($key);
 				if(!is_array($item) ) {
@@ -64,6 +79,7 @@ class GoodController extends Controller
 		}else{
 			$this->renderPartial('adminUpdate',array(
 				'model'=>$model,
+				'check' => $check
 			));
 		}
 	}

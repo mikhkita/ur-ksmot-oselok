@@ -251,7 +251,10 @@ $(document).ready(function(){
 
     function bindForm($form){
 
-        $(".select2").select2();
+        $(".select2").select2({
+          placeholder: "Select a state",
+          allowClear: true
+        });
         $form.validate({
             ignore: ""
         });
