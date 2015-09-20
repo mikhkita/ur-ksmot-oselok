@@ -20,7 +20,7 @@
 		</div>
 		<div class="row row-half">
 			<?php echo $form->labelEx($model,'sort'); ?>
-			<?php echo $form->textField($model,'sort',array('maxlength'=>255,'class'=>'numeric','required'=>true)); ?>
+			<?php echo $form->numberField($model,'sort',array('maxlength'=>255,'required'=>true)); ?>
 			<?php echo $form->error($model,'sort'); ?>
 		</div>
 	</div>

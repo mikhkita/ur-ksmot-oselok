@@ -3,6 +3,9 @@
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'faculties-form',
 	'enableAjaxValidation'=>false,
+	'htmlOptions'=>array(
+		'data-input'=>1,
+	),
 )); ?>
 
 	<?php echo $form->errorSummary($model); ?>
@@ -29,5 +32,4 @@
 	<? endif; ?>
 
 <?php $this->endWidget(); ?>
-
 </div><!-- form -->

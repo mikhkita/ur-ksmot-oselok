@@ -1780,7 +1780,7 @@ li.ui-autocomplete-category {
 
 .yahoo-list {
     margin-top: 20px;
-    margin-bottom: 30px;
+    /*margin-bottom: 30px;*/
     font-size: 0px;
 }
     .yahoo-list li{
@@ -1981,7 +1981,7 @@ ul.b-filter-list{
             text-decoration: underline;
         }
 .b-sort-cont{
-    margin-top: 22px;
+    margin-top: 19px;
     margin-right: 20px;
 }
     .b-sort-cont label{
@@ -1989,8 +1989,23 @@ ul.b-filter-list{
         margin-left: 15px;
     }
     .b-sort-cont select{
-
+        box-sizing: border-box;
+        height: 32px;
     }
+.b-lot-count{
+    margin-left: 10px;
+    display: inline-block;
+}
+
+
+
+
+
+
+
+
+
+
 
 @media screen and (max-width: 1500px){
     .b-hide-title{

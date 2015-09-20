@@ -20,7 +20,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'max_price'); ?>
-		<?php echo $form->textField($model,'max_price',array('maxlength'=>255,'class'=>'numeric','required'=>true)); ?>
+		<?php echo $form->numberField($model,'max_price',array('maxlength'=>255,'required'=>true)); ?>
 		<?php echo $form->error($model,'max_price'); ?>
 	</div>
 

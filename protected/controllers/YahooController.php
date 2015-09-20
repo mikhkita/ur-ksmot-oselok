@@ -31,6 +31,12 @@ class YahooController extends Controller
 
 	public function actionAdminIndex($partial = false)
 	{	
+		session_start();
+		if( !($_POST["sort"]) ){
+			if( isset($_SESSION["POST"]) ) $_POST = $_SESSION["POST"];
+		}else{
+			$_SESSION["POST"] = $_POST;
+		}
 		unset($_GET["partial"]);
 
 		if( !isset($_POST["sort"]) ) $_POST["sort"] = "sort";
@@ -59,6 +65,8 @@ class YahooController extends Controller
 
 	   	$pagination = array('pageSize'=>40,'route' => 'yahoo/adminindex');
 
+	   	$lot_count = YahooLot::model()->count($criteria);
+
 		$dataProvider = new CActiveDataProvider('YahooLot', array(
 		    'criteria'=>$criteria,
 		    'pagination'=>$pagination
@@ -78,6 +86,7 @@ class YahooController extends Controller
 		$options = array(
 			'model'=>$dataProvider->getData(),
 			'pages' => $dataProvider->getPagination(),
+			'lot_count' => $lot_count,
 			'sort_fields' => $this->sort_fields,
 			'labels' => $labels,
 			'arr_name' => $arr_name,

@@ -105,8 +105,9 @@ $(document).ready(function(){
             unbindTinymce();
         },
         afterShow: function(){
+            var $form = $(".fancybox-inner form");
             bindVariants();
-            $(".fancybox-inner").find("input").eq(0).focus();
+            $(".fancybox-inner").find("input").eq(($form.attr("data-input"))?($form.attr("data-input")*1):0).focus();
         }
     });
 

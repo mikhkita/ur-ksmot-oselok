@@ -31,8 +31,8 @@
                 </div>
                 <!-- <h3><?=$item->title?></h3> -->
                 <div class="clearfix">
-                    <h4 class="left">Price: <b><?=$item->cur_price?></b></h4>
-                    <h5 class="right">Bids: <b><?=$item->bids?></b></h5>
+                    <h4 class="left">Цена: <b><?=$item->cur_price?></b></h4>
+                    <h5 class="right">Ст.: <b><?=$item->bids?></b></h5>
                 </div>
                 <div class="clearfix">
                     <h4 class="left"><?=$item->category->name?></b></h4>
@@ -45,14 +45,17 @@
 			</li>
 		<? endforeach; ?>
     </ul>  
-    <?php $this->widget('CLinkPager', array(
-        'header' => '',
-        'lastPageLabel' => 'последняя &raquo;',
-        'firstPageLabel' => '&laquo; первая', 
-        'pages' => $pages,
-        'prevPageLabel' => '< назад',
-        'nextPageLabel' => 'далее >'
-    )) ?>
+    <div class="b-pagination-cont clearfix">
+        <?php $this->widget('CLinkPager', array(
+            'header' => '',
+            'lastPageLabel' => 'последняя &raquo;',
+            'firstPageLabel' => '&laquo; первая', 
+            'pages' => $pages,
+            'prevPageLabel' => '< назад',
+            'nextPageLabel' => 'далее >'
+        )) ?>
+        <div class="b-lot-count">Всего лотов: <?=$lot_count?></div>
+    </div>
 </div>  
 <? else: ?>
     <h3 class="b-no-goods">Лотов не найдено</h3>

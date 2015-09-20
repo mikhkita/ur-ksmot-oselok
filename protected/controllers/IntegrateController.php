@@ -307,7 +307,7 @@ class IntegrateController extends Controller
 
         $values = array();
         foreach ($sellers as $seller) {
-            array_push($values, "(NULL,'".$seller."')");
+            array_push($values, "(NULL,'".addslashes($seller)."')");
         }
 
         $sql .= implode(",", $values);
@@ -322,7 +322,7 @@ class IntegrateController extends Controller
         foreach ($items as $item) {
             if( $item->IsReserved == "false" ){
                 $bidorbuy = (isset($item->BidOrBuy))?intval($item->BidOrBuy):0;
-                array_push($values, array(NULL, $item->AuctionID, $item->Title, date("Y-m-d H:i:s", time()), $item->Image, intval($item->CurrentPrice), $bidorbuy, $item->Bids, $this->convertTime($item->EndTime), $category_id, $item->Seller->Id, 0));
+                array_push($values, array(NULL, $item->AuctionID, addslashes($item->Title), date("Y-m-d H:i:s", time()), $item->Image, intval($item->CurrentPrice), $bidorbuy, $item->Bids, $this->convertTime($item->EndTime), $category_id, $item->Seller->Id, 0));
             }
         }
 
