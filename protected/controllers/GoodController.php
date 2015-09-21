@@ -48,33 +48,25 @@ class GoodController extends Controller
 	public function actionAdminUpdate($id,$goodTypeId)
 	{
 		$model=$this->loadModel($id);
-		$check = array();
-		foreach ($model->type->fields as $attr) {
-			$check[$attr->attribute_id] = "";
-			foreach ($model->fields as $item) {
-				if($attr->attribute_id == $item->attribute_id) {
-					if($item->attribute->list) {
-						if($item->attribute->multi) {
-							$check[$attr->attribute_id][] = $item->variant->id;
-						} else $check[$attr->attribute_id] = $item->variant->id;
-					} else $check[$attr->attribute_id] = $item->value;
-				}
-			}
-		}
-		print_r($check);
+		$model->type->fields
 		if(isset($_POST['Good_attr']))
 		{
+				print_r($_POST['Good_attr']);
+			// foreach ($_POST['Good_attr'] as $key => $item) {
+				$attrs = GoodAttribute::model()->findAll('good_id='.$id);
+				foreach ($attrs as $attr) {
+					if(!is_array($_POST['Good_attr']) ) {
+						$attr[$attr->attribute->type->code."_value"] = $item;
+						$attr->save();
+					} else if(isset($item['single']) ){
+						$attr["variant_id"] = $item['single'];
+						$attr->save();
+					} else {
 
-			foreach ($_POST['Good_attr'] as $key => $item) {
-				$attr = GoodAttribute::model()->findByPk($key);
-				if(!is_array($item) ) {
-					$attr[$attr->attribute->type->code."_value"] = $item;
-					$attr->save();
-				} else if(isset($item['single']) ){
-					$attr["variant_id"] = $item['single'];
-					$attr->save();
+					}
 				}
-			}
+				
+			// }
 			$this->actionAdminIndex(true,$goodTypeId);
 		}else{
 			$this->renderPartial('adminUpdate',array(
@@ -83,7 +75,28 @@ class GoodController extends Controller
 			));
 		}
 	}
+	public function getAttr($model) {
+		$result = array();
+		foreach ($model->type->fields as $attr) {
+			if($attr->attribute->multi)	$result[$attr->attribute_id] = array(); else $result[$attr->attribute_id] = "";
+			foreach ($model->fields as $item) {
+				if($attr->attribute_id == $item->attribute_id) {
+					if($item->attribute->list) {
+						if($item->attribute->multi) {
+							$result[$attr->attribute_id][] = $item->variant->id;
+						} else $result[$attr->attribute_id] = $item->variant->id;
+					} else $result[$attr->attribute_id] = $item->value;
+				}
+			}
+		}
+		return $result;
+	}
 
+	public function getAttrType($model, $attrId) {
+		foreach ($model as $attr) {
+			if($attr->attribute_id == $attrId) return $attr->attribute->type->code."_value";
+		}
+	}
 	public function actionAdminEdit($id)
 	{
 		$model=$this->loadModel($id);
