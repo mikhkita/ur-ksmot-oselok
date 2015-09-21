@@ -32,26 +32,16 @@
 	</div>
 
 	<div class="row">
+		<?php echo $form->labelEx($model,'usr_models'); ?>
+		<?php echo $form->textField($model,'usr_models',array('maxlength'=>255,'required'=>true)); ?>
+		<?php echo $form->error($model,'usr_models'); ?>
+	</div>
+
+	<div class="row">
 		<?php echo $form->labelEx($model,'usr_rol_id'); ?>
 		<?php echo $form->dropDownList($model, 'usr_rol_id', CHtml::listData(Role::model()->findAll(), 'id', 'name')); ?>
 		<?php echo $form->error($model,'usr_rol_id'); ?>
 	</div>
-
-	<?
-		$printerCount = array();
-		for ($i=1; $i <= 10; $i++) { 
-			$printerCount[$i.""] = $i."";
-		}
-		$printerCount["999"] = "Без ограничений";
-	?>
-
-	<?php if( Yii::app()->user->checkAccess('createUser') ):?>
-		<div class="row">
-			<?php echo $form->labelEx($model,'usr_printer_count'); ?>
-			<?php echo $form->dropDownList($model, 'usr_printer_count', $printerCount); ?>
-			<?php echo $form->error($model,'usr_printer_count'); ?>
-		</div>
-	<?endif;?>
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Добавить' : 'Сохранить'); ?>

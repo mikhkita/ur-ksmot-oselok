@@ -601,6 +601,7 @@ h1{
         .fancybox-skin input[type="number"],
         .fancybox-skin input[type="submit"],
         .fancybox-skin input[type="button"],
+        .fancybox-skin input[type="password"],
         .fancybox-skin select{
             border-radius: 5px;
             background: #FFF5D1;

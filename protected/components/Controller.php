@@ -65,6 +65,8 @@ class Controller extends CController
         $this->start = microtime(true);
 
         $this->getInterpreters();
+
+        if( !Yii::app()->user->isGuest ) $this->checkModelAccess();
     }
 
     public function beforeRender($view){
@@ -214,10 +216,33 @@ class Controller extends CController
     }
 
     public function checkAccess($model, $return = false){
+        $rule_codes = explode(",", $model->rule_code);
         if( $return ){
-            return Yii::app()->user->checkAccess($model->rule_code);
-        }else if(!Yii::app()->user->checkAccess($model->rule_code)) 
-            throw new CHttpException(403,'Доступ запрещен');
+            foreach ($rule_codes as $rule_code)
+                if( Yii::app()->user->checkAccess(trim($rule_code)) ) return true;
+            return false;
+        }else{
+            $access = false;
+            foreach ($rule_codes as $rule_code)
+                if( Yii::app()->user->checkAccess(trim($rule_code)) ) $access = true;
+            if( !$access ) throw new CHttpException(403,'Доступ запрещен');
+        }
+    }
+
+    public function checkModelAccess($return = false,$model_code = false){
+        $model_code = ($model_code)?$model_code:$this->adminMenu["cur"]->code;
+        if( $this->user->usr_models == "" || $model_code == "" ) return true;
+        $models = explode(",", $this->user->usr_models);
+        if( $return ){
+            foreach ($models as $model)
+                if( trim($model) == trim($model_code) ) return true;
+            return false;
+        }else{
+            $access = false;
+            foreach ($models as $model)
+                if( trim($model) == trim($model_code) ) $access = true;
+            if( !$access ) throw new CHttpException(403,'Доступ запрещен');
+        }
     }
 
     public function getDynObjects($dynamic,$good_type_id){
@@ -236,7 +261,7 @@ class Controller extends CController
 
     public function removeExcess($model){
         foreach ($model as $key => $item) {
-            if( !$this->checkAccess( $item, true ) ) unset($model[$key]);
+            if( !$this->checkAccess( $item, true ) || !$this->checkModelAccess( true, $item->code ) ) unset($model[$key]);
         }
         return array_values($model);
     }

@@ -39,11 +39,11 @@ class User extends CActiveRecord
 			array('usr_login, usr_password, usr_name, usr_email, usr_rol_id', 'required'),
 			array('usr_state', 'numerical', 'integerOnly'=>true),
 			array('usr_login, usr_password, usr_email', 'length', 'max'=>128),
-			array('usr_name', 'length', 'max'=>255),
+			array('usr_name, usr_models', 'length', 'max'=>255),
 			array('usr_rol_id', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('usr_id, usr_login, usr_password, usr_name, usr_email, usr_rol_id, usr_state', 'safe', 'on'=>'search'),
+			array('usr_id, usr_login, usr_models, usr_password, usr_name, usr_email, usr_rol_id, usr_state', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -72,6 +72,7 @@ class User extends CActiveRecord
 			'usr_state' => 'Статус',
 			'usr_rol_id' => 'Роль',
 			'usr_name' => 'Фамилия И.О.',
+			'usr_models' => 'Доступ',
 		);
 	}
 
