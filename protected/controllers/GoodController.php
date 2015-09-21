@@ -13,7 +13,7 @@ class GoodController extends Controller
 	{
 		return array(
 			array('allow',
-				'actions'=>array('adminIndex','adminCreate','adminUpdate','adminDelete','adminEdit'),
+				'actions'=>array('adminIndex','adminCreate','adminUpdate','adminDelete','adminEdit','getAttrType','getAttr'),
 				'roles'=>array('manager'),
 			),
 			array('allow',
@@ -51,23 +51,40 @@ class GoodController extends Controller
 		$result = $this->getAttr($model);
 		if(isset($_POST['Good_attr']))
 		{
-				print_r($_POST['Good_attr']);
-			// foreach ($_POST['Good_attr'] as $key => $item) {
-				$attrs = GoodAttribute::model()->deleteAll('good_id='.$id);
-				foreach ($_POST['Good_attr'] as $key => $item) {
-					if(!is_array($_POST['Good_attr']) ) {
-						$attr[$attr->attribute->type->code."_value"] = $item;
+			// print_r($_POST['Good_attr']);
+			// die();
+			GoodAttribute::model()->deleteAll('good_id='.$id);
+			foreach ($_POST['Good_attr'] as $attr_id => $value) {
+				if(!is_array($value) ) {
+					if($value) {
+						$attr = new GoodAttribute;
+						$attr->good_id = $id;
+						$attr->attribute_id = $attr_id;
+						$attr[$this->getAttrType($model,$attr_id)] = $value;
 						$attr->save();
-					} else if(isset($item['single']) ){
-						$attr["variant_id"] = $item['single'];
+					}
+				} else if(isset($value['single']) ){
+					if($value['single']) {
+						$attr = new GoodAttribute;
+						$attr->good_id = $id;
+						$attr->attribute_id = $attr_id;
+						$attr->variant_id = $value['single'];
 						$attr->save();
-					} else {
-
+					}
+				} else {
+					if(!empty($value)) {
+						foreach ($value as $variant) {
+							$attr = new GoodAttribute;
+							$attr->good_id = $id;
+							$attr->attribute_id = $attr_id;
+							$attr->variant_id = $variant;
+							$attr->save();
+						}
 					}
 				}
-				
-			// }
+			}
 			$this->actionAdminIndex(true,$goodTypeId);
+
 		}else{
 			$this->renderPartial('adminUpdate',array(
 				'model'=>$model,
@@ -93,7 +110,7 @@ class GoodController extends Controller
 	}
 
 	public function getAttrType($model, $attrId) {
-		foreach ($model as $attr) {
+		foreach ($model->type->fields as $attr) {
 			if($attr->attribute_id == $attrId) return $attr->attribute->type->code."_value";
 		}
 	}
@@ -156,7 +173,7 @@ class GoodController extends Controller
 
 		$options = array(
 			'data'=>$Goods,
-			'fields' => $Goods[0]->fields,
+			'fields' => $Goods[0]->type->fields,
 			'name'=>$Goods[0]->type->name,
 			'pages' => $dataProvider->getPagination()
 		);
