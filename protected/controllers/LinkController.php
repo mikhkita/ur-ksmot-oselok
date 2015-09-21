@@ -40,8 +40,9 @@ class LinkController extends Controller
 			if (!is_dir($dir)) mkdir($dir,0777, true);
 			$imgs = array_values(array_diff(scandir($dir), array('..', '.', 'Thumbs.db')));
 			if(!count($imgs)) {
-				foreach ($html->find('.bulletinImages .image img') as $i => $item) { 
-					copy( $item->getAttribute("data-zoom-image"), $dir."/".$dir_name."_".sprintf("%'.02d", $i).".jpg");
+				foreach ($html->find('.bulletinImages .image img') as $i => $item) {
+				$src = ($item->getAttribute("data-zoom-image")) ? $item->getAttribute("data-zoom-image") : $item->src;
+					copy( $src, $dir."/".$dir_name."_".sprintf("%'.02d", $i).".jpg");
 	  			}
 	  			$imgs = array_values(array_diff(scandir($dir), array('..', '.', 'Thumbs.db')));
 	  			if(count($imgs)) {
