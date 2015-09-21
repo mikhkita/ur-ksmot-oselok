@@ -39,8 +39,9 @@ class LinkController extends Controller
 			$dir = Yii::app()->params["imageFolder"]."/drom/".$dir_name;
 			if (!is_dir($dir)) mkdir($dir,0777, true);
 			$imgs = array_values(array_diff(scandir($dir), array('..', '.', 'Thumbs.db')));
-			if(!count($imgs)) {
-				foreach ($html->find('.bulletinImages .image img') as $i => $item) {
+			$page_img = $html->find('.bulletinImages .image img');
+			if(count($imgs) != count($page_img) ) {
+				foreach ($page_img as $i => $item) {
 				$src = ($item->getAttribute("data-zoom-image")) ? $item->getAttribute("data-zoom-image") : $item->src;
 					copy( $src, $dir."/".$dir_name."_".sprintf("%'.02d", $i).".jpg");
 	  			}

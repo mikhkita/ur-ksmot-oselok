@@ -12,13 +12,13 @@
 			<label><?=$item->attribute->name?></label>
 			<? if($item->attribute->list): ?>
 				<?  if($item->attribute->multi): ?>
-					<? $selected = array(); if(!empty($check[$item->attribute_id])) foreach ($check[$item->attribute_id] as $multi) $selected[$multi] = array('selected' => 'selected'); ?>
+					<? $selected = array(); if(!empty($result[$item->attribute_id])) foreach ($result[$item->attribute_id] as $multi) $selected[$multi] = array('selected' => 'selected'); ?>
 						<?php echo Chtml::dropDownList("Good_attr[".$item->attribute_id."]", "", CHtml::listData(AttributeVariant::model()->findAll(array("condition" => "attribute_id=".$item->attribute_id,"order" => "sort ASC")), 'id', $item->attribute->type->code.'_value'),array('class'=> 'select2','multiple' => 'true',"empty" => "Выберите состояние", 'options' => $selected)); ?>	
 				<? else: ?>
-					<?php echo Chtml::dropDownList("Good_attr[".$item->attribute_id."][single]", $check[$item->attribute_id], CHtml::listData(AttributeVariant::model()->findAll(array("condition" => "attribute_id=".$item->attribute_id,"order" => "sort ASC")), 'id', $item->attribute->type->code.'_value'),array('class'=> 'select2',"empty" => "Выберите состояние")); ?>
+					<?php echo Chtml::dropDownList("Good_attr[".$item->attribute_id."][single]", $result[$item->attribute_id], CHtml::listData(AttributeVariant::model()->findAll(array("condition" => "attribute_id=".$item->attribute_id,"order" => "sort ASC")), 'id', $item->attribute->type->code.'_value'),array('class'=> 'select2',"empty" => "Выберите состояние")); ?>
 				<? endif; ?>
 			<? else:?>
-				<?php echo Chtml::textField("Good_attr[".$item->attribute_id."]",$check[$item->attribute_id],array('maxlength'=>255)); ?>
+				<?php echo Chtml::textField("Good_attr[".$item->attribute_id."]",$result[$item->attribute_id],array('maxlength'=>255)); ?>
 			<?endif;?>
 		</div>
 		
