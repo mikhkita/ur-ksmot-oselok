@@ -30,7 +30,7 @@ class LinkController extends Controller
 	{
 		$this->scripts[] = "link";
 		if(isset($_POST['link'])) {
-			$directory = explode("+",$_POST['link']);
+			$directory = explode("\t",$_POST['link']);
 			$link = $directory[1];
 			$dir_name = $directory[0];
 			include_once  Yii::app()->basePath.'/extensions/simple_html_dom.php';

@@ -9,10 +9,10 @@ $(document).ready(function(){
             arr;
 
     $("#link").submit(function(){    
-            var str=$("textarea[name=link]").serialize();
-            str = str.substr(5);
-            str = decodeURIComponent(str);
-            arr = str.split('\r\n'); 
+            var str=$("textarea[name=link]").val();
+            // str = str.substr(5);
+            // str = decodeURIComponent(str);
+            arr = str.split('\n'); 
             startImport();
             return false;
         });
