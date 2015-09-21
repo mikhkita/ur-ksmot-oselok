@@ -13,7 +13,7 @@ class LinkController extends Controller
 	{
 		return array(
 			array('allow',
-				'actions'=>array('adminIndex'),
+				'actions'=>array('adminIndex','countImg'),
 				'roles'=>array('manager'),
 			),
 			array('allow',
@@ -38,15 +38,13 @@ class LinkController extends Controller
 			$html = file_get_html($link); 
 			$dir = Yii::app()->params["imageFolder"]."/drom/".$dir_name;
 			if (!is_dir($dir)) mkdir($dir,0777, true);
-			$imgs = array_values(array_diff(scandir($dir), array('..', '.', 'Thumbs.db')));
 			$page_img = $html->find('.bulletinImages .image img');
-			if(count($imgs) != count($page_img) ) {
+			if( $this->countImg($dir) != count($page_img) ) {
 				foreach ($page_img as $i => $item) {
 				$src = ($item->getAttribute("data-zoom-image")) ? $item->getAttribute("data-zoom-image") : $item->src;
 					copy( $src, $dir."/".$dir_name."_".sprintf("%'.02d", $i).".jpg");
 	  			}
-	  			$imgs = array_values(array_diff(scandir($dir), array('..', '.', 'Thumbs.db')));
-	  			if(count($imgs)) {
+	  			if( $this->countImg($dir) ) {
 	  				echo "1";
 	  			}	else {
 	  				echo "0";
@@ -57,6 +55,16 @@ class LinkController extends Controller
 		} else {
 			$this->render('adminIndex');
 		}
+	}
+
+	public function countImg($path) {
+		$dir = opendir ("$path");
+		$i = 0;
+		while (false !== ($file = readdir($dir))) {
+		    if (strpos($file, '.jpg', 1)) $i++;
+		}
+		closedir($dir);
+		return $i;
 	}
 
 	public function actionAdminLinkParse()
