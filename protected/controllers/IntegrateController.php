@@ -128,7 +128,7 @@ class IntegrateController extends Controller
             foreach ($curParams["JOIN"] as $field)
                 if( !(isset($item->fields_assoc[intval($field)]) && $item->fields_assoc[intval($field)]->value != 0) ) $tog = false;
 
-            if( $tog && isset($item->fields_assoc[27]) && intval($item->fields_assoc[27]->variant_id) == 1056 ){
+            if( $tog && ( (isset($item->fields_assoc[27]) && intval($item->fields_assoc[27]->variant_id) == 1056) || (isset($item->fields_assoc[46]) && intval($item->fields_assoc[46]->value) == 1) ) ){
                 $title = Interpreter::generate($curParams["ADVERT_TITLE_CODE"],$item);
 
                 if( !isset($result[$title]) ) $result[$title] = array();
@@ -164,9 +164,9 @@ class IntegrateController extends Controller
 
         if( $model )
         foreach ($model as $key => $item) {
-            if( isset($item->fields_assoc[27]) && intval($item->fields_assoc[27]->variant_id) == 1056 ){
+            if( (isset($item->fields_assoc[27]) && intval($item->fields_assoc[27]->variant_id) == 1056) || (isset($item->fields_assoc[46]) && intval($item->fields_assoc[46]->value) == 1) ){
                 array_push($result, array(
-                        "TEXT" => Interpreter::generate($curParams["TEXT_CODE"],$item),
+                        "TEXT" => $this->replaceToBr(Interpreter::generate($curParams["TEXT_CODE"],$item)),
                         "TITLE" => Interpreter::generate($curParams["TITLE_CODE"],$item),
                         "PRICE" => $item->fields_assoc[20]->value,
                         "IMAGE" => substr($this->getImages($item)[0],1)

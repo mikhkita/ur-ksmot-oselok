@@ -50,7 +50,7 @@ class Controller extends CController
         $this->user = User::model()->with("role")->findByPk(Yii::app()->user->id);
 
         $model = ModelNames::model()->findAll(array("order" => "sort ASC"));
-        $this->adminMenu["items"] = $this->removeExcess($model);
+        $this->adminMenu["items"] = $this->removeExcess($model,true);
 
         foreach ($this->adminMenu["items"] as $key => $value) {
             if( $value->admin_menu == 0 ){
@@ -259,9 +259,9 @@ class Controller extends CController
         return $dynObjects;
     }
 
-    public function removeExcess($model){
+    public function removeExcess($model,$menu = false){
         foreach ($model as $key => $item) {
-            if( !$this->checkAccess( $item, true ) || !$this->checkModelAccess( true, $item->code ) ) unset($model[$key]);
+            if( !$this->checkAccess( $item, true ) || ( $menu && !$this->checkModelAccess( true, $item->code ) ) ) unset($model[$key]);
         }
         return array_values($model);
     }
