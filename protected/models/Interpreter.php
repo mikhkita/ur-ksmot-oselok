@@ -150,7 +150,9 @@ class Interpreter extends CActiveRecord
         }
     }
 
-    public function generate($interpreter_id,$model,$dynObjects = NULL){
+    public function generate($interpreter_id,$model,$dynObjects = NULL,$interpreters = NULL){
+    	if( $interpreters !== NULL ) $this->interpreters = $interpreters;
+
     	$attributes = (isset($model->fields_assoc))?$model->fields_assoc:$model;
     	if( $dynObjects !== NULL ) $attributes = $attributes + $dynObjects;
 
