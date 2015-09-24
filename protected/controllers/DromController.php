@@ -23,6 +23,7 @@ class DromController extends Controller
             "guarantee" => array("type" => 'inter',"id" => 73),   
         ),
         "2" => array(
+            "price" => array("type" => 'inter',"id" => 22),
             "subject" => array("type" => 'inter',"id" => 17),
             "cityId" => array("type" => 'inter',"id" => 30),
             "goodPresentState" => array("type" => 'inter',"id" => 103),
@@ -30,7 +31,6 @@ class DromController extends Controller
             "wheelDiameter" => array("type" => 'attr',"id" => 9),
             "inSetQuantity" => array("type" => 'attr',"id" => 28),
             "wheelPcd" => array("type" => 'inter',"id" => 19),
-            "price" => array("type" => 'inter',"id" => 22),
             "disc_width" => array("type" => 'inter',"id" => 93),
             "disc_et" => array("type" => 'attr',"id" => 32),
             "text" => array("type" => 'inter',"id" => 21),
@@ -63,10 +63,8 @@ class DromController extends Controller
 // Дром ------------------------------------------------------------------ Дром
     public function actionAddAvert(){
         $good = Good::model()->find("id=968");
-        $dynamic = array( 37 => 1081, 38 => 869);
+        $dynamic = array( 38 => 1081, 37 => 869);
         $dynObjects = $this->getDynObjects($dynamic,$good->good_type_id);
-        print_r($dynObjects[37]->value);
-        // die();
         foreach ($this->drom_params[$good->good_type_id] as $key => $value) {
             if($value['type']=="attr") {
                 $params[$key] = $good->fields_assoc[$value['id']]->value;
