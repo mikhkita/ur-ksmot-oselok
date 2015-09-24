@@ -230,7 +230,8 @@ class Controller extends CController
     }
 
     public function checkModelAccess($return = false,$model_code = false){
-        $model_code = ($model_code)?$model_code:$this->adminMenu["cur"]->code;
+        $model_code = ($model_code)?$model_code:( (isset($this->adminMenu["cur"]))?$this->adminMenu["cur"]->code:false );
+        if( !$model_code ) return true;
         if( $this->user->usr_models == "" || $model_code == "" ) return true;
         $models = explode(",", $this->user->usr_models);
         if( $return ){
