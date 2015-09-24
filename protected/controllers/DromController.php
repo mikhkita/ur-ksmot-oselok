@@ -16,7 +16,7 @@ class DromController extends Controller
             "price" => array("type" => 'inter',"id" => 45),
             "marking" => array("type" => 'inter',"id" => 13),
             "text" => array("type" => 'inter',"id" => 10),
-            // "pickupAddress" => array("type" => 'inter',"id" => 40),
+            "pickupAddress" => array("type" => 'inter',"id" => 40),
             "localPrice" => array("type" => 'inter',"id" => 39),
             "minPostalPrice" => array("type" => 'inter',"id" => 38),
             "comment" => array("type" => 'inter',"id" => 72),
@@ -34,7 +34,7 @@ class DromController extends Controller
             "disc_width" => array("type" => 'inter',"id" => 93),
             "disc_et" => array("type" => 'attr',"id" => 32),
             "text" => array("type" => 'inter',"id" => 21),
-            // "pickupAddress" => array("type" => 'inter',"id" => 41),
+            "pickupAddress" => array("type" => 'inter',"id" => 41),
             "localPrice" => array("type" => 'inter',"id" => 37),
             "minPostalPrice" => array("type" => 'inter',"id" => 36),
             "comment" => array("type" => 'inter',"id" => 32),
@@ -63,20 +63,19 @@ class DromController extends Controller
 // Дром ------------------------------------------------------------------ Дром
     public function actionAddAvert(){
         $good = Good::model()->find("id=968");
+        $images = $this->getImages($good);
         $dynamic = array( 38 => 1081, 37 => 869);
-        $dynObjects = $this->getDynObjects($dynamic,$good->good_type_id);
         foreach ($this->drom_params[$good->good_type_id] as $key => $value) {
             if($value['type']=="attr") {
                 $params[$key] = $good->fields_assoc[$value['id']]->value;
-
             } else {
-                $params[$key] = Interpreter::generate($value['id'],$good,$dynObjects);
+                $params[$key] = Interpreter::generate($value['id'],$good,$this->getDynObjects($dynamic,$good->good_type_id));
             }
             
         }
         $drom = new Drom();
         $drom->setUser("79528960988","8k6pewk4");
-        $drom->addAdvert($params,$good);
+        $drom->addAdvert($params,$good,$images);
     }   
 
 // Дром ------------------------------------------------------------------ Дром

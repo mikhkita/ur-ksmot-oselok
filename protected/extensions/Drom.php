@@ -67,81 +67,78 @@ Class Drom {
     	$this->interpreters = $interpreters;
     }
 
-    public function addAdvert($params,$good){
+    public function addAdvert($params,$good,$images){
         
+        $images = array(dirname(__FILE__).'/1.jpg',dirname(__FILE__).'/2.jpg',dirname(__FILE__).'/3.jpg');
+        // print_r($params);
+        // print_r($images);
+        $params['model'] = array($params["model"],0,0);
+        $params['price'] = array($params["price"],"RUB");
+        $params['quantity'] = 1;
+        $params['contacts'] =  array("email" => "","is_email_hidden" => false,"contactInfo" => "+7 982 242-42-44");
+        $params['delivery'] = array("pickupAddress" => $params['pickupAddress'],"localPrice" => $params['localPrice'],"minPostalPrice" => $params['minPostalPrice'],"comment" => $params['comment']);
+        unset($params['pickupAddress'],$params['localPrice'],$params['minPostalPrice'],$params['comment']);
 
-        // $images = array(dirname(__FILE__).'/1.jpg',dirname(__FILE__).'/2.jpg',dirname(__FILE__).'/3.jpg');
-        print_r($params);
-        
-        // $params['model'] = array($params["model"],0,0);
-        // $params['price'] = array($params["price"],"RUB");
-        // $params['quantity'] = 1;
-        // $params['contacts'] =  array("email" => "","is_email_hidden" => false,"contactInfo" => "+7 982 242-42-44");
-        // $params['delivery'] = array("pickupAddress" => $params['pickupAddress'],"localPrice" => $params['localPrice'],"minPostalPrice" => $params['minPostalPrice'],"comment" => $params['comment']);
-        // unset($params['pickupAddress'],$params['localPrice'],$params['minPostalPrice'],$params['comment']);
-
-        // if($good->good_type_id== "1") {
-        //     $dirId = 234; 
-        //     $params['predestination'] = "regular";
-        // }
-        // if($good->good_type_id== "2") {
-        //     $dirId = 235;
-        //     $wheelPcd = explode("/",$params['wheelPcd']);
-        //     $params['wheelPcd'] = array();
-        //     foreach ($wheelPcd as $value) {
-        //         array_push($params['wheelPcd'],$value);
-        //     }  
-        //     $disc_width = explode("/",$params['disc_width']);
-        //     $disc_et = explode("/",$params['disc_et']);
-        //     unset($params['disc_width'],$params['disc_et']);
-        //     $params['discParameters'] = array();
-        //     foreach ($disc_width as  $i => $value) {
-        //         $params['discParameters'][] = array("disc_width" => $value,"disc_et" => $disc_et[$i]);
-        //     }           
+        if($good->good_type_id== "1") {
+            $dirId = 234; 
+            $params['predestination'] = "regular";
+        }
+        if($good->good_type_id== "2") {
+            $dirId = 235;
+            $wheelPcd = explode("/",$params['wheelPcd']);
+            $params['wheelPcd'] = array();
+            foreach ($wheelPcd as $value) {
+                array_push($params['wheelPcd'],$value);
+            }  
+            $disc_width = explode("/",$params['disc_width']);
+            $disc_et = explode("/",$params['disc_et']);
+            unset($params['disc_width'],$params['disc_et']);
+            $params['discParameters'] = array();
+            foreach ($disc_width as  $i => $value) {
+                $params['discParameters'][] = array("disc_width" => $value,"disc_et" => $disc_et[$i]);
+            }           
             
-        // }
+        }
     
-        // $options = array(
-        //     'cityId' => $params['cityId'],
-        //     'bulletinType'=>'',
-        //     'fields'=> array(
-        //         'cityId' => $params['cityId'],
-        //         "subject" => $params['subject'],
-        //         "dirId" => $dirId
-        //         ),
-        //     'directoryId'=> $dirId
-        // );
-        // $options = array(
-        //     'changeDescription' => json_encode($options),
-        //     'client_type' => 'v2:adding'
-        // );
-        // $advert_id = json_decode($this->curl->request("http://baza.drom.ru/api/1.0/save/bulletin",$options))->id;
-
-        // $images = $good->getImages();
+        $options = array(
+            'cityId' => $params['cityId'],
+            'bulletinType'=>'',
+            'fields'=> array(
+                'cityId' => $params['cityId'],
+                "subject" => $params['subject'],
+                "dirId" => $dirId
+                ),
+            'directoryId'=> $dirId
+        );
+        $options = array(
+            'changeDescription' => json_encode($options),
+            'client_type' => 'v2:adding'
+        );
+        $advert_id = json_decode($this->curl->request("http://baza.drom.ru/api/1.0/save/bulletin",$options))->id;
         
-        // foreach ($images as &$image_path) {
-        //    $image_path = json_decode($this->curl->request("http://baza.drom.ru/upload-image-jquery",'up[]' => '@'.$image_path))->id;
-        // }
+        foreach ($images as &$image_path) {
+           $image_path = json_decode($this->curl->request("http://baza.drom.ru/upload-image-jquery",array('up[]' => '@'.$image_path)))->id;
+        }
         
-        // $options = array(
-	       //  'cityId' => $params['cityId'],
-	       //  'bulletinType'=>'bulletinRegular',
-	       //  'directoryId'=> $dirId,
-	       //  'fields' => $params,
-	       //  'images' => array(
-	       //      'images' => $images
-	       //      // 'order'=> $images
-	       //  ), 
-	       //  'id'=>$advert_id
-        // );
+        $options = array(
+	        'cityId' => $params['cityId'],
+	        'bulletinType'=>'bulletinRegular',
+	        'directoryId'=> $dirId,
+	        'fields' => $params,
+	        'images' => array(
+	            'images' => $images,
+	            'order'=> $images
+	        ), 
+	        'id'=>$advert_id
+        );
 
-        // $options= array(
-        //     'changeDescription' => json_encode($options),
-        //     'client_type' => 'v2:editing'
-        // );
+        $options= array(
+            'changeDescription' => json_encode($options),
+            'client_type' => 'v2:editing'
+        );
 
-        // $this->curl->request("http://baza.drom.ru/api/1.0/save/bulletin",$options);
-        // $this->curl->request("http://baza.drom.ru/bulletin/".$advert_id."/draft/publish?from=draft.publish",'from'=>'adding.publish');
+        $this->curl->request("http://baza.drom.ru/api/1.0/save/bulletin",$options);
+        $this->curl->request("http://baza.drom.ru/bulletin/".$advert_id."/draft/publish?from=draft.publish",array('from'=>'adding.publish'));
     }
 }
 
