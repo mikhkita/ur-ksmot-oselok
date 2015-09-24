@@ -389,11 +389,11 @@ class Controller extends CController
                     }
                 }           
             } else {
-                array_push($imgs, Yii::app()->request->baseUrl."/".$path."default.jpg");
+                array_push($imgs, Yii::app()->request->baseUrl."/".$path."/default.jpg");
             }
         }
         else {
-            array_push($imgs, Yii::app()->request->baseUrl."/".$path."default.jpg");    
+            array_push($imgs, Yii::app()->request->baseUrl."/".$path."/default.jpg");    
         }
         return $imgs;
     }
