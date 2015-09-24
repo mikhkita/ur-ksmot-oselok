@@ -6,42 +6,42 @@ Class Drom {
     private $curl;
     private $drom_params = array(
         "1" => array(
-            "SUBJECT" => array("type" => 'inter',"id" => 8),
-            "CITY_ID" => array("type" => 'inter',"id" => 31),
-            "GOOD_PRESENT_STATE" => array("type" => 'inter',"id" => 102),
-            "MODEL" => array("type" => 'inter',"id" => 12),
-            "IN_SET_QUANTITY" => array("type" => 'attr',"id" => 28),
-            "WHEEL_SEASON" => array("type" => 'inter',"id" => 101),
-            "WHEEL_TIREWEAR" => array("type" => 'attr',"id" => 29),
-            "YEAR" => array("type" => 'attr',"id" => 10),
-            "WHEEL_SPIKE" => array("type" => 'inter',"id" => 104),
-            "PRICE" => array("type" => 'inter',"id" => 45),
-            "MARKING" => array("type" => 'inter',"id" => 13),
-            "TEXT" => array("type" => 'inter',"id" => 10),
-            "PICKUP_ADDRESS" => array("type" => 'inter',"id" => 40),
-            "LOCAL_PRICE" => array("type" => 'inter',"id" => 39),
-            "MIN_POSTAL_PRICE" => array("type" => 'inter',"id" => 38),
-            "COMMENT" => array("type" => 'inter',"id" => 72),
-            "GUARANTEE" => array("type" => 'inter',"id" => 73),   
-        )
-        "2" => array(
-            "SUBJECT" => array("type" => 'inter',"id" => 17),
-            "CITY_ID" => array("type" => 'inter',"id" => 30),
-            "GOOD_PRESENT_STATE" => array("type" => 'inter',"id" => 103),
-            "MODEL" => array("type" => 'inter',"id" => 92),
-            "WHEEL_DIAMETER" => array("type" => 'attr',"id" => 9),
-            "IN_SET_QUANTITY" => array("type" => 'attr',"id" => 28),
-            "WHEEL_PCD" => array("type" => 'inter',"id" => 19),
-            "PRICE" => array("type" => 'inter',"id" => 22),
-            "DISC_WIDTH" => array("type" => 'inter',"id" => 93),
-            "DISC_ET" => array("type" => 'attr',"id" => 32),
-            "TEXT" => array("type" => 'inter',"id" => 21),
-            "PICKUP_ADDRESS" => array("type" => 'inter',"id" => 41),
-            "LOCAL_PRICE" => array("type" => 'inter',"id" => 37),
-            "MIN_POSTAL_PRICE" => array("type" => 'inter',"id" => 36),
-            "COMMENT" => array("type" => 'inter',"id" => 32),
-            "GUARANTEE" => array("type" => 'inter',"id" => 29),           
+            "subject" => array("type" => 'inter',"id" => 8),
+            "cityId" => array("type" => 'inter',"id" => 31),
+            "goodPresentState" => array("type" => 'inter',"id" => 102),
+            "model" => array("type" => 'inter',"id" => 12),
+            "inSetQuantity" => array("type" => 'attr',"id" => 28),
+            "wheelSeason" => array("type" => 'inter',"id" => 101),
+            "wheelTireWear" => array("type" => 'attr',"id" => 29),
+            "year" => array("type" => 'attr',"id" => 10),
+            "wheelSpike" => array("type" => 'inter',"id" => 104),
+            "price" => array("type" => 'inter',"id" => 45),
+            "marking" => array("type" => 'inter',"id" => 13),
+            "text" => array("type" => 'inter',"id" => 10),
+            "pickupAddress" => array("type" => 'inter',"id" => 40),
+            "localPrice" => array("type" => 'inter',"id" => 39),
+            "minPostalPrice" => array("type" => 'inter',"id" => 38),
+            "comment" => array("type" => 'inter',"id" => 72),
+            "guarantee" => array("type" => 'inter',"id" => 73),   
         ),
+        "2" => array(
+            "subject" => array("type" => 'inter',"id" => 17),
+            "cityId" => array("type" => 'inter',"id" => 30),
+            "goodPresentState" => array("type" => 'inter',"id" => 103),
+            "model" => array("type" => 'inter',"id" => 92),
+            "wheelDiameter" => array("type" => 'attr',"id" => 9),
+            "inSetQuantity" => array("type" => 'attr',"id" => 28),
+            "wheelPcd" => array("type" => 'inter',"id" => 19),
+            "price" => array("type" => 'inter',"id" => 22),
+            "disc_width" => array("type" => 'inter',"id" => 93),
+            "disc_et" => array("type" => 'attr',"id" => 32),
+            "text" => array("type" => 'inter',"id" => 21),
+            "pickupAddress" => array("type" => 'inter',"id" => 41),
+            "localPrice" => array("type" => 'inter',"id" => 37),
+            "minPostalPrice" => array("type" => 'inter',"id" => 36),
+            "comment" => array("type" => 'inter',"id" => 32),
+            "guarantee" => array("type" => 'inter',"id" => 29),           
+        )
         
     );
     function __construct() {
@@ -105,7 +105,7 @@ Class Drom {
 
     public function addAdvert(){
         $good = Good::model()->find();
-        $images = array(dirname(__FILE__).'/1.jpg',dirname(__FILE__).'/2.jpg',dirname(__FILE__).'/3.jpg');
+        // $images = array(dirname(__FILE__).'/1.jpg',dirname(__FILE__).'/2.jpg',dirname(__FILE__).'/3.jpg');
         $params = array();
         foreach ($this->drom_params[$good->good_type_id] as $key => $value) {
             if($value['type']=="attr") {
@@ -114,82 +114,73 @@ Class Drom {
                 $params[$key] = Interpreter::generate($value['id'],$good);
             }
         }
-        if($good->good_type_id== "1") $params["DIR_ID"] = 234; 
-        if($good->good_type_id== "2") $params["DIR_ID"] = 235;
-        
+        $params['model'] = array($params["model"],0,0);
+        $params['price'] = array($params["price"],"RUB");
+        $params['quantity'] = 1;
+        $params['contacts'] =  array("email" => "","is_email_hidden" => false,"contactInfo" => "+7 982 242-42-44");
+        $params['delivery'] = array("pickupAddress" => $params['pickupAddress'],"localPrice" => $params['localPrice'],"minPostalPrice" => $params['minPostalPrice'],"comment" => $params['comment']);
+        unset($params['pickupAddress'],$params['localPrice'],$params['minPostalPrice'],$params['comment']);
+
+        if($good->good_type_id== "1") {
+            $dirId = 234; 
+            $params['predestination'] = "regular";
+        }
+        if($good->good_type_id== "2") {
+            $dirId = 235;
+            $wheelPcd = explode("/",$params['wheelPcd']);
+            $params['wheelPcd'] = array();
+            foreach ($wheelPcd as $value) {
+                array_push($params['wheelPcd'],$value);
+            }  
+            $disc_width = explode("/",$params['disc_width']);
+            $disc_et = explode("/",$params['disc_et']);
+            unset($params['disc_width'],$params['disc_et']);
+            $params['discParameters'] = array();
+            foreach ($disc_width as  $i => $value) {
+                $params['discParameters'][] = array("disc_width" => $value,"disc_et" => $disc_et[$i]);
+            }           
+            
+        }
+    
         $options = array(
-            'cityId' => $params['CITY_ID'],
+            'cityId' => $params['cityId'],
             'bulletinType'=>'',
             'fields'=> array(
-                'cityId' => $params['CITY_ID'],
-                "subject" => $params['SUBJECT'],
-                "dirId" => $params["DIR_ID"]
+                'cityId' => $params['cityId'],
+                "subject" => $params['subject'],
+                "dirId" => $dirId
                 ),
-            'directoryId'=> $params["DIR_ID"]
+            'directoryId'=> $dirId
         );
-        $fields = array(
+        $options = array(
             'changeDescription' => json_encode($options),
             'client_type' => 'v2:adding'
         );
-        $advert_id = json_decode($this->curl->request("http://baza.drom.ru/api/1.0/save/bulletin",$fields))->id;
+        $advert_id = json_decode($this->curl->request("http://baza.drom.ru/api/1.0/save/bulletin",$options))->id;
 
+        $images = $good->getImages();
         foreach ($images as &$image_path) {
            $image_path = json_decode($this->curl->request("http://baza.drom.ru/upload-image-jquery",'up[]' => '@'.$image_path))->id;
         }
         
         $options = array(
-        'cityId' => $params['CITY_ID'],
-        'bulletinType'=>'bulletinRegular',
-        'directoryId'=> $params["DIR_ID"],
-        'fields' => array(
-            "goodPresentState" => $params["GOOD_PRESENT_STATE"],
-            "model" => array($params["MODEL"],0,0),
-            "inSetQuantity" => $params["IN_SET_QUANTITY"],
-            "quantity" => 1,
-            "price" => array($params["PRICE"],"RUB"),
-            "text" => $params["TEXT"],
-            'pickupAddress' => $params["PICKUP_ADDRESS"],
-            'localPrice' => $params["LOCAL_PRICE"],
-            'minPostalPrice' => $params["MIN_POSTAL_PRICE"],
-            'comment' => $params["COMMENT"],
-            'guarantee' => $params["GUARANTEE"],
-            "contacts" => array("email" => "","is_email_hidden" => false,"contactInfo" => "+7 982 242-42-44")
-        ),
-        'images' => array(
-            'images' => $images,
-            'order'=> $images
-        ), 
-        'id'=>$advert_id
+	        'cityId' => $params['cityId'],
+	        'bulletinType'=>'bulletinRegular',
+	        'directoryId'=> $dirId,
+	        'fields' => $params,
+	        'images' => array(
+	            'images' => $images
+	            // 'order'=> $images
+	        ), 
+	        'id'=>$advert_id
         );
-        if($good->good_type_id== "1") {
-            $options['fields']['wheelSeason'] = $params["WHEEL_SEASON"];
-            $options['fields']['wheelTireWear'] = $params["WHEEL_TIREWEAR"];
-            $options['fields']['year'] = $params["YEAR"];
-            $options['fields']['wheelSpike'] = $params["WHEEL_SPIKE"];
-            $options['fields']['marking'] = $params["MARKING"];
-            $options['fields']['predestination'] = "regular"; 
-        }
-        if($good->good_type_id== "2") {
-            $options['fields']['wheelDiameter'] = $params["WHEEL_SEASON"];
-            $options['fields']['wheelPcd'] = $params["WHEEL_TIREWEAR"];
-            $options['fields']['year'] = $params["YEAR"];
-            $options['fields']['wheelSpike'] = $params["WHEEL_SPIKE"];
-            $options['fields']['marking'] = $params["MARKING"];
-        }
-            $options['fields'] = array(
-                "model" => array("5ZIGEN",0,0),
-                "wheelDiameter" => "4.5",
-                "quantity" => 1,
-                "goodPresentState" => "present",
-                "text" => "Объява",
-                "contacts" => array("email" => "","is_email_hidden" => false,"contactInfo" => "+7 982 242-42-44")
-            );
-        $params = array(
+
+        $options= array(
             'changeDescription' => json_encode($options),
             'client_type' => 'v2:editing'
         );
 
-        $this->curl->request("http://baza.drom.ru/api/1.0/save/bulletin",$params);
+        $this->curl->request("http://baza.drom.ru/api/1.0/save/bulletin",$options);
         $this->curl->request("http://baza.drom.ru/bulletin/".$advert_id."/draft/publish?from=draft.publish",'from'=>'adding.publish');
     }
 }

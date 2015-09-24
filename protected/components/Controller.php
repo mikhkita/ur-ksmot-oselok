@@ -75,7 +75,7 @@ class Controller extends CController
         $this->render = microtime(true);
 
         $this->debugText = "Controller ".round(microtime(true) - $this->start,4);
-
+        
         return true;
     }
 
