@@ -104,7 +104,7 @@ Class Drom {
     }
 
     public function addAdvert(){
-        $good = Good::model()->find();
+        $good = Good::model()->find("id=968");
         // $images = array(dirname(__FILE__).'/1.jpg',dirname(__FILE__).'/2.jpg',dirname(__FILE__).'/3.jpg');
         $params = array();
         foreach ($this->drom_params[$good->good_type_id] as $key => $value) {
@@ -159,29 +159,30 @@ Class Drom {
         $advert_id = json_decode($this->curl->request("http://baza.drom.ru/api/1.0/save/bulletin",$options))->id;
 
         $images = $good->getImages();
-        foreach ($images as &$image_path) {
-           $image_path = json_decode($this->curl->request("http://baza.drom.ru/upload-image-jquery",'up[]' => '@'.$image_path))->id;
-        }
+        print_r($images);
+        // foreach ($images as &$image_path) {
+        //    $image_path = json_decode($this->curl->request("http://baza.drom.ru/upload-image-jquery",'up[]' => '@'.$image_path))->id;
+        // }
         
-        $options = array(
-	        'cityId' => $params['cityId'],
-	        'bulletinType'=>'bulletinRegular',
-	        'directoryId'=> $dirId,
-	        'fields' => $params,
-	        'images' => array(
-	            'images' => $images
-	            // 'order'=> $images
-	        ), 
-	        'id'=>$advert_id
-        );
+        // $options = array(
+	       //  'cityId' => $params['cityId'],
+	       //  'bulletinType'=>'bulletinRegular',
+	       //  'directoryId'=> $dirId,
+	       //  'fields' => $params,
+	       //  'images' => array(
+	       //      'images' => $images
+	       //      // 'order'=> $images
+	       //  ), 
+	       //  'id'=>$advert_id
+        // );
 
-        $options= array(
-            'changeDescription' => json_encode($options),
-            'client_type' => 'v2:editing'
-        );
+        // $options= array(
+        //     'changeDescription' => json_encode($options),
+        //     'client_type' => 'v2:editing'
+        // );
 
-        $this->curl->request("http://baza.drom.ru/api/1.0/save/bulletin",$options);
-        $this->curl->request("http://baza.drom.ru/bulletin/".$advert_id."/draft/publish?from=draft.publish",'from'=>'adding.publish');
+        // $this->curl->request("http://baza.drom.ru/api/1.0/save/bulletin",$options);
+        // $this->curl->request("http://baza.drom.ru/bulletin/".$advert_id."/draft/publish?from=draft.publish",'from'=>'adding.publish');
     }
 }
 

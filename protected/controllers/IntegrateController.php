@@ -226,6 +226,7 @@ class IntegrateController extends Controller
     public function actionDromUp(){
         Log::debug("Начало автоподнятия дром");
         $drom = new Drom();
+        
 
         $users = $this->getParam("DROM","USERS");
 
@@ -239,6 +240,7 @@ class IntegrateController extends Controller
 
         Log::debug("Кончало автоподнятия дром");
     }
+
 // Дром ------------------------------------------------------------------ Дром
 
 // Yahoo ----------------------------------------------------------------- Yahoo
