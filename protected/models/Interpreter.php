@@ -150,15 +150,13 @@ class Interpreter extends CActiveRecord
         }
     }
 
-    public function generate($interpreter_id,$model,$dynObjects = NULL,$interpreters = NULL){
-    	if( $interpreters !== NULL ) $this->interpreters = $interpreters;
-
+    public function generate($interpreter_id,$model,$dynObjects = NULL){
     	$attributes = (isset($model->fields_assoc))?$model->fields_assoc:$model;
     	if( $dynObjects !== NULL ) $attributes = $attributes + $dynObjects;
-
     	if( isset($this->interpreters[(string)$interpreter_id]) ){
     		if( $this->interpreters[(string)$interpreter_id]->good_type_id == $model->good_type_id ){
     			$template = $this->interpreters[(string)$interpreter_id]->template;
+    			
     		}else{
     			throw new CHttpException(500,'У типа товара "'.$model->type->name.'" нет интерпретатора с идентификатором '.$interpreter_id);
     		}
@@ -167,7 +165,6 @@ class Interpreter extends CActiveRecord
     	}
 
     	preg_match_all("~\[\+([^\+\]]+)\+\]~", $template, $matches);
-
     	while( count($matches[1]) ){
 
 			$rules = $matches[1];
@@ -223,7 +220,7 @@ class Interpreter extends CActiveRecord
 
 					$matches[1][$i] = $val;
 				}else if( isset($params["INTER"]) ){
-					$matches[1][$i] = Interpreter::generate(intval($params["INTER"]),$model);
+					$matches[1][$i] = Interpreter::generate(intval($params["INTER"]),$model,$dynObjects);
 				}else if( isset($params["LIST"]) ){
 					$matches[1][$i] = $this->getListValue(intval($params["LIST"]),$attributes);
 				}else if( isset($params["TABLE"]) ){

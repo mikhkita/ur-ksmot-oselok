@@ -13,7 +13,7 @@ class DesktopController extends Controller
 	{
 		return array(
 			array('allow',
-				'actions'=>array('adminIndex','adminCreate','adminUpdate','adminDelete',"adminDromAdvert"),
+				'actions'=>array('adminIndex','adminCreate','adminUpdate','adminDelete'),
 				'roles'=>array('manager'),
 			),
 			array('deny',
@@ -21,15 +21,6 @@ class DesktopController extends Controller
 			),
 		);
 	}
-
-	public function actionAdminDromAdvert(){
-
-        $drom = new Drom();
-        $drom->setUser("79528960988","8k6pewk4");
-        $drom->addAdvert();
-        
-
-    }
 
 	public function actionAdminCreate()
 	{
