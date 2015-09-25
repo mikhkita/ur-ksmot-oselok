@@ -66,25 +66,26 @@ class DromController extends Controller
 
 // Дром ------------------------------------------------------------------ Дром
     public function actionIndex(){
-        $good = Good::model()->find("id=1123");
+        $good = Good::model()->find("id=1120");
         $images = $this->getImages($good);
         $dynamic = array( 38 => 1081, 37 => 869);
         foreach ($this->drom_params[$good->good_type_id] as $key => $value) {
             if($value['type']=="attr") {
-                if(isset($good->fields_assoc[$value['id']]))
-                if(is_array($good->fields_assoc[$value['id']])) {
-                    foreach ($good->fields_assoc[$value['id']] as $i => $item) {
-                        if($key=='wheelPcd') {
-                            $item = explode("*", $item->value);
-                            $item[1] = number_format ($item[1],2);
-                            $params[$key][$i] = $item[1]."x".$item[0];
-                        }else $params[$key][$i] = $item->value;
-                    }
-                } else  if($key=='wheelPcd') {
-                    $pcd = explode("*", $good->fields_assoc[$value['id']]->value);
-                    $pcd[1] = number_format ($pcd[1],2);
-                    $params[$key] = $pcd[1]."x".$pcd[0];
-                } else $params[$key] = $good->fields_assoc[$value['id']]->value;
+                if(isset($good->fields_assoc[$value['id']])) {
+                    if(is_array($good->fields_assoc[$value['id']])) {
+                        foreach ($good->fields_assoc[$value['id']] as $i => $item) {
+                            if($key=='wheelPcd') {
+                                $item = explode("*", $item->value);
+                                $item[1] = number_format ($item[1],2);
+                                $params[$key][$i] = $item[1]."x".$item[0];
+                            }else $params[$key][$i] = $item->value;
+                        }
+                    } else if($key=='wheelPcd') {
+                        $pcd = explode("*", $good->fields_assoc[$value['id']]->value);
+                        $pcd[1] = number_format ($pcd[1],2);
+                        $params[$key] = $pcd[1]."x".$pcd[0];
+                    } else $params[$key] = $good->fields_assoc[$value['id']]->value;
+                } else $params[$key] = null;
             } else {
                 $params[$key] = Interpreter::generate($value['id'],$good,$this->getDynObjects($dynamic,$good->good_type_id));
             }
@@ -94,6 +95,7 @@ class DromController extends Controller
         $drom->setUser("79528960988","aeesnb33");
         $drom->auth("http://baza.drom.ru/personal/");
         $drom->addAdvert($params,$good,$images);
+        $drom->deleteCookies();
     }   
 
 // Дром ------------------------------------------------------------------ Дром

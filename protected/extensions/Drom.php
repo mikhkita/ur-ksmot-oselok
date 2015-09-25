@@ -68,7 +68,7 @@ Class Drom {
         $params['model'] = array($params["model"],0,0);
         $params['price'] = array($params["price"],"RUB");
         $params['quantity'] = 1;
-        $params['contacts'] =  array("email" => "","is_email_hidden" => false,"contactInfo" => "+79528960988");
+        $params['contacts'] =  array("email" => "","is_email_hidden" => false,"contactInfo" => "+79528960999");
         $params['delivery'] = array("pickupAddress" => $params['pickupAddress'],"localPrice" => $params['localPrice'],"minPostalPrice" => $params['minPostalPrice'],"comment" => $params['comment']);
         unset($params['pickupAddress'],$params['localPrice'],$params['minPostalPrice'],$params['comment']);
 
@@ -82,11 +82,11 @@ Class Drom {
             $params['discParameters'] = array();
             foreach ($disc_width as  $i => $value) {
                 $params['discParameters'][$i]["disc_width"] = $value;
-                if(isset($params['disc_et']) && is_array($params['disc_et'])) {
+                if(is_array($params['disc_et'])) {
                 	$params['discParameters'][$i]["disc_et"] = (isset($params['disc_et'][$i])) ? $params['disc_et'][$i] : null;
-            	} else if(isset($params['disc_et'])) $params['discParameters'][0]["disc_et"] = $params['disc_et']; else $params['discParameters'][0]["disc_et"] = null;
+            	} else $params['discParameters'][0]["disc_et"] = $params['disc_et'];
             }  
-            if( isset($params['disc_et']) && is_array($params['disc_et']))
+            if(is_array($params['disc_et']))
             foreach ($params['disc_et'] as  $j => $value) {
             	$params['discParameters'][$j]["disc_width"] = (isset($disc_width[$j])) ? $disc_width[$j] : null;
                 $params['discParameters'][$j]["disc_et"] = $value;
@@ -109,7 +109,7 @@ Class Drom {
             'changeDescription' => json_encode($options),
             'client_type' => 'v2:adding'
         );
-
+        
         $advert_id = json_decode($this->curl->request("http://baza.drom.ru/api/1.0/save/bulletin",$options))->id;
 
         foreach ($images as &$image_path) {
@@ -123,11 +123,11 @@ Class Drom {
 	        'fields' => $params,
 	        'images' => array(
 	            'images' => $images,
-	            'order'=> $images
+	            // 'order'=> $images
 	        ), 
 	        'id'=>$advert_id
         );
-
+        
         $options= array(
             'changeDescription' => json_encode($options),
             'client_type' => 'v2:editing'
