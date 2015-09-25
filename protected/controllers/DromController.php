@@ -95,7 +95,7 @@ class DromController extends Controller
         $drom->setUser("79528960988","aeesnb33");
         $drom->auth("http://baza.drom.ru/personal/");
         $drom->addAdvert($params,$good,$images);
-        $drom->deleteCookies();
+        // $drom->deleteCookies();
     }   
 
 // Дром ------------------------------------------------------------------ Дром
