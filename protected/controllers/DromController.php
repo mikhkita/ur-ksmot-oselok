@@ -65,10 +65,43 @@ class DromController extends Controller
 
 
 // Дром ------------------------------------------------------------------ Дром
-    public function actionIndex(){
-        $good = Good::model()->find("id=1120");
+    public function actionCreate(){
+        $good = Good::model()->find("id=1181");
         $images = $this->getImages($good);
         $dynamic = array( 38 => 1081, 37 => 869);
+        
+        $drom = new Drom();
+        $drom->setUser("79528960988","aeesnb33");
+        $drom->auth("http://baza.drom.ru/personal/");
+        $drom->addAdvert($this->getParams($good,$dynamic),$images);
+        // $drom->curl->removeCookies();
+    }   
+
+    public function actionUpdate($images = NULL){
+        $url = "http://tomsk.baza.drom.ru/n1011-letnjaja-para-yokohama-dna-ecos-es300-215-40-17-japan-b-u-38913568.html";
+        $advert_id = substr($url, strrpos($url, "-")+1,-5);
+        $good = Good::model()->find("id=1181");
+        if($images) $images = $this->getImages($good);
+        $dynamic = array( 38 => 1081, 37 => 869);
+        
+        $drom = new Drom();
+        $drom->setUser("79528960988","aeesnb33");
+        $drom->auth("http://baza.drom.ru/personal/");
+        $drom->updateAdvert($advert_id,$this->getParams($good,$dynamic),$images);
+        // $drom->curl->removeCookies();
+    }   
+
+    public function actionDelete(){
+        $drom = new Drom();
+        $drom->setUser("79528960988","aeesnb33");
+        $drom->auth("http://baza.drom.ru/personal/");
+        $drom->deleteAdverts(array("38916734","38916795"));
+        // $drom->curl->removeCookies();
+    }   
+
+// Дром ------------------------------------------------------------------ Дром
+
+    public function getParams($good,$dynamic) {
         foreach ($this->drom_params[$good->good_type_id] as $key => $value) {
             if($value['type']=="attr") {
                 if(isset($good->fields_assoc[$value['id']])) {
@@ -88,17 +121,38 @@ class DromController extends Controller
                 } else $params[$key] = null;
             } else {
                 $params[$key] = Interpreter::generate($value['id'],$good,$this->getDynObjects($dynamic,$good->good_type_id));
-            }
-            
+            }  
         }
-        $drom = new Drom();
-        $drom->setUser("79528960988","aeesnb33");
-        $drom->auth("http://baza.drom.ru/personal/");
-        $drom->addAdvert($params,$good,$images);
-        // $drom->deleteCookies();
-    }   
+        $params['model'] = array($params["model"],0,0);
+        $params['price'] = array($params["price"],"RUB");
+        $params['quantity'] = 1;
+        $params['contacts'] =  array("email" => "","is_email_hidden" => false,"contactInfo" => "+79528960999");
+        $params['delivery'] = array("pickupAddress" => $params['pickupAddress'],"localPrice" => $params['localPrice'],"minPostalPrice" => $params['minPostalPrice'],"comment" => $params['comment']);
+        unset($params['pickupAddress'],$params['localPrice'],$params['minPostalPrice'],$params['comment']);
 
-// Дром ------------------------------------------------------------------ Дром
+        if($good->good_type_id== "1") {
+            $params['dirId'] = 234; 
+            $params['predestination'] = "regular";
+        }
+        if($good->good_type_id== "2") {
+            $params['dirId'] = 235; 
+            $disc_width = explode("/",$params['disc_width']);
+            $params['discParameters'] = array();
+            foreach ($disc_width as  $i => $value) {
+                $params['discParameters'][$i]["disc_width"] = $value;
+                if(is_array($params['disc_et'])) {
+                    $params['discParameters'][$i]["disc_et"] = (isset($params['disc_et'][$i])) ? $params['disc_et'][$i] : null;
+                } else $params['discParameters'][0]["disc_et"] = $params['disc_et'];
+            }  
+            if(is_array($params['disc_et']))
+            foreach ($params['disc_et'] as  $j => $value) {
+                $params['discParameters'][$j]["disc_width"] = (isset($disc_width[$j])) ? $disc_width[$j] : null;
+                $params['discParameters'][$j]["disc_et"] = $value;
+            }     
+            unset($params['disc_width'],$params['disc_et'],$disc_width);
+        }
+        return $params;
+    }
 
     public function actionAdminIndex(){
         

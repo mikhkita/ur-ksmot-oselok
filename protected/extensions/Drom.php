@@ -64,77 +64,61 @@ Class Drom {
         return $links;
     }
 
-    public function addAdvert($params,$good,$images){
-        $params['model'] = array($params["model"],0,0);
-        $params['price'] = array($params["price"],"RUB");
-        $params['quantity'] = 1;
-        $params['contacts'] =  array("email" => "","is_email_hidden" => false,"contactInfo" => "+79528960999");
-        $params['delivery'] = array("pickupAddress" => $params['pickupAddress'],"localPrice" => $params['localPrice'],"minPostalPrice" => $params['minPostalPrice'],"comment" => $params['comment']);
-        unset($params['pickupAddress'],$params['localPrice'],$params['minPostalPrice'],$params['comment']);
-
-        if($good->good_type_id== "1") {
-            $dirId = 234; 
-            $params['predestination'] = "regular";
+    public function addAdvert($params,$images){
+        $options = $this->setOptions($params);
+        $advert_id = json_decode($this->curl->request("http://baza.drom.ru/api/1.0/save/bulletin",$options))->id;
+        $this->updateAdvert($advert_id,$params,$images);
+        
+        $this->curl->request("http://baza.drom.ru/bulletin/".$advert_id."/draft/publish?from=draft.publish",array('from'=>'adding.publish'));
+    }
+    public function updateAdvert($advert_id,$params,$images = NULL) {
+        if($images) {
+            foreach ($images as &$image_path) {
+                $image_path = json_decode($this->curl->request("http://baza.drom.ru/upload-image-jquery",array('up[]' => '@'.Yii::app()->basePath.DIRECTORY_SEPARATOR.'..'.$image_path)))->id;
+            }
+            $params['images'] = array('images' => $images);
         }
-        if($good->good_type_id== "2") {
-            $dirId = 235; 
-            $disc_width = explode("/",$params['disc_width']);
-            $params['discParameters'] = array();
-            foreach ($disc_width as  $i => $value) {
-                $params['discParameters'][$i]["disc_width"] = $value;
-                if(is_array($params['disc_et'])) {
-                	$params['discParameters'][$i]["disc_et"] = (isset($params['disc_et'][$i])) ? $params['disc_et'][$i] : null;
-            	} else $params['discParameters'][0]["disc_et"] = $params['disc_et'];
-            }  
-            if(is_array($params['disc_et']))
-            foreach ($params['disc_et'] as  $j => $value) {
-            	$params['discParameters'][$j]["disc_width"] = (isset($disc_width[$j])) ? $disc_width[$j] : null;
-                $params['discParameters'][$j]["disc_et"] = $value;
-            }     
-            unset($params['disc_width'],$params['disc_et'],$disc_width);
-        }
+        $options = $this->setOptions($params,$advert_id);
+        
+        $this->curl->request("http://baza.drom.ru/api/1.0/save/bulletin",$options);
+        // $this->curl->removeCookies();
+    }
 
+    public function deleteAdverts($arr) {
+        include_once Yii::app()->basePath.'/extensions/simple_html_dom.php';
+        $html = str_get_html($this->curl->request('https://baza.drom.ru/bulletin/service-configure?ids='.$arr[0].'&applier=deleteBulletin'));
+        
+        $del_arr = array(
+            'applier' => 'deleteBulletin',
+            'uid' => $html->find('input[name="uid"]', 0)->value,
+            'price' => 0,
+            'order_id' => 0,
+            'return_to' => ''
+            );
+        foreach ($arr as $key => $value) {
+            $del_arr['bulletin['.$value.']']= 'on';
+        }
+        $this->curl->request('https://baza.drom.ru/bulletin/service-apply',$del_arr);
+        $this->curl->removeCookies();
+    }
+
+    public function setOptions($params,$advert_id = NULL) {
         $options = array(
             'cityId' => $params['cityId'],
-            'bulletinType'=>'',
-            'fields'=> array(
-                'cityId' => $params['cityId'],
-                "subject" => $params['subject'],
-                "dirId" => $dirId
-                ),
-            'directoryId'=> $dirId
+            'bulletinType'=>'bulletinRegular',
+            'directoryId'=> $params['dirId'],
+            'fields'=> $params
         );
-
-        $options = array(
-            'changeDescription' => json_encode($options),
-            'client_type' => 'v2:adding'
-        );
-        
-        $advert_id = json_decode($this->curl->request("http://baza.drom.ru/api/1.0/save/bulletin",$options))->id;
-
-        foreach ($images as &$image_path) {
-           $image_path = json_decode($this->curl->request("http://baza.drom.ru/upload-image-jquery",array('up[]' => '@'.Yii::app()->basePath.DIRECTORY_SEPARATOR.'..'.$image_path)))->id;
+       
+        if($advert_id) {
+            if(isset($params['images'])) {
+                $options['images'] = $params['images'];
+            }
+            $options['id'] = $advert_id;
         }
-
-        $options = array(
-	        'cityId' => $params['cityId'],
-	        'bulletinType'=>'bulletinRegular',
-	        'directoryId'=> $dirId,
-	        'fields' => $params,
-	        'images' => array(
-	            'images' => $images,
-	            // 'order'=> $images
-	        ), 
-	        'id'=>$advert_id
-        );
-        
-        $options= array(
-            'changeDescription' => json_encode($options),
-            'client_type' => 'v2:editing'
-        );
-
-        $this->curl->request("http://baza.drom.ru/api/1.0/save/bulletin",$options);
-        $this->curl->request("http://baza.drom.ru/bulletin/".$advert_id."/draft/publish?from=draft.publish",array('from'=>'adding.publish'));
+        $options = array('changeDescription' => json_encode($options));
+        $options['client_type'] = ($advert_id) ? 'v2:editing' : "v2:adding";
+        return $options;
     }
 }
 
