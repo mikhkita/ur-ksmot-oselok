@@ -176,19 +176,23 @@ class ShopController extends Controller
                  => array(
                     'select' => false,
                     'condition' => 'good_type_id='.$_GET['type']
-                    )
+                    ),
+                'variant' => array(
+                		'select' => false
+                	)
 
                 );
-            $criteria->condition = 'attribute_id=9 OR attribute_id=27 OR attribute_id=28 OR ';
+            $criteria->condition = 't.attribute_id=9 OR t.attribute_id=27 OR t.attribute_id=28 OR ';
             if($_GET['type']==1) {
-            	$criteria->condition .= 'attribute_id=7 OR attribute_id=8 OR attribute_id=23 OR attribute_id=16';
+            	$criteria->condition .= 't.attribute_id=7 OR t.attribute_id=8 OR t.attribute_id=23 OR t.attribute_id=16';
         	}	
         	if($_GET['type']==2) {
-            	$criteria->condition .= 'attribute_id=6 OR attribute_id=5 OR attribute_id=31 OR attribute_id=32';
+            	$criteria->condition .= 't.attribute_id=6 OR t.attribute_id=5 OR t.attribute_id=31 OR t.attribute_id=32';
         	}	
 
         	$criteria->addInCondition("good.id",$goods_no_photo);
-            $criteria->group = 'variant_id';
+            $criteria->group = 't.variant_id';
+            $criteria->order = 'variant.sort ASC';
 
             $model = GoodAttribute::model()->findAll($criteria);
             $filter = array();
