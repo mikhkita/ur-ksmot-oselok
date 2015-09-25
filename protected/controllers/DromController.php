@@ -74,7 +74,7 @@ class DromController extends Controller
         $drom->setUser("79528960988","aeesnb33");
         $drom->auth("http://baza.drom.ru/personal/");
         $drom->addAdvert($this->getParams($good,$dynamic),$images);
-        // $drom->curl->removeCookies();
+        $drom->curl->removeCookies();
     }   
 
     public function actionUpdate($images = NULL){
@@ -88,7 +88,7 @@ class DromController extends Controller
         $drom->setUser("79528960988","aeesnb33");
         $drom->auth("http://baza.drom.ru/personal/");
         $drom->updateAdvert($advert_id,$this->getParams($good,$dynamic),$images);
-        // $drom->curl->removeCookies();
+        $drom->curl->removeCookies();
     }   
 
     public function actionDelete(){
@@ -96,7 +96,7 @@ class DromController extends Controller
         $drom->setUser("79528960988","aeesnb33");
         $drom->auth("http://baza.drom.ru/personal/");
         $drom->deleteAdverts(array("38916734","38916795"));
-        // $drom->curl->removeCookies();
+        $drom->curl->removeCookies();
     }   
 
 // Дром ------------------------------------------------------------------ Дром

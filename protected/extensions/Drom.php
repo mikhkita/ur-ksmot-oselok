@@ -3,7 +3,7 @@
 Class Drom {
     private $login = "";
     private $password = "";
-    private $curl;
+    public $curl;
     
     function __construct() {
         $this->curl = new Curl();
@@ -70,8 +70,8 @@ Class Drom {
         $this->updateAdvert($advert_id,$params,$images);
         
         $this->curl->request("http://baza.drom.ru/bulletin/".$advert_id."/draft/publish?from=draft.publish",array('from'=>'adding.publish'));
-        $this->curl->removeCookies();
     }
+    
     public function updateAdvert($advert_id,$params,$images = NULL) {
         if($images) {
             foreach ($images as &$image_path) {
@@ -82,7 +82,6 @@ Class Drom {
         $options = $this->setOptions($params,$advert_id);
         
         $this->curl->request("http://baza.drom.ru/api/1.0/save/bulletin",$options);
-        // $this->curl->removeCookies();
     }
 
     public function deleteAdverts($arr) {
@@ -100,7 +99,6 @@ Class Drom {
             $del_arr['bulletin['.$value.']']= 'on';
         }
         $this->curl->request('https://baza.drom.ru/bulletin/service-apply',$del_arr);
-        $this->curl->removeCookies();
     }
 
     public function setOptions($params,$advert_id = NULL) {
