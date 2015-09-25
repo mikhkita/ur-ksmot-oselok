@@ -70,6 +70,7 @@ Class Drom {
         $this->updateAdvert($advert_id,$params,$images);
         
         $this->curl->request("http://baza.drom.ru/bulletin/".$advert_id."/draft/publish?from=draft.publish",array('from'=>'adding.publish'));
+        $this->curl->removeCookies();
     }
     public function updateAdvert($advert_id,$params,$images = NULL) {
         if($images) {
