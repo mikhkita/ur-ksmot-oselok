@@ -82,11 +82,11 @@ Class Drom {
             $params['discParameters'] = array();
             foreach ($disc_width as  $i => $value) {
                 $params['discParameters'][$i]["disc_width"] = $value;
-                if(is_array($params['disc_et'])) {
+                if(isset($params['disc_et']) && is_array($params['disc_et'])) {
                 	$params['discParameters'][$i]["disc_et"] = (isset($params['disc_et'][$i])) ? $params['disc_et'][$i] : null;
-            	} else $params['discParameters'][0]["disc_et"] = ($params['disc_et']) ? $params['disc_et'] : null;
+            	} else if(isset($params['disc_et'])) $params['discParameters'][0]["disc_et"] = $params['disc_et']; else $params['discParameters'][0]["disc_et"] = null;
             }  
-            if(is_array($params['disc_et']))
+            if( isset($params['disc_et']) && is_array($params['disc_et']))
             foreach ($params['disc_et'] as  $j => $value) {
             	$params['discParameters'][$j]["disc_width"] = (isset($disc_width[$j])) ? $disc_width[$j] : null;
                 $params['discParameters'][$j]["disc_et"] = $value;
@@ -127,13 +127,13 @@ Class Drom {
 	        ), 
 	        'id'=>$advert_id
         );
- 
+
         $options= array(
             'changeDescription' => json_encode($options),
             'client_type' => 'v2:editing'
         );
 
-        $this->curl->request("http://baza.drom.ru/api/1.0/save/bulletin",$options)->id;
+        $this->curl->request("http://baza.drom.ru/api/1.0/save/bulletin",$options);
         $this->curl->request("http://baza.drom.ru/bulletin/".$advert_id."/draft/publish?from=draft.publish",array('from'=>'adding.publish'));
     }
 }

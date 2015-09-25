@@ -45,7 +45,7 @@ class GoodController extends Controller
 
 	}
 
-	public function actionAdminUpdate($id,$goodTypeId)
+	public function actionAdminUpdate($id,$goodTypeId,$Good_page)
 	{
 		$model=$this->loadModel($id);
 		$result = $this->getAttr($model);
@@ -83,7 +83,7 @@ class GoodController extends Controller
 					}
 				}
 			}
-			$this->actionAdminIndex(true,$goodTypeId);
+			$this->actionAdminIndex(true,$goodTypeId,$Good_page);
 
 		}else{
 			$this->renderPartial('adminUpdate',array(
@@ -136,7 +136,7 @@ class GoodController extends Controller
 		$this->actionAdminIndex(true);
 	}
 
-	public function actionAdminIndex($partial = false, $goodTypeId = false)
+	public function actionAdminIndex($partial = false, $goodTypeId = false,$Good_page = 0)
 	{
 		if( !$partial ){
 			$this->layout='admin';
@@ -146,11 +146,11 @@ class GoodController extends Controller
 
 			$criteria = new CDbCriteria();
 			$criteria->addCondition("good_type_id=".$goodTypeId);
+			unset($_GET["id"]);
+			$pagination = array('pageSize'=>25,'route' => 'good/adminindex');
 			$dataProvider = new CActiveDataProvider('Good', array(
 			    'criteria'=>$criteria,
-			    'pagination'=>array(
-			        'pageSize'=>25
-			    )
+			    'pagination'=>$pagination
 			));
 			$Goods = $dataProvider->getData();
 			// $GoodType = GoodType::model()->with('goods.fields.variant','goods.fields.attribute')->findByPk($goodTypeId);

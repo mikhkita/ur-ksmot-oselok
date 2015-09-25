@@ -66,11 +66,12 @@ class DromController extends Controller
 
 // Дром ------------------------------------------------------------------ Дром
     public function actionIndex(){
-        $good = Good::model()->find("id=969");
+        $good = Good::model()->find("id=1123");
         $images = $this->getImages($good);
         $dynamic = array( 38 => 1081, 37 => 869);
         foreach ($this->drom_params[$good->good_type_id] as $key => $value) {
             if($value['type']=="attr") {
+                if(isset($good->fields_assoc[$value['id']]))
                 if(is_array($good->fields_assoc[$value['id']])) {
                     foreach ($good->fields_assoc[$value['id']] as $i => $item) {
                         if($key=='wheelPcd') {
