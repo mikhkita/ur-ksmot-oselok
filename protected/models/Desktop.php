@@ -9,6 +9,7 @@
  * @property string $value
  * @property integer $link
  * @property string $rule_code
+ * @property integer $sort
  */
 class Desktop extends CActiveRecord
 {
@@ -29,12 +30,12 @@ class Desktop extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('name, value', 'required'),
-			array('link', 'numerical', 'integerOnly'=>true),
+			array('link, sort', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>255),
 			array('rule_code', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, value, link, rule_code', 'safe', 'on'=>'search'),
+			array('id, name, value, link, rule_code, sort', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -60,6 +61,7 @@ class Desktop extends CActiveRecord
 			'value' => 'Значение',
 			'link' => 'Ссылка',
 			'rule_code' => 'Роль',
+			'sort' => 'Сортировка',
 		);
 	}
 
@@ -86,6 +88,7 @@ class Desktop extends CActiveRecord
 		$criteria->compare('value',$this->value,true);
 		$criteria->compare('link',$this->link);
 		$criteria->compare('rule_code',$this->rule_code,true);
+		$criteria->compare('sort',$this->sort);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -25,6 +25,12 @@
 		<?php echo $form->error($model,'value'); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->labelEx($model,'sort'); ?>
+		<?php echo $form->numberField($model,'sort',array('maxlength'=>255,'required'=>true)); ?>
+		<?php echo $form->error($model,'sort'); ?>
+	</div>
+
 	<? if( Yii::app()->user->checkAccess("rootActions") ): ?>
 	<div class="row">
 		<?php echo $form->labelEx($model,'rule_code'); ?>

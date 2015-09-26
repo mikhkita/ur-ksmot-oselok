@@ -88,7 +88,7 @@ class DesktopController extends Controller
             }
         }
 
-        $criteria->order = 'id DESC';
+        $criteria->order = 'sort ASC, name ASC';
 
         $model = Desktop::model()->findAll($criteria);
 

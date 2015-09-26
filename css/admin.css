@@ -727,22 +727,22 @@ h1{
                     width: 210px;
                 }
                 .b-full-width .row-half{
-                    width: 340px;
+                    width: 340px !important;
                 }
                 .row-half:nth-child(1){
                     margin-right: 10px;
                 }
                 .row-half input{
-                    width: 190px;
+                    width: 190px !important;
                 }
                 .row-half select{
-                    width: 210px;
+                    width: 210px !important;
                 }
                 .b-full-width .row-half input{
-                    width: 320px;
+                    width: 320px !important;
                 }
                 .b-full-width .row-half select{
-                    width: 340px;
+                    width: 340px !important;
                 }
                 input.b-checkbox{
                     margin-right: 10px;

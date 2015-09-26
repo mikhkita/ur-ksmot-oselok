@@ -1,7 +1,6 @@
 <?php
 	require_once("phpmail.php");
 
-	// $email_admin = "beatbox787@gmail.com";
 	$email_admin = "godzilla.wheels@gmail.com";
 
 	$from = "Koleso Tomsk Ru";
@@ -26,10 +25,6 @@
 		}
 
 		$subject = $_POST["subject"];
-
-		// $title = "Поступила заявка с сайта ".$from.":\n";
-
-		// $message = "<div><h3 style=\"color: #333;\">".$title."</h3>";
 
 		foreach ($fields  as $key => $value){
 			$message .= "<div><p><b>".$key.": </b>".$value."</p></div>";

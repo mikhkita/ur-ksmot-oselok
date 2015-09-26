@@ -43,7 +43,7 @@
                 <h4>57-57-56</h4>
                 <h5>или</h5>
                 <h6>оставьте заявку<br>и мы Вам перезвоним в ближайшее время</h6>
-                <form action="/kitsend.php" method="POST" data-block="#b-popup-thanks" id="b-form-buy">
+                <form action="<?=Yii::app()->createUrl('/shop/mail/')?>" method="POST" data-block="#b-popup-thanks" id="b-form-buy">
                     <input type="hidden" name="good" id="good" required/>
                     <input type="hidden" name="good-url" id="good-url" required/>
                     <input type="text" name="phone" id="phone" placeholder="Ваш номер телефона" required/>
