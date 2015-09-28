@@ -81,7 +81,7 @@ class ShopController extends Controller
 		$criteria=new CDbCriteria();
 		$criteria->select = 'id,good_type_id';
 	   	$criteria->with = array('fields' => array('select'=> array('attribute_id','varchar_value')));
-		$criteria->condition = 'good_type_id='.$_GET['type'];//.' AND (fields.attribute_id=3 AND fields.varchar_value IN('.$temp.'))';
+		$criteria->condition = 'good_type_id='.$_GET['type'].' AND (fields.attribute_id=3 AND fields.varchar_value IN('.$temp.'))';
 
 		$model=Good::model()->findAll($criteria);
 
