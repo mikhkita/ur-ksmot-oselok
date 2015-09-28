@@ -3,13 +3,10 @@
 Class Yahoo {
     private $curl;
     private $cur_page;
-    private $courses;
     private $tog;
     
-    function __construct($courses) {
+    function __construct() {
         $this->curl = new Curl();
-
-        $this->courses = $courses;
 
         $this->tog = true;
 
@@ -24,7 +21,7 @@ Class Yahoo {
             "order" => $order, // Порядок сортировки. a - по возрастанию, d - по убыванию
             "item_status" => 2, // Состояние товара, 0 - не важно, 1 - новые, 2 - б/у
             // "timebuf" => 10,
-            "aucmaxprice" => intval($max_price*$this->courses["USD"]), // Ограничение текущей цены сверху
+            "aucmaxprice" => $max_price, // Ограничение текущей цены сверху
             // "seller" => "fix1youki",// Продавец или много продавцов через запятую
             // "page" => 1, // Страница
         );
@@ -38,7 +35,7 @@ Class Yahoo {
             $file = "";
             if( isset($page["items"]) )
             foreach ($page["items"] as $key => $item) {
-                $file .= $item->Title."\n";
+                $file .= intval($item->CurrentPrice)." ".$max_price."\n";
             }
             file_put_contents('yahoo.txt', $file, FILE_APPEND);
 

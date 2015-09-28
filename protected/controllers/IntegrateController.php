@@ -245,11 +245,12 @@ class IntegrateController extends Controller
 
 // Yahoo ----------------------------------------------------------------- Yahoo
     public function actionYahooBids(){
+        return false;
+
         $model = YahooCategory::model()->findAll(array("order"=>"id ASC"));
-        foreach ($model as $item) {
+        foreach ($model as $item)
             $this->parseCategory($item,true);
-        }
-        
+
     }
 
     public function actionYahooAll(){
@@ -279,10 +280,10 @@ class IntegrateController extends Controller
     }
 
     public function parseCategory($category, $bids = false){
-        $yahoo = new Yahoo($this->courses);
+        $yahoo = new Yahoo();
         $tog = true;
 
-        $page = $yahoo->getNextPage($category->code,$category->max_price,( ($bids)?"a":"d" ));
+        $page = $yahoo->getNextPage($category->code,intval($category->max_price*$this->courses["USD"]),( ($bids)?"a":"d" ));
 
         while( $page && $tog ){
             $sellers = array();
@@ -296,7 +297,6 @@ class IntegrateController extends Controller
 
             foreach ($page["items"] as &$item){
                 $item->Seller->Id = $sellers_id[$item->Seller->Id];
-                echo $item->Bids."<br>";
             }
 
             $this->updateLots($page["items"],$category->id);
@@ -309,7 +309,7 @@ class IntegrateController extends Controller
                 $tog = ( intval(array_pop($page["items"])->Bids) == 0 )?true:false;
             }
 
-            $page = $yahoo->getNextPage($category->code,$category->max_price,( ($bids)?"a":"d" ));
+            $page = $yahoo->getNextPage($category->code,intval($category->max_price*$this->courses["USD"]),( ($bids)?"a":"d" ));
         }
         
         Log::debug($category->name." Парсинг завершен. Количество полученных страниц: ".$yahoo->getLastPage()-1);
@@ -328,13 +328,25 @@ class IntegrateController extends Controller
     public function updateSellers($sellers){
         $sql = "INSERT IGNORE INTO `".YahooSeller::tableName()."` (`id`,`name`) VALUES ";
 
+        $exist = Yii::app()->db->createCommand()->select("id, name")->from(YahooSeller::tableName())->where(array('in', 'name', $sellers))->queryAll();
+
         $values = array();
-        foreach ($sellers as $seller) {
-            array_push($values, "(NULL,'".addslashes($seller)."')");
+        foreach ($sellers as $key => $seller) {
+            if( !$this->existSeller($seller,$exist) ){
+                array_push($values, "(NULL,'".addslashes(trim($seller))."')");
+            }
         }
 
-        $sql .= implode(",", $values);
-        Yii::app()->db->createCommand($sql)->execute();
+        if( count($values) ){
+            $sql .= implode(",", $values);
+            Yii::app()->db->createCommand($sql)->execute();
+        }
+    }
+
+    public function existSeller($seller,$exist){
+        foreach ($exist as $sel)
+            if( $sel["name"] == $seller ) return true;
+        return false;
     }
 
     public function updateLots($items,$category_id){

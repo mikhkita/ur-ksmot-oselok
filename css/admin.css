@@ -65,10 +65,8 @@ table tr td:first-child,table tr td:last-child{
 input[type="text"], input[type="password"]
 {
     font-size: 14px;
-    padding: 0;
-    height: 20px;
-    border: 1px solid #c8c8c8;
-    /*margin-top: 5px;*/
+    padding: 5px;
+    font-family: 'Roboto-Regular', Arial;
 }
 input[type="text"]:focus,
 select:focus,
@@ -589,10 +587,6 @@ h1{
         margin-top: 15px;
         padding: 0px 5px;
     }
-        .fancybox-skin span.required{
-            /*display: none;*/
-            color: #D26A44;
-        }
         .fancybox-skin label{
             display: block;
             margin-bottom: 5px;
@@ -606,7 +600,7 @@ h1{
             border-radius: 5px;
             background: #FFF5D1;
             border: 1px solid #452716;
-            padding: 5px 10px;
+            padding: 7px 10px;
             font-size: 14px;
             display: block;
             width: 420px;
@@ -623,10 +617,12 @@ h1{
             padding: 5px 10px;
             font-size: 14px;
             display: block;
-            min-width: 150px;
+            min-width: 200px;
         }
         .fancybox-skin .select2-choices {
-            padding: 4px 0 0;
+            padding: 1px 0 1px;
+            max-width: 452px;
+            min-width: 452px;
         }
         .fancybox-skin textarea{
             /*margin-top: 5px;*/
@@ -759,6 +755,24 @@ h1{
                     border-radius: 50%;
                     display: inline-block;
                 }
+    .b-good-form .clearfix{
+        width: 465px;
+    }
+    .b-good-form .clearfix .row{
+        float: left;
+    }
+        .b-good-form .clearfix .row:nth-child(2n){
+            /*margin-left: 5px;*/
+        }
+        .b-good-form .clearfix .row input[type="text"],
+        .b-good-form .clearfix .row input[type="number"],
+        .b-good-form .clearfix .row input[type="submit"],
+        .b-good-form .clearfix .row input[type="button"],
+        .b-good-form .clearfix .row input[type="password"],
+        .b-good-form .clearfix .row select
+        .b-good-form .clearfix .row span.required{
+            width: 200px;
+        }
             .double-list{
                
             }
