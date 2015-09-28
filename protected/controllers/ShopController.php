@@ -81,7 +81,7 @@ class ShopController extends Controller
 		$criteria=new CDbCriteria();
 		$criteria->select = 'id,good_type_id';
 	   	$criteria->with = array('fields' => array('select'=> array('attribute_id','varchar_value')));
-		$criteria->condition = 'good_type_id='.$_GET['type'].' AND (fields.attribute_id=3 AND fields.varchar_value IN('.$temp.'))';
+		$criteria->condition = 'good_type_id='.$_GET['type'];//.' AND (fields.attribute_id=3 AND fields.varchar_value IN('.$temp.'))';
 
 		$model=Good::model()->findAll($criteria);
 
@@ -107,11 +107,12 @@ class ShopController extends Controller
 			foreach ($arr as $value) {
 				$check[$value] = true;
 				$criteria->addCondition('fields.variant_id='.$value,'OR');
+				
 			}
 			$count++;
 		}
 
-    	$criteria->having = 'COUNT(fields.id)='.($count+1);
+    	$criteria->having = 'COUNT(fields.id)>='.($count+1);
     	$model=Good::model()->findAllbyPk($goods_no_photo,$criteria);
         $goods_id = array();
 		foreach ($model as $good) {
