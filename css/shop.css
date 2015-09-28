@@ -402,7 +402,7 @@ input:-moz-placeholder {
   							font-family: "HNM";
 						}
 							.b-main .b-block .b-main-items .pagination ul:nth-child(1) li h5 span{
-								font-size: 19px;
+								font-size: 18px;
 							}
 			.b-main .b-block .b-main-items .pagination .yiiPager {
 				margin-top: 20px;
@@ -535,9 +535,11 @@ input:-moz-placeholder {
 			.b-item .b-block .desc>div {
 				margin-bottom: 18px;
 			}
+				.b-item .b-block .desc .detail-price {
+					width: 225px;
+				}
 				.b-item .b-block .desc div h3 {
 					font-family: "HNR";
-					margin-top: 10px;
 	  				font-size: 29px;
 	  				color: #4172A6;
 	  				line-height: 1.2;
