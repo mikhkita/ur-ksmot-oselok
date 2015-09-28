@@ -106,13 +106,14 @@ class Good extends CActiveRecord
 			$fields = array();
 
 			foreach ($this->fields as $field) {
-				if( isset($fields[$field->attribute_id]) ){
-					if( !is_array($fields[$field->attribute_id]) ){
-						$fields[$field->attribute_id] = array(0 => $fields[$field->attribute_id]);
+				$attr_id = ( $field->attribute->dynamic )?($field->attribute_id."-d"):$field->attribute_id;
+				if( isset($fields[$attr_id]) ){
+					if( !is_array($fields[$attr_id]) ){
+						$fields[$attr_id] = array(0 => $fields[$attr_id]);
 					}
-					$fields[$field->attribute_id][] = $field;
+					$fields[$attr_id][] = $field;
 				}else{
-					$fields[$field->attribute_id] = $field;
+					$fields[$attr_id] = $field;
 				}
 			}
 			$this->setAttribute("fields_assoc",$fields,true);
