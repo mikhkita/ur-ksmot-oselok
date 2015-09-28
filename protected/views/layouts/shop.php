@@ -24,9 +24,9 @@
     <?php foreach ($this->scripts AS $script): ?><script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/<?php echo $script?>.js"></script><? endforeach; ?>
 </head>
 <body> 
-    <? if(Yii::app()->params['debug']): ?>
+   <!--  <? if(Yii::app()->params['debug']): ?>
                 <div class="b-debug"><?=$this->debugText?></div>
-            <? endif; ?>
+            <? endif; ?> -->
     <div class="b b-header">
         <div class="b-block">
         <a href="http://koleso.tomsk.ru/"><img src="<?php echo Yii::app()->request->baseUrl; ?>/i/logo.png" alt=""></a><span class="b-top-title">Godzilla Wheels</span>
