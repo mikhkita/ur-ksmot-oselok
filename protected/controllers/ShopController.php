@@ -81,7 +81,7 @@ class ShopController extends Controller
 		$criteria=new CDbCriteria();
 		$criteria->select = 'id,good_type_id';
 	   	$criteria->with = array('fields' => array('select'=> array('attribute_id','varchar_value')));
-		$criteria->condition = 'good_type_id='.$_GET['type'].' AND (fields.attribute_id=3 AND fields.varchar_value IN('.$temp.'))';
+		$criteria->condition = 'good_type_id='.$_GET['type'];//.' AND (fields.attribute_id=3 AND fields.varchar_value IN('.$temp.'))';
 
 		$model=Good::model()->findAll($criteria);
 
@@ -100,22 +100,46 @@ class ShopController extends Controller
 		
         $criteria->with = array('fields' => array('select'=> array('variant_id','attribute_id','int_value')));
         // $criteria->addInCondition("id",$goods_no_photo);
-        
-		foreach ($_GET as $name => $arr) {		
-			if( !($name=='price-min' || $name=='price-max' || $name=='partial' || $name=='Good_page' || $name=='type' || $name=='countGood') ) {
-				foreach ($arr as $value) {
-					$check[$value] = true;
-					$condition .= 'fields.variant_id='.$value.' OR ';
-				}
-				$count++;
+
+        $criteria->condition = '(good_type_id='.$_GET['type'].' AND fields.attribute_id=20 AND fields.int_value>='.$_GET['price-min'].' AND fields.int_value<='.$_GET['price-max'].' )';
+        if(isset($_GET['arr']))
+		foreach ($_GET['arr'] as $id => $arr) {		
+			foreach ($arr as $value) {
+				$check[$value] = true;
+				$criteria->addCondition('fields.variant_id='.$value,'OR');
 			}
+			$count++;
 		}
-		$criteria->condition = $condition.'(good_type_id='.$_GET['type'].' AND fields.attribute_id=20 AND fields.int_value>='.$_GET['price-min'].' AND fields.int_value<='.$_GET['price-max'].' )';
+
     	$criteria->having = 'COUNT(fields.id)='.($count+1);
     	$model=Good::model()->findAllbyPk($goods_no_photo,$criteria);
         $goods_id = array();
 		foreach ($model as $good) {
 			array_push($goods_id, $good->id); 
+		}
+
+		
+		if( (isset($_GET['arr'][5]) && (count($_GET['arr'][5]) > 1)) || 
+			(isset($_GET['arr'][31]) && (count($_GET['arr'][31]) > 1)) ||
+			(isset($_GET['arr'][32]) && (count($_GET['arr'][32]) > 1))
+			) {
+			$model=Good::model()->findAllbyPk($goods_id);
+			foreach ($model as $key => $good) {
+				$count = array();
+				foreach ($good->fields as $attr) {
+					foreach ($check as $value => $item) {
+						if($attr->variant_id == $value) $count[$attr->attribute_id] = true;
+						
+					}			
+				}
+				if(count($count) < count($_GET['arr']))  {
+					unset($model[$key]);
+				}
+			}
+			$goods_id = array();
+			foreach ($model as $good) {
+				array_push($goods_id, $good->id); 
+			}
 		}
 
 		$criteria=new CDbCriteria();
@@ -130,17 +154,6 @@ class ShopController extends Controller
 		    )
 		));
 		$goods = $dataProvider->getData();
-		$check_count = count($check);
-		foreach ($goods as $key => $good) {
-			$count = 0;
-			foreach ($good->fields as $attr) {
-				foreach ($check as $value => $item) {
-					if($attr->variant_id == $value) $count++;
-					
-				}			
-			}
-			if($count != $check_count) unset($goods[$key]);
-		}
 		$count = $dataProvider->getTotalItemCount();					
     	if( !$countGood ) {
     		

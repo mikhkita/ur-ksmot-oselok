@@ -18,7 +18,7 @@
                             <ul class="hor clearfix">
                                 <? foreach ($filter[9] as $item): ?>
                                 <li>
-                                    <input type="checkbox" id="f<?=$item['variant_id']?>" name="arr9[]" value="<?=$item['variant_id']?>" <?=$item['checked']?>>
+                                    <input type="checkbox" id="f<?=$item['variant_id']?>" name="arr[9][]" value="<?=$item['variant_id']?>" <?=$item['checked']?>>
                                     <label class="clearfix" for="f<?=$item['variant_id']?>">
                                         <span class="checked"></span>
                                         <span class="default"></span>   
@@ -37,7 +37,7 @@
                                 <ul class="hor clearfix">
                                     <? foreach ($filter[7] as $item): ?>
                                     <li>
-                                        <input type="checkbox" id="f<?=$item['variant_id']?>" name="arr7[]" value="<?=$item['variant_id']?>" <?=$item['checked']?>>
+                                        <input type="checkbox" id="f<?=$item['variant_id']?>" name="arr[7][]" value="<?=$item['variant_id']?>" <?=$item['checked']?>>
                                         <label class="clearfix" for="f<?=$item['variant_id']?>">
                                             <span class="checked"></span>
                                             <span class="default"></span>   
@@ -55,7 +55,7 @@
                                 <ul class="hor clearfix">
                                     <? foreach ($filter[8] as $item): ?>
                                     <li>
-                                        <input type="checkbox" id="f<?=$item['variant_id']?>" name="arr8[]" value="<?=$item['variant_id']?>" <?=$item['checked']?>>
+                                        <input type="checkbox" id="f<?=$item['variant_id']?>" name="arr[8][]" value="<?=$item['variant_id']?>" <?=$item['checked']?>>
                                         <label class="clearfix" for="f<?=$item['variant_id']?>">
                                             <span class="checked"></span>
                                             <span class="default"></span>   
@@ -75,7 +75,7 @@
                                 <ul class="hor clearfix">
                                     <? foreach ($filter[5] as $item): ?>
                                     <li>
-                                        <input type="checkbox" id="f<?=$item['variant_id']?>" name="arr5[]" value="<?=$item['variant_id']?>" <?=$item['checked']?>>
+                                        <input type="checkbox" id="f<?=$item['variant_id']?>" name="arr[5][]" value="<?=$item['variant_id']?>" <?=$item['checked']?>>
                                         <label class="clearfix" for="f<?=$item['variant_id']?>">
                                             <span class="checked"></span>
                                             <span class="default"></span>   
@@ -107,7 +107,7 @@
                                 <ul class="hor clearfix">
                                     <? foreach ($filter[16] as $item): ?>
                                     <li>
-                                        <input type="checkbox" id="f<?=$item['variant_id']?>" name="arr16[]" value="<?=$item['variant_id']?>" <?=$item['checked']?>>
+                                        <input type="checkbox" id="f<?=$item['variant_id']?>" name="arr[16][]" value="<?=$item['variant_id']?>" <?=$item['checked']?>>
                                         <label class="clearfix" for="f<?=$item['variant_id']?>">
                                             <span class="checked"></span>
                                             <span class="default"></span>   
@@ -125,7 +125,7 @@
                                 <ul class="hor clearfix">
                                     <? foreach ($filter[23] as $item): ?>
                                     <li>
-                                        <input type="checkbox" id="f<?=$item['variant_id']?>" name="arr23[]" value="<?=$item['variant_id']?>" <?=$item['checked']?>>
+                                        <input type="checkbox" id="f<?=$item['variant_id']?>" name="arr[23][]" value="<?=$item['variant_id']?>" <?=$item['checked']?>>
                                         <label class="clearfix" for="f<?=$item['variant_id']?>">
                                             <span class="checked"></span>
                                             <span class="default"></span>   
@@ -145,7 +145,7 @@
                                 <ul class="hor clearfix">
                                     <? foreach ($filter[31] as $item): ?>
                                     <li>
-                                        <input type="checkbox" id="f<?=$item['variant_id']?>" name="arr31[]" value="<?=$item['variant_id']?>" <?=$item['checked']?>>
+                                        <input type="checkbox" id="f<?=$item['variant_id']?>" name="arr[31][]" value="<?=$item['variant_id']?>" <?=$item['checked']?>>
                                         <label class="clearfix" for="f<?=$item['variant_id']?>">
                                             <span class="checked"></span>
                                             <span class="default"></span>   
@@ -163,7 +163,7 @@
                                 <ul class="hor clearfix">
                                     <? foreach ($filter[32] as $item): ?>
                                     <li>
-                                        <input type="checkbox" id="f<?=$item['variant_id']?>" name="arr32[]" value="<?=$item['variant_id']?>" <?=$item['checked']?>>
+                                        <input type="checkbox" id="f<?=$item['variant_id']?>" name="arr[32][]" value="<?=$item['variant_id']?>" <?=$item['checked']?>>
                                         <label class="clearfix" for="f<?=$item['variant_id']?>">
                                             <span class="checked"></span>
                                             <span class="default"></span>   
@@ -181,7 +181,7 @@
                             <ul class="hor clearfix">
                                 <? foreach ($filter[28] as $item): ?>
                                 <li>
-                                    <input type="checkbox" id="f<?=$item['variant_id']?>" name="arr28[]" value="<?=$item['variant_id']?>" <?=$item['checked']?>>
+                                    <input type="checkbox" id="f<?=$item['variant_id']?>" name="arr[28][]" value="<?=$item['variant_id']?>" <?=$item['checked']?>>
                                     <label class="clearfix" for="f<?=$item['variant_id']?>">
                                         <span class="checked"></span>
                                         <span class="default"></span>   
@@ -198,7 +198,7 @@
                             <ul class="hor clearfix">
                                 <? foreach ($filter[27] as $item): ?>
                                 <li>
-                                    <input type="checkbox" id="f<?=$item['variant_id']?>" name="arr27[]" value="<?=$item['variant_id']?>" <?=$item['checked']?>>
+                                    <input type="checkbox" id="f<?=$item['variant_id']?>" name="arr[27][]" value="<?=$item['variant_id']?>" <?=$item['checked']?>>
                                     <label class="clearfix" for="f<?=$item['variant_id']?>">
                                         <span class="checked"></span>
                                         <span class="default"></span>   
