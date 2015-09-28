@@ -21,6 +21,7 @@
 				<div class="clearfix">
 					<? $price = 0; $price = Interpreter::generate($this->params[$_GET['type']]["PRICE_CODE"], $good); ?>
 					<h3 class="left"><?=(!$price )? Yii::app()->params["zeroPrice"] : number_format( $price, 0, ',', ' ' )." руб."?></h3>
+					<p><?=Interpreter::generate($this->params[$_GET['type']]["ORDER"], $good)?></p>
 					<a class="red-btn right fancy" data-afterShow="myHandler" data-block="#b-popup-buy" href="#">Купить</a>
 				</div>
 				<ul>
@@ -121,7 +122,7 @@
 					</li>
 					<? endif; ?>
 				</ul> 
-				<p><span style="display:none;">Описание: </span><?=$this->replaceToBr(Interpreter::generate($this->params[$_GET['type']]["DESCRIPTION_CODE"], $good));?></p>
+				<p><span style="display:none;">Описание: </span><? if(isset($good->fields_assoc[35]->value)) echo $good->fields_assoc[35]->value; ?><br><?=$this->replaceToBr(Interpreter::generate($this->params[$_GET['type']]["DESCRIPTION_CODE"], $good));?></p>
 			</div>
 		</div>
 		<h4>Гарантия и условия возврата: </h4>

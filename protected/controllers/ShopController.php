@@ -11,7 +11,8 @@ class ShopController extends Controller
 			"TITLE_2_CODE" => 13,
 			"DESCRIPTION_CODE" => 74,
 			"GARANTY_CODE" => 77,
-			"PRICE_CODE" => 95
+			"PRICE_CODE" => 95,
+			"ORDER" => 120
 		),
 		2 => array(
 			"NAME" => "Диски",
@@ -19,7 +20,8 @@ class ShopController extends Controller
 			"TITLE_2_CODE" => 54,
 			"DESCRIPTION_CODE" => 75,
 			"GARANTY_CODE" => 78,
-			"PRICE_CODE" => 94
+			"PRICE_CODE" => 94,
+			"ORDER" => 121
 		));
 
 	public function filters()
@@ -79,7 +81,7 @@ class ShopController extends Controller
 		$criteria=new CDbCriteria();
 		$criteria->select = 'id,good_type_id';
 	   	$criteria->with = array('fields' => array('select'=> array('attribute_id','varchar_value')));
-		$criteria->condition = 'good_type_id='.$_GET['type'].' AND (fields.attribute_id=3 AND fields.varchar_value IN('.$temp.')) ';
+		$criteria->condition = 'good_type_id='.$_GET['type'].'AND (fields.attribute_id=3 AND fields.varchar_value IN('.$temp.'))';
 
 		$model=Good::model()->findAll($criteria);
 
@@ -97,14 +99,13 @@ class ShopController extends Controller
 		$criteria->group = 'fields.good_id';
 		
         $criteria->with = array('fields' => array('select'=> array('variant_id','attribute_id','int_value')));
-        $criteria->addInCondition("id",$goods_no_photo);
+        // $criteria->addInCondition("id",$goods_no_photo);
         
-       	
 		foreach ($_GET as $name => $arr) {		
 			if( !($name=='price-min' || $name=='price-max' || $name=='partial' || $name=='Good_page' || $name=='type' || $name=='countGood') ) {
 				foreach ($arr as $value) {
-				$check[$value] = true;
-				$condition .= 'fields.variant_id='.$value.' OR ';
+					$check[$value] = true;
+					$condition .= 'fields.variant_id='.$value.' OR ';
 				}
 				$count++;
 			}
@@ -117,9 +118,8 @@ class ShopController extends Controller
 			array_push($goods_id, $good->id); 
 		}
 
-		
 		$criteria=new CDbCriteria();
-	   	// $criteria->with = array('fields');
+		// $criteria->with = 'fields';
 	   	$criteria->addInCondition("t.id",$goods_id);
 	   	$criteria->order = 't.id DESC';
 	   	
@@ -130,6 +130,17 @@ class ShopController extends Controller
 		    )
 		));
 		$goods = $dataProvider->getData();
+		$check_count = count($check);
+		foreach ($goods as $key => $good) {
+			$count = 0;
+			foreach ($good->fields as $attr) {
+				foreach ($check as $value => $item) {
+					if($attr->variant_id == $value) $count++;
+					
+				}			
+			}
+			if($count != $check_count) unset($goods[$key]);
+		}
 		$count = $dataProvider->getTotalItemCount();					
     	if( !$countGood ) {
     		
