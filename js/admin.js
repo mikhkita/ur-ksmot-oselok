@@ -33,6 +33,17 @@ $(document).ready(function(){
     $(window).resize(whenResize);
     whenResize();
 
+    if( $.cookie('textarea-rows') ) $("#b-textarea-rows").val($.cookie('textarea-rows'));
+
+    $("body").on("change","#b-textarea-rows",changeText);
+
+    changeText();
+
+    function changeText(){
+        $("table textarea").attr("rows",$("#b-textarea-rows").val());
+        $.cookie('textarea-rows',$("#b-textarea-rows").val(), { expires: 7, path: '/' });
+    }
+
     function bindFancy(){
         $(".fancy-img").fancybox({
             padding : 0

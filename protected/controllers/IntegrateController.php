@@ -245,6 +245,7 @@ class IntegrateController extends Controller
 
 // Yahoo ----------------------------------------------------------------- Yahoo
     public function actionYahooBids(){
+        return false;
         $model = YahooCategory::model()->findAll(array("order"=>"id ASC"));
         foreach ($model as $item)
             $this->parseCategory($item,true);
@@ -252,6 +253,7 @@ class IntegrateController extends Controller
     }
 
     public function actionYahooAll(){
+        return false;
         $category = $this->getNextCategory();
         
         $this->parseCategory($category);

@@ -122,7 +122,7 @@ class Controller extends CController
         foreach ($values as $value) {
             $item = array();
             foreach ($value as $el) {
-                $item[] = "'".$el."'";
+                $item[] = "'".addslashes($el)."'";
             }
             $vals[] = "(".implode(",", $item).")";
         }
