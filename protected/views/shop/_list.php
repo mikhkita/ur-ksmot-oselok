@@ -1,4 +1,32 @@
 <? if(count($goods)): ?>
+<?
+    $sort_arr = array("20" => "по цене", "9" => "по диаметру");
+    if ($_GET['type'] == 1) {
+        $sort_arr["7"] = "по ширине";
+        $sort_arr["8"] = "по профилю";
+    }
+    if ($_GET['type'] == 2) {
+        $sort_arr["31"] = "по ширине";
+        $sort_arr["32"] = "по вылету";
+    }
+    $sort_type = (isset($_GET['sort'])) ? $_GET['sort']['sort_type'] : "DESC";
+?>
+<h2 class="left">Сортировать:</h2>
+<ul class="left b-items-sort clearfix">
+    <? foreach ($sort_arr as $key => $value): ?>
+        <? if(isset($_GET['sort']['id']) && $_GET['sort']['id']==$key): ?>
+            <li class="active <? if($sort_type =='ASC') echo 'up'; ?>">
+            <?=$value?>
+            <input type="radio" name="sort[id]" value="<?=$key?>" checked>
+        <? else: ?>
+            <li>
+            <?=$value?>
+            <input type="radio" name="sort[id]" value="<?=$key?>">
+        <? endif; ?>
+        </li>
+    <? endforeach;?>
+</ul>
+<input type="hidden" name="sort[sort_type]" value="<?=$sort_type?>">
 <div class="pagination">
     <ul>
     	<? foreach ($goods as $good): ?>
