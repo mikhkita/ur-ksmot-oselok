@@ -130,4 +130,12 @@ $(document).ready(function(){
         $("#yw0 .last").show();
         $("<li class='last-points'>...</li>").insertBefore("#yw0 .last");
     }
+
+    $(".b-items-sort li").click(function(){
+        $(this).find("input").prop("checked",true);
+        if($(this).hasClass("active")) {
+            if($(this).hasClass("up")) $("input[name='sort[sort_type]']").val("DESC"); else $("input[name='sort[sort_type]']").val("ASC");
+        } else $("input[name='sort[sort_type]']").val("DESC");
+        $("#filter").submit();
+    });
 });

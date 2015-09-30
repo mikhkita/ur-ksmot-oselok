@@ -81,7 +81,7 @@ class ShopController extends Controller
 		$criteria=new CDbCriteria();
 		$criteria->select = 'id,good_type_id';
 	   	$criteria->with = array('fields' => array('select'=> array('attribute_id','varchar_value')));
-		$criteria->condition = 'good_type_id='.$_GET['type'].' AND (fields.attribute_id=3 AND fields.varchar_value IN('.$temp.'))';
+		$criteria->condition = 'good_type_id='.$_GET['type'];//.' AND (fields.attribute_id=3 AND fields.varchar_value IN('.$temp.'))';
 
 		$model=Good::model()->findAll($criteria);
 
@@ -142,20 +142,13 @@ class ShopController extends Controller
 				array_push($goods_id, $good->id); 
 			}
 		}
+		$sort = (isset($_GET['sort']['id'])) ? $_GET['sort'] : NULL;
+		$goods = $this->sort($goods_id,$sort);
 
-		$criteria=new CDbCriteria();
-		// $criteria->with = 'fields';
-	   	$criteria->addInCondition("t.id",$goods_id);
-	   	$criteria->order = 't.id DESC';
-	   	
-		$dataProvider = new CActiveDataProvider('Good', array(
-		    'criteria'=>$criteria,
-		    'pagination'=>array(
-		        'pageSize'=>13
-		    )
-		));
-		$goods = $dataProvider->getData();
-		$count = $dataProvider->getTotalItemCount();					
+		$count = $goods['count'];	
+		$pages = $goods['pages'];	
+		$goods = $goods['model'];
+
     	if( !$countGood ) {
     		
 			// $criteria=new CDbCriteria();
@@ -241,11 +234,49 @@ class ShopController extends Controller
 				'filter' =>$filter,
 				'price_min' => $price_min,
 				'price_max' => $price_max,
-				'pages' => $dataProvider->getPagination()
+				'pages' => $pages
 			));
 		} else {
 			echo $count;
 		}		
+	}
+
+	public function sort($goods_id,$attr = NULL) {
+		$criteria=new CDbCriteria();	
+		$criteria->order = 't.id DESC';
+		if($attr) {
+			$criteria->with = ($attr['id'] != 20) ? array('fields' => array('select'=> array('attribute_id')),"fields.variant"=> array('select' => array('sort'))) : array('fields' => array('select'=> array('variant_id','attribute_id','int_value')));
+			$criteria->together = true;
+			$criteria->group = 'fields.good_id';
+			$sort = $attr['sort_type'];
+	        $criteria->condition = 'fields.attribute_id='.$attr['id'];
+	        $criteria->order = ($attr['id'] != 20) ? 'variant.sort '.$sort : 'fields.int_value '.$sort;
+	    }
+	    $criteria->addInCondition("t.id",$goods_id);
+		$dataProvider = new CActiveDataProvider('Good', array(
+		    'criteria'=>$criteria,
+		    'pagination'=>array(
+		        'pageSize'=>13
+		    )
+		));
+		$goods = $dataProvider->getData();
+		if($attr) {
+			$goods_id = array();
+			foreach ($goods as $good) {
+				array_push($goods_id, $good->id); 
+			}
+			$goods = Good::model()->findAllbyPk($goods_id);
+			usort($goods, function($a, $b) use($attr) {
+				$a = (is_array($a->fields_assoc[$attr['id']])) ? $a->fields_assoc[$attr['id']][0]->value : $a->fields_assoc[$attr['id']]->value;
+				$b = (is_array($b->fields_assoc[$attr['id']])) ? $b->fields_assoc[$attr['id']][0]->value : $b->fields_assoc[$attr['id']]->value;
+			    if ($a == $b) {
+			        return 0;
+			    }
+			    if($attr['sort_type'] == "DESC") return ($a > $b) ? -1 : 1; else return ($a < $b) ? -1 : 1;
+			});
+
+		}
+		return array('model' => $goods,'count' => $dataProvider->getTotalItemCount(), 'pages' => $dataProvider->getPagination());
 	}
 
 	public function actionDetail($partial = false,$id = NULL)

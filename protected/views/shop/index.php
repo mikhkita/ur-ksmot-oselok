@@ -4,13 +4,13 @@
 <div class='b b-content'>
     <div class="b b-main">
         <div class="b-block clearfix">
-            <div class="b-main-filter left">
-                <?php $form=$this->beginWidget('CActiveForm', array(
-                    'id'=>'filter',
-                    'action' => Yii::app()->createUrl('/shop/index'),
-                    'enableAjaxValidation'=>false,
-                    'method' => 'GET'
-                )); ?>
+            <?php $form=$this->beginWidget('CActiveForm', array(
+                'id'=>'filter',
+                'action' => Yii::app()->createUrl('/shop/index',array("type" => $_GET['type'])),
+                'enableAjaxValidation'=>false,
+                'method' => 'GET'
+            )); ?>
+            <div class="b-main-filter left">  
                 <? if ($filter): ?>
                     <div class="filter-cont four-cols">
                         <h2>Диаметр</h2>
@@ -210,11 +210,12 @@
                         </div>  
                     </div>
                 <? endif; ?>
-                <?php $this->endWidget(); ?>
+                
             </div>
-            <div class="b-main-items left">
+            <div class="b-main-items left clearfix">
                 <?php $this->renderPartial('_list', array('goods'=>$goods,'pages' => $pages)); ?>
             </div>
+            <?php $this->endWidget(); ?>
         </div>
     </div>
 </div>
